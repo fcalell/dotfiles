@@ -119,9 +119,7 @@ in {
 
       master = {
         mfact = 0.5;
-        orientation = "left";
         new_is_master = false;
-        no_gaps_when_only = false;
       };
 
       gestures = { workspace_swipe = false; };
@@ -138,6 +136,8 @@ in {
 
       bind = [
         "SUPER,Q,killactive,"
+        "ALT, Tab, cyclenext,"
+
         # "SUPER,M,exit,"
         # "SUPER,S,togglefloating,"
         # "SUPER,g,togglegroup"

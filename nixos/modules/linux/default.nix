@@ -1,8 +1,1 @@
-_: {
-  imports = [
-    ./addons
-    # ./gtk
-    ./hyprland
-    # ./themes
-  ];
-}
+_: { imports = [ ./addons ./gtk ./hyprland ]; }

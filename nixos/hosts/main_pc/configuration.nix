@@ -129,9 +129,6 @@
       EDITOR = "nvim";
       QT_AUTO_SCREEN_SCALE_FACTOR = "1";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-      GTK_THEME = "Catppuccin-Mocha-Compact-Blue-dark";
-      XCURSOR_THEME = "macOS-BigSur";
-      XCURSOR_SIZE = "32";
     };
     sessionVariables = {
       NIXOS_OZONE_WL = "1"; # Hint electron apps to use wayland

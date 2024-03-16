@@ -1,41 +1,37 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 let
-  hyprlandFlake = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  fontsize = "12";
-  oxocarbon_pink = "ff7eb6";
-  oxocarbon_border = "393939";
+  # oxocarbon_pink = "ff7eb6";
+  # oxocarbon_border = "393939";
   oxocarbon_background = "161616";
   background = "rgba(11111B00)";
-  tokyonight_border = "rgba(7aa2f7ee) rgba(87aaf8ee) 45deg";
+  # tokyonight_border = "rgba(7aa2f7ee) rgba(87aaf8ee) 45deg";
   tokyonight_background = "rgba(32344aaa)";
   catppuccin_border = "rgba(b4befeee)";
   opacity = "0.95";
-  cursor = "macOS-BigSur";
+  # cursor = "macOS-BigSur";
 in {
-  home.packages = with pkgs;
-    [
-      dunst
-      # (writeShellScriptBin "autostart" ''
-      #   # Variables
-      #   config=$HOME/.config/hypr
-      #   scripts=$config/scripts
-      #
-      #   # Waybar
-      #   pkill waybar
-      #   $scripts/launch_waybar &
-      #   $scripts/tools/dynamic &
-      #
-      #   # Dunst (Notifications)
-      #   pkill dunst
-      #   dunst &
-      #
-      #   # Cursor
-      #   hyprctl setcursor "macOS-BigSur" 32 # "Catppuccin-Mocha-Mauve-Cursors"
-      # '')
-    ];
+  home.packages = with pkgs; [
+    dunst
+    (writeShellScriptBin "hyprstart" ''
+      # Variables
+      config=$HOME/.config/hypr
+      scripts=$config/scripts
+
+      # Waybar
+      pkill waybar
+      $scripts/launch_waybar &
+      $scripts/tools/dynamic &
+
+      # Dunst (Notifications)
+      pkill dunst
+      dunst 
+
+      # Cursor
+      # hyprctl setcursor "macOS-BigSur" 32 # "Catppuccin-Mocha-Mauve-Cursors"
+    '')
+  ];
   wayland.windowManager.hyprland = {
     enable = true;
-    # package = hyprlandFlake; # hyprlandFlake or pkgs.hyprland
     settings = {
       "$mainMod" = "SUPER";
       input = {
@@ -54,12 +50,12 @@ in {
       };
 
       general = {
-        gaps_in = 1;
-        gaps_out = 2;
+        gaps_in = 5;
+        gaps_out = 5;
         border_size = 3;
         "col.active_border" = "${catppuccin_border}";
         "col.inactive_border" = "${tokyonight_background}";
-        layout = "dwindle";
+        layout = "master";
         apply_sens_to_raw =
           1; # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
       };
@@ -108,25 +104,23 @@ in {
         vfr =
           true; # misc:no_vfr -> misc:vfr. bool, heavily recommended to leave at default on. Saves on CPU usage.
         vrr =
-          false; # misc:vrr -> Adaptive sync of your monitor. 0 (off), 1 (on), 2 (fullscreen only). Default 0 to avoid white flashes on select hardware.
+          0; # misc:vrr -> Adaptive sync of your monitor. 0 (off), 1 (on), 2 (fullscreen only). Default 0 to avoid white flashes on select hardware.
       };
 
       dwindle = {
         pseudotile = true; # enable pseudotiling on dwindle
-        force_split = 0;
+        force_split = 2;
         preserve_split = true;
         default_split_ratio = 1.0;
         no_gaps_when_only = false;
-        special_scale_factor = 0.8;
         split_width_multiplier = 1.0;
         use_active_for_splits = true;
       };
 
       master = {
         mfact = 0.5;
-        orientation = "right";
-        special_scale_factor = 0.8;
-        new_is_master = true;
+        orientation = "left";
+        new_is_master = false;
         no_gaps_when_only = false;
       };
 
@@ -138,15 +132,15 @@ in {
       };
 
       exec-once = [
-        "autostart"
-        "easyeffects --gapplication-service" # Starts easyeffects in the background
+        "hyprstart"
+        # "easyeffects --gapplication-service" # Starts easyeffects in the background
       ];
 
       bind = [
         "SUPER,Q,killactive,"
-        "SUPER,M,exit,"
-        "SUPER,S,togglefloating,"
-        "SUPER,g,togglegroup"
+        # "SUPER,M,exit,"
+        # "SUPER,S,togglefloating,"
+        # "SUPER,g,togglegroup"
         # "SUPER,tab,changegroupactive"
         # "SUPER,P,pseudo,"
 
@@ -165,12 +159,9 @@ in {
         "SUPER,2,workspace,2"
         "SUPER,3,workspace,3"
         "SUPER,4,workspace,4"
-        "SUPER,5,workspace,5"
-        "SUPER,6,workspace,6"
-        "SUPER,7,workspace,7"
-        "SUPER,8,workspace,8"
+        "SUPER,mouse_down,workspace,e-1"
+        "SUPER,mouse_up,workspace,e+1"
 
-        ################################## Move ###########################################
         "SUPER SHIFT, H, movewindow, l"
         "SUPER SHIFT, L, movewindow, r"
         "SUPER SHIFT, K, movewindow, u"
@@ -180,48 +171,18 @@ in {
         "SUPER SHIFT, up, movewindow, u"
         "SUPER SHIFT, down, movewindow, d"
 
-        #---------------------------------------------------------------#
-        # Move active window to a workspace with mainMod + ctrl + [0-9] #
-        #---------------------------------------------------------------#
-        # "SUPER $mainMod CTRL, 1, movetoworkspace, 1"
-        # "SUPER $mainMod CTRL, 2, movetoworkspace, 2"
-        # "SUPER $mainMod CTRL, 3, movetoworkspace, 3"
-        # "SUPER $mainMod CTRL, 4, movetoworkspace, 4"
-        # "SUPER $mainMod CTRL, 5, movetoworkspace, 5"
-        # "SUPER $mainMod CTRL, 6, movetoworkspace, 6"
-        # "SUPER $mainMod CTRL, 7, movetoworkspace, 7"
-        # "SUPER $mainMod CTRL, 8, movetoworkspace, 8"
-        # "SUPER $mainMod CTRL, 9, movetoworkspace, 9"
-        # "SUPER $mainMod CTRL, 0, movetoworkspace, 10"
-        # "SUPER $mainMod CTRL, left, movetoworkspace, -1"
-        # "SUPER $mainMod CTRL, right, movetoworkspace, +1"
-        # same as above, but doesnt switch to the workspace
-        "SUPER $mainMod SHIFT, 1, movetoworkspacesilent, 1"
-        "SUPER $mainMod SHIFT, 2, movetoworkspacesilent, 2"
-        "SUPER $mainMod SHIFT, 3, movetoworkspacesilent, 3"
-        "SUPER $mainMod SHIFT, 4, movetoworkspacesilent, 4"
-        "SUPER $mainMod SHIFT, 5, movetoworkspacesilent, 5"
-        "SUPER $mainMod SHIFT, 6, movetoworkspacesilent, 6"
-        "SUPER $mainMod SHIFT, 7, movetoworkspacesilent, 7"
-        "SUPER $mainMod SHIFT, 8, movetoworkspacesilent, 8"
+        "SUPER CTRL, h, resizeactive,-10 0"
+        "SUPER CTRL, l, resizeactive,10 0"
+        "SUPER CTRL, k, resizeactive,0 -10"
+        "SUPER CTRL, j, resizeactive,0 10"
 
-        # "SUPER,space,exec,bemenu-run"
-        # "SUPER,space,exec, tofi-drun --drun-launch=true"
+        "SUPER ALT, 1, movetoworkspacesilent, 1"
+        "SUPER ALT, 2, movetoworkspacesilent, 2"
+        "SUPER ALT, 3, movetoworkspacesilent, 3"
+        "SUPER ALT, 4, movetoworkspacesilent, 4"
+
         "SUPER,RETURN,exec,wofi --show drun -I -s ~/.config/wofi/style.css DP-3"
       ];
-
-      # bindle = [
-      #     # Backlight Keys
-      #     ",XF86MonBrightnessUp,exec,light -A 5"
-      #     ",XF86MonBrightnessDown,exec,light -U 5"
-      #     # Volume Keys
-      #     ",XF86AudioRaiseVolume,exec,pactl set-sink-volume @DEFAULT_SINK@ +5%  "
-      #     ",XF86AudioLowerVolume,exec,pactl set-sink-volume @DEFAULT_SINK@ -5%  "
-      # ];
-      # bindl = [
-      #     ",switch:on:Lid Switch, exec, swaylock -f -i ~/photos/wallpapers/wallpaper.png"
-      #     ",switch:off:Lid Switch, exec, swaylock -f -i ~/photos/wallpapers/wallpaper.png"
-      # ];
 
       windowrule = [
         # Window rules
@@ -252,37 +213,7 @@ in {
         "opacity 1.0 1.0,class:^(wofi)$"
       ];
     };
-
-    # Submaps
-    # extraConfig = ''
-    #        # source = ~/.config/hypr/themes/catppuccin-macchiato.conf
-    #        # source = ~/.config/hypr/themes/oxocarbon.conf
-    #        env = GBM_BACKEND,nvidia-drm
-    #        env = LIBVA_DRIVER_NAME,nvidia
-    #        env = XDG_SESSION_TYPE,wayland
-    #        env = __GLX_VENDOR_LIBRARY_NAME,nvidia
-    #        env = WLR_NO_HARDWARE_CURSORS,1
-    #   #     # will switch to a submap called resize
-    #   #     bind=$mainMod,R,submap,resize
-    #   #
-    #   #     # will start a submap called "resize"
-    #   #     submap=resize
-    #   #
-    #   #     # sets repeatable binds for resizing the active window
-    #   #     binde=,L,resizeactive,15 0
-    #   #     binde=,H,resizeactive,-15 0
-    #   #     binde=,K,resizeactive,0 -15
-    #   #     binde=,J,resizeactive,0 15
-    #   #
-    #   #     # use reset to go back to the global submap
-    #   #     bind=,escape,submap,reset
-    #   #     bind=$mainMod,R,submap,reset
-    #   #
-    #   #     # will reset the submap, meaning end the current one and return to the global one
-    #   #     submap=reset
-    # '';
   };
-
   # Hyprland configuration files
   xdg.configFile = {
     "hypr/store/dynamic_out.txt".source = ./store/dynamic_out.txt;

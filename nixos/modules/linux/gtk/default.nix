@@ -1,4 +1,11 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+let
+  catppuccin = pkgs.catppuccin-gtk.override {
+    size = "compact";
+    accents = [ "blue" ];
+    variant = "macchiato";
+  };
+in {
   gtk = {
     enable = true;
     cursorTheme = {
@@ -9,11 +16,7 @@
 
     theme = {
       name = "Catppuccin-Macchiato-Compact-Blue-dark";
-      package = pkgs.catppuccin-gtk.override {
-        size = "compact";
-        accents = ["blue"];
-        variant = "macchiato";
-      };
+      package = catppuccin;
     };
 
     iconTheme = {
@@ -21,4 +24,14 @@
       package = pkgs.papirus-folders;
     };
   };
+  home.file.".config/gtk-4.0/gtk.css".source =
+    "${catppuccin}/share/themes/Catppuccin-Mocha-Standard-Maroon-Dark/gtk-4.0/gtk.css";
+  home.file.".config/gtk-4.0/gtk-dark.css".source =
+    "${catppuccin}/share/themes/Catppuccin-Mocha-Standard-Maroon-Dark/gtk-4.0/gtk-dark.css";
+  home.file.".config/gtk-4.0/assets" = {
+    recursive = true;
+    source =
+      "${catppuccin}/share/themes/Catppuccin-Mocha-Standard-Maroon-Dark/gtk-4.0/assets";
+  };
+
 }

@@ -1,5 +1,6 @@
-_: let
-  font = "RobotoMono Nerd Font";
+_:
+let
+  font = "JetBrainsMono Nerd Font";
   fontsize = "12";
   primary_accent = "cba6f7";
   secondary_accent = "89b4fa";
@@ -23,23 +24,15 @@ in {
       "custom/playerctl#play"
       "custom/playerctl#foward"
     ];
-    modules-center = [
-      "cava#left"
-      "hyprland/workspaces"
-      "cava#right"
-    ];
-    modules-right = [
-      "custom/notification"
-      "tray"
-      "battery"
-      "pulseaudio"
-      "network"
-      "clock"
-    ];
+    modules-center = [ "cava#left" "hyprland/workspaces" "cava#right" ];
+    modules-right =
+      [ "custom/notification" "tray" "battery" "pulseaudio" "network" "clock" ];
     clock = {
       format = "󰥔  {:%a, %d %b, %I:%M %p}";
       tooltip = "true";
-      tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+      tooltip-format = ''
+        <big>{:%Y %B}</big>
+        <tt><small>{calendar}</small></tt>'';
       format-alt = "   {:%d/%m}";
     };
     "hyprland/workspaces" = {
@@ -118,7 +111,8 @@ in {
     "custom/playerctl#play" = {
       format = "{icon}";
       return-type = "json";
-      exec = "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
+      exec = ''
+        playerctl -a metadata --format '{"text": "{{artist}} - {{markup_escape(title)}}", "tooltip": "{{playerName}} : {{markup_escape(title)}}", "alt": "{{status}}", "class": "{{status}}"}' -F'';
       on-click = "playerctl play-pause";
       on-scroll-up = "playerctl volume .05+";
       on-scroll-down = "playerctl volume .05-";
@@ -138,7 +132,8 @@ in {
       format = "<span>󰎈 {} 󰎈</span>";
       return-type = "json";
       max-length = 40;
-      exec = "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
+      exec = ''
+        playerctl -a metadata --format '{"text": "{{artist}} - {{markup_escape(title)}}", "tooltip": "{{playerName}} : {{markup_escape(title)}}", "alt": "{{status}}", "class": "{{status}}"}' -F'';
       on-click = "";
     };
     battery = {
@@ -151,7 +146,7 @@ in {
       format-charging = "  {capacity}%";
       format-plugged = " {capacity}% ";
       format-alt = "{icon} {time}";
-      format-icons = ["" "" "" "" ""];
+      format-icons = [ "" "" "" "" "" ];
     };
 
     memory = {
@@ -178,9 +173,7 @@ in {
     pulseaudio = {
       format = "{icon} {volume}%";
       format-muted = "󰝟";
-      format-icons = {
-        default = ["󰕿" "󰖀" "󰕾"];
-      };
+      format-icons = { default = [ "󰕿" "󰖀" "󰕾" ]; };
       # on-scroll-up= "bash ~/.scripts/volume up";
       # on-scroll-down= "bash ~/.scripts/volume down";
       scroll-step = 5;

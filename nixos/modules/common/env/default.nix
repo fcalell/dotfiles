@@ -1,4 +1,4 @@
-{ ... }: {
+_: {
   config = {
     environment = {
       sessionVariables = {

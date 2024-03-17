@@ -1,6 +1,7 @@
- { pkgs, lib, ... }:
+_:
 
 {
+  imports = [ ./lsp ];
   programs.neovim = {
     enable = true;
     defaultEditor = true;

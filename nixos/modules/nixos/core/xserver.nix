@@ -4,12 +4,11 @@ in {
   services = {
     xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
       displayManager.autoLogin = {
         enable = true;
         user = "${username}";
       };
-      desktopManager = { xfce.enable = true; };
+      # desktopManager = { xfce.enable = true; };
       libinput = {
         enable = true;
         mouse = { accelProfile = "flat"; };

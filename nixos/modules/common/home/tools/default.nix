@@ -1,9 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./lsp ];
   home.packages = [
-    pkgs.xclip
     pkgs.btop
     pkgs.ranger
     pkgs.lazygit

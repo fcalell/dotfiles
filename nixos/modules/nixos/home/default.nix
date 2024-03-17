@@ -1,1 +1,4 @@
-_: { imports = [ ./addons ./gtk ./hyprland ]; }
+{ pkgs, ... }: {
+  imports = [ ./addons ./gtk ./hyprland ];
+  home.packages = [ pkgs.xfce.thunar ];
+}

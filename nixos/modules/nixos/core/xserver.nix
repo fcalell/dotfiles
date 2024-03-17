@@ -5,13 +5,11 @@ in {
     xserver = {
       enable = true;
       displayManager.gdm.enable = true;
-      desktopManager = {
-        xfce.enable = true;
-        autoLogin = {
-          enable = true;
-          user = "${username}";
-        };
+      displayManager.autoLogin = {
+        enable = true;
+        user = "${username}";
       };
+      desktopManager = { xfce.enable = true; };
       libinput = {
         enable = true;
         mouse = { accelProfile = "flat"; };

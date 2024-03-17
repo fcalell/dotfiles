@@ -1,7 +1,12 @@
-{ pkgs, ... }:
-
-{
-  imports = [ ./modules/common ./modules/linux ];
+{ pkgs, os, ... }:
+let
+  imports = if os == "nixos" then [
+    ./modules/common/home
+    ./modules/nixos/home
+  ] else
+    [ ./modules/common/home ];
+in {
+  imports = imports;
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "fcalell";

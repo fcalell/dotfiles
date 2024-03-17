@@ -27,6 +27,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = {
+              os = "nixos";
               inherit
                 inputs; # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
             };

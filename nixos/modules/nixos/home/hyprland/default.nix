@@ -1,229 +1,26 @@
-{ pkgs, ... }:
-let
-  # oxocarbon_pink = "ff7eb6";
-  # oxocarbon_border = "393939";
-  oxocarbon_background = "161616";
-  background = "rgba(11111B00)";
-  # tokyonight_border = "rgba(7aa2f7ee) rgba(87aaf8ee) 45deg";
-  tokyonight_background = "rgba(32344aaa)";
-  catppuccin_border = "rgba(b4befeee)";
-  opacity = "0.95";
-  # cursor = "macOS-BigSur";
-in {
-  home.packages = with pkgs; [
-    dunst
-    (writeShellScriptBin "hyprstart" ''
-      # Variables
-      config=$HOME/.config/hypr
-      scripts=$config/scripts
-
-      # Waybar
-      pkill waybar
-      $scripts/launch_waybar &
-      $scripts/tools/dynamic &
-
-      # Dunst (Notifications)
-      pkill dunst
-      dunst 
-
-      # Cursor
-      # hyprctl setcursor "macOS-BigSur" 32 # "Catppuccin-Mocha-Mauve-Cursors"
-    '')
-  ];
+{ pkgs, ... }: {
+  imports = [ ./config.nix ];
+  home.packages = with pkgs; [ dunst swaybg wl-clipboard glib wayland direnv ];
   wayland.windowManager.hyprland = {
     enable = true;
-    settings = {
-      "$mainMod" = "SUPER";
-      input = {
-        kb_layout = "us";
-        kb_variant = "";
-        kb_model = "";
-        kb_options = "";
-        kb_rules = "";
-
-        follow_mouse = 0;
-        numlock_by_default = 1;
-        accel_profile = "flat";
-        sensitivity = 0;
-        force_no_accel = 1;
-        touchpad = { natural_scroll = 1; };
-      };
-
-      general = {
-        gaps_in = 5;
-        gaps_out = 5;
-        border_size = 3;
-        "col.active_border" = "${catppuccin_border}";
-        "col.inactive_border" = "${tokyonight_background}";
-        layout = "master";
-        apply_sens_to_raw =
-          1; # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
-      };
-
-      decoration = {
-        rounding = 12;
-        shadow_ignore_window = true;
-        drop_shadow = false;
-        shadow_range = 20;
-        shadow_render_power = 3;
-        "col.shadow" = "rgb(${oxocarbon_background})";
-        "col.shadow_inactive" = "${background}";
-        blur = {
-          enabled = false;
-          size = 5;
-          passes = 3;
-          new_optimizations = true;
-          ignore_opacity = true;
-          noise = 1.17e-2;
-          contrast = 1.5;
-          brightness = 1;
-          xray = true;
-        };
-      };
-
-      animations = {
-        enabled = true;
-        bezier = [
-          "pace,0.46, 1, 0.29, 0.99"
-          "overshot,0.13,0.99,0.29,1.1"
-          "md3_decel, 0.05, 0.7, 0.1, 1"
-        ];
-        animation = [
-          "windowsIn,1,6,md3_decel,slide"
-          "windowsOut,1,6,md3_decel,slide"
-          "windowsMove,1,6,md3_decel,slide"
-          "fade,1,10,md3_decel"
-          "workspaces,1,9,md3_decel,slide"
-          "workspaces, 1, 6, default"
-          "specialWorkspace,1,8,md3_decel,slide"
-          "border,1,10,md3_decel"
-        ];
-      };
-
-      misc = {
-        vfr =
-          true; # misc:no_vfr -> misc:vfr. bool, heavily recommended to leave at default on. Saves on CPU usage.
-        vrr =
-          0; # misc:vrr -> Adaptive sync of your monitor. 0 (off), 1 (on), 2 (fullscreen only). Default 0 to avoid white flashes on select hardware.
-      };
-
-      dwindle = {
-        pseudotile = true; # enable pseudotiling on dwindle
-        force_split = 2;
-        preserve_split = true;
-        default_split_ratio = 1.0;
-        no_gaps_when_only = false;
-        split_width_multiplier = 1.0;
-        use_active_for_splits = true;
-      };
-
-      master = {
-        mfact = 0.5;
-        new_is_master = false;
-      };
-
-      gestures = { workspace_swipe = false; };
-
-      debug = {
-        damage_tracking =
-          2; # leave it on 2 (full) unless you hate your GPU and want to make it suffer!
-      };
-
-      exec-once = [
-        "hyprstart"
-        # "easyeffects --gapplication-service" # Starts easyeffects in the background
-      ];
-
-      bind = [
-        "SUPER,Q,killactive,"
-        "ALT, Tab, cyclenext,"
-
-        # "SUPER,M,exit,"
-        # "SUPER,S,togglefloating,"
-        # "SUPER,g,togglegroup"
-        # "SUPER,tab,changegroupactive"
-        # "SUPER,P,pseudo,"
-
-        # Vim binds
-        "SUPER,h,movefocus,l"
-        "SUPER,l,movefocus,r"
-        "SUPER,k,movefocus,u"
-        "SUPER,j,movefocus,d"
-
-        "SUPER,left,movefocus,l"
-        "SUPER,down,movefocus,r"
-        "SUPER,up,movefocus,u"
-        "SUPER,right,movefocus,d"
-
-        "SUPER,1,workspace,1"
-        "SUPER,2,workspace,2"
-        "SUPER,3,workspace,3"
-        "SUPER,4,workspace,4"
-        "SUPER,mouse_down,workspace,e-1"
-        "SUPER,mouse_up,workspace,e+1"
-
-        "SUPER SHIFT, H, movewindow, l"
-        "SUPER SHIFT, L, movewindow, r"
-        "SUPER SHIFT, K, movewindow, u"
-        "SUPER SHIFT, J, movewindow, d"
-        "SUPER SHIFT, left, movewindow, l"
-        "SUPER SHIFT, right, movewindow, r"
-        "SUPER SHIFT, up, movewindow, u"
-        "SUPER SHIFT, down, movewindow, d"
-
-        "SUPER CTRL, h, resizeactive,-10 0"
-        "SUPER CTRL, l, resizeactive,10 0"
-        "SUPER CTRL, k, resizeactive,0 -10"
-        "SUPER CTRL, j, resizeactive,0 10"
-
-        "SUPER ALT, 1, movetoworkspacesilent, 1"
-        "SUPER ALT, 2, movetoworkspacesilent, 2"
-        "SUPER ALT, 3, movetoworkspacesilent, 3"
-        "SUPER ALT, 4, movetoworkspacesilent, 4"
-
-        "SUPER,RETURN,exec,wofi --show drun -I -s ~/.config/wofi/style.css DP-3"
-      ];
-
-      windowrule = [
-        # Window rules
-        "tile,title:^(kitty)$"
-        "float,title:^(fly_is_kitty)$"
-        "tile,^(Spotify)$"
-        # "tile,^(neovide)$"
-        "tile,^(wps)$"
-      ];
-
-      windowrulev2 = [
-        "opacity ${opacity} ${opacity},class:^(thunar)$"
-        "opacity ${opacity} ${opacity},class:^(discord)$"
-        "opacity ${opacity} ${opacity},class:^(st-256color)$"
-        "float,class:^(pavucontrol)$"
-        "float,class:^(file_progress)$"
-        "float,class:^(confirm)$"
-        "float,class:^(dialog)$"
-        "float,class:^(download)$"
-        "float,class:^(notification)$"
-        "float,class:^(error)$"
-        "float,class:^(confirmreset)$"
-        "float,title:^(Open File)$"
-        "float,title:^(branchdialog)$"
-        "float,title:^(Confirm to replace files)$"
-        "float,title:^(File Operation Progress)$"
-        "float,title:^(mpv)$"
-        "opacity 1.0 1.0,class:^(wofi)$"
-      ];
-    };
+    xwayland.enable = true;
   };
-  # Hyprland configuration files
-  xdg.configFile = {
-    "hypr/store/dynamic_out.txt".source = ./store/dynamic_out.txt;
-    "hypr/store/prev.txt".source = ./store/prev.txt;
-    "hypr/store/latest_notif".source = ./store/latest_notif;
-    "hypr/scripts/wall".source = ./scripts/wall;
-    "hypr/scripts/launch_waybar".source = ./scripts/launch_waybar;
-    "hypr/scripts/tools/dynamic".source = ./scripts/tools/dynamic;
-    "hypr/scripts/tools/expand".source = ./scripts/tools/expand;
-    "hypr/scripts/tools/notif".source = ./scripts/tools/notif;
-    "hypr/scripts/tools/start_dyn".source = ./scripts/tools/start_dyn;
+  home.sessionVariables = {
+    GDK_BACKEND = "wayland";
+    ANKI_WAYLAND = "1";
+    DIRENV_LOG_FORMAT = "";
+    WLR_DRM_NO_ATOMIC = "1";
+    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    QT_QPA_PLATFORM = "xcb";
+    QT_QPA_PLATFORMTHEME = "qt5ct";
+    QT_STYLE_OVERRIDE = "kvantum";
+    MOZ_ENABLE_WAYLAND = "1";
+    WLR_BACKEND = "vulkan";
+    WLR_RENDERER = "vulkan";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    XDG_SESSION_TYPE = "wayland";
+    SDL_VIDEODRIVER = "wayland";
+    CLUTTER_BACKEND = "wayland";
   };
 }

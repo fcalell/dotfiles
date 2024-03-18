@@ -1,14 +1,17 @@
 { pkgs, ... }:
 
 {
-  home.packages = [
+  home.packages = with pkgs; [
     # Formatters
-    pkgs.stylua
-    pkgs.nixfmt
-    pkgs.perl538Packages.LatexIndent
-    pkgs.biome
+    stylua
+    nixfmt
+    perl538Packages.LatexIndent
+    biome
     # LSP
-    pkgs.nil
-    pkgs.lua-language-server
+    nil
+    lua-language-server
+    nodePackages_latest.typescript-language-server
+    vscode-langservers-extracted
+    tailwindcss-language-server
   ];
 }

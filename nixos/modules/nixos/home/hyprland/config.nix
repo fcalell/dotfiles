@@ -158,10 +158,10 @@ in {
       "SUPER SHIFT, up, movewindow, u"
       "SUPER SHIFT, down, movewindow, d"
 
-      "SUPER CTRL, h, resizeactive,-10 0"
-      "SUPER CTRL, l, resizeactive,10 0"
-      "SUPER CTRL, k, resizeactive,0 -10"
-      "SUPER CTRL, j, resizeactive,0 10"
+      "SUPER CTRL, h, resizeactive,-30 0"
+      "SUPER CTRL, l, resizeactive,30 0"
+      "SUPER CTRL, k, resizeactive,0 -30"
+      "SUPER CTRL, j, resizeactive,0 30"
 
       "SUPER ALT, 1, movetoworkspacesilent, 1"
       "SUPER ALT, 2, movetoworkspacesilent, 2"

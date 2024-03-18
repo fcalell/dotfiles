@@ -1,4 +1,4 @@
 { pkgs, ... }: {
   imports = [ ./addons ./gtk ./hyprland ];
-  home.packages = [ pkgs.xfce.thunar ];
+  home.packages = [ pkgs.google-chrome pkgs.xfce.thunar ];
 }

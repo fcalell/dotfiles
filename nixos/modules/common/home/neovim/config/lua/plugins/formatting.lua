@@ -1,0 +1,31 @@
+return {
+	"stevearc/conform.nvim",
+	lazy = true,
+	event = { "BufEnter" },
+	config = function()
+		local conform = require("conform")
+		local formatters_by_ft = {
+			javascript = { "biome-check" },
+			typescript = { "biome-check" },
+			javascriptreact = { "biome-check" },
+			typescriptreact = { "biome-check" },
+			css = { "biome-check" },
+			html = { "biome-check" },
+			json = { "biome-check" },
+			yaml = { "biome-check" },
+			markdown = { "biome-check" },
+			graphql = { "biome-check" },
+			lua = { "stylua" },
+			tex = { "latexindent" },
+      nix = { "nixfmt" }
+		}
+		conform.setup({
+			formatters_by_ft = formatters_by_ft,
+			format_on_save = {
+				lsp_fallback = false,
+				async = false,
+				timeout_ms = 10000,
+			},
+		})
+	end,
+}

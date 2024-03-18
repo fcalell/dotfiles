@@ -1,29 +1,71 @@
-{ ... }:
-
-{
+_: {
   programs.kitty = {
     enable = true;
+    shellIntegration = {
+      enableZshIntegration = true;
+      mode = "no-cursor";
+    };
+    theme = "Catppuccin-Mocha";
+    font = {
+      name = "JetBrainsMono Nerd Font";
+      size = 12;
+    };
+    settings = {
+      bold_font = "JetBrainsMono Nerd Font";
+      italic_font = "JetBrainsMono Nerd Font";
+      bold_italic_font = "JetBrainsMono Nerd Font";
+
+      # modify_font underline_position 2
+      # modify_font underline_thickness 150%
+      adjust_line_height = "120%";
+      text_composition_strategy = "platform";
+      sync_to_monitor = "yes";
+
+      background_opacity = "0.98";
+      # cursor_shape = "block";
+      cursor_blink_interval = 0;
+
+      # confirm_os_window_close = 0;
+      disable_ligatures = "never";
+
+      copy_on_select = "clipboard";
+      clear_all_shortcuts = true;
+      draw_minimal_borders = "yes";
+      input_delay = 0;
+      # kitty_mod = "ctrl+shift";
+
+      enable_audio_bell = false;
+      visual_bell_duration = 0;
+      window_alert_on_bell = false;
+      bell_on_tab = false;
+      command_on_bell = "none";
+
+      term = "xterm-256color";
+
+      window_padding_width = 5;
+
+      macos_option_as_alt = "left";
+      macos_show_window_title_in = "none";
+
+      # Tab Bar
+      # tab_bar_edge = "top";
+      # tab_bar_margin_width = 5;
+      # tab_bar_margin_height = "5 0";
+      # tab_bar_style = "separator";
+      # tab_bar_min_tabs = 2;
+      # tab_separator = "";
+      # tab_title_template = "{fmt.fg._5c6370}{fmt.bg.default}{fmt.fg._abb2bf}{fmt.bg._5c6370} {tab.active_oldest_wd} {fmt.fg._5c6370}{fmt.bg.default} ";
+      # active_tab_title_template = "{fmt.fg._BAA0E8}{fmt.bg.default}{fmt.fg.default}{fmt.bg._BAA0E8} {tab.active_oldest_wd} {fmt.fg._BAA0E8}{fmt.bg.default} ";
+      # tab_bar_edge = "bottom";
+      # tab_bar_style = "powerline";
+      # tab_powerline_style = "slanted";
+      # active_tab_title_template = "{index}: {title}";
+      # active_tab_font_style = "bold-italic";
+      # inactive_tab_font_style = "normal";
+
+      # repaint_delay = 8;
+    };
     extraConfig = ''
-      font_family      JetBrainsMono Nerd Font
-      bold_font        JetBrainsMono Nerd Font 
-      italic_font      JetBrainsMono Nerd Font
-      bold_italic_font JetBrainsMono Nerd Font
-      font_size 12.0
-      modify_font underline_position 2
-      modify_font underline_thickness 150%
-      adjust_line_height  120%
-
-      cursor_blink_interval 0
-
-      window_padding_width 2
-      background_opacity 0.98
-      background #000000
-
-      macos_option_as_alt left
-      macos_show_window_title_in none
-      open_url_modifiers super
-
-      clear_all_shortcuts yes
       map super+c copy_to_clipboard
       map super+v paste_from_clipboard
 
@@ -35,65 +77,7 @@
 
       map super+plus change_font_size all +2.0
       map super+minus change_font_size all -2.0
-      map super+shift+r load_config_file
-
-      foreground #a9b1d6
-      background #1a1b26
-
-      # Black
-      color0 #414868
-      color8 #414868
-      # Red
-      color1 #f7768e
-      color9 #f7768e
-      # Green
-      color2  #73daca
-      color10 #73daca
-      # Yellow
-      color3  #e0af68
-      color11 #e0af68
-      # Blue
-      color4  #7aa2f7
-      color12 #7aa2f7
-      # Magenta
-      color5  #bb9af7
-      color13 #bb9af7
-      # Cyan
-      color6  #7dcfff
-      color14 #7dcfff
-      # White
-      color7  #c0caf5
-      color15 #c0caf5
-
-      # Cursor
-      cursor #c0caf5
-      cursor_text_color #1a1b26
-
-      # Selection highlight
-      selection_foreground none
-      selection_background #28344a
-
-      # The color for highlighting URLs on mouse-over
-      url_color #9ece6a
-
-      # Window borders
-      active_border_color #3d59a1
-      inactive_border_color #101014
-      bell_border_color #e0af68
-
-      # Tab bar
-      tab_bar_style fade
-      tab_fade 1
-      active_tab_foreground   #3d59a1
-      active_tab_background   #16161e
-      active_tab_font_style   bold
-      inactive_tab_foreground #787c99
-      inactive_tab_background #16161e
-      inactive_tab_font_style bold
-      tab_bar_background #101014
-
-      # Title bar
-      macos_titlebar_color #16161e
     '';
   };
 }
+

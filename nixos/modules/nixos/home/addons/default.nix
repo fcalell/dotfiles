@@ -1,1 +1,1 @@
-_: { imports = [ ./alacritty ./waybar ./wofi ]; }
+_: { imports = [ ./waybar ./wofi ]; }

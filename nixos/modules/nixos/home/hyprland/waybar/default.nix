@@ -1,9 +1,8 @@
 { pkgs, ... }: {
+  imports = [ ./config.nix ./style.nix ];
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
-    settings = import ./config.nix;
-    style = import ./style.nix;
   };
   xdg = {
     configFile = {

@@ -41,8 +41,8 @@ in {
     };
 
     general = {
-      gaps_in = 5;
-      gaps_out = 5;
+      gaps_in = 3;
+      gaps_out = 3;
       border_size = 3;
       "col.active_border" = "${catppuccin_border}";
       "col.inactive_border" = "${tokyonight_background}";

@@ -12,6 +12,19 @@ let
 in {
   wayland.windowManager.hyprland.settings = {
     "$mainMod" = "SUPER";
+    exec-once = [
+      "systemctl --user import-environment &"
+      "hash dbus-update-activation-environment 2>/dev/null &"
+      "dbus-update-activation-environment --systemd &"
+      "nm-applet &"
+      "wl-paste --primary --watch wl-copy --primary --clear"
+      "swaybg -m fill -i $(find ~/nixos/assets/wallpapers/ -maxdepth 1 -type f) &"
+      # "sleep 1 && swaylock"
+      "hyprctl setcursor macOS-BigSur 22"
+      "waybar &"
+      # "mako &"
+      # "easyeffects --gapplication-service" # Starts easyeffects in the background
+    ];
     input = {
       kb_layout = "us";
       kb_variant = "";
@@ -106,20 +119,6 @@ in {
       damage_tracking =
         2; # leave it on 2 (full) unless you hate your GPU and want to make it suffer!
     };
-
-    exec-once = [
-      "systemctl --user import-environment &"
-      "hash dbus-update-activation-environment 2>/dev/null &"
-      "dbus-update-activation-environment --systemd &"
-      "nm-applet &"
-      "wl-paste --primary --watch wl-copy --primary --clear"
-      # "swaybg -m fill -i $(find ~/Pictures/wallpapers/ -maxdepth 1 -type f) &"
-      # "sleep 1 && swaylock"
-      "hyprctl setcursor macOS-BigSur 22"
-      # "waybar &"
-      # "mako &"
-      # "easyeffects --gapplication-service" # Starts easyeffects in the background
-    ];
 
     bind = [
       "SUPER,Q,killactive,"

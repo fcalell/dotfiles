@@ -20,15 +20,15 @@ return {
 
 		-- Set menu
 		dashboard.section.buttons.val = {
-			dashboard.button("v", "  > File browser", "<cmd>Telescope file_browser<CR>"),
-			dashboard.button("f", "󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
-			dashboard.button("s", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
+			dashboard.button("v", "  > [V]iew files", "<cmd>Telescope file_browser<CR>"),
+			dashboard.button("f", "󰱼  > [F]ind File", "<cmd>Telescope find_files<CR>"),
+			dashboard.button("s", "  > [S]earch Word", "<cmd>Telescope live_grep<CR>"),
 			dashboard.button(
 				"r",
-				"󰁯  > Restore Session For Current Directory",
+				"󰁯  > [R]estore Session For Current Directory",
 				"<cmd>lua require('persistence').load()<cr>"
 			),
-			dashboard.button("q", "  > Quit NVIM", "<cmd>qa<CR>"),
+			dashboard.button("q", "  > [Q]uit NVIM", "<cmd>qa<CR>"),
 		}
 
 		-- Send config to alpha

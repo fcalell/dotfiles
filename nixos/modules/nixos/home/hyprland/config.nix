@@ -8,7 +8,6 @@ let
   tokyonight_background = "rgba(32344aaa)";
   catppuccin_border = "rgba(b4befeee)";
   opacity = "0.95";
-  # cursor = "macOS-BigSur";
 in {
   wayland.windowManager.hyprland.settings = {
     "$mainMod" = "SUPER";
@@ -16,11 +15,11 @@ in {
       "systemctl --user import-environment &"
       "hash dbus-update-activation-environment 2>/dev/null &"
       "dbus-update-activation-environment --systemd &"
-      "nm-applet &"
+      # "nm-applet &"
       "wl-paste --primary --watch wl-copy --primary --clear"
       "swaybg -m fill -i $(find ~/nixos/assets/wallpapers/ -maxdepth 1 -type f) &"
       # "sleep 1 && swaylock"
-      "hyprctl setcursor macOS-BigSur 22"
+      "hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 22"
       "waybar &"
       # "mako &"
       # "easyeffects --gapplication-service" # Starts easyeffects in the background
@@ -123,6 +122,7 @@ in {
     bind = [
       "SUPER,Q,killactive,"
       "ALT, Tab, cyclenext,"
+      ''SUPER,P,exec, grim -g "$(slurp)" - | wl-copy -t image/png''
 
       # "SUPER,M,exit,"
       # "SUPER,S,togglefloating,"

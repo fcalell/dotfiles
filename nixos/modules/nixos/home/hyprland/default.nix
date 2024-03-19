@@ -1,6 +1,14 @@
 { pkgs, ... }: {
   imports = [ ./config.nix ./waybar ./wofi ./dunst ];
-  home.packages = with pkgs; [ swaybg wl-clipboard glib wayland direnv ];
+  home.packages = with pkgs; [
+    swaybg
+    wl-clipboard
+    glib
+    wayland
+    direnv
+    grim
+    slurp
+  ];
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;

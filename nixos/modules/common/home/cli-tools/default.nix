@@ -5,7 +5,7 @@
     pkgs.nodejs_20
     pkgs.yarn
     pkgs.btop
-    pkgs.ranger
+    pkgs.lf
     pkgs.lazygit
     pkgs.duf
     pkgs.du-dust

@@ -1,10 +1,11 @@
-{ config, inputs, ... }: {
+{ inputs, ... }: {
+
   imports = [ inputs.android-nixpkgs.hmModule ];
 
   android-sdk.enable = true;
 
   # Optional; default path is "~/.local/share/android".
-  android-sdk.path = "${config.home.homeDirectory}/.android/sdk";
+  android-sdk.path = "/home/fcalell/.android/sdk";
 
   android-sdk.packages = sdk:
     with sdk; [

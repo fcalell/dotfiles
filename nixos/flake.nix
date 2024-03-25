@@ -21,11 +21,19 @@
     };
   };
 
-  outputs = { nixpkgs, hyprland, home-manager, ... }@inputs: {
+  outputs = { nixpkgs, ... }@inputs: {
+    packages.x86_64-linux.android-sdk = inputs.android-nixpkgs.sdk (sdkPkgs:
+      with sdkPkgs; [
+        cmdline-tools-latest
+        build-tools-34-0-0
+        platform-tools
+        platforms-android-34
+        emulator
+      ]);
     nixosConfigurations = {
       main_pc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs hyprland; };
+        specialArgs = { inherit inputs; };
         modules = [
           ./modules/nixos/core/deafult.nix
           ./hosts/main_pc/hardware-configuration.nix

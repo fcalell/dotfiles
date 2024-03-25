@@ -16,7 +16,7 @@
     };
   };
 
-  outputs = { nixpkgs, ... }@inputs: {
+  outputs = { nixpkgs, android-nixpkgs, ... }@inputs: {
     nixosConfigurations = {
       main_pc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

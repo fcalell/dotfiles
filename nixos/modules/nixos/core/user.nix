@@ -32,10 +32,10 @@ in {
     useGlobalPkgs = true;
     extraSpecialArgs = { inherit inputs username; };
     users.${username} = {
-      imports = [ ./../home/default.nix ../../common/home/default.nix ];
       home.username = "${username}";
       home.homeDirectory = "/home/${username}";
       home.stateVersion = "23.11";
+      imports = [ ./../home/default.nix ../../common/home/default.nix ];
       programs.home-manager.enable = true;
     };
   };

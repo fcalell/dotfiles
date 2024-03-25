@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./android ./terminal ./zsh ./neovim ./cli-tools ./fonts ./env ];
+  imports = [ ./terminal ./zsh ./neovim ./cli-tools ./fonts ./env ./android ];
   home.packages = [ pkgs.google-chrome ];
 }

@@ -1,28 +1,35 @@
 { pkgs, ... }:
 
 {
-  home.packages = [
-    pkgs.nodejs_20
-    pkgs.yarn
-    pkgs.btop
-    pkgs.lf
-    pkgs.lazygit
-    pkgs.duf
-    pkgs.du-dust
-    pkgs.tre-command
-    pkgs.neofetch
-    pkgs.gcc_multi
-    pkgs.gnumake
-    pkgs.python3
-    pkgs.unzip
-    pkgs.fzf
-    pkgs.ripgrep
+  home.packages = with pkgs; [
+    btop
+    lf
+    duf
+    du-dust
+    tre-command
+    neofetch
+    gnumake
+    unzip
+    fzf
+    fd
+    ripgrep
+    lazygit
+    gcc_multi
+    # pkgs.nodejs_20
+    # pkgs.yarn
+    # pkgs.nodePackages.pnpm
+    # pkgs.python3
   ];
   programs = {
     git = {
       enable = true;
       userName = "fcalell";
       userEmail = "frankie.calella@gmail.com";
+    };
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
     };
   };
 }

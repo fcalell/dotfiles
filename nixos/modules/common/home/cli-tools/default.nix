@@ -3,7 +3,6 @@
 {
   home.packages = with pkgs; [
     btop
-    lf
     duf
     du-dust
     tre-command
@@ -21,6 +20,10 @@
     # pkgs.python3
   ];
   programs = {
+    lf = {
+      enable = true;
+      settings = { hidden = true; };
+    };
     git = {
       enable = true;
       userName = "fcalell";

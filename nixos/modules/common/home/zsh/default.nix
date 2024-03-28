@@ -23,7 +23,6 @@ in {
         nixc = "sudo nix-collect-garbage -d";
         gg = "lazygit";
         ls = "ls --color -la -h";
-        grep = "ripgrep";
         ".." = "cd ..";
         cl = "clear";
         top = "btop";

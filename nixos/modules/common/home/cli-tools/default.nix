@@ -11,7 +11,6 @@
     unzip
     fzf
     fd
-    ripgrep
     lazygit
     gcc13
     nodejs_20
@@ -20,6 +19,7 @@
     # pkgs.python3
   ];
   programs = {
+    ripgrep.enable = true;
     lf = {
       enable = true;
       settings = { hidden = true; };

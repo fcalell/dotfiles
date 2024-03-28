@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+_:
 
 {
   imports = [
@@ -11,5 +11,4 @@
     ./env
     # ./android 
   ];
-  home.packages = [ pkgs.google-chrome ];
 }

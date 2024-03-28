@@ -8,6 +8,7 @@
     tre-command
     neofetch
     gnumake
+    fd
     unzip
     fzf
     fd
@@ -20,6 +21,7 @@
   ];
   programs = {
     ripgrep.enable = true;
+    fzf.enable = true;
     lf = {
       enable = true;
       settings = { hidden = true; };

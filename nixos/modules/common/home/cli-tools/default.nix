@@ -14,7 +14,7 @@
     ripgrep
     lazygit
     gcc13
-    pkgs.nodejs_20
+    nodejs_20
     # pkgs.yarn
     # pkgs.nodePackages.pnpm
     # pkgs.python3

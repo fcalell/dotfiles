@@ -3,7 +3,7 @@ _:
 {
   imports = [
     ./terminal
-    ./browser
+    # ./browser
     ./zsh
     ./neovim
     ./cli-tools

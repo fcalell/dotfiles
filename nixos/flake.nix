@@ -26,7 +26,10 @@
     nixosConfigurations = {
       main_pc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+          system = "x86_64-linux";
+        };
         modules = [
           ./modules/nixos/core/deafult.nix
           ./hosts/main_pc/hardware-configuration.nix
@@ -35,7 +38,10 @@
     };
     darwinConfigurations = {
       macbook = nix-darwin.lib.darwinSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+          system = "x86_64-darwin";
+        };
         modules = [ ./modules/macbook/core/default.nix ];
       };
     };

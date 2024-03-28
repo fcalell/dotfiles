@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, system, ... }:
 let username = "fcalell";
 in {
   time.timeZone = "Europe/Rome";
@@ -30,7 +30,7 @@ in {
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
-    extraSpecialArgs = { inherit inputs username; };
+    extraSpecialArgs = { inherit inputs username system; };
     users.${username} = {
       home.username = "${username}";
       home.homeDirectory = "/home/${username}";

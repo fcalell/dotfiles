@@ -3,6 +3,7 @@
 {
   imports = [
     ./terminal
+    ./browser
     ./zsh
     ./neovim
     ./cli-tools

@@ -9,11 +9,11 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/hyprland";
-    android-nixpkgs = {
-      url = "github:tadfisher/android-nixpkgs";
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/hyprland";
     # devenv.url = "github:cachix/devenv";
     # nixConfig = {
     #   extra-trusted-public-keys =
@@ -22,7 +22,7 @@
     # };
   };
 
-  outputs = { nixpkgs, android-nixpkgs, ... }@inputs: {
+  outputs = { nixpkgs, nix-darwin, ... }@inputs: {
     nixosConfigurations = {
       main_pc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -31,6 +31,12 @@
           ./modules/nixos/core/deafult.nix
           ./hosts/main_pc/hardware-configuration.nix
         ];
+      };
+    };
+    darwinConfigurations = {
+      macbook = nix-darwin.lib.darwinSystem {
+        specialArgs = { inherit inputs; };
+        modules = [ ./modules/macbook/core/default.nix ];
       };
     };
   };

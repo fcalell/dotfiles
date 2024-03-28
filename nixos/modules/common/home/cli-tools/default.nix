@@ -13,8 +13,8 @@
     fd
     ripgrep
     lazygit
-    gcc_multi
-    # pkgs.nodejs_20
+    gcc13
+    pkgs.nodejs_20
     # pkgs.yarn
     # pkgs.nodePackages.pnpm
     # pkgs.python3

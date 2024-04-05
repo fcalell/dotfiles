@@ -5,9 +5,9 @@
     # Formatters
     stylua
     nixfmt
-    perl538Packages.LatexIndent
     biome
     # LSP
+    texlab
     nil
     lua-language-server
     nodePackages_latest.typescript-language-server

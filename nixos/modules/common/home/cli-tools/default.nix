@@ -15,6 +15,9 @@
     lazygit
     gcc13
     nodejs_20
+    nodejs_20.pkgs.pnpm
+    nodejs_20.pkgs.yarn
+    tree-sitter
     # pkgs.yarn
     # pkgs.nodePackages.pnpm
     # pkgs.python3
@@ -31,10 +34,19 @@
       userName = "fcalell";
       userEmail = "frankie.calella@gmail.com";
     };
-    direnv = {
+    # direnv = {
+    #   enable = true;
+    #   enableZshIntegration = true;
+    #   nix-direnv.enable = true;
+    # };
+    texlive = {
       enable = true;
-      enableZshIntegration = true;
-      nix-direnv.enable = true;
+      extraPackages = tpkgs: {
+        inherit (tpkgs)
+          scheme-basic enumitem mmap cmap titlesec metafont xcolor soul setspace
+          substr xstring xifthen ifmtarg lastpage biblatex biblatex-ext helvetic
+          csquotes europasscv latexindent;
+      };
     };
   };
 }

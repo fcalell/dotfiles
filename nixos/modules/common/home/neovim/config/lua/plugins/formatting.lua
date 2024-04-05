@@ -17,7 +17,7 @@ return {
 			graphql = { "biome-check" },
 			lua = { "stylua" },
 			tex = { "latexindent" },
-      nix = { "nixfmt" }
+			nix = { "nixfmt" },
 		}
 		conform.setup({
 			formatters_by_ft = formatters_by_ft,

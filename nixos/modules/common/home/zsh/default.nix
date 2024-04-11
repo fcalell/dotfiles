@@ -28,6 +28,7 @@ in {
         top = "btop";
         df = "duf";
         du = "dust";
+        note = "cd ~/Documents/notes && vi index.norg";
       };
     };
   };

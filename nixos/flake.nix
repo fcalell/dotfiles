@@ -1,14 +1,6 @@
 {
   description = "NixOS configuration";
 
-  nixConfig = {
-    extra-trusted-public-keys =
-      # "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=";
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
-    extra-substituters = "https://nix-community.cachix.org";
-    # "https://devenv.cachix.org";
-  };
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -35,6 +27,7 @@
           system = "x86_64-linux";
         };
         modules = [
+          ./modules/common/core/default.nix
           ./modules/nixos/core/deafult.nix
           ./hosts/main_pc/hardware-configuration.nix
         ];
@@ -46,7 +39,10 @@
           inherit inputs;
           system = "x86_64-darwin";
         };
-        modules = [ ./modules/macbook/core/default.nix ];
+        modules = [
+          ./modules/common/core/default.nix
+          ./modules/macbook/core/default.nix
+        ];
       };
     };
   };

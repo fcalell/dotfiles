@@ -1,6 +1,4 @@
-{ inputs, system, ... }:
-let username = "fcalell";
-in {
+{ inputs, username, system, ... }: {
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
 

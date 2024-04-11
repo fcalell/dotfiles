@@ -1,4 +1,4 @@
-{ inputs, ... }:
+_:
 
 {
   imports = [
@@ -11,5 +11,4 @@
     ./env
     # ./android 
   ];
-  nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlay ];
 }

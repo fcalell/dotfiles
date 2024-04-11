@@ -18,6 +18,8 @@
     nodejs_20.pkgs.pnpm
     nodejs_20.pkgs.yarn
     tree-sitter
+    luajit
+    luajitPackages.luarocks-nix
     # pkgs.yarn
     # pkgs.nodePackages.pnpm
     # pkgs.python3

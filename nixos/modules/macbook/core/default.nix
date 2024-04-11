@@ -33,7 +33,7 @@ in {
       home.username = "${username}";
       home.homeDirectory = "/Users/${username}";
       home.stateVersion = "23.11";
-      imports = [ ../../common/home/default.nix ];
+      imports = [ ../../common/home/default.nix ../home/default.nix ];
       programs.home-manager.enable = true;
     };
   };

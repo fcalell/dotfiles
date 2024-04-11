@@ -24,6 +24,7 @@ return {
 				},
 				sources = {
 					{ name = "nvim_lsp" },
+					{ name = "neorg" },
 					{ name = "path" },
 				},
 				---@diagnostic disable-next-line: missing-fields

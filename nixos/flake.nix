@@ -13,6 +13,7 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     hyprland.url = "github:hyprwm/hyprland";
     # devenv.url = "github:cachix/devenv";
     # nixConfig = {

@@ -23,6 +23,7 @@ return {
 			dashboard.button("v", "  > [V]iew files", "<cmd>Telescope file_browser<CR>"),
 			dashboard.button("f", "󰱼  > [F]ind File", "<cmd>Telescope find_files<CR>"),
 			dashboard.button("s", "  > [S]earch Word", "<cmd>Telescope live_grep<CR>"),
+			dashboard.button("n", "󰠮  > [N]otes", "<cmd>Neorg workspace notes<CR>"),
 			dashboard.button(
 				"r",
 				"󰁯  > [R]estore Session For Current Directory",

@@ -1,1 +1,1 @@
-{ pkgs, ... }: { home.packages = [ pkgs.xcrun ]; }
+{ pkgs, ... }: { home.packages = [ pkgs.xcbuild ]; }

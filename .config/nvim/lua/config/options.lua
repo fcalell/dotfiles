@@ -17,6 +17,8 @@ vim.opt.clipboard = "unnamed,unnamedplus" --- Copy-paste between vim and everyth
 -- Indentation settings
 vim.opt.breakindent = true
 vim.opt.autoindent = true
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevel = 99
 
 vim.opt.undofile = true --- Sets undo to file
 

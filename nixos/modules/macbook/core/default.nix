@@ -1,4 +1,6 @@
-{ inputs, username, system, ... }: {
+{ inputs, system, ... }:
+let username = "fcalell";
+in {
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
 
@@ -12,7 +14,10 @@
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "x86_64-darwin";
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlay ];
+
   nix.configureBuildUsers = true;
+  nix.settings.trusted-users = [ "root" "fcalell" ];
 
   security.pam.enableSudoTouchIdAuth = true;
 

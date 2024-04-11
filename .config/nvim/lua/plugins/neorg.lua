@@ -3,8 +3,6 @@ return {
 		"nvim-neorg/neorg",
 		dependencies = { { "vhyrro/luarocks.nvim", config = true } },
 		-- lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-		cmd = "Neorg",
-		ft = "norg",
 		version = "*", -- Pin Neorg to the latest stable release
 		config = function()
 			require("neorg").setup({
@@ -28,14 +26,33 @@ return {
 					},
 					["core.dirman"] = { -- Manage your directories with Neorg
 						config = {
-							index = "index.norg",
 							workspaces = {
 								notes = "~/Documents/notes",
 							},
+							default_workspace = "notes",
 						},
 					},
 				},
 			})
+			vim.keymap.set("n", "<leader>ni", "<cmd>Neorg index<CR>", { desc = "[N]otes [I]ndex" })
+			vim.keymap.set("n", "<leader>nc", "<cmd>Neorg return<CR>", { desc = "[N]otes [R]eturn" })
+			vim.keymap.set("n", "<leader>nf", function()
+				require("telescope.builtin").find_files({
+					cwd = "~/Documents/notes",
+					prompt = "Notes",
+				})
+			end, { desc = "[N]otes [F]ind" })
+			vim.keymap.set("n", "<leader>nv", function()
+				require("telescope").extensions.file_browser.file_browser({
+					path = "~/Documents/notes",
+				})
+			end, { desc = "[N]otes [V]iew" })
+			vim.keymap.set("n", "<leader>ns", function()
+				require("telescope.builtin").live_grep({
+					cwd = "~/Documents/notes",
+					prompt = "Notes",
+				})
+			end, { desc = "[N]otes [S]earch" })
 		end,
 	},
 }

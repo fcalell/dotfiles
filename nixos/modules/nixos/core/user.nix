@@ -28,7 +28,7 @@ in {
   # Home Manager
   imports = [ inputs.home-manager.nixosModules.home-manager ];
   home-manager = {
-    useUserPackages = true;
+    # useUserPackages = true;
     useGlobalPkgs = true;
     extraSpecialArgs = { inherit inputs username system; };
     users.${username} = {

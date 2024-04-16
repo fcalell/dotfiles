@@ -13,6 +13,7 @@
     fzf
     fd
     lazygit
+    (hiPrio gcc)
     clang
     nodejs_20
     nodejs_20.pkgs.pnpm

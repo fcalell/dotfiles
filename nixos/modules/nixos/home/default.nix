@@ -1,4 +1,4 @@
 { pkgs, ... }: {
   imports = [ ./gtk ./hyprland ];
-  home.packages = [ pkgs.google-chrome pkgs.xfce.thunar ];
+  home.packages = with pkgs; [ google-chrome xfce.thunar onlyoffice-bin ];
 }

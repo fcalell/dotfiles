@@ -60,7 +60,7 @@ vim.opt.incsearch = true
 vim.opt.infercase = true
 
 -- UI
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.showtabline = 1
 vim.opt.signcolumn = "yes"

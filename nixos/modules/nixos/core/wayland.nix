@@ -2,7 +2,10 @@
   imports = [ inputs.hyprland.nixosModules.default ];
   services.xserver.displayManager.gdm.wayland = true;
   services.xserver.displayManager.defaultSession = "hyprland";
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  };
   xdg = {
     # autostart.enable = true;
     portal = {

@@ -1,4 +1,4 @@
-{ inputs, system, ... }:
+{ inputs, ... }:
 let username = "fcalell";
 in {
   # Auto upgrade nix package and the daemon service.
@@ -26,7 +26,7 @@ in {
   home-manager = {
     # useUserPackages = true;
     useGlobalPkgs = true;
-    extraSpecialArgs = { inherit inputs username system; };
+    extraSpecialArgs = { inherit inputs username; };
     users.${username} = {
       home.username = "${username}";
       home.homeDirectory = "/Users/${username}";

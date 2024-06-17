@@ -6,22 +6,13 @@ _: {
       mode = "no-cursor";
     };
     theme = "Catppuccin-Mocha";
-    font = {
-      name = "JetBrainsMono Nerd Font";
-      size = 12;
-    };
     settings = {
-      bold_font = "JetBrainsMono Nerd Font";
-      italic_font = "JetBrainsMono Nerd Font";
-      bold_italic_font = "JetBrainsMono Nerd Font";
-
       # modify_font underline_position 2
       # modify_font underline_thickness 150%
       adjust_line_height = "120%";
       text_composition_strategy = "platform";
       sync_to_monitor = "yes";
 
-      background_opacity = "0.98";
       # cursor_shape = "block";
       cursor_blink_interval = 0;
 

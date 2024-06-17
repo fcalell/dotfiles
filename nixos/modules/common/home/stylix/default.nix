@@ -1,4 +1,4 @@
-{ inputs, pkgs }: {
+{ inputs, pkgs, ... }: {
   imports = [ inputs.stylix.homeManagerModules.stylix ];
 
   stylix = {
@@ -12,17 +12,25 @@
       size = 24;
     };
     fonts = {
-      packages = [
-        (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-        pkgs.noto-fonts
-        pkgs.noto-fonts-emoji
-      ];
-      serif = { name = "Noto Serif"; };
-      sansSerif = { name = "Noto Sans"; };
-      monospace = { name = "JetBrainsMono Nerd Font"; };
-      emoji = { name = "Noto Color Emoji"; };
+      serif = {
+        name = "Noto Serif";
+        package = pkgs.noto-fonts;
+      };
+      sansSerif = {
+        name = "Noto Sans";
+        package = pkgs.noto-fonts;
+      };
+      monospace = {
+        name = "JetBrainsMono Nerd Font";
+        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+      };
+      emoji = {
+        name = "Noto Color Emoji";
+        package = pkgs.noto-fonts-emoji;
+      };
     };
-    image = "~/nixos/assets/wallpapers/feet-on-the-dashboard.png";
+    image = "./wallpapers/feet-on-the-dashboard.png";
     opacity = { terminal = 0.98; };
+    targets = { bemenu.enable = false; };
   };
 }

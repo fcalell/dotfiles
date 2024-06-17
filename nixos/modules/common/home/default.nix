@@ -7,7 +7,7 @@ _:
     ./zsh
     ./neovim
     ./cli-tools
-    ./fonts
+    # ./fonts
     ./env
     # ./android 
   ];

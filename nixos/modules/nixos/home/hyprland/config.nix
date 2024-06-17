@@ -43,8 +43,8 @@ in {
       gaps_in = 3;
       gaps_out = 3;
       border_size = 3;
-      "col.active_border" = "${catppuccin_border}";
-      "col.inactive_border" = "${tokyonight_background}";
+      # "col.active_border" = "${catppuccin_border}";
+      # "col.inactive_border" = "${tokyonight_background}";
       layout = "master";
       apply_sens_to_raw =
         1; # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
@@ -56,8 +56,8 @@ in {
       drop_shadow = false;
       shadow_range = 20;
       shadow_render_power = 3;
-      "col.shadow" = "rgb(${oxocarbon_background})";
-      "col.shadow_inactive" = "${background}";
+      # "col.shadow" = "rgb(${oxocarbon_background})";
+      # "col.shadow_inactive" = "${background}";
       blur = {
         enabled = false;
         size = 5;
@@ -162,10 +162,10 @@ in {
       "SUPER CTRL, k, resizeactive,0 -30"
       "SUPER CTRL, j, resizeactive,0 30"
 
-      "SUPER ALT, 1, movetoworkspacesilent, 1"
-      "SUPER ALT, 2, movetoworkspacesilent, 2"
-      "SUPER ALT, 3, movetoworkspacesilent, 3"
-      "SUPER ALT, 4, movetoworkspacesilent, 4"
+      "SUPER SHIFT, 1, movetoworkspacesilent, 1"
+      "SUPER SHIFT, 2, movetoworkspacesilent, 2"
+      "SUPER SHIFT, 3, movetoworkspacesilent, 3"
+      "SUPER SHIFT, 4, movetoworkspacesilent, 4"
 
       "SUPER,RETURN,exec,wofi --show drun -I -s ~/.config/wofi/style.css DP-3"
     ];

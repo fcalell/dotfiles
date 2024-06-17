@@ -1,5 +1,6 @@
 { inputs, pkgs }: {
   imports = [ inputs.stylix.homeManagerModules.stylix ];
+
   stylix = {
     enable = true;
     autoEnable = true;

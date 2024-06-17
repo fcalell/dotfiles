@@ -19,7 +19,7 @@ in {
       "wl-paste --primary --watch wl-copy --primary --clear"
       "swaybg -m fill -i $(find ~/nixos/assets/wallpapers/ -maxdepth 1 -type f) &"
       # "sleep 1 && swaylock"
-      "hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 22"
+      # "hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 22"
       "waybar &"
       # "mako &"
       # "easyeffects --gapplication-service" # Starts easyeffects in the background

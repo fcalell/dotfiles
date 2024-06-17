@@ -10,5 +10,6 @@ _:
     # ./fonts
     ./env
     # ./android 
+    ./stylix
   ];
 }

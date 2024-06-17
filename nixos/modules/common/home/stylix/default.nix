@@ -29,7 +29,7 @@
         package = pkgs.noto-fonts-emoji;
       };
     };
-    image = "./wallpapers/feet-on-the-dashboard.png";
+    image = "./wallpapers/feet-on-the-dashboard.jpg";
     opacity = { terminal = 0.98; };
     targets = { bemenu.enable = false; };
   };

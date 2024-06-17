@@ -2,18 +2,20 @@ _:
 let username = "fcalell";
 in {
   services = {
-    xserver = {
+    libinput = {
       enable = true;
-      displayManager.autoLogin = {
+      mouse = { accelProfile = "flat"; };
+      touchpad = { accelProfile = "flat"; };
+    };
+    displayManager = {
+      autoLogin = {
         enable = true;
         user = "${username}";
       };
+    };
+    xserver = {
+      enable = true;
       # desktopManager = { xfce.enable = true; };
-      libinput = {
-        enable = true;
-        mouse = { accelProfile = "flat"; };
-        touchpad = { accelProfile = "flat"; };
-      };
       xkb = {
         variant = "";
         layout = "us";

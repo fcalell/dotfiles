@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, config, ... }: {
   imports = [ inputs.stylix.homeManagerModules.stylix ];
 
   stylix = {
@@ -29,8 +29,7 @@
         package = pkgs.noto-fonts-emoji;
       };
     };
-    image = "./wallpapers/feet-on-the-dashboard.jpg";
+    image = config.lib.stylix.pixel "base0A";
     opacity = { terminal = 0.98; };
-    targets = { bemenu.enable = false; };
   };
 }

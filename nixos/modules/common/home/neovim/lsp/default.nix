@@ -4,7 +4,7 @@
   home.packages = with pkgs; [
     # Formatters
     stylua
-    nixfmt
+    nixfmt-classic
     biome
     # LSP
     texlab

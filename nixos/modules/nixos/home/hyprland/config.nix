@@ -1,20 +1,10 @@
-_:
-let
-  # oxocarbon_pink = "ff7eb6";
-  # oxocarbon_border = "393939";
-  oxocarbon_background = "161616";
-  background = "rgba(11111B00)";
-  # tokyonight_border = "rgba(7aa2f7ee) rgba(87aaf8ee) 45deg";
-  tokyonight_background = "rgba(32344aaa)";
-  catppuccin_border = "rgba(b4befeee)";
-  opacity = "0.95";
-in {
+_: {
   wayland.windowManager.hyprland.settings = {
     "$mainMod" = "SUPER";
     exec-once = [
-      "systemctl --user import-environment &"
-      "hash dbus-update-activation-environment 2>/dev/null &"
-      "dbus-update-activation-environment --systemd &"
+      # "systemctl --user import-environment &"
+      # "hash dbus-update-activation-environment 2>/dev/null &"
+      # "dbus-update-activation-environment --systemd &"
       # "nm-applet &"
       "wl-paste --primary --watch wl-copy --primary --clear"
       # "swaybg -m fill -i $(find ~/nixos/assets/wallpapers/ -maxdepth 1 -type f) &"
@@ -167,7 +157,7 @@ in {
       "SUPER SHIFT, 3, movetoworkspacesilent, 3"
       "SUPER SHIFT, 4, movetoworkspacesilent, 4"
 
-      "SUPER,RETURN,exec,wofi --show drun -I -s ~/.config/wofi/style.css DP-3"
+      "SUPER,RETURN,exec,rofi -show drun"
     ];
 
     windowrule = [
@@ -180,9 +170,6 @@ in {
     ];
 
     windowrulev2 = [
-      "opacity ${opacity} ${opacity},class:^(thunar)$"
-      "opacity ${opacity} ${opacity},class:^(discord)$"
-      "opacity ${opacity} ${opacity},class:^(st-256color)$"
       "float,class:^(pavucontrol)$"
       "float,class:^(file_progress)$"
       "float,class:^(confirm)$"

@@ -1,5 +1,10 @@
 { pkgs, ... }: {
-  imports = [ ./config.nix ./waybar ./wofi ./dunst ];
+  imports = [
+    ./config.nix
+    ./waybar
+    #./wofi 
+    #./dunst 
+  ];
   home.packages = with pkgs; [
     swaybg
     wl-clipboard
@@ -12,6 +17,10 @@
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
+  };
+  programs = {
+    rofi.enable = true;
+    mako.enable = true;
   };
   home.sessionVariables = {
     GDK_BACKEND = "wayland";

@@ -2,6 +2,7 @@
   imports = [ ./style.nix ];
   programs.waybar = {
     enable = true;
+    systemd.enable = true;
     settings = {
       mainBar = {
         position = "top";
@@ -13,7 +14,7 @@
         margin-right = 0;
         modules-left = [ ];
         modules-center = [ "hyprland/workspaces" ];
-        modules-right = [ "custom/notification" "pulseaudio" "clock" ];
+        modules-right = [ "pulseaudio" "clock" ];
         clock = {
           format = "󰥔  {:%a, %d %b, %I:%M %p}";
           tooltip = "true";
@@ -28,9 +29,13 @@
           disable-scroll = false;
           on-scroll-up = "hyprctl dispatch workspace e-1";
           on-scroll-down = "hyprctl dispatch workspace e+1";
-          format = "{name}";
+          format = "{icon}";
           on-click = "activate";
           format-icons = {
+            "1" = "α";
+            "2" = "β";
+            "3" = "γ";
+            "4" = "δ";
             urgent = "";
             active = "";
             default = "";

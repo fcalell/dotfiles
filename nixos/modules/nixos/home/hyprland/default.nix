@@ -24,7 +24,11 @@
       allow_images = true;
     };
   };
-  services.mako.enable = true;
+  services.mako = {
+    enable = true;
+    anchor = "top-right";
+    defaultTimeout = 5000;
+  };
   home.sessionVariables = {
     GDK_BACKEND = "wayland";
     ANKI_WAYLAND = "1";

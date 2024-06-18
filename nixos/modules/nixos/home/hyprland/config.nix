@@ -10,8 +10,8 @@ _: {
       # "swaybg -m fill -i $(find ~/nixos/assets/wallpapers/ -maxdepth 1 -type f) &"
       # "sleep 1 && swaylock"
       # "hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 22"
-      "waybar &"
-      "mako &"
+      # "waybar &"
+      # "mako &"
       # "easyeffects --gapplication-service" # Starts easyeffects in the background
     ];
     input = {

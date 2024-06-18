@@ -10,11 +10,6 @@ in {
   programs = {
     zsh = {
       enable = true;
-      oh-my-zsh = {
-        enable = true;
-        theme = "gallois";
-        plugins = [ "git" ];
-      };
       autosuggestion.enable = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;

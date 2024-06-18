@@ -5,7 +5,7 @@ _: {
       enableZshIntegration = true;
       mode = "no-cursor";
     };
-    theme = "Catppuccin-Mocha";
+    # theme = "Catppuccin-Mocha";
     settings = {
       # modify_font underline_position 2
       # modify_font underline_thickness 150%

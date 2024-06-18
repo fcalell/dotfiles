@@ -1,43 +1,73 @@
-{ pkgs, ... }: {
-  imports = [ ./config.nix ./style.nix ];
+{
+  imports = [ ./style.nix ];
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar;
-  };
-  xdg = {
-    configFile = {
-      "waybar/machiatto.css".text = ''
-        @define-color base   #1e1e2e;
-        @define-color mantle #181825;
-        @define-color crust  #11111b;
-
-        @define-color text     #cdd6f4;
-        @define-color subtext0 #a6adc8;
-        @define-color subtext1 #bac2de;
-
-        @define-color surface0 #313244;
-        @define-color surface1 #45475a;
-        @define-color surface2 #585b70;
-
-        @define-color overlay0 #6c7086;
-        @define-color overlay1 #7f849c;
-        @define-color overlay2 #9399b2;
-
-        @define-color blue      #89b4fa;
-        @define-color lavender  #b4befe;
-        @define-color sapphire  #74c7ec;
-        @define-color sky       #89dceb;
-        @define-color teal      #94e2d5;
-        @define-color green     #a6e3a1;
-        @define-color yellow    #f9e2af;
-        @define-color peach     #fab387;
-        @define-color maroon    #eba0ac;
-        @define-color red       #f38ba8;
-        @define-color mauve     #cba6f7;
-        @define-color pink      #f5c2e7;
-        @define-color flamingo  #f2cdcd;
-        @define-color rosewater #f5e0dc;
-      '';
+    settings = {
+      mainBar = {
+        position = "top";
+        layer = "top";
+        height = 35;
+        margin-top = 0;
+        margin-bottom = 0;
+        margin-left = 0;
+        margin-right = 0;
+        modules-left = [ ];
+        modules-center = [ "hyprland/workspaces" ];
+        modules-right = [ "custom/notification" "pulseaudio" "clock" ];
+        clock = {
+          format = "󰥔  {:%a, %d %b, %I:%M %p}";
+          tooltip = "true";
+          tooltip-format = ''
+            <big>{:%Y %B}</big>
+            <tt><small>{calendar}</small></tt>'';
+          format-alt = "   {:%d/%m}";
+        };
+        "hyprland/workspaces" = {
+          active-only = false;
+          all-outputs = false;
+          disable-scroll = false;
+          on-scroll-up = "hyprctl dispatch workspace e-1";
+          on-scroll-down = "hyprctl dispatch workspace e+1";
+          format = "{name}";
+          on-click = "activate";
+          format-icons = {
+            urgent = "";
+            active = "";
+            default = "";
+            sort-by-number = true;
+          };
+        };
+        memory = {
+          format = "󰍛 {}%";
+          format-alt = "󰍛 {used}/{total} GiB";
+          interval = 5;
+        };
+        cpu = {
+          format = "󰻠 {usage}%";
+          format-alt = "󰻠 {avg_frequency} GHz";
+          interval = 5;
+        };
+        network = {
+          format-wifi = "  {signalStrength}%";
+          format-ethernet = "󰈀 100% ";
+          tooltip-format = "Connected to {essid} {ifname} via {gwaddr}";
+          format-linked = "{ifname} (No IP)";
+          format-disconnected = "󰖪 0% ";
+        };
+        tray = {
+          icon-size = 20;
+          spacing = 8;
+        };
+        pulseaudio = {
+          format = "{icon} {volume}%";
+          format-muted = "󰝟";
+          format-icons = { default = [ "󰕿" "󰖀" "󰕾" ]; };
+          # on-scroll-up= "bash ~/.scripts/volume up";
+          # on-scroll-down= "bash ~/.scripts/volume down";
+          scroll-step = 5;
+          on-click = "pavucontrol";
+        };
+      };
     };
   };
 }

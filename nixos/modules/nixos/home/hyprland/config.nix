@@ -17,7 +17,7 @@ in {
       "dbus-update-activation-environment --systemd &"
       # "nm-applet &"
       "wl-paste --primary --watch wl-copy --primary --clear"
-      "swaybg -m fill -i $(find ~/nixos/assets/wallpapers/ -maxdepth 1 -type f) &"
+      # "swaybg -m fill -i $(find ~/nixos/assets/wallpapers/ -maxdepth 1 -type f) &"
       # "sleep 1 && swaylock"
       # "hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 22"
       "waybar &"

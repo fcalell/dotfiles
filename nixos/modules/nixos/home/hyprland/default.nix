@@ -2,7 +2,6 @@
   imports = [
     ./config.nix
     ./waybar
-    #./wofi 
     #./dunst 
   ];
   home.packages = with pkgs; [
@@ -18,10 +17,14 @@
     enable = true;
     xwayland.enable = true;
   };
-  programs = {
-    rofi.enable = true;
-    mako.enable = true;
+  programs.wofi = {
+    enable = true;
+    settings = {
+      mode = "drun";
+      allow_images = true;
+    };
   };
+  services.mako.enable = true;
   home.sessionVariables = {
     GDK_BACKEND = "wayland";
     ANKI_WAYLAND = "1";

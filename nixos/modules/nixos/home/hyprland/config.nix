@@ -11,7 +11,7 @@ _: {
       # "sleep 1 && swaylock"
       # "hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 22"
       "waybar &"
-      # "mako &"
+      "mako &"
       # "easyeffects --gapplication-service" # Starts easyeffects in the background
     ];
     input = {
@@ -157,7 +157,7 @@ _: {
       "SUPER SHIFT, 3, movetoworkspacesilent, 3"
       "SUPER SHIFT, 4, movetoworkspacesilent, 4"
 
-      "SUPER,RETURN,exec,rofi -show drun"
+      "SUPER,RETURN,exec,wofi --show drun"
     ];
 
     windowrule = [

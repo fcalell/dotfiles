@@ -1,4 +1,4 @@
-_: {
+{
   wayland.windowManager.hyprland.settings = {
     "$mainMod" = "SUPER";
     exec-once = [
@@ -7,7 +7,7 @@ _: {
       # "dbus-update-activation-environment --systemd &"
       # "nm-applet &"
       "wl-paste --primary --watch wl-copy --primary --clear"
-      # "swaybg -m fill -i $(find ~/nixos/assets/wallpapers/ -maxdepth 1 -type f) &"
+      "swaybg -m fill -i ~/nixos/modules/common/home/stylix/wallpapers/feet-on-the-dashboard.png &"
       # "sleep 1 && swaylock"
       # "hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 22"
       # "waybar &"

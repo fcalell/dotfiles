@@ -6,18 +6,15 @@
     ./wofi
     #./dunst 
   ];
-  home.packages = with pkgs; [
-    swaybg
-    wl-clipboard
-    glib
-    wayland
-    direnv
-    grim
-    slurp
-  ];
+  home.packages = with pkgs; [ wl-clipboard glib wayland direnv grim slurp ];
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
+    systemd.enable = true;
+  };
+  services = {
+    hyprpaper.enable = true;
+    copyq.enable = true;
   };
   # home.sessionVariables = {
   #   GDK_BACKEND = "wayland";

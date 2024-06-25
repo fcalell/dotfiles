@@ -6,7 +6,7 @@
     ./wofi
     #./dunst 
   ];
-  home.packages = with pkgs; [ wl-clipboard glib wayland direnv grim slurp ];
+  home.packages = with pkgs; [ grim slurp ];
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;

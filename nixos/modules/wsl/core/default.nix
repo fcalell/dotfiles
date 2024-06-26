@@ -1,8 +1,7 @@
-{
+{inputs,...}:{
   imports = [
-    # include NixOS-WSL modules
-    <nixos-wsl/modules>
-./user.nix
+    inputs.nixos-wsl.nixosModules.wsl
+    ./user.nix
   ];
 
   wsl.enable = true;

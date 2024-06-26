@@ -13,6 +13,10 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-wsl = {
+	url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     stylix.url = "github:danth/stylix";
@@ -28,6 +32,14 @@
           ./modules/common/core/default.nix
           ./modules/nixos/core/deafult.nix
           ./hosts/main_pc/hardware-configuration.nix
+        ];
+      };
+      wsl = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+	  ./modules/wsl/core/default.nix
+          ./modules/common/core/default.nix
         ];
       };
     };

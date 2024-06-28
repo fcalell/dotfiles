@@ -1,6 +1,4 @@
-_:
-let username = "fcalell";
-in {
+{ username, ... }: {
   services = {
     libinput = {
       enable = true;

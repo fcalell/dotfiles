@@ -14,7 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-wsl = {
-	url = "github:nix-community/NixOS-WSL";
+      url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
@@ -25,9 +25,12 @@
 
   outputs = { nixpkgs, nix-darwin, ... }@inputs: {
     nixosConfigurations = {
-      main_pc = nixpkgs.lib.nixosSystem {
+      nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+          username = "fcalell";
+        };
         modules = [
           ./modules/common/core/default.nix
           ./modules/nixos/core/deafult.nix
@@ -36,16 +39,20 @@
       };
       wsl = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-	  ./modules/wsl/core/default.nix
-          ./modules/common/core/default.nix
-        ];
+        specialArgs = {
+          inherit inputs;
+          username = "fcalell";
+        };
+        modules =
+          [ ./modules/wsl/core/default.nix ./modules/common/core/default.nix ];
       };
     };
     darwinConfigurations = {
       macbook = nix-darwin.lib.darwinSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+          username = "fcalell";
+        };
         modules = [
           ./modules/common/core/default.nix
           ./modules/macbook/core/default.nix

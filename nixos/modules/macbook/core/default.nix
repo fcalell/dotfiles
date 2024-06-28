@@ -1,15 +1,10 @@
-{ inputs, ... }:
-let username = "fcalell";
-in {
+{ inputs, username, ... }: {
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
-
-  # The platform the configuration will be used on.
-  nixpkgs.hostPlatform = "x86_64-darwin";
 
   nix.configureBuildUsers = true;
   nix.settings.trusted-users = [ "root" "fcalell" ];

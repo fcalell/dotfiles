@@ -1,6 +1,4 @@
-{ pkgs, inputs, ... }:
-let username = "fcalell";
-in {
+{ pkgs, inputs, username, ... }: {
   time.timeZone = "Europe/Rome";
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -40,5 +38,4 @@ in {
       programs.home-manager.enable = true;
     };
   };
-
 }

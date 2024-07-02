@@ -3,6 +3,7 @@ _: {
     ./user.nix
     ./bootloader.nix
     ./network.nix
+    ./shell.nix
     ./sound.nix
     ./system.nix
     ./xserver.nix

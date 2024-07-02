@@ -1,5 +1,5 @@
 {
-  system.stateVersion = "unstable";
+  system.stateVersion = "24.11";
   time.hardwareClockInLocalTime = true;
   time.timeZone = "Europe/Rome";
   i18n.defaultLocale = "en_US.UTF-8";

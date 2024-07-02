@@ -96,10 +96,7 @@
       use_active_for_splits = true;
     };
 
-    master = {
-      mfact = 0.5;
-      new_is_master = false;
-    };
+    master = { mfact = 0.5; };
 
     gestures = { workspace_swipe = false; };
 

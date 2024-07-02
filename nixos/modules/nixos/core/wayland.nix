@@ -7,7 +7,7 @@
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
   xdg = {
-    # autostart.enable = true;
+    autostart.enable = true;
     portal = {
       enable = true;
       xdgOpenUsePortal = true;

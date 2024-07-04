@@ -13,14 +13,6 @@ in {
       autosuggestion.enable = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
-      antidote = {
-        enable = true;
-        plugins = [
-          # "spaceship-prompt/spaceship-prompt"
-          # "spaceship-prompt/spaceship-vi-mode"
-          "romkatv/powerlevel10k"
-        ];
-      };
       initExtra = ''
         source ~/.p10k.zsh
       '';
@@ -37,5 +29,5 @@ in {
       };
     };
   };
-  home.file.".p10k.zsh".source = ./.p10k.zsh;
+  home.file.".p10k.zsh".source = ./p10k.zsh;
 }

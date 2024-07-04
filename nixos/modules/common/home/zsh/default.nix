@@ -2,8 +2,8 @@
 let
   nixr = if pkgs.system == "x86_64-linux" then
     "sudo nixos-rebuild switch --flake ~/nixos/#nixos"
-  else if pkgs.system == "x86_64-darwin" then
-    "~/result/sw/bin/darwin-rebuild switch --flake ./nixos#macbook"
+  else if pkgs.system == "aarch64-darwin" then
+    "nix run nix-darwin -- switch --flake ~/nixos/.#macbook"
   else
     "echo 'Unsupported system'";
 in {

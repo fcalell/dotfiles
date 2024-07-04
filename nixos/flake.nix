@@ -21,42 +21,37 @@
     # devenv.url = "github:cachix/devenv";
   };
 
-  outputs = { nixpkgs, nix-darwin, ... }@inputs: {
-    nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-          username = "fcalell";
+  outputs = { nixpkgs, nix-darwin, ... }@inputs:
+    let username = "fcalell";
+    in {
+      nixosConfigurations = {
+        nixos = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs username; };
+          modules = [
+            ./modules/common/core/default.nix
+            ./modules/nixos/core/deafult.nix
+            ./hosts/main_pc/hardware-configuration.nix
+          ];
         };
-        modules = [
-          ./modules/common/core/default.nix
-          ./modules/nixos/core/deafult.nix
-          ./hosts/main_pc/hardware-configuration.nix
-        ];
+        wsl = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs username; };
+          modules = [
+            ./modules/wsl/core/default.nix
+            ./modules/common/core/default.nix
+          ];
+        };
       };
-      wsl = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-          username = "fcalell";
+      darwinConfigurations = {
+        macbook = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = { inherit inputs username; };
+          modules = [
+            ./modules/common/core/default.nix
+            ./modules/macbook/core/default.nix
+          ];
         };
-        modules =
-          [ ./modules/wsl/core/default.nix ./modules/common/core/default.nix ];
-      };
-    };
-    darwinConfigurations = {
-      macbook = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = {
-          inherit inputs;
-          username = "fcalell";
-        };
-        modules = [
-          ./modules/common/core/default.nix
-          ./modules/macbook/core/default.nix
-        ];
       };
     };
-  };
 }

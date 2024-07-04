@@ -53,6 +53,7 @@
     vcs                       # git status
     # command_execution_time  # previous command duration
     # virtualenv              # python virtual environment
+    newline
     prompt_char               # prompt symbol
   )
 

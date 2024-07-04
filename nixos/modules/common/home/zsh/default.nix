@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ system, pkgs, ... }:
 let
-  nixr = if pkgs.system == "x86_64-linux" then
+  nixr = if system == "x86_64-linux" then
     "sudo nixos-rebuild switch --flake ~/nixos/#nixos"
-  else if pkgs.system == "aarch64-darwin" then
+  else if system == "aarch64-darwin" then
     "nix run nix-darwin -- switch --flake ~/nixos/.#macbook"
   else
     "echo 'Unsupported system'";
@@ -13,11 +13,34 @@ in {
       autosuggestion.enable = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
+      plugins = [
+        {
+          name = "powerlevel10k";
+          src = pkgs.zsh-powerlevel10k;
+          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        }
+        {
+          name = "vi-mode";
+          src = pkgs.zsh-vi-mode;
+          file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+        }
+      ];
       initExtra = ''
         source ~/.p10k.zsh
+        check_and_rebuild() {
+          if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+            echo "Detected Linux environment."
+            sudo nixos-rebuild switch --flake ~/nixos/#nixos
+          elif [[ "$OSTYPE" == "darwin"* ]]; then
+            echo "Detected macOS environment."
+            darwin-rebuild switch --flake ~/nixos/#macbook
+          else
+            echo "Unsupported OS type: $OSTYPE"
+          fi
+        }
       '';
       shellAliases = {
-        nixr = nixr;
+        nixr = "check_and_rebuild";
         nixc = "sudo nix-collect-garbage -d";
         gg = "lazygit";
         ls = "ls --color -la -h";

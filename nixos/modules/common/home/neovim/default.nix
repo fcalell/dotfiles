@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, config, ... }:
 
 {
   imports = [ ./lsp ];
@@ -12,7 +12,8 @@
           	require('config')
       	'';
   };
-  home.file.".config/nvim/lua" = {
-    source = ./lua;
+  xdg.configFile."nvim/lua" = {
+    source = config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/nixos/modules/common/home/neovim/lua";
   };
 }

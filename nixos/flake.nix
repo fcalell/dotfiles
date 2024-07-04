@@ -1,6 +1,4 @@
 {
-  description = "NixOS configuration";
-
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -49,7 +47,7 @@
     };
     darwinConfigurations = {
       macbook = nix-darwin.lib.darwinSystem {
-	system = "aarch64-darwin";
+        system = "aarch64-darwin";
         specialArgs = {
           inherit inputs;
           username = "fcalell";

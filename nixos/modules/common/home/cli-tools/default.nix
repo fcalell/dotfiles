@@ -2,17 +2,12 @@
 
 {
   home.packages = with pkgs; [
-    btop
     duf
     du-dust
     tre-command
     neofetch
     gnumake
-    fd
     unzip
-    fzf
-    fd
-    lazygit
     (hiPrio gcc)
     clang
     nodejs_20
@@ -26,22 +21,26 @@
     # pkgs.python3
   ];
   programs = {
-    ripgrep.enable = true;
-    fzf.enable = true;
-    lf = {
+    btop = {
       enable = true;
-      settings = { hidden = true; };
+      settings = { vim_keys = "true"; };
     };
+    fd = {
+      enable = true;
+      hidden = true;
+    };
+    fzf.enable = true;
     git = {
       enable = true;
       userName = "fcalell";
       userEmail = "frankie.calella@gmail.com";
     };
-    # direnv = {
-    #   enable = true;
-    #   enableZshIntegration = true;
-    #   nix-direnv.enable = true;
-    # };
+    lazygit.enable = true;
+    lf = {
+      enable = true;
+      settings = { hidden = true; };
+    };
+    ripgrep.enable = true;
     texlive = {
       enable = true;
       extraPackages = tpkgs: {

@@ -1,10 +1,6 @@
 { config, ... }: {
   gtk = {
     enable = true;
-    font = {
-      name = config.theme.fonts.sansSerif.name;
-      size = config.theme.fonts.size;
-    };
     catppuccin = {
       enable = true;
       accent = config.catppuccin.accent;

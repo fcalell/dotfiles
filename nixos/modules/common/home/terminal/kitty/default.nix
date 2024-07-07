@@ -1,11 +1,7 @@
-{ config, ... }: {
+{
   programs.kitty = {
     enable = true;
     shellIntegration = { enableZshIntegration = true; };
-    font = {
-      name = config.theme.fonts.monospace.name;
-      size = 12;
-    };
     settings = {
       adjust_line_height = "120%";
       cursor_blink_interval = 0;

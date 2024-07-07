@@ -1,5 +1,5 @@
-{ pkgs, config, inputs, ... }: {
-  imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
+{ pkgs, ... }: {
+  imports = [ ./catppuccin.nix ];
   config.theme = {
     fonts = {
       size = 12;
@@ -21,26 +21,5 @@
       };
     };
     background = ./wallpapers/feet-on-the-dashboard.png;
-  };
-
-  fonts.fontconfig = {
-    enable = true;
-    defaultfonts = {
-      serif = [ config.theme.fonts.serif.name ];
-      sansSerif = [ config.theme.fonts.sansSerif.name ];
-      monospace = [ config.theme.fonts.monospace.name ];
-      emoji = [ config.theme.fonts.emoji.name ];
-    };
-  };
-
-  catppuccin = {
-    enable = true;
-    accent = "blue";
-    flavor = "mocha";
-    pointerCursor = {
-      enable = true;
-      accent = "dark";
-      flavor = "mocha";
-    };
   };
 }

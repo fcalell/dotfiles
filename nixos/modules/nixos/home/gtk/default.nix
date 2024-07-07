@@ -1,18 +1,5 @@
-{ config, ... }: {
-  gtk = {
-    enable = true;
-    catppuccin = {
-      enable = true;
-      accent = config.catppuccin.accent;
-      flavor = config.catppuccin.flavor;
-      icon = {
-        enable = true;
-        accent = config.catppuccin.accent;
-        flavor = config.catppuccin.flavor;
-      };
-      tweaks = [ "black" "rimless" ];
-    };
-  };
+{ ... }: {
+  gtk = { enable = true; };
 
   # home.sessionVariables = {
   #   # GTK_THEME = "Catppuccino-Mocha-Compact-Blue-Dark";

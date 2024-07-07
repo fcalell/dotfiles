@@ -12,7 +12,14 @@
     xwayland.enable = true;
     systemd.enable = true;
   };
-  programs.wpaperd.enable = true;
+  programs.wpaperd = {
+    enable = true;
+    settings = {
+      any = {
+        path = "${../../../../assets/wallpapers/feet-on-the-dashboard.png}";
+      };
+    };
+  };
   programs.bemenu.enable = true;
   # home.sessionVariables = {
   #   GDK_BACKEND = "wayland";

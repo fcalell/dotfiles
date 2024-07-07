@@ -12,7 +12,7 @@
       visual_bell_duration = 0;
       window_alert_on_bell = false;
       bell_on_tab = false;
-      background_opacity = 0.98;
+      background_opacity = "0.98";
       window_padding_width = 5;
       macos_option_as_alt = "left";
     };

@@ -23,12 +23,11 @@ in {
   home.packages = [
     pkgs.noto-fonts
     pkgs.noto-fonts-emoji
-    pkgs.nerdfonts.override
-    { fonts = [ "JetBrainsMono" ]; }
+    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
   fonts.fontconfig = {
     enable = true;
-    defaultfonts = {
+    defaultFonts = {
       serif = [ fonts.serif.name ];
       sansSerif = [ fonts.sansSerif.name ];
       monospace = [ fonts.monospace.name ];

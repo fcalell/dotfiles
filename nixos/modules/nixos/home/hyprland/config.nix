@@ -10,7 +10,7 @@
       "wpaperd &"
       # "swaybg -m fill -i ~/nixos/modules/common/home/stylix/wallpapers/feet-on-the-dashboard.png &"
       # "sleep 1 && swaylock"
-      "hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 24"
+      # "hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 24"
       "waybar &"
       # "mako &"
       # "easyeffects --gapplication-service" # Starts easyeffects in the background
@@ -85,6 +85,8 @@
       vrr =
         0; # misc:vrr -> Adaptive sync of your monitor. 0 (off), 1 (on), 2 (fullscreen only). Default 0 to avoid white flashes on select hardware.
       middle_click_paste = false;
+      disable_hyprland_logo = true;
+      force_default_wallpaper = 0;
     };
 
     dwindle = {

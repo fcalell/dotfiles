@@ -1,12 +1,4 @@
-{ system, pkgs, ... }:
-let
-  nixr = if system == "x86_64-linux" then
-    "sudo nixos-rebuild switch --flake ~/nixos/#nixos"
-  else if system == "aarch64-darwin" then
-    "nix run nix-darwin -- switch --flake ~/nixos/.#macbook"
-  else
-    "echo 'Unsupported system'";
-in {
+{ pkgs, ... }: {
   programs = {
     zsh = {
       enable = true;

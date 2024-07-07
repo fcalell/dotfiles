@@ -6,11 +6,12 @@
       # "hash dbus-update-activation-environment 2>/dev/null &"
       # "dbus-update-activation-environment --systemd &"
       # "nm-applet &"
-      # "wl-paste --primary --watch wl-copy --primary --clear"
+      "wl-paste --primary --watch wl-copy --primary --clear"
+      "wpaperd &"
       # "swaybg -m fill -i ~/nixos/modules/common/home/stylix/wallpapers/feet-on-the-dashboard.png &"
       # "sleep 1 && swaylock"
-      # "hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 22"
-      # "waybar &"
+      "hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 24"
+      "waybar &"
       # "mako &"
       # "easyeffects --gapplication-service" # Starts easyeffects in the background
     ];

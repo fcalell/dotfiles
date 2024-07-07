@@ -70,6 +70,9 @@
       map super+minus change_font_size all -2.0
     '';
   };
-  home.sessionVariables = { TERMINAL = "kitty"; };
+  home.sessionVariables = {
+    TERMINAL = "kitty";
+    TERM = "kitty";
+  };
 }
 

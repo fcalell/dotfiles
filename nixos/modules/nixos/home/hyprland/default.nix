@@ -6,16 +6,14 @@
     ./wofi
     #./dunst 
   ];
-  home.packages = with pkgs; [ grim slurp ];
+  home.packages = with pkgs; [ grim slurp wl-clipboard ];
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
     systemd.enable = true;
   };
-  services = {
-    hyprpaper.enable = true;
-    copyq.enable = true;
-  };
+  programs.wpaperd.enable = true;
+  programs.bemenu.enable = true;
   # home.sessionVariables = {
   #   GDK_BACKEND = "wayland";
   #   ANKI_WAYLAND = "1";

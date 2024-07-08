@@ -14,6 +14,7 @@
     xserver = {
       enable = true;
       # desktopManager = { xfce.enable = true; };
+      desktopManager = { xterm.enable = false; };
       xkb = {
         variant = "";
         layout = "us";

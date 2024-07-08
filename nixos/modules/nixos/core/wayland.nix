@@ -13,6 +13,10 @@
       xdgOpenUsePortal = true;
       extraPortals = [ pkgs.xdg-desktop-portal pkgs.xdg-desktop-portal-gtk ];
     };
+    terminal-exec = {
+      enable = true;
+      settings = { default = [ "kitty.desktop" ]; };
+    };
   };
   # environment = {
   #   variables = {

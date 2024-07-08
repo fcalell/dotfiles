@@ -9,5 +9,6 @@
     ./xserver.nix
     ./wayland.nix
     ./ssh.nix
+    ./steam.nix
   ];
 }

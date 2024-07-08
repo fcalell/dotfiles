@@ -1,11 +1,5 @@
 { pkgs, ... }: {
-  imports = [
-    ./config.nix
-    ./waybar
-    ./mako
-    ./wofi
-    #./dunst 
-  ];
+  imports = [ ./config.nix ./waybar ./mako ./wofi ];
   home.packages = with pkgs; [ grim slurp wl-clipboard ];
   wayland.windowManager.hyprland = {
     enable = true;

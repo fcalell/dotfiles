@@ -28,18 +28,8 @@
           disable-scroll = false;
           on-scroll-up = "hyprctl dispatch workspace e-1";
           on-scroll-down = "hyprctl dispatch workspace e+1";
-          format = "{icon}";
+          format = "{id}";
           on-click = "activate";
-          format-icons = {
-            "1" = "α";
-            "2" = "β";
-            "3" = "γ";
-            "4" = "δ";
-            urgent = "";
-            active = "";
-            default = "";
-            sort-by-number = true;
-          };
         };
         memory = {
           format = "󰍛 {}%";

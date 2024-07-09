@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./config.nix ./waybar ./mako ./wofi ];
+  imports = [ ./config.nix ./waybar ./mako ./fuzzel ];
   home.packages = with pkgs; [ grim slurp wl-clipboard ];
   wayland.windowManager.hyprland = {
     enable = true;
@@ -14,7 +14,6 @@
       };
     };
   };
-  programs.bemenu.enable = true;
   # home.sessionVariables = {
   #   GDK_BACKEND = "wayland";
   #   ANKI_WAYLAND = "1";

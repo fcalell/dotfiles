@@ -125,7 +125,7 @@
       "SUPER SHIFT, 3, movetoworkspacesilent, 3"
       "SUPER SHIFT, 4, movetoworkspacesilent, 4"
 
-      "SUPER,RETURN,exec,wofi --show drun"
+      "SUPER,RETURN,exec,fuzzel"
     ];
 
     windowrule = [
@@ -138,6 +138,7 @@
     ];
 
     windowrulev2 = [
+      "float,class:^(fuzzel)$"
       "float,class:^(pavucontrol)$"
       "float,class:^(file_progress)$"
       "float,class:^(confirm)$"

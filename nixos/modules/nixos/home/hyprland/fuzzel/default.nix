@@ -6,8 +6,9 @@
         anchor = "center";
         layer = "overlay";
         font = "Noto Sans:size=14";
-        prompt = "❯_";
-        width = "50";
+        prompt = "❯ ";
+        lines = "3";
+        width = "40";
         vertical-pad = "12";
         inner-pad = "8";
       };

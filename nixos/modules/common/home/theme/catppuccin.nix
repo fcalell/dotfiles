@@ -9,6 +9,4 @@ in {
     accent = accent;
     flavor = flavor;
   };
-  home.pointerCursor.gtk.enable = true;
-  home.pointerCursor.size = 24;
 }

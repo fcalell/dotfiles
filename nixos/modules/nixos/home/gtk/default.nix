@@ -24,6 +24,8 @@ in {
       tweaks = [ "rimless" ];
     };
   };
+  home.pointerCursor.gtk.enable = true;
+  home.pointerCursor.size = 24;
 
   # home.sessionVariables = {
   #   # GTK_THEME = "Catppuccino-Mocha-Compact-Blue-Dark";

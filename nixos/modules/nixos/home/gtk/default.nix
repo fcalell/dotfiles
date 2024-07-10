@@ -1,5 +1,29 @@
-{ ... }: {
-  gtk = { enable = true; };
+{ ... }:
+let
+  accent = "blue";
+  flavor = "mocha";
+in {
+  catppuccin = {
+    pointerCursor = {
+      enable = true;
+      accent = "dark";
+      flavor = flavor;
+    };
+  };
+  gtk = {
+    enable = true;
+    catppuccin = {
+      enable = true;
+      accent = accent;
+      flavor = flavor;
+      icon = {
+        enable = true;
+        accent = accent;
+        flavor = flavor;
+      };
+      tweaks = [ "rimless" ];
+    };
+  };
 
   # home.sessionVariables = {
   #   # GTK_THEME = "Catppuccino-Mocha-Compact-Blue-Dark";

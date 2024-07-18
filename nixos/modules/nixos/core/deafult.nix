@@ -8,6 +8,7 @@
     ./system.nix
     ./xserver.nix
     ./wayland.nix
+    ./samba.nix
     ./ssh.nix
     ./steam.nix
   ];

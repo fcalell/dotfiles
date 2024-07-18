@@ -1,9 +1,4 @@
 { pkgs, ... }: {
-  imports = [ ./gtk ./hyprland ];
-  home.packages = with pkgs; [
-    google-chrome
-    xfce.thunar
-    onlyoffice-bin
-    streamrip
-  ];
+  imports = [ ./gtk ./hyprland ./streamrip ];
+  home.packages = with pkgs; [ google-chrome xfce.thunar onlyoffice-bin ];
 }

@@ -13,7 +13,7 @@
         margin-right = 0;
         modules-left = [ ];
         modules-center = [ "hyprland/workspaces" ];
-        modules-right = [ "pulseaudio" "clock" ];
+        modules-right = [ "pulseaudio" "tray" "clock" ];
         clock = {
           format = "󰥔  {:%a, %d %b, %I:%M %p}";
           tooltip = "true";

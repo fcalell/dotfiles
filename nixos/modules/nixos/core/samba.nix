@@ -1,16 +1,42 @@
 { pkgs, ... }: {
-  # For mount.cifs, required unless domain name resolution is not needed.
-  # environment.systemPackages = [ pkgs.cifs-utils ];
-  # fileSystems."/mnt/share" = {
-  #   device = "//DEKSTOP-AU281FN/Users/fcalell/Music";
-  #   fsType = "cifs";
-  #   options = let
-  #     # this line prevents hanging on network split
-  #     automount_opts =
-  #       "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-  #
-  #   in [ "${automount_opts},credentials=/etc/nixos/smb-secrets" ];
-  # };
-  environment.systemPackages = with pkgs; [ lxqt.lxqt-policykit ];
+  environment.systemPackages = [ pkgs.cifs-utils ];
   services.gvfs = { enable = true; };
+  # services.samba = {
+  #   enable = true;
+  #   # You will still need to set up the user accounts to begin with:
+  #   # $ sudo smbpasswd -a yourusername
+  #   securityType = "user";
+  #   openFirewall = true;
+  #   extraConfig = ''
+  #     workgroup = WORKGROUP 
+  #     server string = smbnix
+  #     netbios name = smbnix
+  #     security = user 
+  #     #use sendfile = yes
+  #     #max protocol = smb2
+  #     # note: localhost is the ipv6 localhost ::1
+  #     hosts allow = 192.168.0. 127.0.0.1 localhost
+  #     hosts deny = 0.0.0.0/0
+  #     guest account = nobody
+  #     map to guest = bad user
+  #   '';
+  #   shares = {
+  #     public = {
+  #       path = "/home/fcalell/Music";
+  #       browseable = "yes";
+  #       writable = "yes";
+  #       "guest ok" = "yes";
+  #       "read only" = "no";
+  #       "create mask" = "0644";
+  #       "directory mask" = "0755";
+  #     };
+  #   };
+  # };
+  # services.samba-wsdd = {
+  #   enable = true;
+  #   openFirewall = true;
+  # };
+  #
+  # networking.firewall.enable = true;
+  # networking.firewall.allowPing = true;
 }

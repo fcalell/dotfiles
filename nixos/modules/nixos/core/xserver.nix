@@ -1,6 +1,5 @@
 { username, ... }: {
   services = {
-    udisks2.enable = true;
     libinput = {
       enable = true;
       mouse = { accelProfile = "flat"; };

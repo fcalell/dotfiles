@@ -78,12 +78,12 @@ return {
 		keys = {
 			{
 				"<leader>e",
-				"<cmd>TroubleToggle document_diagnostics<cr>",
+				"<cmd>Trouble diagnostics toggle<cr>",
 				mode = "n",
 				desc = "Document Diagnostics (Trouble)",
 			},
-			{ "<leader>ql", "<cmd>TroubleToggle loclist<cr>", mode = "n", desc = "Location List (Trouble)" },
-			{ "<leader>qf", "<cmd>TroubleToggle quickfix<cr>", mode = "n", desc = "Quickfix List (Trouble)" },
+			{ "<leader>ql", "<cmd>Trouble loclist toggle<cr>", mode = "n", desc = "Location List (Trouble)" },
+			{ "<leader>qf", "<cmd>Trouble quickfix toggle<cr>", mode = "n", desc = "Quickfix List (Trouble)" },
 		},
 	},
 	{ "karb94/neoscroll.nvim", enabled = false, config = true },

@@ -1,1 +1,1 @@
-{ pkgs, ... }: { home.packages = [ pkgs.xcbuild ]; }
+{ pkgs, ... }: { home.packages = with pkgs; [ xcbuild gnused nicotine-plus ]; }

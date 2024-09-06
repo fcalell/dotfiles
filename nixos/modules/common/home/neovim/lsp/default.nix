@@ -6,6 +6,7 @@
     stylua
     nixfmt-classic
     biome
+    prettierd
     # LSP
     texlab
     nil

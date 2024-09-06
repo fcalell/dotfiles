@@ -1,4 +1,4 @@
-{ options, pkgs, ... }: {
+{
   system.stateVersion = "24.11";
   time.hardwareClockInLocalTime = true;
   time.timeZone = "Europe/Rome";
@@ -14,7 +14,4 @@
     LC_TELEPHONE = "it_IT.UTF-8";
     LC_TIME = "it_IT.UTF-8";
   };
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = options.programs.nix-ld.libraries.default
-    ++ (with pkgs; [ electron ]);
 }

@@ -11,5 +11,6 @@
     ./samba.nix
     ./ssh.nix
     ./steam.nix
+    ./nix-ld.nix
   ];
 }

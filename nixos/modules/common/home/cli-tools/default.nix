@@ -14,7 +14,6 @@
     nodejs_20.pkgs.pnpm
     nodejs_20.pkgs.yarn
     bun
-    electron
     python3
     tree-sitter
     luajit

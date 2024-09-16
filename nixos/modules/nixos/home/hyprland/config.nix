@@ -22,8 +22,6 @@
       "col.active_border" = "$accent";
       # "col.inactive_border" = "${tokyonight_background}";
       layout = "master";
-      apply_sens_to_raw =
-        1; # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
       no_focus_fallback = true;
     };
     decoration = {

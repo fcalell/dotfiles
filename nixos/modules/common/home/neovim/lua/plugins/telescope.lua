@@ -41,6 +41,7 @@ return {
 								trouble.open({ mode = "loclist" })
 							end,
 							["<leader>d"] = actions.delete_buffer,
+							["q"] = actions.close,
 						},
 					},
 				},

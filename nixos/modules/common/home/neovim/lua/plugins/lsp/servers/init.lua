@@ -15,7 +15,7 @@ return {
 	cssls = require("plugins.lsp.servers.css"),
 	tailwindcss = require("plugins.lsp.servers.tailwind"),
 	-- vtsls = require("plugins.lsp.servers.vtsls"),
-	tsserver = {},
+	ts_ls = {},
 	lua_ls = require("plugins.lsp.servers.lua"),
 	-- eslint = require("plugins.lsp.servers.eslint"),
 	biome = {},

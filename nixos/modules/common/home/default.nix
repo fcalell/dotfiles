@@ -1,4 +1,4 @@
-{
+{ pkgs, ... }: {
   imports = [
     ./terminal
     ./zsh
@@ -8,4 +8,5 @@
     ./theme
     # ./android 
   ];
+  home.packages = with pkgs; [ sqlite-web ];
 }

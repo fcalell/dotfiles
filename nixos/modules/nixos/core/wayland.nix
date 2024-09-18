@@ -2,9 +2,11 @@
   imports = [ inputs.hyprland.nixosModules.default ];
   services.xserver.displayManager.gdm.wayland = true;
   services.displayManager.defaultSession = "hyprland";
+  programs.dconf.enable = true;
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    systemd.setPath.enable = true;
   };
   xdg = {
     autostart.enable = true;

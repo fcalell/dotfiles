@@ -2,27 +2,34 @@
   imports = [ inputs.nix-index-database.nixosModules.nix-index ];
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = (with pkgs; [
-    electron
-    glib
-    nss_latest
-    nspr
-    dbus
+    alsa-lib
     at-spi2-atk
-    cups
-    libdrm
-    gtk3
-    pango
     cairo
+    cups
+    dbus
+    expat
+    gdk-pixbuf
+    glib
+    gtk3
+    nss
+    nspr
     xorg.libX11
+    xorg.libxcb
     xorg.libXcomposite
     xorg.libXdamage
     xorg.libXext
     xorg.libXfixes
     xorg.libXrandr
-    xorg.libxcb
+    xorg.libxkbfile
+    pango
+    pciutils
+    stdenv.cc.cc.lib
+    systemd
+    libdrm
     mesa
-    expat
     libxkbcommon
-    alsa-lib
+    libGL
+    vulkan-loader
+    wrapGAppsHook3
   ]);
 }

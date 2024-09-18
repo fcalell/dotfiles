@@ -5,6 +5,7 @@
     enable = true;
     xwayland.enable = true;
     systemd.enable = true;
+    systemd.variables = [ "--all" ];
   };
   programs.wpaperd = {
     enable = true;

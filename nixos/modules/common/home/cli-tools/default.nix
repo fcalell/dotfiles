@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+  imports = [ ./doc-generation.nix ];
   home.packages = with pkgs; [
     duf
     du-dust
@@ -41,14 +42,5 @@
       settings = { hidden = true; };
     };
     ripgrep.enable = true;
-    texlive = {
-      enable = true;
-      extraPackages = tpkgs: {
-        inherit (tpkgs)
-          scheme-basic enumitem mmap cmap titlesec metafont xcolor soul setspace
-          substr xstring xifthen ifmtarg lastpage biblatex biblatex-ext helvetic
-          csquotes europasscv latexindent;
-      };
-    };
   };
 }

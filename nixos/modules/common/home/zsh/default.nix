@@ -30,6 +30,7 @@
             echo "Unsupported OS type: $OSTYPE"
           fi
         }
+        zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
       '';
       shellAliases = {
         nixr = "check_and_rebuild";

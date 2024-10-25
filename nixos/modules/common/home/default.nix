@@ -8,5 +8,5 @@
     ./theme
     # ./android 
   ];
-  home.packages = with pkgs; [ sqlite-web ];
+  home.packages = with pkgs; [ sqlite-web qbittorrent ];
 }

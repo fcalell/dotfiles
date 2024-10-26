@@ -1,7 +1,12 @@
 { pkgs, inputs, ... }: {
   imports = [ inputs.hyprland.nixosModules.default ];
-  services.xserver.displayManager.gdm.wayland = true;
-  services.displayManager.defaultSession = "hyprland";
+  services.displayManager = {
+    defaultSession = "hyprland";
+    sddm = {
+      enable = true;
+      wayland = true;
+    };
+  };
   programs.dconf.enable = true;
   programs.hyprland = {
     enable = true;

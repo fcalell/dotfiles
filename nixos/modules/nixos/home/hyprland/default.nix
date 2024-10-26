@@ -1,20 +1,31 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports = [ ./config.nix ./waybar ./mako ./fuzzel ];
   home.packages = with pkgs; [ grim slurp wl-clipboard ];
   wayland.windowManager.hyprland = {
     enable = true;
+    package =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     xwayland.enable = true;
     systemd.enable = true;
     systemd.variables = [ "--all" ];
   };
-  programs.wpaperd = {
+  services.hyprpaper = {
     enable = true;
     settings = {
-      any = {
-        path = "${../../../../assets/wallpapers/feet-on-the-dashboard.png}";
-      };
+      preload =
+        [ "${../../../../assets/wallpapers/feet-on-the-dashboard.png}" ];
+      wallpaper =
+        [ ",${../../../../assets/wallpapers/feet-on-the-dashboard.png}" ];
     };
   };
+  # programs.wpaperd = {
+  #   enable = true;
+  #   settings = {
+  #     any = {
+  #       path = "${../../../../assets/wallpapers/feet-on-the-dashboard.png}";
+  #     };
+  #   };
+  # };
   # home.sessionVariables = {
   #   GDK_BACKEND = "wayland";
   #   ANKI_WAYLAND = "1";

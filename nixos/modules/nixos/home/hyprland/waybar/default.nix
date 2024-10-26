@@ -2,6 +2,7 @@
   imports = [ ./style.nix ];
   programs.waybar = {
     enable = true;
+    systemd.enable = true;
     settings = {
       mainBar = {
         position = "top";

@@ -7,29 +7,14 @@
       # "dbus-update-activation-environment --systemd &"
       # "nm-applet &"
       "wl-paste --primary --watch wl-copy --primary --clear"
-      "wpaperd &"
+      # "wpaperd &"
       # "swaybg -m fill -i ~/nixos/modules/common/home/stylix/wallpapers/feet-on-the-dashboard.png &"
       # "sleep 1 && swaylock"
       # "hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 24"
-      "waybar &"
+      # "waybar &"
       # "mako &"
       # "easyeffects --gapplication-service" # Starts easyeffects in the background
     ];
-    general = {
-      gaps_in = 3;
-      gaps_out = 5;
-      border_size = 3;
-      "col.active_border" = "$accent";
-      # "col.inactive_border" = "${tokyonight_background}";
-      layout = "master";
-      no_focus_fallback = true;
-    };
-    decoration = {
-      rounding = 12;
-      shadow_ignore_window = true;
-      drop_shadow = false;
-      blur = { enabled = false; };
-    };
     input = {
       kb_layout = "us";
       kb_variant = "";
@@ -44,22 +29,32 @@
       sensitivity = 0;
       touchpad = { natural_scroll = 1; };
     };
+
+    general = {
+      gaps_in = 3;
+      gaps_out = 5;
+      border_size = 3;
+      "col.active_border" = "$accent";
+      # "col.inactive_border" = "${tokyonight_background}";
+      layout = "master";
+      no_focus_fallback = true;
+    };
+
+    decoration = {
+      rounding = 12;
+      shadow_ignore_window = true;
+      drop_shadow = false;
+      blur = { enabled = false; };
+    };
+
     animations = {
-      enabled = false;
-      bezier = [
-        "pace,0.46, 1, 0.29, 0.99"
-        "overshot,0.13,0.99,0.29,1.1"
-        "md3_decel, 0.05, 0.7, 0.1, 1"
-      ];
+      enabled = true;
+      bezier = [ "linear, 0.0, 0.0, 1, 1" ];
       animation = [
-        "windowsIn,1,6,md3_decel,slide"
-        "windowsOut,1,6,md3_decel,slide"
-        "windowsMove,1,6,md3_decel,slide"
-        "fade,1,10,md3_decel"
-        "workspaces,1,9,md3_decel,slide"
-        "workspaces, 1, 6, default"
-        "specialWorkspace,1,8,md3_decel,slide"
-        "border,1,10,md3_decel"
+        "borderangle, 1, 50, linear, loop"
+        "workspaces,1,0.5,default"
+        "windows,0,0.1,default"
+        "fade,0,0.1,default"
       ];
     };
 
@@ -77,7 +72,6 @@
 
     bind = [
       "SUPER,Q,killactive,"
-      "ALT, Tab, cyclenext,"
       ''SUPER,P,exec, grim -g "$(slurp)" - | wl-copy -t image/png''
 
       # "SUPER,M,exit,"
@@ -150,7 +144,6 @@
       "float,title:^(Confirm to replace files)$"
       "float,title:^(File Operation Progress)$"
       "float,title:^(mpv)$"
-      "opacity 1.0 1.0,class:^(wofi)$"
     ];
   };
 }

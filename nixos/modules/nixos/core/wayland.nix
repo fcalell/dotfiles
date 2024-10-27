@@ -4,7 +4,7 @@
     defaultSession = "hyprland";
     sddm = {
       enable = true;
-      wayland = true;
+      wayland = { enable = true; };
     };
   };
   programs.dconf.enable = true;

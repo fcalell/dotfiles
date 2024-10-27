@@ -38,4 +38,9 @@ in {
     #   DISABLE_QT5_COMPAT = "0";
     #   NIXOS_OZONE_WL = "1";
   };
+  qt = {
+    enable = true;
+    platformTheme.name = "kvantum";
+    style.name = "kvantum";
+  };
 }

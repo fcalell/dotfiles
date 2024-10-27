@@ -34,8 +34,8 @@
       gaps_in = 3;
       gaps_out = 5;
       border_size = 3;
-      "col.active_border" = "$accent";
-      # "col.inactive_border" = "${tokyonight_background}";
+      "col.active_border" = "$lavender";
+      "col.inactive_border" = "$overlay0";
       layout = "master";
       no_focus_fallback = true;
     };
@@ -52,9 +52,9 @@
       bezier = [ "linear, 0.0, 0.0, 1, 1" ];
       animation = [
         "borderangle, 1, 50, linear, loop"
-        "workspaces,1,0.5,default"
-        "windows,0,0.1,default"
-        "fade,0,0.1,default"
+        "workspaces,1,0.8,default"
+        "windows,0,0.5,default"
+        "fade,0,0.5,default"
       ];
     };
 

@@ -6,8 +6,10 @@
     package =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     xwayland.enable = true;
-    systemd.enable = true;
-    systemd.variables = [ "--all" ];
+    systemd = {
+      enable = true;
+      variables = [ "--all" ];
+    };
   };
   services.hyprpaper = {
     enable = true;
@@ -18,14 +20,6 @@
         [ ",${../../../../assets/wallpapers/feet-on-the-dashboard.png}" ];
     };
   };
-  # programs.wpaperd = {
-  #   enable = true;
-  #   settings = {
-  #     any = {
-  #       path = "${../../../../assets/wallpapers/feet-on-the-dashboard.png}";
-  #     };
-  #   };
-  # };
   # home.sessionVariables = {
   #   GDK_BACKEND = "wayland";
   #   ANKI_WAYLAND = "1";

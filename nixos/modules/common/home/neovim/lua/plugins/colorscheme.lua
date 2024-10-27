@@ -21,7 +21,7 @@ return {
 		lazy = false,
 		config = function()
 			require("tokyonight").setup({
-				transparent = true,
+				-- transparent = true,
 				style = "moon",
 			})
 			vim.cmd("colorscheme tokyonight")

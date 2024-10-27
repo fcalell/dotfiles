@@ -3,13 +3,6 @@ let
   accent = "blue";
   flavor = "mocha";
 in {
-  catppuccin = {
-    pointerCursor = {
-      enable = true;
-      accent = "dark";
-      flavor = flavor;
-    };
-  };
   gtk = {
     enable = true;
     catppuccin = {
@@ -25,7 +18,6 @@ in {
     };
   };
   home.pointerCursor.gtk.enable = true;
-  home.pointerCursor.size = 24;
 
   home.packages = with pkgs; [ gsettings-desktop-schemas ];
   home.sessionVariables = {

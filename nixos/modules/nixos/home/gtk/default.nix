@@ -2,8 +2,10 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome-themes-extra;
+      # name = "Adwaita-dark";
+      # package = pkgs.gnome-themes-extra;
+      package = pkgs.adw-gtk3;
+      name = "adw-gtk3";
     };
     cursorTheme = {
       name = "catppuccin-mocha-dark-cursors";
@@ -17,8 +19,8 @@
         accent = "blue";
       };
     };
-    gtk3.extraCss = import ./gtk-3.0/gtk.css;
-    gtk4.extraCss = import ./gtk-4.0/gtk.css;
+    gtk3.extraCss = builtins.readFile ./gtk-3.0/gtk.css;
+    gtk4.extraCss = builtins.readFile ./gtk-4.0/gtk.css;
   };
   home.pointerCursor.gtk.enable = true;
   dconf = {

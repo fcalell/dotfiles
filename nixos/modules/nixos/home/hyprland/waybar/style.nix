@@ -4,6 +4,7 @@
         min-height: 0;
         font-size: 14px;
         font-weight: bold;
+        color: @text;
     }
 
     window#waybar {
@@ -13,7 +14,7 @@
 
     #workspaces button {
         margin: 2px 3px;
-        color: @text;
+        border-radius: 0px;
         border-bottom: 2px solid transparent;
         transition: all 0.3s ease-in-out;
     }

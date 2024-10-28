@@ -2,7 +2,7 @@ return {
 	jsonls = {},
 	html = {},
 	bashls = {},
-	graphql = {},
+	-- graphql = {},
 	nil_ls = {},
 	texlab = {
 		texlab = {

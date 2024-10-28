@@ -11,8 +11,9 @@
     texlab
     nil
     lua-language-server
-    nodePackages_latest.typescript-language-server
+    typescript-language-server
     vscode-langservers-extracted
     tailwindcss-language-server
+    bash-language-server
   ];
 }

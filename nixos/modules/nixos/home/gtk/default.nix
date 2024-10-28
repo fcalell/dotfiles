@@ -1,23 +1,31 @@
-{ pkgs, ... }:
-let
-  accent = "blue";
-  flavor = "mocha";
-in {
+{ pkgs, ... }: {
   gtk = {
     enable = true;
-    catppuccin = {
-      enable = true;
-      accent = accent;
-      flavor = flavor;
-      icon = {
-        enable = true;
-        accent = accent;
-        flavor = flavor;
-      };
-      tweaks = [ "rimless" ];
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
     };
+    cursorTheme = {
+      name = "catppuccin-mocha-dark-cursors";
+      package = pkgs.catppuccin-cursors.mochaDark;
+      size = 24;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.catppuccin-papirus-folders.override {
+        flavor = "mocha";
+        accent = "blue";
+      };
+    };
+    gtk3.extraCss = import ./gtk-3.0/gtk.css;
+    gtk4.extraCss = import ./gtk-4.0/gtk.css;
   };
   home.pointerCursor.gtk.enable = true;
+  dconf = {
+    settings = {
+      "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
+    };
+  };
 
   home.packages = with pkgs; [ gsettings-desktop-schemas ];
   home.sessionVariables = {

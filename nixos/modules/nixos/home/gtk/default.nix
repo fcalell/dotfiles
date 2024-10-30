@@ -23,6 +23,7 @@
     gtk4.extraCss = builtins.readFile ./gtk-4.0/gtk.css;
   };
   home.pointerCursor.gtk.enable = true;
+  home.pointerCursor.size = 24;
   dconf = {
     settings = {
       "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };

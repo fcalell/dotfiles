@@ -23,6 +23,13 @@
     gtk4.extraCss = builtins.readFile ./gtk-4.0/gtk.css;
   };
   home.pointerCursor.gtk.enable = true;
+  catppuccin = {
+    pointerCursor = {
+      enable = true;
+      accent = "dark";
+      flavor = "mocha";
+    };
+  };
   home.pointerCursor.size = 24;
   dconf = {
     settings = {

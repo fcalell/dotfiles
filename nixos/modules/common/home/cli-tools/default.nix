@@ -15,12 +15,13 @@
     yarn-berry
     bun
     python3
-    tree-sitter
+    # tree-sitter
     luajit
     # pkgs.yarn
     # pkgs.nodePackages.pnpm
     # pkgs.python3
   ];
+  xdg = { enable = true; };
   programs = {
     btop = {
       enable = true;
@@ -37,6 +38,7 @@
       userEmail = "frankie.calella@gmail.com";
     };
     lazygit.enable = true;
+    lazygit.settings = { disableStartupPopups = false; };
     lf = {
       enable = true;
       settings = { hidden = true; };

@@ -8,10 +8,5 @@ in {
     enable = true;
     accent = accent;
     flavor = flavor;
-    pointerCursor = {
-      enable = true;
-      accent = "dark";
-      flavor = flavor;
-    };
   };
 }

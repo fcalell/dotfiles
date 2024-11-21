@@ -1,9 +1,7 @@
 { ... }: {
   nix = {
-    settings = {
-      auto-optimise-store = true;
-      experimental-features = [ "nix-command" "flakes" ];
-    };
+    optimise.automatic = true;
+    settings = { experimental-features = [ "nix-command" "flakes" ]; };
   };
   nixpkgs.config.allowUnfree = true;
 }

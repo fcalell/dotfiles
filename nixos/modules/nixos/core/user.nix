@@ -11,7 +11,7 @@
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
-    backupFileExtension = "hm-backup";
+    backupFileExtension = "backup";
     extraSpecialArgs = { inherit inputs username; };
     users.${username} = {
       home.username = "${username}";

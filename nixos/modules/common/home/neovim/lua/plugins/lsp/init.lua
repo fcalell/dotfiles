@@ -40,6 +40,7 @@ return {
 		)
 
 		local on_attach = function(client, bufnr)
+			client.offset_encoding = "utf-16"
 			-- vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 			local telescope = require("telescope.builtin")
 			local map = function(mode, lhs, rhs, options)

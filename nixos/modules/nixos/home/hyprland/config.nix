@@ -42,8 +42,7 @@
 
     decoration = {
       rounding = 12;
-      shadow_ignore_window = true;
-      drop_shadow = false;
+      shadow = { enabled = false; };
       blur = { enabled = false; };
     };
 

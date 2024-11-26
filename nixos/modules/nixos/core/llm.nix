@@ -9,7 +9,7 @@
     rocmPackages.rocminfo
     clinfo
     rocmPackages.clr.icd
-    nvtop-amd
+    nvtopPackages.amd
     lmstudio
   ];
 }

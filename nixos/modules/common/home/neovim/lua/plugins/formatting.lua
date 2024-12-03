@@ -5,11 +5,11 @@ return {
 	config = function()
 		local conform = require("conform")
 		local formatters_by_ft = {
-			javascript = { "biome-check" },
-			typescript = { "biome-check" },
-			javascriptreact = { "biome-check" },
-			typescriptreact = { "biome-check" },
-			json = { "biome-check" },
+			javascript = { "biome-check", "prettierd", stop_after_first = true },
+			typescript = { "biome-check", "prettierd", stop_after_first = true },
+			javascriptreact = { "biome-check", "prettierd", stop_after_first = true },
+			typescriptreact = { "biome-check", "prettierd", stop_after_first = true },
+			json = { "biome-check", "prettierd", stop_after_first = true },
 			css = { "prettierd" },
 			html = { "prettierd" },
 			yaml = { "prettierd" },

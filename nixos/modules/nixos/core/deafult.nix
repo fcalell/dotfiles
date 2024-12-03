@@ -1,6 +1,5 @@
 {
   imports = [
-    ./adb.nix
     ./user.nix
     ./bootloader.nix
     ./network.nix

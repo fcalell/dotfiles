@@ -1,6 +1,5 @@
 { config, inputs, ... }: {
   imports = [ inputs.android-nixpkgs.hmModule ];
-
   android-sdk.enable = true;
 
   # Optional; default path is "~/.local/share/android".

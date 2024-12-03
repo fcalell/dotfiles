@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./gtk ./hyprland ./streamrip ];
+  imports = [ ./gtk ./hyprland ./streamrip ./android ];
   home.packages = with pkgs; [
     google-chrome
     xfce.thunar

@@ -14,5 +14,6 @@
     ./steam.nix
     ./nix-ld.nix
     ./llm.nix
+    ./virtualization.nix
   ];
 }

@@ -18,7 +18,6 @@
       vulkan-extension-layer
     ];
   };
-  services.xserver.videoDrivers = [ "amdgpu" ];
   nixpkgs.config.rocmSupport = true;
   environment.systemPackages = with pkgs; [
     rocmPackages.rocminfo
@@ -47,6 +46,7 @@
     };
     xserver = {
       enable = true;
+      videoDrivers = [ "amdgpu" ];
       # desktopManager = { xfce.enable = true; };
       desktopManager = { xterm.enable = false; };
       xkb = {

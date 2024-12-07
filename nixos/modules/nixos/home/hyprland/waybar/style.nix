@@ -25,7 +25,7 @@
         transition: all 0.3s ease-in-out;
     }
 
-    #pulseaudio, #clock, #tray, #workspaces {
+    #pulseaudio, #clock, #tray, #workspaces, #window {
         margin: 5px 5px 0px 5px;
         border-radius: 10px 24px 10px 24px;
         padding: 0 20px;

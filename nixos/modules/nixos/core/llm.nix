@@ -1,15 +1,5 @@
 { pkgs, ... }:
 
 {
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  services.xserver.videoDrivers = [ "amdgpu" ];
-  hardware.amdgpu.opencl.enable = true;
-  nixpkgs.config.rocmSupport = true;
-  environment.systemPackages = with pkgs; [
-    rocmPackages.rocminfo
-    clinfo
-    rocmPackages.clr.icd
-    nvtopPackages.amd
-    lmstudio
-  ];
+  environment.systemPackages = with pkgs; [ lmstudio ];
 }

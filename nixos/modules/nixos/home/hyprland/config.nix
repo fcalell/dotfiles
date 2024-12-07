@@ -22,8 +22,9 @@
       kb_options = "";
       kb_rules = "";
 
-      follow_mouse = 0;
+      follow_mouse = 2;
       mouse_refocus = false;
+      float_switch_override_focus = 0;
       numlock_by_default = true;
       accel_profile = "flat";
       sensitivity = 0;
@@ -68,6 +69,8 @@
     };
 
     master = { mfact = 0.5; };
+
+    bindm = [ "SUPER,mouse:272,movewindow" "SUPER,mouse:273,resizewindow" ];
 
     bind = [
       "SUPER,Q,killactive,"
@@ -143,6 +146,7 @@
       "float,title:^(Confirm to replace files)$"
       "float,title:^(File Operation Progress)$"
       "float,title:^(mpv)$"
+      "float,title:.*[eE]mulator"
     ];
   };
 }

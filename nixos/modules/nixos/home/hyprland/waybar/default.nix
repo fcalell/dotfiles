@@ -12,7 +12,7 @@
         margin-bottom = 0;
         margin-left = 0;
         margin-right = 0;
-        modules-left = [ ];
+        modules-left = [ "hyprland/window" ];
         modules-center = [ "hyprland/workspaces" ];
         modules-right = [ "pulseaudio" "tray" "clock" ];
         clock = {

@@ -1,5 +1,5 @@
 { username, pkgs, ... }: {
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.kernelModules = [ "amdgpu" ];
   hardware.amdgpu = {
     opencl.enable = true;
     amdvlk = {
@@ -11,16 +11,28 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [
+      rocmPackages.clr.icd
+      vulkan-loader
+      vulkan-validation-layers
+      vulkan-extension-layer
+    ];
   };
+  services.xserver.videoDrivers = [ "amdgpu" ];
   nixpkgs.config.rocmSupport = true;
   environment.systemPackages = with pkgs; [
     rocmPackages.rocminfo
     clinfo
     nvtopPackages.amd
-    rocmPackages.clr.icd
   ];
-  systemd.tmpfiles.rules =
-    [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}" ];
+
+  systemd.tmpfiles.rules = let
+    rocmEnv = pkgs.symlinkJoin {
+      name = "rocm-combined";
+      paths = with pkgs.rocmPackages; [ rocblas hipblas clr ];
+    };
+  in [ "L+    /opt/rocm   -    -    -     -    ${rocmEnv}" ];
+
   services = {
     libinput = {
       enable = true;
@@ -35,7 +47,6 @@
     };
     xserver = {
       enable = true;
-      videoDrivers = [ "amdgpu" ];
       # desktopManager = { xfce.enable = true; };
       desktopManager = { xterm.enable = false; };
       xkb = {

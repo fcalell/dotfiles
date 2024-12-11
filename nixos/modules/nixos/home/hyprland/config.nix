@@ -146,7 +146,7 @@
       "float,title:^(Confirm to replace files)$"
       "float,title:^(File Operation Progress)$"
       "float,title:^(mpv)$"
-      "float,title:.*[eE]mulator"
+      "pseudo,title:^(Android Emulator)"
     ];
   };
 }

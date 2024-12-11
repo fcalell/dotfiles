@@ -13,6 +13,16 @@ default-root-container-layout = 'tiles'
 #               tall monitor (anything higher than wide) gets vertical orientation
 default-root-container-orientation = 'auto'
 
+# Run related apps 
+after-startup-command = [
+  # 'exec-and-forget sketchybar',
+  'exec-and-forget borders active_color=0xFFB4BEFE inactive_color=0xFF6C7086 width=3.0'
+]
+
+# Notify Sketchybar about workspace change
+# exec-on-workspace-change = ['/bin/bash', '-c',
+#     'sketchybar --trigger aerospace_workspace_change FOCUSED=$AEROSPACE_FOCUSED_WORKSPACE'
+# ]
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
 # - Constant:     gaps.outer.top = 8
@@ -21,23 +31,12 @@ default-root-container-orientation = 'auto'
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 5
-inner.vertical = 5
+inner.horizontal = 3
+inner.vertical = 3
 outer.left = 5
 outer.bottom = 5
 outer.top = 5
 outer.right = 5
-
-# Run related apps 
-after-startup-command = [
-  # 'exec-and-forget sketchybar',
-  'exec-and-forget borders active_color=0xB4BEFE inactive_color=0x6C7086 width=5.0'
-]
-
-# Notify Sketchybar about workspace change
-# exec-on-workspace-change = ['/bin/bash', '-c',
-#     'sketchybar --trigger aerospace_workspace_change FOCUSED=$AEROSPACE_FOCUSED_WORKSPACE'
-# ]
 
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
@@ -88,10 +87,10 @@ cmd-ctrl-k= 'resize height -30'
 cmd-ctrl-l= 'resize width 30'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-cmd-1 = 'workspace --auto-back-and-forth 1'
-cmd-2 = 'workspace --auto-back-and-forth 2'
-cmd-3 = 'workspace --auto-back-and-forth 3'
-cmd-4 = 'workspace --auto-back-and-forth 4'
+cmd-1 = 'workspace 1'
+cmd-2 = 'workspace 2'
+cmd-3 = 'workspace 3'
+cmd-4 = 'workspace 4'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 cmd-shift-1 = 'move-node-to-workspace 1'

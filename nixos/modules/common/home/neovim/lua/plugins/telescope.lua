@@ -23,8 +23,12 @@ return {
 			local actions = require("telescope.actions")
 			local trouble = require("trouble")
 			telescope.setup({
+				pickers = {
+					find_files = {
+						find_command = { "rg", "--files", "--hidden" },
+					},
+				},
 				defaults = {
-					file_ignore_patterns = { "^.git/", "^node_modules/" },
 					prompt_prefix = "❯ ",
 					selection_caret = "❯ ",
 					mappings = {

@@ -1,1 +1,4 @@
-{ pkgs, ... }: { home.packages = with pkgs; [ xcbuild gnused nicotine-plus ]; }
+{ pkgs, ... }: {
+  imports = [ ./aerospace ];
+  home.packages = with pkgs; [ gnused nicotine-plus cocoapods ];
+}

@@ -22,7 +22,7 @@
 
   nix.configureBuildUsers = true;
   nix.settings.trusted-users = [ "root" "fcalell" ];
-
+  ids.gids.nixbld = 350;
   security.pam.enableSudoTouchIdAuth = true;
 
   programs.zsh.enable = true;
@@ -35,7 +35,7 @@
   #Home manager
   imports = [ inputs.home-manager.darwinModules.home-manager ];
   home-manager = {
-    # useUserPackages = true;
+    useUserPackages = true;
     useGlobalPkgs = true;
     backupFileExtension = "backup";
     extraSpecialArgs = { inherit inputs username; };

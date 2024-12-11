@@ -82,9 +82,9 @@ cmd-shift-l= 'move right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 cmd-ctrl-h= 'resize width -30'
-cmd-ctrl-j= 'resize height 30'
+cmd-ctrl-j= 'resize height +30'
 cmd-ctrl-k= 'resize height -30'
-cmd-ctrl-l= 'resize width 30'
+cmd-ctrl-l= 'resize width +30'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 cmd-1 = 'workspace 1'

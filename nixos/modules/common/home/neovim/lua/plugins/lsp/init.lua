@@ -7,13 +7,6 @@ local servers = require("plugins.lsp.servers")
 -- extract all the dependencies from the servers table if they exist
 local dependencies = {
 	{ "j-hui/fidget.nvim", opts = {} },
-	{
-		"SmiteshP/nvim-navbuddy",
-		dependencies = {
-			"SmiteshP/nvim-navic",
-			"MunifTanjim/nui.nvim",
-		},
-	},
 }
 for serverName, serverConfig in pairs(servers) do
 	if serverConfig.dependencies then
@@ -36,7 +29,7 @@ return {
 			"force",
 			{},
 			vim.lsp.protocol.make_client_capabilities(),
-			require("cmp_nvim_lsp").default_capabilities()
+			require("blink.cmp").get_lsp_capabilities()
 		)
 
 		local on_attach = function(client, bufnr)
@@ -46,12 +39,6 @@ return {
 			local map = function(mode, lhs, rhs, options)
 				local map_opts = vim.tbl_extend("force", { buffer = bufnr, silent = true }, options or {})
 				vim.keymap.set(mode, lhs, rhs, map_opts)
-			end
-
-			if client.server_capabilities["documentSymbolProvider"] then
-				require("nvim-navbuddy").attach(client, bufnr)
-				require("nvim-navic").attach(client, bufnr)
-				map("n", "<leader>cn", require("nvim-navbuddy").open, { desc = "Navigate code" })
 			end
 
 			map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })

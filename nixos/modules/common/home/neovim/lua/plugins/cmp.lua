@@ -1,68 +1,31 @@
 return {
 	{
-		"hrsh7th/nvim-cmp",
+		"saghen/blink.cmp",
+		dependencies = "rafamadriz/friendly-snippets",
+		version = "v0.*",
 		lazy = true,
 		event = "InsertEnter",
-		dependencies = {
-			-- Autocompletion
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/cmp-path" },
-			{ "L3MON4D3/LuaSnip" },
-		},
-		config = function()
-			local cmp = require("cmp")
-			local luasnip = require("luasnip")
-			local defaults = require("cmp.config.default")()
-			cmp.setup({
-				completion = {
-					completeopt = "menu,menuone",
-				},
-				snippet = { -- configure how nvim-cmp interacts with snippet engine
-					expand = function(args)
-						luasnip.lsp_expand(args.body)
-					end,
-				},
-				sources = {
-					{ name = "nvim_lsp" },
-					{ name = "path" },
-				},
-				---@diagnostic disable-next-line: missing-fields
-				formatting = {
-					format = function(_, item)
-						local icons = require("config.icons").kinds
-						if icons[item.kind] then
-							item.kind = icons[item.kind] .. item.kind
-						end
-						return item
-					end,
-				},
-				sorting = defaults.sorting,
-				mapping = {
-					["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-					["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-					["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-					["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-				},
-			})
-		end,
-	},
-	{
-		"zbirenbaum/copilot.lua",
-		enabled = false,
-		cmd = "Copilot",
-		lazy = true,
-		event = "InsertEnter",
-		build = ":Copilot auth",
 		opts = {
-			panel = { enabled = false },
-			suggestion = {
-				enabled = true,
-				auto_trigger = true,
-				keymap = {
-					accept = "<C-Enter>",
+			sources = {
+				default = {
+					"lsp",
+					"path",
+					-- "snippets",
+					-- "buffer"
 				},
 			},
+			keymap = {
+				["<C-j>"] = { "select_next" },
+				["<C-k>"] = { "select_prev" },
+				["<Down>"] = { "select_next" },
+				["<Up>"] = { "select_prev" },
+				["<CR>"] = { "select_and_accept" },
+			},
+			appearance = {
+				use_nvim_cmp_as_default = true,
+				nerd_font_variant = "mono",
+			},
+			signature = { enabled = true },
 		},
 	},
 }

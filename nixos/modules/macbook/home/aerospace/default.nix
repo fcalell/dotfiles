@@ -1,5 +1,5 @@
 { pkgs, config, ... }: {
-  home.packages = with pkgs; [ aerospace jankyborders sketchybar ];
+  home.packages = with pkgs; [ aerospace jankyborders ];
 
   xdg.configFile."aerospace/aerospace.toml" = {
     source = config.lib.file.mkOutOfStoreSymlink

@@ -5,6 +5,8 @@ start-at-login = true
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
+accordion-padding = 12
+
 # Possible values: tiles|accordion
 default-root-container-layout = 'tiles'
 
@@ -15,8 +17,18 @@ default-root-container-orientation = 'auto'
 
 # Run related apps 
 after-startup-command = [
-  # 'exec-and-forget sketchybar',
-  'exec-and-forget borders active_color=0xFFB4BEFE inactive_color=0xFF6C7086 width=3.0'
+  'exec-and-forget sketchybar',
+  'exec-and-forget borders active_color=0xFFB4BEFE inactive_color=0xFF6C7086 width=5.0'
+]
+
+exec-on-workspace-change = [
+  '/bin/bash', '-c',
+  'sketchybar --trigger aerospace_workspace_changed FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
+
+on-focus-changed = [
+  'exec-and-forget sketchybar --trigger front_app_switched'
+  # 'exec-and-forget sketchybar --trigger send_message MESSAGE="Focus has changed"'
 ]
 
 # Notify Sketchybar about workspace change

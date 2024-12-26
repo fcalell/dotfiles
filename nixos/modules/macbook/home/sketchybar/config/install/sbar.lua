@@ -1,4 +1,4 @@
-local sbarpath = "/Users/" .. os.getenv("USER") .. "/.config/sketchybar-lua/"
+local sbarpath = "/Users/" .. os.getenv("USER") .. "/.local/share/sketchybar_lua/"
 
 package.cpath = package.cpath .. ";" .. sbarpath .. "?.so"
 

@@ -17,7 +17,7 @@
     bun
     python3
     # tree-sitter
-    lua
+    lua5_4_compat
     # pkgs.yarn
     # pkgs.nodePackages.pnpm
     # pkgs.python3

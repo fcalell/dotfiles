@@ -11,12 +11,13 @@
     unzip
     (hiPrio gcc)
     clang
+    readline
     nodejs_20
     yarn-berry
     bun
     python3
     # tree-sitter
-    luajit
+    lua
     # pkgs.yarn
     # pkgs.nodePackages.pnpm
     # pkgs.python3

@@ -1,8 +1,13 @@
-{ config, pkgs, ... }: {
-  home.packages = with pkgs; [ sketchybar import ./sketchybar-lua.nix ];
+{ config, pkgs, ... }:
+let sbarlua = import ./sketchybar-lua.nix { inherit pkgs; };
+in {
+  home.packages = [ pkgs.sketchybar sbarlua ];
 
   xdg.configFile."sketchybar" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/nixos/modules/macbook/home/sketchybar/config";
+    source = ./config;
+    recursive = true;
+  };
+  xdg.configFile."sketchybar/lua/sketchybar.so" = {
+    source = "${sbarlua}/sketchybar.so";
   };
 }

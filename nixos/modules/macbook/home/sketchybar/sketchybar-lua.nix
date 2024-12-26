@@ -1,4 +1,4 @@
-{ pkgs, lib }:
+{ pkgs }:
 pkgs.stdenv.mkDerivation {
   pname = "sketchybar-lua";
   version = "0.1";
@@ -6,7 +6,7 @@ pkgs.stdenv.mkDerivation {
     owner = "FelixKratz";
     repo = "SbarLua";
     rev = "main";
-    sha256 = lib.fakeSha256; # This will fail and show the correct hash
+    sha256 = "F0UfNxHM389GhiPQ6/GFbeKQq5EvpiqQdvyf7ygzkPg=";
   };
   nativeBuildInputs = with pkgs; [ clang gcc ];
   buildInputs = with pkgs; [ readline ];

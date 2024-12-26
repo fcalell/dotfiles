@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let sbarlua = import ./sketchybar-lua.nix { inherit pkgs; };
 in {
   home.packages = [ pkgs.sketchybar sbarlua ];
@@ -7,7 +7,7 @@ in {
     source = ./config;
     recursive = true;
   };
-  xdg.configFile."sketchybar/lua/sketchybar.so" = {
+  xdg.configFile."sketchybar/sketchybar.so" = {
     source = "${sbarlua}/sketchybar.so";
   };
 }

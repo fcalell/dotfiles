@@ -5,6 +5,7 @@
     settings = {
       adjust_line_height = "120%";
       cursor_blink_interval = 0;
+      hide_window_decorations = true;
       # confirm_os_window_close = 0;
       clear_all_shortcuts = true;
       draw_minimal_borders = "yes";

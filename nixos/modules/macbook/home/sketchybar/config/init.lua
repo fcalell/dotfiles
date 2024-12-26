@@ -1,7 +1,6 @@
--- require("install.sbar")
+require("install.sbar")
 
 sbar = require("sketchybar")
-
 sbar.begin_config()
 sbar.hotload(true)
 

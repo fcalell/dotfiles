@@ -1,6 +1,17 @@
 { inputs, pkgs, username, ... }: {
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
+
+  services.aerospace.enable = true;
+  services.sketchybar.enable = true;
+  services.jankyborders = {
+    enable = true;
+    active_color = "0xFFB4BEFE";
+    inactive_color = "0xFF6C7086";
+    order = "above";
+    width = "5.0";
+  };
+
   nix.package = pkgs.nix;
 
   # Used for backwards compatibility, please read the changelog before changing.

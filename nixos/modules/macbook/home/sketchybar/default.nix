@@ -16,7 +16,6 @@ let
     '';
   };
 in {
-  services.sketchybar.enable = true;
 
   xdg.configFile."sketchybar" = {
     source = config.lib.file.mkOutOfStoreSymlink

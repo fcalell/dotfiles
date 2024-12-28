@@ -16,12 +16,11 @@ let
     '';
   };
 in {
-  home.packages = [ sbarlua ];
   services.sketchybar.enable = true;
 
   xdg.configFile."sketchybar" = {
     source = config.lib.file.mkOutOfStoreSymlink
       "${config.home.homeDirectory}/nixos/modules/macbook/home/sketchybar/config";
   };
-  home.file.".local/share/sketchybar_lua" = { source = "${sbarlua}"; };
+  xdg.dataFile."sketchybar_lua" = { source = "${sbarlua}"; };
 }

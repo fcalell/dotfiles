@@ -33,12 +33,7 @@
   };
 
   #Home manager
-  imports = [
-    inputs.home-manager.darwinModules.home-manager
-    ./jankyborders
-    ./aerospace
-    ./sketchybar
-  ];
+  imports = [ inputs.home-manager.darwinModules.home-manager ];
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;

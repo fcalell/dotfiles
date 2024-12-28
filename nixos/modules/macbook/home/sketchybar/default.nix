@@ -16,6 +16,13 @@ let
     '';
   };
 in {
+  home.packages = with pkgs; [ sketchybar ];
+
+  launchd.user.agents.sketchybar = {
+    serviceConfig.ProgramArguments = [ "${pkgs.sketchybar}/bin/sketchybar" ];
+    serviceConfig.KeepAlive = true;
+    serviceConfig.RunAtLoad = true;
+  };
 
   xdg.configFile."sketchybar" = {
     source = config.lib.file.mkOutOfStoreSymlink

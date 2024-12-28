@@ -1,10 +1,34 @@
-local settings = require("config.settings")
+local icons = require("icons")
+local colors = require("colors")
 
-sbar.add("item", "apple", {
-  background = {
-    color = settings.colors.purple,
+local popup_toggle = "sketchybar --set $NAME popup.drawing=toggle"
+
+local apple_logo = sbar.add("item", {
+  padding_right = 15,
+  click_script = popup_toggle,
+  icon = {
+    string = icons.apple,
+    font = {
+      style = "Black",
+      size = 16.0,
+    },
+    color = colors.green,
   },
-  icon = { string = settings.icons.text.apple },
-  label = { width = 0, padding_left = 0 },
-  click_script = "$CONFIG_DIR/bridge/menus/bin/menus -s 0"
+  label = {
+    drawing = false,
+  },
+  popup = {
+    height=35
+  }
 })
+
+local apple_prefs = sbar.add("item", {
+  position = "popup." .. apple_logo.name,
+  icon = icons.preferences,
+  label = "Preferences",
+})
+
+apple_prefs:subscribe("mouse.clicked", function(_)
+  sbar.exec("open -a 'System Preferences'")
+  apple_logo:set({ popup = { drawing = false } } )
+end)

@@ -16,7 +16,8 @@ let
     '';
   };
 in {
-  home.packages = [ pkgs.sketchybar sbarlua ];
+  home.packages = [ sbarlua ];
+  services.sketchybar.enable = true;
 
   xdg.configFile."sketchybar" = {
     source = config.lib.file.mkOutOfStoreSymlink

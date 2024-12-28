@@ -1,5 +1,5 @@
 # Start AeroSpace at login
-start-at-login = true
+# start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -16,10 +16,9 @@ default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
 # Run related apps 
-after-startup-command = [
-  'exec-and-forget sketchybar',
-  'exec-and-forget borders active_color=0xFFB4BEFE inactive_color=0xFF6C7086 width=5.0'
-]
+# after-startup-command = [
+#   'exec-and-forget borders active_color=0xFFB4BEFE inactive_color=0xFF6C7086 width=5.0'
+# ]
 
 exec-on-workspace-change = [
   '/bin/bash', '-c',

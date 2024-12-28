@@ -19,7 +19,7 @@ in {
   home.packages = with pkgs; [ sketchybar ];
 
   launchd.agents.sketchybar = {
-    enable = true;
+    enable = false;
     config = {
       ProgramArguments = [ "${pkgs.sketchybar}/bin/sketchybar" ];
       KeepAlive = true;

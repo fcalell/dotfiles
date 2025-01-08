@@ -12,8 +12,10 @@
     nil
     lua-language-server
     typescript-language-server
+    vtsls
     vscode-langservers-extracted
     tailwindcss-language-server
+    astro-language-server
     bash-language-server
   ];
 }

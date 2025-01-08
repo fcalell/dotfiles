@@ -8,7 +8,7 @@ local servers = require("plugins.lsp.servers")
 local dependencies = {
 	{ "j-hui/fidget.nvim", opts = {} },
 }
-for serverName, serverConfig in pairs(servers) do
+for _, serverConfig in pairs(servers) do
 	if serverConfig.dependencies then
 		for _, dependency in pairs(serverConfig.dependencies) do
 			table.insert(dependencies, dependency)
@@ -27,13 +27,12 @@ return {
 		-- Servers
 		local capabilities = vim.tbl_deep_extend(
 			"force",
-			{},
 			vim.lsp.protocol.make_client_capabilities(),
-			require("blink.cmp").get_lsp_capabilities()
+			require("blink.cmp").get_lsp_capabilities(),
+			{ offsetEncoding = { "utf-16" } }
 		)
 
 		local on_attach = function(client, bufnr)
-			client.offset_encoding = "utf-16"
 			-- vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 			local telescope = require("telescope.builtin")
 			local map = function(mode, lhs, rhs, options)

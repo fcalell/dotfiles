@@ -14,6 +14,7 @@
     readline
     nodejs_20
     yarn-berry
+    pnpm
     bun
     python3
     # tree-sitter

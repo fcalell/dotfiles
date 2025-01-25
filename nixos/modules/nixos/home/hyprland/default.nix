@@ -20,6 +20,14 @@
         [ ",${../../../../assets/wallpapers/feet-on-the-dashboard.png}" ];
     };
   };
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      background = {
+        path = "${../../../../assets/wallpapers/feet-on-the-dashboard.png}";
+      };
+    };
+  };
   # home.sessionVariables = {
   #   GDK_BACKEND = "wayland";
   #   ANKI_WAYLAND = "1";

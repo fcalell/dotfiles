@@ -75,6 +75,8 @@
     bind = [
       "SUPER,Q,killactive,"
       ''SUPER,P,exec, grim -g "$(slurp)" - | wl-copy -t image/png''
+      "SUPER,RETURN,exec,fuzzel"
+      "SUPER,L,exec,hyprlock"
 
       # "SUPER,M,exit,"
       # "SUPER,S,togglefloating,"
@@ -119,7 +121,6 @@
       "SUPER SHIFT, 3, movetoworkspacesilent, 3"
       "SUPER SHIFT, 4, movetoworkspacesilent, 4"
 
-      "SUPER,RETURN,exec,fuzzel"
     ];
 
     windowrule = [

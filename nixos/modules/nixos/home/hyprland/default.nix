@@ -21,7 +21,7 @@
     };
   };
   programs.hyprlock = {
-    enable = true;
+    enable = false;
     settings = {
       background = {
         path = "${../../../../assets/wallpapers/feet-on-the-dashboard.png}";

@@ -12,7 +12,7 @@ let
     };
     monospace = {
       name = "JetBrainsMono Nerd Font";
-      package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+      package = pkgs.nerd-fonts.jetbrains-mono;
     };
     emoji = {
       name = "Noto Color Emoji";
@@ -20,11 +20,8 @@ let
     };
   };
 in {
-  home.packages = [
-    pkgs.noto-fonts
-    pkgs.noto-fonts-emoji
-    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-  ];
+  home.packages =
+    [ pkgs.noto-fonts pkgs.noto-fonts-emoji pkgs.nerd-fonts.jetbrains-mono ];
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {

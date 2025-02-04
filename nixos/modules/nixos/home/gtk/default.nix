@@ -24,7 +24,7 @@
   };
   home.pointerCursor.gtk.enable = true;
   catppuccin = {
-    pointerCursor = {
+    cursors = {
       enable = true;
       accent = "dark";
       flavor = "mocha";

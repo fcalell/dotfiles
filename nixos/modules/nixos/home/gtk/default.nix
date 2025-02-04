@@ -7,11 +7,11 @@
       package = pkgs.adw-gtk3;
       name = "adw-gtk3";
     };
-    cursorTheme = {
-      name = "catppuccin-mocha-dark-cursors";
-      package = pkgs.catppuccin-cursors.mochaDark;
-      size = 24;
-    };
+    # cursorTheme = {
+    #   name = "catppuccin-mocha-dark-cursors";
+    #   package = pkgs.catppuccin-cursors.mochaDark;
+    #   size = 24;
+    # };
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.catppuccin-papirus-folders.override {
@@ -23,13 +23,6 @@
     gtk4.extraCss = builtins.readFile ./gtk-4.0/gtk.css;
   };
   home.pointerCursor.gtk.enable = true;
-  catppuccin = {
-    cursors = {
-      enable = true;
-      accent = "dark";
-      flavor = "mocha";
-    };
-  };
   home.pointerCursor.size = 24;
   dconf = {
     settings = {

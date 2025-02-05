@@ -15,6 +15,7 @@
       platforms-android-35
       sources-android-35
       system-images-android-35-google-apis-playstore-x86-64
+      system-images-android-35-google-apis-playstore-arm64-v8a
       ndk-26-1-10909125
       skiaparser-3
       sources-android-34

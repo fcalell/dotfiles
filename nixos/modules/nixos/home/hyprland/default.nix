@@ -5,10 +5,7 @@
     enable = true;
     package = null;
     portalPackage = null;
-    # systemd = {
-    #   enable = true;
-    #   variables = [ "--all" ];
-    # };
+    systemd = { variables = [ "--all" ]; };
   };
   services.hyprpaper = {
     enable = true;

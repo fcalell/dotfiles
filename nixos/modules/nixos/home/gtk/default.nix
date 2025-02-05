@@ -24,6 +24,18 @@
   };
   home.pointerCursor.gtk.enable = true;
   home.pointerCursor.size = 24;
+  catppuccin = {
+    cursors = {
+      enable = true;
+      accent = "dark";
+      flavor = "mocha";
+    };
+    # gtk = {
+    #   enable = true;
+    #   accent = accent;
+    #   flavor = flavor;
+    # };
+  };
   dconf = {
     settings = {
       "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };

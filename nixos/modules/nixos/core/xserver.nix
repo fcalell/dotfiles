@@ -1,4 +1,4 @@
-{ username, pkgs, ... }: {
+{ username, ... }: {
   hardware.amdgpu = { opencl.enable = true; };
   hardware.graphics = { enable = true; };
   nixpkgs.config.rocmSupport = true;

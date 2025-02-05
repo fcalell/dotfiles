@@ -1,15 +1,14 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, ... }: {
   imports = [ ./config.nix ./waybar ./mako ./fuzzel ];
   home.packages = with pkgs; [ grim slurp wl-clipboard ];
   wayland.windowManager.hyprland = {
     enable = true;
-    package =
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    xwayland.enable = true;
-    systemd = {
-      enable = true;
-      variables = [ "--all" ];
-    };
+    package = null;
+    portalPackage = null;
+    # systemd = {
+    #   enable = true;
+    #   variables = [ "--all" ];
+    # };
   };
   services.hyprpaper = {
     enable = true;

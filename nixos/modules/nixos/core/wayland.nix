@@ -1,31 +1,21 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, username, ... }: {
   imports = [ inputs.hyprland.nixosModules.default ];
+  programs.dconf.enable = true;
   services.displayManager = {
-    defaultSession = "hyprland";
+    autoLogin = { user = username; };
+    defaultSession = "hyprland-uwsm";
     sddm = {
       enable = true;
       wayland = { enable = true; };
     };
   };
-  programs.dconf.enable = true;
   programs.hyprland = {
     enable = true;
+    withUWSM = true;
     package =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-  };
-  xdg = {
-    autostart.enable = true;
-    portal = {
-      enable = true;
-      xdgOpenUsePortal = true;
-      extraPortals = [ pkgs.xdg-desktop-portal pkgs.xdg-desktop-portal-gtk ];
-    };
-    terminal-exec = {
-      enable = true;
-      settings = { default = [ "kitty.desktop" ]; };
-    };
   };
   environment = {
     # variables = {

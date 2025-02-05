@@ -7,8 +7,8 @@
     ./shell.nix
     ./sound.nix
     ./system.nix
-    ./xserver.nix
-    ./wayland.nix
+    ./inputs.nix
+    ./hyprland.nix
     ./samba.nix
     ./ssh.nix
     ./steam.nix

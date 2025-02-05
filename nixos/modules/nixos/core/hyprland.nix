@@ -2,7 +2,7 @@
   imports = [ inputs.hyprland.nixosModules.default ];
   programs.dconf.enable = true;
   services.displayManager = {
-    autoLogin = { user = username; };
+    autoLogin = { user = "${username}"; };
     defaultSession = "hyprland-uwsm";
     sddm = {
       enable = true;

@@ -12,7 +12,7 @@
     ./samba.nix
     ./ssh.nix
     ./steam.nix
-    ./nix-ld.nix
+    # ./nix-ld.nix
     ./llm.nix
     ./virtualization.nix
   ];

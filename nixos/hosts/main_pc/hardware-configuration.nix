@@ -13,13 +13,14 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/bb2b685c-8ef6-42c6-ad0e-f4e2917721a1";
+    device = "/dev/disk/by-uuid/af61504d-66c4-4824-8b60-66eb19e1f30c";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/8849-F3EF";
+    device = "/dev/disk/by-uuid/68FD-4CCF";
     fsType = "vfat";
+    options = [ "fmask=0077" "dmask=0077" ];
   };
 
   swapDevices = [ ];
@@ -35,6 +36,8 @@
   hardware.cpu.amd.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  hardware.amdgpu = { opencl.enable = true; };
-  hardware.graphics = { enable = true; };
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 }

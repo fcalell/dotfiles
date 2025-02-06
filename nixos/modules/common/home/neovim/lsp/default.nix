@@ -8,6 +8,7 @@
     biome
     prettierd
     # LSP
+    tree-sitter
     texlab
     nil
     lua-language-server

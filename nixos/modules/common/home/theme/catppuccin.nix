@@ -8,6 +8,9 @@ in {
     enable = true;
     accent = accent;
     flavor = flavor;
+    # Waybar
+    waybar.mode = "createLink";
+    # Deprecated
     # gtk = {
     #   enable = true;
     #   accent = accent;

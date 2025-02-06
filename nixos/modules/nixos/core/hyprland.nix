@@ -1,6 +1,8 @@
 { pkgs, inputs, username, ... }: {
   imports = [ inputs.hyprland.nixosModules.default ];
   programs.dconf.enable = true;
+
+  services.getty.autologinUser = "${username}";
   services.displayManager = {
     autoLogin = {
       enable = true;

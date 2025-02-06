@@ -1,0 +1,71 @@
+[
+  {
+    "clock": {
+      "format": "󰥔  {:%a, %d %b, %I:%M %p}",
+      "format-alt": "   {:%d/%m}",
+      "tooltip": "true",
+      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "cpu": {
+      "format": "󰻠 {usage}%",
+      "format-alt": "󰻠 {avg_frequency} GHz",
+      "interval": 5
+    },
+    "height": 35,
+    "hyprland/workspaces": {
+      "active-only": false,
+      "all-outputs": false,
+      "disable-scroll": false,
+      "format": "{id}",
+      "on-click": "activate",
+      "on-scroll-down": "hyprctl dispatch workspace e+1",
+      "on-scroll-up": "hyprctl dispatch workspace e-1"
+    },
+    "layer": "top",
+    "margin-bottom": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "margin-top": 0,
+    "memory": {
+      "format": "󰍛 {}%",
+      "format-alt": "󰍛 {used}/{total} GiB",
+      "interval": 5
+    },
+    "modules-center": [
+      "hyprland/workspaces"
+    ],
+    "modules-left": [
+      "hyprland/window"
+    ],
+    "modules-right": [
+      "pulseaudio",
+      "tray",
+      "clock"
+    ],
+    "network": {
+      "format-disconnected": "󰖪 0% ",
+      "format-ethernet": "󰈀 100% ",
+      "format-linked": "{ifname} (No IP)",
+      "format-wifi": "  {signalStrength}%",
+      "tooltip-format": "Connected to {essid} {ifname} via {gwaddr}"
+    },
+    "position": "top",
+    "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "format-icons": {
+        "default": [
+          "󰕿",
+          "󰖀",
+          "󰕾"
+        ]
+      },
+      "format-muted": "󰝟",
+      "on-click": "pavucontrol",
+      "scroll-step": 5
+    },
+    "tray": {
+      "icon-size": 20,
+      "spacing": 8
+    }
+  }
+]

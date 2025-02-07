@@ -82,7 +82,9 @@ return {
 			lualine.setup({
 				options = {
 					globalstatus = true,
-					theme = "tokyonight",
+					theme = "auto",
+					section_separators = "",
+					component_separators = "",
 				},
 				sections = {
 					lualine_a = {

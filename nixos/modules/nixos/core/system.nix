@@ -22,4 +22,5 @@
     LC_TELEPHONE = "it_IT.UTF-8";
     LC_TIME = "it_IT.UTF-8";
   };
+  systemd.extraConfig = "DefaultTimeoutStopSec=10s";
 }

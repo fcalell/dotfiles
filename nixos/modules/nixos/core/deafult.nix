@@ -5,10 +5,9 @@
     ./bootloader.nix
     ./network.nix
     ./shell.nix
-    ./sound.nix
     ./system.nix
-    ./inputs.nix
     ./hyprland.nix
+    ./peripherials.nix
     ./samba.nix
     ./ssh.nix
     ./steam.nix

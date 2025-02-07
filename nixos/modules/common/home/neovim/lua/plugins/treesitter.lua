@@ -30,7 +30,7 @@ return {
 				"css",
 				"javascript",
 				"json",
-				"latex",
+				-- "latex",
 				"lua",
 				"luap",
 				"markdown",

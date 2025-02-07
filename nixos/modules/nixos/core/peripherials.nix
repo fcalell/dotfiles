@@ -10,4 +10,18 @@
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
   };
+
+  services = {
+    libinput = {
+      enable = true;
+      mouse = { accelProfile = "flat"; };
+      touchpad = { accelProfile = "flat"; };
+    };
+  };
+
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
+  hardware.xone.enable = true;
+  hardware.xpadneo.enable = true;
 }

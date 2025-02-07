@@ -1,4 +1,4 @@
-@import "~/.config/waybar/catppuccin.css";
+@import "./catppuccin.css";
 
 * {
   min-height: 0;

@@ -14,14 +14,18 @@
   services = {
     libinput = {
       enable = true;
-      mouse = { accelProfile = "flat"; };
+      mouse = {
+        accelProfile = "flat";
+        scrollButton = 2;
+        scrollMethod = "button";
+      };
       touchpad = { accelProfile = "flat"; };
     };
   };
 
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  # hardware.bluetooth.enable = true;
+  # services.blueman.enable = true;
 
   hardware.xone.enable = true;
-  hardware.xpadneo.enable = true;
+  # hardware.xpadneo.enable = true;
 }

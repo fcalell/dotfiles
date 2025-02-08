@@ -8,7 +8,7 @@
     tre-command
     neofetch
     gnumake
-    unzip
+    unar
     (hiPrio gcc)
     clang
     readline

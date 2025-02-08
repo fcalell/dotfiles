@@ -23,6 +23,7 @@
     };
   };
 
+  hardware.keyboard.qmk.enable = true;
   # hardware.bluetooth.enable = true;
   # services.blueman.enable = true;
 

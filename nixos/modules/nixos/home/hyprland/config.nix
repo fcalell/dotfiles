@@ -76,6 +76,7 @@
       "SUPER,Q,killactive,"
       ''SUPER,P,exec, grim -g "$(slurp)" - | wl-copy -t image/png''
       "SUPER,RETURN,exec,fuzzel"
+      "SUPER,F,fullscreen"
 
       # "SUPER,M,exit,"
       # "SUPER,S,togglefloating,"

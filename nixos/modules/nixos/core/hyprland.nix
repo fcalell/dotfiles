@@ -7,10 +7,10 @@
 
   services.getty.autologinUser = "${username}";
   services.displayManager = {
-    # autoLogin = {
-    #   enable = true;
-    #   user = "${username}";
-    # };
+    autoLogin = {
+      enable = true;
+      user = "${username}";
+    };
     defaultSession = "hyprland-uwsm";
     sddm = {
       enable = true;

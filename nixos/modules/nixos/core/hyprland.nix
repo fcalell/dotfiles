@@ -1,17 +1,21 @@
 { pkgs, inputs, username, ... }: {
-  imports = [ inputs.hyprland.nixosModules.default ];
+  imports = [
+    inputs.hyprland.nixosModules.default
+    # inputs.catppuccin.nixosModules.catppuccin
+  ];
   programs.dconf.enable = true;
 
   services.getty.autologinUser = "${username}";
   services.displayManager = {
-    autoLogin = {
-      enable = true;
-      user = "${username}";
-    };
+    # autoLogin = {
+    #   enable = true;
+    #   user = "${username}";
+    # };
     defaultSession = "hyprland-uwsm";
     sddm = {
       enable = true;
       wayland = { enable = true; };
+      # package = pkgs.kdePackages.sddm;
     };
   };
   programs.hyprland = {

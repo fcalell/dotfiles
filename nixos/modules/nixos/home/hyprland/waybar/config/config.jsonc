@@ -1,5 +1,12 @@
 [
   {
+    "height": 35,
+    "position": "top",
+    "layer": "top",
+    "margin-bottom": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "margin-top": 0,
     "clock": {
       "format": "󰥔  {:%a, %d %b, %I:%M %p}",
       "format-alt": "   {:%d/%m}",
@@ -11,7 +18,6 @@
       "format-alt": "󰻠 {avg_frequency} GHz",
       "interval": 5
     },
-    "height": 35,
     "hyprland/workspaces": {
       "active-only": false,
       "all-outputs": false,
@@ -21,27 +27,16 @@
       "on-scroll-down": "hyprctl dispatch workspace e+1",
       "on-scroll-up": "hyprctl dispatch workspace e-1"
     },
-    "layer": "top",
-    "margin-bottom": 0,
-    "margin-left": 0,
-    "margin-right": 0,
-    "margin-top": 0,
+    "custom/wlogout": {
+        "format": "",
+        "interval": "once",
+        "on-click": "wlogout -c 5 -r 5 -p layer-shell"
+    },
     "memory": {
       "format": "󰍛 {}%",
       "format-alt": "󰍛 {used}/{total} GiB",
       "interval": 5
     },
-    "modules-center": [
-      "hyprland/workspaces"
-    ],
-    "modules-left": [
-      "hyprland/window"
-    ],
-    "modules-right": [
-      "tray",
-      "pulseaudio",
-      "clock"
-    ],
     "network": {
       "format-disconnected": "󰖪 0% ",
       "format-ethernet": "󰈀 100% ",
@@ -50,7 +45,6 @@
       "tooltip":"true",
       "tooltip-format": "Connected to {essid} {ifname} via {gwaddr}"
     },
-    "position": "top",
     "pulseaudio": {
       "format": "{icon} {volume}%",
       "format-icons": {
@@ -67,6 +61,18 @@
     "tray": {
       "icon-size": 20,
       "spacing": 8
-    }
+    },
+    "modules-left": [
+      "custom/wlogout"
+      // "hyprland/window"
+    ],
+    "modules-center": [
+      "hyprland/workspaces"
+    ],
+    "modules-right": [
+      "tray",
+      "pulseaudio",
+      "clock"
+    ]
   }
 ]

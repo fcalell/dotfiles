@@ -3,13 +3,15 @@
 * {
   min-height: 0;
   font-size: 14px;
+  font-family: "JetBrainsMono Nerd Font";
   font-weight: bold;
   color: @text;
+  padding: 0 5px;
 }
 
 window#waybar {
   /* background: rgba(16, 18, 19, 0.8); */
-  background-color: transparent;
+  background-color: @base;
 }
 
 #workspaces button {
@@ -20,18 +22,6 @@ window#waybar {
 }
 
 #workspaces button.active {
-  border-radius: 0px;
   border-bottom: 2px solid @blue;
   transition: all 0.3s ease-in-out;
-}
-
-#pulseaudio,
-#clock,
-#tray,
-#workspaces,
-#window {
-  margin: 5px 5px 0px 5px;
-  border-radius: 10px 24px 10px 24px;
-  padding: 0 20px;
-  background-color: @base;
 }

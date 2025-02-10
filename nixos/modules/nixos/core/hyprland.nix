@@ -4,8 +4,8 @@ let
     echo "======================================"
     echo "   Welcome! Please select a session:  "
     echo "======================================"
-    echo "1) steamos"
-    echo "2) hyprland"
+    echo "1) hyprland"
+    echo "2) steamos"
     echo ""
 
     # Loop until a valid option is provided
@@ -13,12 +13,12 @@ let
         read -rp "Enter your choice (1 or 2): " choice
         case $choice in
             1)
-                echo "Launching steamos..."
-                exec steamos
-                ;;
-            2)
                 echo "Launching hyprland..."
                 exec hyprland
+                ;;
+            2)
+                echo "Launching steamos..."
+                exec steamos
                 ;;
             *)
                 echo "Invalid option. Please enter 1 or 2."

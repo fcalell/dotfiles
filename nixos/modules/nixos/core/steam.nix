@@ -2,7 +2,7 @@
 let
   steamos = pkgs.pkgs.writeShellScriptBin "steamos" ''
     set -xeuo pipefail
-    gamescope --steam --rt --hdr-enabled --adaptive-sync -- steam -tenfoot -steamos3 -pipewire-dmabuf
+    gamescope --steam --rt --adaptive-sync -- steam -tenfoot -steamos3 -pipewire-dmabuf
   '';
 
   steamos-session-select =
@@ -21,15 +21,7 @@ in {
       true; # Open ports in the firewall for Steam Local Network Game Transfers
     gamescopeSession = {
       enable = true;
-      args = [
-        "-w 2560"
-        "-h 1440"
-        "-r 144"
-        "-f"
-        "--rt"
-        "--hdr-enabled"
-        "--adaptive-sync"
-      ];
+      args = [ "--rt" "--adaptive-sync" ];
     };
   };
   programs.gamescope = {

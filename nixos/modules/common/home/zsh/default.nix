@@ -30,6 +30,16 @@
             echo "Unsupported OS type: $OSTYPE"
           fi
         }
+        android_emulator() {
+          # Check if steam-run is installed (i.e., available in PATH)
+          if command -v steam-run >/dev/null 2>&1; then
+              # If steam-run is found, run emulator using steam-run
+              exec steam-run emulator "$@"
+          else
+              # If steam-run is not found, run emulator directly
+              exec emulator "$@"
+          fi
+        }
         zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
       '';
       shellAliases = {
@@ -42,6 +52,7 @@
         top = "btop";
         df = "duf";
         du = "dust";
+        emulator = "android_emulator";
       };
     };
   };

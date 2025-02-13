@@ -12,7 +12,7 @@
     (hiPrio gcc)
     clang
     readline
-    nodejs_20
+    nodejs_22
     yarn-berry
     pnpm
     bun

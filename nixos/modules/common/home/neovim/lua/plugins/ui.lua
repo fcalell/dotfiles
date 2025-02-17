@@ -7,34 +7,6 @@ return {
 		opts = {},
 	},
 	{
-		"rcarriga/nvim-notify",
-		lazy = false,
-		opts = {
-			timeout = 3000,
-			max_height = function()
-				return math.floor(vim.o.lines * 0.75)
-			end,
-			max_width = function()
-				return math.floor(vim.o.columns * 0.75)
-			end,
-			on_open = function(win)
-				vim.api.nvim_win_set_config(win, { zindex = 100 })
-			end,
-		},
-		config = function(_, opts)
-			local notify_plugin = require("notify")
-			local banned_messages = { "No information available" }
-			notify_plugin.setup(opts)
-			vim.notify = function(message, ...)
-				if vim.tbl_contains(banned_messages, message) then
-					return
-				end
-				notify_plugin(message, ...)
-			end
-			vim.keymap.set("n", "<leader>pn", "<cmd>Telescope notify<CR>", { desc = "[P]roject [N]otifications" })
-		end,
-	},
-	{
 		"nvim-lualine/lualine.nvim",
 		lazy = false,
 		config = function()

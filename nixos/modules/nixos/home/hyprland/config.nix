@@ -43,7 +43,7 @@
 
     decoration = {
       rounding = 0;
-      dim_inactive = true;
+      # dim_inactive = true;
       shadow = { enabled = false; };
       blur = { enabled = false; };
     };

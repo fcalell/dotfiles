@@ -5,6 +5,7 @@
     settings = {
       adjust_line_height = "120%";
       cursor_blink_interval = 0;
+      cursor_trail = 1;
       hide_window_decorations = "titlebar-and-corners";
       # confirm_os_window_close = 0;
       clear_all_shortcuts = true;

@@ -74,7 +74,7 @@ map(
 -- Buffer management
 -- map("n", "<Tab>", ":bnext<CR>", { desc = "Next buffer" })
 -- map("n", "<S-Tab>", ":bprevious<CR>", { desc = "Previous buffer" })
-map("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete buffer" })
+-- map("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete buffer" })
 -- map("n", "<leader>bc", ":bdelete<CR>", { desc = "Delete buffer" })
 
 -- Don't `noremap` in insert mode to have these keybindings behave exactly

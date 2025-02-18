@@ -1,5 +1,6 @@
 { inputs, pkgs, ... }: {
   imports = [ inputs.nix-index-database.nixosModules.nix-index ];
+  environment.stub-ld.enable = true;
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = (with pkgs; [
     alsa-lib

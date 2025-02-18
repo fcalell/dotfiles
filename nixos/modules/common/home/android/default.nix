@@ -1,8 +1,8 @@
 { config, inputs, pkgs, ... }: {
   imports = [ inputs.android-nixpkgs.hmModule ];
-  android-sdk.enable = true;
+  home.packages = with pkgs; [ aapt ];
 
-  # Optional; default path is "~/.local/share/android".
+  android-sdk.enable = true;
   android-sdk.path = "${config.home.homeDirectory}/.android/sdk";
 
   android-sdk.packages = sdk:
@@ -26,14 +26,13 @@
     enable = true;
     package = pkgs.jdk17;
   };
+
   programs.gradle = {
     enable = true;
     settings = { newArchEnables = true; };
   };
 
   home.sessionVariables = {
-    ANDROID_USER_HOME = "${config.home.homeDirectory}/.android";
-    ANDROID_EMULATOR_HOME = "${config.home.homeDirectory}/.android";
     ANDROID_AVD_HOME = "${config.home.homeDirectory}/.android/avd";
   };
 }

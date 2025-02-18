@@ -11,8 +11,7 @@
     ./samba.nix
     ./ssh.nix
     ./steam.nix
-    # ./nix-ld.nix
-    ./nix-ld-madness.nix
+    ./nix-ld.nix
     ./llm.nix
     # ./virtualization.nix
   ];

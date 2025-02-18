@@ -52,7 +52,7 @@
         top = "btop";
         df = "duf";
         du = "dust";
-        emulator = "android_emulator";
+        # emulator = "android_emulator";
       };
     };
   };

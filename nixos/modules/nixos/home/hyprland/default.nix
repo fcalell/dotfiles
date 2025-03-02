@@ -25,6 +25,7 @@
     };
   };
   programs.wlogout = { enable = true; };
+  programs.imv.enable = true;
   # home.sessionVariables = {
   #   GDK_BACKEND = "wayland";
   #   ANKI_WAYLAND = "1";

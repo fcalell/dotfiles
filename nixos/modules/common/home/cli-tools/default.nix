@@ -33,10 +33,7 @@
       enable = true;
       hidden = true;
     };
-    fzf = {
-      enable = true;
-      tmux = { enableShellIntegration = true; };
-    };
+    fzf.enable = true;
     git = {
       enable = true;
       userName = "fcalell";
@@ -49,12 +46,5 @@
       settings = { hidden = true; };
     };
     ripgrep.enable = true;
-    tmux = {
-      enable = true;
-      baseIndex = 1;
-      clock24 = true;
-      keyMode = "vi";
-      newSession = true;
-    };
   };
 }

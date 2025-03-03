@@ -3,6 +3,7 @@
     enable = true;
     settings = {
       main = {
+        launch-prefix = "uwsm app --";
         anchor = "center";
         layer = "overlay";
         font = "Noto Sans:size=14";

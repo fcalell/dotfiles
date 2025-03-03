@@ -1,33 +1,4 @@
-{ pkgs, inputs, username, ... }:
-let
-  login-script = pkgs.pkgs.writeShellScriptBin "session" ''
-    echo "======================================"
-    echo "   Welcome! Please select a session:  "
-    echo "======================================"
-    echo "1) hyprland"
-    echo "2) steamos"
-    echo ""
-
-    # Loop until a valid option is provided
-    while true; do
-        read -rp "Enter your choice (1 or 2): " choice
-        case $choice in
-            1)
-                echo "Launching hyprland..."
-                exec hyprland
-                ;;
-            2)
-                echo "Launching steamos..."
-                exec steamos
-                ;;
-            *)
-                echo "Invalid option. Please enter 1 or 2."
-                ;;
-        esac
-    done
-  '';
-
-in {
+{ pkgs, inputs, username, ... }: {
   imports = [
     inputs.hyprland.nixosModules.default
     # inputs.catppuccin.nixosModules.catppuccin
@@ -35,6 +6,7 @@ in {
   programs.dconf.enable = true;
 
   services.getty = { autologinUser = "${username}"; };
+
   # services.displayManager = {
   #   autoLogin = {
   #     enable = true;
@@ -46,9 +18,10 @@ in {
   #     wayland = { enable = true; };
   #   };
   # };
+  programs.zsh.loginShellInit = "uwsm start select";
   programs.hyprland = {
     enable = true;
-    # withUWSM = true;
+    withUWSM = true;
     package =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage =
@@ -60,7 +33,6 @@ in {
     #   QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     #   QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     # };
-    systemPackages = [ login-script ];
     sessionVariables = {
       NIXOS_OZONE_WL = "1"; # Hint electron apps to use wayland
     };

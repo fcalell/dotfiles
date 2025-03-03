@@ -23,6 +23,7 @@ in {
       enable = true;
       args = [ "--rt" "--adaptive-sync" ];
     };
+    extest.enable = true;
   };
   programs.gamescope = {
     enable = true;

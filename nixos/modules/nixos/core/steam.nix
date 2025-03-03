@@ -24,6 +24,7 @@ in {
       args = [ "--rt" "--adaptive-sync" ];
     };
     extest.enable = true;
+    protontricks.enable = true;
   };
   programs.gamescope = {
     enable = true;

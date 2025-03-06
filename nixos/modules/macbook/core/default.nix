@@ -1,8 +1,6 @@
 { inputs, pkgs, username, ... }: {
   # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
-
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system = {
@@ -23,7 +21,7 @@
   nix.configureBuildUsers = true;
   nix.settings.trusted-users = [ "root" "fcalell" ];
   ids.gids.nixbld = 350;
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   programs.zsh.enable = true;
   users.users.${username} = {

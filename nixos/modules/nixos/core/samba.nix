@@ -1,6 +1,6 @@
-{ pkgs, ... }: {
-  environment.systemPackages = [ pkgs.cifs-utils ];
-  services.gvfs = { enable = true; };
+{ pkgs, ... }:
+{
+  # environment.systemPackages = [ pkgs.cifs-utils ];
   # services.samba = {
   #   enable = true;
   #   # You will still need to set up the user accounts to begin with:

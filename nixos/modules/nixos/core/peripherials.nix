@@ -1,5 +1,10 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [ pavucontrol ];
+
+  security.polkit.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
   # hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {

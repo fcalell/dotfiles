@@ -44,7 +44,7 @@
       '';
       shellAliases = {
         nixr = "check_and_rebuild";
-        nixc = "sudo nix-collect-garbage -d";
+        nixc = "nix-collect-garbage -d && sudo nix-collect-garbage -d";
         gg = "lazygit";
         ls = "ls --color -la -h";
         ".." = "cd ..";

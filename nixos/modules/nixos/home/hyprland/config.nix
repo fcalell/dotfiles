@@ -1,4 +1,12 @@
-{
+{ pkgs, ... }: {
+  home.packages = with pkgs; [
+    grim
+    slurp
+    wl-clipboard
+    udiskie
+    hyprpolkitagent
+  ];
+
   wayland.windowManager.hyprland.settings = {
     "$mainMod" = "SUPER";
     exec-once = [
@@ -6,6 +14,8 @@
       # "hash dbus-update-activation-environment 2>/dev/null &"
       # "dbus-update-activation-environment --systemd &"
       # "nm-applet &"
+      "systemctl --user enable --now hyprpolkitagent.service"
+      "udiskie"
       "wl-paste --primary --watch wl-copy --primary --clear"
       # "wpaperd &"
       # "swaybg -m fill -i ~/nixos/modules/common/home/stylix/wallpapers/feet-on-the-dashboard.png &"

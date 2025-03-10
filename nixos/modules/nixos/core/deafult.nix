@@ -1,6 +1,6 @@
 {
   imports = [
-    ./adb.nix
+    ./android.nix
     ./user.nix
     ./bootloader.nix
     ./network.nix
@@ -8,11 +8,12 @@
     ./system.nix
     ./hyprland.nix
     ./peripherials.nix
-    ./samba.nix
+    # ./samba.nix
     ./ssh.nix
     ./steam.nix
     ./nix-ld.nix
     ./llm.nix
-    # ./virtualization.nix
+    ./thunar.nix
+    ./virtualization.nix
   ];
 }

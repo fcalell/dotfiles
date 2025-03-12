@@ -18,7 +18,6 @@
     };
   };
 
-  nix.configureBuildUsers = true;
   nix.settings.trusted-users = [ "root" "fcalell" ];
   ids.gids.nixbld = 350;
   security.pam.services.sudo_local.touchIdAuth = true;

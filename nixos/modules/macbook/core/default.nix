@@ -1,5 +1,6 @@
 { inputs, pkgs, username, ... }: {
   # Auto upgrade nix package and the daemon service.
+  nix.enable = false;
   nix.package = pkgs.nix;
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

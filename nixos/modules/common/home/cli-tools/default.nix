@@ -3,6 +3,7 @@
 {
   imports = [ ./doc-generation.nix ];
   home.packages = with pkgs; [
+    chafa
     duf
     du-dust
     tre-command

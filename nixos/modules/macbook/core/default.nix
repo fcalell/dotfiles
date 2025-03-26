@@ -30,8 +30,10 @@
     shell = pkgs.zsh;
   };
 
-  #Home manager
-  imports = [ inputs.home-manager.darwinModules.home-manager ];
+  imports = [
+    inputs.home-manager.darwinModules.home-manager
+    inputs.mac-app-util.darwinModules.default
+  ];
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -41,7 +43,11 @@
       home.username = "${username}";
       home.homeDirectory = "/Users/${username}";
       home.stateVersion = "24.11";
-      imports = [ ../../common/home/default.nix ../home/default.nix ];
+      imports = [
+        ../../common/home/default.nix
+        ../home/default.nix
+        inputs.mac-app-util.homeManagerModules.default
+      ];
       programs.home-manager.enable = true;
     };
   };

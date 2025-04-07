@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./doc-generation.nix ];
+  imports = [ ./doc-generation ];
   home.packages = with pkgs; [
     chafa
     duf

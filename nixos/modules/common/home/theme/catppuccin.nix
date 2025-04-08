@@ -3,7 +3,7 @@ let
   accent = "blue";
   flavor = "mocha";
 in {
-  imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
+  imports = [ inputs.catppuccin.homeModules.catppuccin ];
   catppuccin = {
     enable = true;
     accent = accent;

@@ -138,9 +138,9 @@
       # Window rules
       "tile,title:^(kitty)$"
       "float,title:^(fly_is_kitty)$"
-      "tile,^(Spotify)$"
+      # "tile,^(Spotify)$"
       # "tile,^(neovide)$"
-      "tile,^(wps)$"
+      # "tile,^(wps)$"
     ];
 
     windowrulev2 = [

@@ -11,7 +11,7 @@
     # ./samba.nix
     ./ssh.nix
     ./steam.nix
-    ./nix-ld.nix
+    # ./nix-ld.nix
     ./llm.nix
     ./thunar.nix
     ./virtualization.nix

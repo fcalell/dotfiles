@@ -21,15 +21,17 @@ in {
       true; # Open ports in the firewall for Steam Local Network Game Transfers
     gamescopeSession = {
       enable = true;
-      args = [ "--rt" "--adaptive-sync" ];
+      args = [
+        "-f -W 2560 -H 1440 -r 144 --adaptive-sync --force-grab-cursor --grab"
+      ];
     };
-    extest.enable = true;
-    protontricks.enable = true;
+    # extest.enable = true;
+    # protontricks.enable = true;
   };
-  programs.gamescope = {
-    enable = true;
-    capSysNice = true;
-  };
+  # programs.gamescope = {
+  #   enable = true;
+  #   capSysNice = true;
+  # };
   environment.systemPackages = [ steamos steamos-session-select ];
   # https://gist.github.com/jakehamilton/632edeb9d170a2aedc9984a0363523d3
   # environment.systemPackages = with pkgs; [ steamtinkerlaunch ];

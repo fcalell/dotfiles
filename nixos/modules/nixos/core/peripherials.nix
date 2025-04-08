@@ -28,6 +28,12 @@
     };
   };
 
+  hardware.logitech = {
+    wireless = {
+      enable = true;
+      enableGraphical = true;
+    };
+  };
   hardware.keyboard.qmk.enable = true;
   # hardware.bluetooth.enable = true;
   # services.blueman.enable = true;

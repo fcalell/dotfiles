@@ -5,9 +5,30 @@
       enable = true;
       extraPackages = tpkgs: {
         inherit (tpkgs)
-          scheme-basic enumitem mmap cmap titlesec metafont xcolor soul setspace
-          substr xstring xifthen ifmtarg lastpage biblatex biblatex-ext helvetic
-          csquotes latexindent;
+          scheme-basic
+          # Fonts and encoding
+          fontspec xunicode unicode-math upquote sourcesanspro ly1 titling
+          # Language + quotes
+          babel csquotes polyglossia
+          # Layout
+          geometry footmisc setspace parskip microtype titlesec fancyvrb
+          footnotebackref zref needspace
+          # Math
+          amsmath
+          # Code listings
+          listings fvextra sourcecodepro
+          # Tables
+          booktabs multirow
+          # Graphics
+          float xcolor adjustbox
+          # Blockquotes
+          mdframed
+          # Links
+          hyperref xurl bookmark
+          # Misc support
+          iftex soul etoolbox koma-script caption
+          # Optional but helpful
+          eurosym;
       };
     };
   };

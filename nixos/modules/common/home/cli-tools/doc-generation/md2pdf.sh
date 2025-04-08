@@ -34,7 +34,7 @@ pandoc "$input" -o "$output" \
   -V colorlinks=true \
   -V linkcolor=blue \
   -V geometry:margin=1in \
-  -V fontsize=12pt \
+  -V fontsize=10pt \
   -V mainfont="Noto Sans"
 
 echo "✅ Done! Output: $output"

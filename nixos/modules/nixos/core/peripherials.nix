@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  environment.systemPackages = with pkgs; [ pavucontrol ];
+  environment.systemPackages = with pkgs; [ pavucontrol piper ];
 
   security.polkit.enable = true;
   services.gvfs.enable = true;
@@ -28,12 +28,9 @@
     };
   };
 
-  hardware.logitech = {
-    wireless = {
-      enable = true;
-      enableGraphical = true;
-    };
-  };
+  # Gaming mouse coonfiguration
+  services.ratbagd.enable = true;
+
   hardware.keyboard.qmk.enable = true;
   # hardware.bluetooth.enable = true;
   # services.blueman.enable = true;

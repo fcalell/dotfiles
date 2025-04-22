@@ -28,11 +28,12 @@ in {
     # extest.enable = true;
     # protontricks.enable = true;
   };
-  # programs.gamescope = {
-  #   enable = true;
-  #   capSysNice = true;
-  # };
-  environment.systemPackages = [ steamos steamos-session-select ];
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
+
+  environment.systemPackages = [ steamos steamos-session-select pkgs.bottles ];
   # https://gist.github.com/jakehamilton/632edeb9d170a2aedc9984a0363523d3
   # environment.systemPackages = with pkgs; [ steamtinkerlaunch ];
 }

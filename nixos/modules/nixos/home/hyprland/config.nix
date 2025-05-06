@@ -153,6 +153,7 @@
       "float,class:^(notification)$"
       "float,class:^(error)$"
       "float,class:^(confirmreset)$"
+      "float,title:^(teams.microsoft.com.mcas.ms)"
       "float,title:^(Open File)$"
       "float,title:^(branchdialog)$"
       "float,title:^(Confirm to replace files)$"

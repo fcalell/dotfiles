@@ -42,8 +42,8 @@
     };
 
     general = {
-      gaps_in = 2;
-      gaps_out = 5;
+      gaps_in = 6;
+      gaps_out = 12;
       border_size = 3;
       "col.active_border" = "$lavender";
       "col.inactive_border" = "$overlay0";

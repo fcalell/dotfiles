@@ -42,9 +42,9 @@
     };
 
     general = {
-      gaps_in = 6;
-      gaps_out = 12;
-      border_size = 3;
+      gaps_in = 0;
+      gaps_out = 0;
+      border_size = 0;
       "col.active_border" = "$lavender";
       "col.inactive_border" = "$overlay0";
       layout = "master";
@@ -52,7 +52,7 @@
     };
 
     decoration = {
-      rounding = 8;
+      rounding = 0;
       # dim_inactive = true;
       shadow = { enabled = false; };
       blur = { enabled = false; };

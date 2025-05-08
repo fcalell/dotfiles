@@ -12,7 +12,6 @@
 window#waybar {
   /* background: rgba(16, 18, 19, 0.8); */
   background-color: @base;
-  border-radius: 8px;
 }
 
 #workspaces button {

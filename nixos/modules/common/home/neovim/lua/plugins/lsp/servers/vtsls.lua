@@ -5,10 +5,10 @@ M.dependencies = {
 	-- { "pmizio/typescript-tools.nvim" },
 }
 
-M.settings = {}
-
-M.setup = function()
-	require("lspconfig.configs").vtsls = require("vtsls").lspconfig
-end
+M.settings = {
+	vtsls = {
+		autoUseWorkspaceTsdk = true,
+	},
+}
 
 return M

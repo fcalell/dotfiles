@@ -66,62 +66,16 @@ return {
 		},
 	},
 	{
-		"folke/flash.nvim",
-		lazy = true,
-		event = { "BufEnter" },
-		---@type Flash.Config
-		config = {
-			modes = {
-				char = {
-					enabled = false,
-				},
-			},
-		},
-		keys = {
-			{
-				"s",
-				mode = { "n", "x", "o" },
-				function()
-					require("flash").jump()
-				end,
-				desc = "Flash",
-			},
-		},
-	},
-	{
-		"echasnovski/mini.bracketed",
-		lazy = true,
-		event = { "BufEnter" },
-		config = function()
-			require("mini.bracketed").setup({
-				buffer = { suffix = "b", options = {} },
-				comment = { suffix = "c", options = {} },
-				conflict = { suffix = "", options = {} },
-				diagnostic = { suffix = "d", options = {} },
-				file = { suffix = "", options = {} },
-				indent = { suffix = "", options = {} },
-				jump = { suffix = "", options = {} },
-				location = { suffix = "l", options = {} },
-				oldfile = { suffix = "", options = {} },
-				quickfix = { suffix = "q", options = {} },
-				treesitter = { suffix = "", options = {} },
-				undo = { suffix = "", options = {} },
-				window = { suffix = "w", options = {} },
-				yank = { suffix = "", options = {} },
-			})
-		end,
-	},
-	{
 		"folke/trouble.nvim",
 		lazy = true,
 		event = { "BufEnter" },
 		opts = { use_diagnostic_signs = true },
 		keys = {
 			{
-				"<leader>e",
+				"<leader>d",
 				"<cmd>Trouble diagnostics toggle<cr>",
 				mode = "n",
-				desc = "Document Diagnostics (Trouble)",
+				desc = "[D]iagnostics (Trouble)",
 			},
 			{ "<leader>ql", "<cmd>Trouble loclist toggle<cr>", mode = "n", desc = "Location List (Trouble)" },
 			{ "<leader>qf", "<cmd>Trouble quickfix toggle<cr>", mode = "n", desc = "Quickfix List (Trouble)" },

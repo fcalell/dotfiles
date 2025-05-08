@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   fonts = {
-    size = 12;
+    size = 14;
     serif = {
       name = "Noto Serif";
       package = pkgs.noto-fonts;

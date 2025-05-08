@@ -19,6 +19,7 @@
       ];
       initExtra = ''
         source ~/.p10k.zsh
+        source ~/.env.zsh
         check_and_rebuild() {
           if [[ "$OSTYPE" == "linux-gnu"* ]]; then
             echo "Detected Linux environment."

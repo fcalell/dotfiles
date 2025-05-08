@@ -18,6 +18,6 @@ return {
 	astro = {},
 	-- ts_ls = {},
 	lua_ls = require("plugins.lsp.servers.lua"),
-	eslint = require("plugins.lsp.servers.eslint"),
+	-- eslint = require("plugins.lsp.servers.eslint"),
 	biome = {},
 }

@@ -1,25 +1,24 @@
 local M = {}
 
 M.dependencies = {
-	"folke/neodev.nvim",
-}
-
-M.settings = {
-	Lua = {
-		-- diagnostics = {
-		-- 	globals = { "vim" },
-		-- },
-		workspace = {
-			checkThirdParty = false,
-		},
-		completion = {
-			callSnippet = "Replace",
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				{ path = "LazyVim", words = { "LazyVim" } },
+				{ path = "snacks.nvim", words = { "Snacks" } },
+			},
 		},
 	},
 }
 
-M.setup = function()
-	require("neodev").setup({})
-end
+M.settings = {
+	Lua = {
+		runtime = {
+			version = "LuaJIT",
+		},
+	},
+}
 
 return M

@@ -9,10 +9,8 @@
   services.hyprpaper = {
     enable = true;
     settings = {
-      preload =
-        [ "${../../../../assets/wallpapers/feet-on-the-dashboard.png}" ];
-      wallpaper =
-        [ ",${../../../../assets/wallpapers/feet-on-the-dashboard.png}" ];
+      preload = [ "${../../../../assets/wallpapers/cloudsnight.jpg}" ];
+      wallpaper = [ ",${../../../../assets/wallpapers/cloudsnight.jpg}" ];
     };
   };
   programs.hyprlock = {

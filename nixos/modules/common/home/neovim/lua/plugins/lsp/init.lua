@@ -23,19 +23,13 @@ return {
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("fcalell-lsp-attach", { clear = true }),
 			callback = function(event)
-				local telescope = require("telescope.builtin")
 				local map = function(mode, lhs, rhs, options)
 					local map_opts = vim.tbl_extend("force", { buffer = event.buf, silent = true }, options or {})
 					vim.keymap.set(mode, lhs, rhs, map_opts)
 				end
 
 				map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
-				map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto declaration" })
-				map("n", "gd", telescope.lsp_definitions, { desc = "Goto definition" })
 				map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
-				map("n", "gi", telescope.lsp_implementations, { desc = "Goto implementations" })
-				map("n", "gr", telescope.lsp_references, { desc = "Goto references" })
-				map("n", "gt", telescope.lsp_type_definitions, { desc = "Goto type definition" })
 				map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code Rename" })
 			end,
 		})

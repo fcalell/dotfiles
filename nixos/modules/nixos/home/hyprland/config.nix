@@ -44,9 +44,9 @@
     general = {
       gaps_in = 0;
       gaps_out = 0;
-      border_size = 0;
-      "col.active_border" = "$lavender";
-      "col.inactive_border" = "$overlay0";
+      border_size = 2;
+      "col.active_border" = "$pink";
+      "col.inactive_border" = "$base";
       layout = "master";
       no_focus_fallback = true;
     };
@@ -144,6 +144,7 @@
     ];
 
     windowrulev2 = [
+      "noborder, onworkspace:w[t1]"
       "float,class:^(fuzzel)$"
       "float,class:^(pavucontrol)$"
       "float,class:^(file_progress)$"

@@ -18,7 +18,7 @@
 
   services = {
     libinput = {
-      enable = true;
+      enable = false;
       mouse = {
         accelProfile = "flat";
         scrollButton = 2;

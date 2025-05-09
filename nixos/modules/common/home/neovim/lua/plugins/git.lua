@@ -1,10 +1,5 @@
 return {
 	{
-		"kdheepak/lazygit.nvim",
-		lazy = true,
-		keys = { { "<leader>gg", ":LazyGit<CR>", desc = "[G]it Lazy[G]it" } },
-	},
-	{
 		"lewis6991/gitsigns.nvim",
 		lazy = true,
 		event = { "BufEnter" },

@@ -6,18 +6,89 @@ return {
 			lazy = false,
 			keys = {
 				{
+					"<leader><leader>",
+					function()
+						Snacks.picker.buffers()
+					end,
+					desc = "Buffers",
+				},
+				{
+					"<leader>ps",
+					function()
+						Snacks.picker.grep()
+					end,
+					desc = "[P]roject [S]earch with Grep",
+				},
+				{
+					"<leader>pf",
+					function()
+						Snacks.picker.smart()
+					end,
+					desc = "[P]roject [F]iles",
+				},
+				{
+					"<leader>pv",
+					function()
+						Snacks.explorer()
+					end,
+					desc = "[P]roject [V]iew",
+				},
+				{
 					"<leader>bd",
 					function()
 						Snacks.bufdelete()
 					end,
-					desc = "Delete Buffer",
+					desc = "[D]elete [B]uffer",
 				},
 				{
 					"<leader>t",
 					function()
 						Snacks.terminal()
 					end,
-					desc = "Toggle Terminal",
+					desc = "[T]erminal",
+				},
+				{
+					"<leader>gg",
+					function()
+						Snacks.lazygit()
+					end,
+					desc = "[G]it Lazy[G]it",
+				},
+				{
+					"gd",
+					function()
+						Snacks.picker.lsp_definitions()
+					end,
+					desc = "Goto Definition",
+				},
+				{
+					"gD",
+					function()
+						Snacks.picker.lsp_declarations()
+					end,
+					desc = "Goto Declaration",
+				},
+				{
+					"gr",
+					function()
+						Snacks.picker.lsp_references()
+					end,
+					nowait = true,
+					desc = "References",
+				},
+				{
+					"gI",
+					function()
+						Snacks.picker.lsp_implementations()
+					end,
+					desc = "Goto Implementation",
+				},
+				{
+					"gy",
+					function()
+						Snacks.picker.lsp_type_definitions()
+					end,
+					desc = "Goto T[y]pe Definition",
 				},
 			},
 			---@type snacks.Config
@@ -26,11 +97,47 @@ return {
 				-- or leave it empty to use the default settings
 				-- refer to the configuration section below
 				bigfile = { enabled = true },
-				-- dashboard = { enabled = true },
-				-- explorer = { enabled = true },
+				dashboard = {
+					enabled = true,
+					preset = {
+						header = [[
+███████╗ ██████╗ █████╗ ██╗     ███████╗██╗     ██╗     
+██╔════╝██╔════╝██╔══██╗██║     ██╔════╝██║     ██║     
+█████╗  ██║     ███████║██║     █████╗  ██║     ██║     
+██╔══╝  ██║     ██╔══██║██║     ██╔══╝  ██║     ██║     
+██║     ╚██████╗██║  ██║███████╗███████╗███████╗███████╗
+╚═╝      ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚══════╝
+]],
+						keys = {
+							{ icon = " ", key = "v", desc = "[V]iew files", action = ":lua Snacks.explorer()" },
+							{ icon = "󰱼 ", key = "f", desc = "[F]ind file", action = ":lua Snacks.picker.smart()" },
+							{ icon = " ", key = "s", desc = "[S]earch in files", action = ":lua Snacks.grep()" },
+							{
+								icon = "󰁯 ",
+								key = "r",
+								desc = "[R]estore session",
+								action = ":lua require('persistence').load()",
+							},
+							{ icon = " ", key = "q", desc = "[Q]uit nvim", action = ":qa" },
+						},
+					},
+					sections = {
+						{ section = "header" },
+						{ section = "keys", gap = 1, padding = 1 },
+					},
+				},
+				explorer = { enabled = true, replace_netrw = true },
+				image = { enabled = true },
 				-- indent = { enabled = true },
 				input = { enabled = true },
-				-- picker = { enabled = true },
+				picker = {
+					enabled = true,
+					sources = {
+						explorer = {
+							auto_close = true,
+						},
+					},
+				},
 				notifier = { enabled = true },
 				quickfile = { enabled = true },
 				scope = { enabled = true },
@@ -42,6 +149,7 @@ return {
 	},
 	{
 		"RRethy/vim-illuminate",
+		enabled = false,
 		lazy = true,
 		event = { "BufEnter" },
 		opts = {
@@ -81,6 +189,18 @@ return {
 			{ "<leader>qf", "<cmd>Trouble quickfix toggle<cr>", mode = "n", desc = "Quickfix List (Trouble)" },
 		},
 	},
-	{ "karb94/neoscroll.nvim", enabled = false, config = true },
+	{
+		"windwp/nvim-spectre",
+		lazy = true,
+		keys = {
+			{
+				"<leader>pr",
+				function()
+					require("spectre").open()
+				end,
+				desc = "[P]roject search and [R]eplace in files",
+			},
+		},
+	},
 	{ "folke/which-key.nvim", enabled = false },
 }

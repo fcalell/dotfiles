@@ -22,7 +22,7 @@ return {
 				{
 					"<leader>pf",
 					function()
-						Snacks.picker.smart()
+						Snacks.picker.git_files()
 					end,
 					desc = "[P]roject [F]iles",
 				},
@@ -110,8 +110,18 @@ return {
 ]],
 						keys = {
 							{ icon = " ", key = "v", desc = "[V]iew files", action = ":lua Snacks.explorer()" },
-							{ icon = "󰱼 ", key = "f", desc = "[F]ind file", action = ":lua Snacks.picker.smart()" },
-							{ icon = " ", key = "s", desc = "[S]earch in files", action = ":lua Snacks.grep()" },
+							{
+								icon = "󰱼 ",
+								key = "f",
+								desc = "[F]ind file",
+								action = ":lua Snacks.picker.git_files()",
+							},
+							{
+								icon = " ",
+								key = "s",
+								desc = "[S]earch in files",
+								action = ":lua Snacks.picker.grep()",
+							},
 							{
 								icon = "󰁯 ",
 								key = "r",

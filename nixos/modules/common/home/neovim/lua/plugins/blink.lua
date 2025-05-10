@@ -2,7 +2,6 @@ return {
 	{
 		"saghen/blink.cmp",
 		dependencies = {
-			"Kaiser-Yang/blink-cmp-avante",
 			"rafamadriz/friendly-snippets",
 		},
 		version = "1.*",
@@ -13,7 +12,6 @@ return {
 		opts = {
 			sources = {
 				default = {
-					"avante",
 					"lazydev",
 					"lsp",
 					"path",
@@ -21,13 +19,6 @@ return {
 					-- "buffer"
 				},
 				providers = {
-					avante = {
-						module = "blink-cmp-avante",
-						name = "Avante",
-						opts = {
-							-- options for blink-cmp-avante
-						},
-					},
 					lazydev = {
 						name = "LazyDev",
 						module = "lazydev.integrations.blink",

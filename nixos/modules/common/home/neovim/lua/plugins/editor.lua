@@ -142,9 +142,13 @@ return {
 				input = { enabled = true },
 				picker = {
 					enabled = true,
+					hidden = true,
+					untracked = true,
 					sources = {
 						explorer = {
 							auto_close = true,
+							git_untracked = true,
+							matcher = { fuzzy = true },
 						},
 					},
 				},

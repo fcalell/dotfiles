@@ -15,7 +15,6 @@ return {
 			},
 			indent = {
 				enable = true,
-				disable = { "python" },
 			},
 			-- autotag = {
 			-- 	enable = true,

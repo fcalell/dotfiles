@@ -88,6 +88,7 @@
       ''SUPER,P,exec, grim -g "$(slurp)" - | wl-copy -t image/png''
       "SUPER,RETURN,exec,fuzzel"
       "SUPER,F,fullscreen"
+      "SUPER,ESCAPE,exec, systemctl suspend"
 
       # "SUPER,M,exit,"
       # "SUPER,S,togglefloating,"

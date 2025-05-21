@@ -4,6 +4,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
 		},
+		enabled = false,
 		-- lazy = true,
 		-- cmd = "MCPHub", -- lazy load
 		-- build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
@@ -25,6 +26,7 @@ return {
 		"yetone/avante.nvim",
 		event = "VeryLazy",
 		version = false, -- Never set this value to "*"! Never!
+		enabled = false,
 		config = function()
 			require("avante").setup({
 				provider = "claude",

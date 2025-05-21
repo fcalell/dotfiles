@@ -4,6 +4,9 @@ return {
 			"folke/snacks.nvim",
 			priority = 1000,
 			lazy = false,
+			dependencies = {
+				"nvim-tree/nvim-web-devicons",
+			},
 			keys = {
 				{
 					"<leader><leader>",
@@ -147,7 +150,6 @@ return {
 					sources = {
 						explorer = {
 							auto_close = true,
-							git_untracked = true,
 							matcher = { fuzzy = true },
 						},
 					},

@@ -139,7 +139,7 @@ return {
 						{ section = "keys", gap = 1, padding = 1 },
 					},
 				},
-				explorer = { enabled = true, replace_netrw = true },
+				explorer = { enabled = true },
 				image = { enabled = true },
 				-- indent = { enabled = true },
 				input = { enabled = true },

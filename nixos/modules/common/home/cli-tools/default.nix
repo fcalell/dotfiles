@@ -8,6 +8,7 @@
     du-dust
     tre-command
     neofetch
+    openssl
     gnumake
     unar
     (hiPrio gcc)

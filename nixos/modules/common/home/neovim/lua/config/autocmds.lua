@@ -10,13 +10,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
--- Disable diagnostics in node_modules (0 is current buffer only)
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-	group = augroup("hide_diagnostic_node_modules"),
-	pattern = "*/node_modules/*",
-	command = "lua vim.diagnostic.disable(0)",
-})
-
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 	group = augroup("checktime"),

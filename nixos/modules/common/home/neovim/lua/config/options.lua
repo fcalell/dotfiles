@@ -69,7 +69,7 @@ vim.opt.pumheight = 5
 
 vim.opt.errorbells = false --- Disables sound effect for errors
 vim.opt.termguicolors = true --- Correct terminal colors
-vim.opt.wildignore = "*node_modules/**" --- Don't search inside Node.js modules (works for gutentag)
+-- vim.opt.wildignore = "*node_modules/**" --- Don't search inside Node.js modules (works for gutentag)
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0

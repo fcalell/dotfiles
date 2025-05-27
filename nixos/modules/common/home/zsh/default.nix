@@ -10,7 +10,7 @@
         src = pkgs.zsh-powerlevel10k;
         file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }];
-      initExtra = ''
+      initContent = ''
         source ~/.p10k.zsh
         source ~/.env.zsh
         check_and_rebuild() {

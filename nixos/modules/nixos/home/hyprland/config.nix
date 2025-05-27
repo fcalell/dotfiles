@@ -25,6 +25,8 @@
       # "mako &"
       # "easyeffects --gapplication-service" # Starts easyeffects in the background
     ];
+    # Workaround for gamescope https://github.com/ValveSoftware/gamescope/issues/1825
+    debug = { full_cm_proto = true; };
     input = {
       kb_layout = "us";
       kb_variant = "";

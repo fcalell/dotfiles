@@ -21,13 +21,11 @@ default-root-container-orientation = 'auto'
 # ]
 
 exec-on-workspace-change = [
-  '/bin/bash', '-c',
-  'sketchybar --trigger aerospace_workspace_changed FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 ]
 
 on-focus-changed = [
-  'exec-and-forget sketchybar --trigger front_app_switched'
-  # 'exec-and-forget sketchybar --trigger send_message MESSAGE="Focus has changed"'
+  # 'exec-and-forget sketchybar --trigger front_app_switched'
+  # 'exec-and-forget [ $(aerospace list-windows --workspace focused | wc -l) -eq 1 ] && borders width=0.0 || borders width=5.0'
 ]
 
 # Notify Sketchybar about workspace change

@@ -1,4 +1,7 @@
 { pkgs, ... }: {
-  imports = [ ./aerospace ./sketchybar ./jankyborders.nix ];
+  imports = [
+    ./aerospace
+    #./jankyborders.nix 
+  ];
   home.packages = with pkgs; [ gnused nicotine-plus cocoapods ];
 }

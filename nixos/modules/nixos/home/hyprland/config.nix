@@ -3,6 +3,7 @@
     grim
     slurp
     wl-clipboard
+    hyprpicker
     udiskie
     hyprpolkitagent
   ];

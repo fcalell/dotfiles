@@ -4,20 +4,7 @@
   nix.package = pkgs.nix;
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system = {
-    stateVersion = 4;
-    defaults = {
-      dock = {
-        autohide = true;
-        show-recents = false;
-        launchanim = false;
-        mouse-over-hilite-stack = true;
-        orientation = "bottom";
-        tilesize = 48;
-      };
-      finder = { _FXShowPosixPathInTitle = false; };
-    };
-  };
+  system = { stateVersion = 4; };
 
   nix.settings.trusted-users = [ "root" "fcalell" ];
   ids.gids.nixbld = 350;

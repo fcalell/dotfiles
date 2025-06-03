@@ -1,15 +1,4 @@
-{ pkgs, ... }:
-let
-  steamos = pkgs.pkgs.writeShellScriptBin "steamos" ''
-    set -xeuo pipefail
-    gamescope --steam --adaptive-sync --hdr-enabled -- steam -tenfoot -steamos3
-  '';
-
-  steamos-session-select =
-    pkgs.pkgs.writeShellScriptBin "steamos-session-select" ''
-      steam -shutdown
-    '';
-in {
+{ pkgs, ... }: {
   programs.steam = {
     enable = true;
     # protontricks.enable = true;
@@ -31,8 +20,7 @@ in {
         "-H 1440"
         # "-R"
       ];
-      steamArgs = [ "-tenfoot" "-steamos3" ];
-      # env = { WAYLAND_DISPLAY = "wayland-1"; };
+      # steamArgs = [ "-tenfoot" ];
     };
   };
   programs.gamescope = {
@@ -40,8 +28,7 @@ in {
     capSysNice = true;
   };
 
-  environment.systemPackages =
-    [ steamos steamos-session-select pkgs.bottles pkgs.mangohud ];
+  environment.systemPackages = [ pkgs.bottles pkgs.mangohud ];
   # https://gist.github.com/jakehamilton/632edeb9d170a2aedc9984a0363523d3
   # environment.systemPackages = with pkgs; [ steamtinkerlaunch ];
 }

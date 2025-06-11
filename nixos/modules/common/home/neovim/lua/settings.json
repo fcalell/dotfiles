@@ -1,0 +1,99 @@
+{
+	// --- Vim Extension Settings ---
+	"vim.leader": "<space>",
+	"vim.useCtrlKeys": true,
+	"vim.insertModeKeyBindings": [
+		{ "before": ["<C-c>"], "after": ["<Esc>"] },
+		{ "before": ["<C-s>"], "commands": ["workbench.action.files.save"] }
+	],
+	"vim.normalModeKeyBindingsNonRecursive": [
+		{ "before": ["H"], "after": ["^"] },
+		{ "before": ["L"], "after": ["$"] },
+		{
+			"before": ["<leader>", "w", "c"],
+			"commands": ["workbench.action.closeActiveEditor"]
+		},
+		{
+			"before": ["<leader>", "w", "v"],
+			"commands": ["workbench.action.splitEditorRight"]
+		},
+		{
+			"before": ["<leader>", "w", "s"],
+			"commands": ["workbench.action.splitEditorDown"]
+		},
+		{ "before": ["<leader>", "u"], "commands": ["undoTree.toggle"] },
+		{ "before": ["<leader>", "K"], "commands": ["editor.action.showHover"] },
+		{
+			"before": ["<leader>", "c", "c"],
+			"commands": ["editor.action.commentLine"]
+		},
+		{
+			"before": ["<leader>", "d"],
+			"commands": ["workbench.actions.view.problems"]
+		},
+		{
+			"before": ["<leader>", "q", "l"],
+			"commands": ["workbench.action.showErrorsWarnings"]
+		},
+		{
+			"before": ["<leader>", "q", "f"],
+			"commands": ["workbench.action.quickFix"]
+		},
+		{ "before": ["<leader>", "ca"], "commands": ["editor.action.codeAction"] },
+		{ "before": ["<leader>", "cr"], "commands": ["editor.action.rename"] },
+		{ "before": ["K"], "commands": ["editor.action.showHover"] },
+		{ "before": ["<C-s>"], "commands": ["workbench.action.files.save"] },
+		{ "before": ["<C-h>"], "commands": ["workbench.action.navigateLeft"] },
+		{ "before": ["<C-j>"], "commands": ["workbench.action.navigateDown"] },
+		{ "before": ["<C-k>"], "commands": ["workbench.action.navigateUp"] },
+		{ "before": ["<C-l>"], "commands": ["workbench.action.navigateRight"] }
+	],
+	"vim.visualModeKeyBindingsNonRecursive": [
+		{ "before": ["H"], "after": ["^"] },
+		{ "before": ["L"], "after": ["$"] },
+		{ "before": ["<"], "after": ["<", "g", "v"] },
+		{ "before": [">"], "after": [">", "g", "v"] },
+		{ "before": ["p"], "after": ["\"", "_", "d", "P"] },
+		{ "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
+		{ "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] },
+		{
+			"before": ["<leader>", "c", "c"],
+			"commands": ["editor.action.commentLine"]
+		}
+	],
+	"vim.operatorPendingModeKeyBindingsNonRecursive": [
+		{ "before": ["H"], "after": ["^"] },
+		{ "before": ["L"], "after": ["$"] }
+	],
+	"vim.normalModeKeyBindings": [
+		{ "before": ["<C-s>"], "commands": ["workbench.action.files.save"] }
+	],
+	"vim.visualModeKeyBindings": [
+		{ "before": ["<C-s>"], "commands": ["workbench.action.files.save"] }
+	],
+	"vim.handleKeys": {
+		"<C-h>": false,
+		"<C-j>": false,
+		"<C-k>": false,
+		"<C-l>": false
+	},
+	// --- Editor Options ---
+	"editor.lineNumbers": "relative",
+	"editor.tabSize": 2,
+	"editor.insertSpaces": true,
+	"editor.wordWrap": "on",
+	"editor.renderLineHighlight": "none",
+	"editor.mouseWheelZoom": true,
+	"editor.quickSuggestions": true,
+	"editor.smoothScrolling": true,
+	"editor.scrollBeyondLastLine": false,
+	"editor.find.autoFindInSelection": true,
+	"editor.minimap.enabled": false,
+	// --- Color Theme (match tokyonight if installed) ---
+	"workbench.colorTheme": "Tokyo Night"
+	// --- Comments ---
+	// Some Neovim features (autocmds, advanced macros, plugin-specific actions) are not portable to VSCodeVim.
+	// For buffer navigation, use VSCode's tab navigation shortcuts (Ctrl+Tab, Ctrl+Shift+Tab).
+	// For LSP, diagnostics, and git features, install the appropriate VSCode extensions.
+	// For advanced text objects, consider VSCode extensions or custom snippets.
+}

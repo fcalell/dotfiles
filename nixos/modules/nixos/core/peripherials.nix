@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  environment.systemPackages = with pkgs; [ pavucontrol piper ];
+  environment.systemPackages = with pkgs; [ pavucontrol piper hplipWithPlugin ];
 
   security.polkit.enable = true;
   services.gvfs.enable = true;
@@ -26,6 +26,11 @@
       };
       touchpad = { accelProfile = "flat"; };
     };
+  };
+
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.hplipWithPlugin ];
   };
 
   # Gaming mouse coonfiguration

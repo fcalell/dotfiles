@@ -1,12 +1,7 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [
-    grim
-    slurp
-    wl-clipboard
-    hyprpicker
-    udiskie
-    hyprpolkitagent
-  ];
+  home.packages = with pkgs; [ hyprpicker hyprpolkitagent grimblast ];
+  services.udiskie.enable = true;
+  services.clipman.enable = true;
 
   wayland.windowManager.hyprland.settings = {
     "$mainMod" = "SUPER";
@@ -16,8 +11,8 @@
       # "dbus-update-activation-environment --systemd &"
       # "nm-applet &"
       "systemctl --user enable --now hyprpolkitagent.service"
-      "udiskie"
-      "wl-paste --primary --watch wl-copy --primary --clear"
+      # "udiskie"
+      # "wl-paste --primary --watch wl-copy --primary --clear"
       # "wpaperd &"
       # "swaybg -m fill -i ~/nixos/modules/common/home/stylix/wallpapers/feet-on-the-dashboard.png &"
       # "sleep 1 && swaylock"
@@ -88,7 +83,7 @@
 
     bind = [
       "SUPER,Q,killactive,"
-      ''SUPER,P,exec, grim -g "$(slurp)" - | wl-copy -t image/png''
+      "SUPER,P,exec, grimblast copy area"
       "SUPER,RETURN,exec,fuzzel"
       "SUPER,F,fullscreen"
       "SUPER,ESCAPE,exec, systemctl suspend"

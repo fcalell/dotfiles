@@ -1,7 +1,12 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [ hyprpicker hyprpolkitagent grimblast ];
+  home.packages = with pkgs; [
+    hyprpicker
+    hyprpolkitagent
+    grimblast
+    wl-clipboard
+  ];
+
   services.udiskie.enable = true;
-  services.clipman.enable = true;
 
   wayland.windowManager.hyprland.settings = {
     "$mainMod" = "SUPER";
@@ -86,7 +91,6 @@
       "SUPER,P,exec, grimblast copy area"
       "SUPER,RETURN,exec,fuzzel"
       "SUPER,F,fullscreen"
-      "SUPER,ESCAPE,exec, systemctl suspend"
 
       # "SUPER,M,exit,"
       # "SUPER,S,togglefloating,"

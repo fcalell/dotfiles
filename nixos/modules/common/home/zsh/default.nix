@@ -19,7 +19,7 @@
             sudo nixos-rebuild switch --flake ~/nixos/#nixos
           elif [[ "$OSTYPE" == "darwin"* ]]; then
             echo "Detected macOS environment."
-            darwin-rebuild switch --flake ~/nixos/#macbook
+            sudo darwin-rebuild switch --flake ~/nixos/#macbook
           else
             echo "Unsupported OS type: $OSTYPE"
           fi

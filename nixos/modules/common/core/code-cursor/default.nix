@@ -41,7 +41,7 @@ let
     aarch64-darwin = fetchurl {
       url =
         "https://downloads.cursor.com/production/f364e608fc11d38303429b80fd1e1f32d7587d43/darwin/arm64/Cursor-darwin-arm64.dmg";
-      hash = lib.fakeHash;
+      hash = "sha256-eqyUPHUN1N53wfy3ENS95XYOIpsaaS0KeO9W7x68/tY=";
     };
   };
 

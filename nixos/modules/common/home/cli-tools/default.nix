@@ -14,11 +14,12 @@
     (hiPrio gcc)
     clang
     readline
-    nodejs_22
+    nodejs_24
     yarn-berry
     pnpm
     bun
     python3
+    claude-code
     # tree-sitter
     lua5_4_compat
     # pkgs.yarn

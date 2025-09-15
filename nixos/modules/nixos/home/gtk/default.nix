@@ -12,13 +12,13 @@
     #   package = pkgs.catppuccin-cursors.mochaDark;
     #   size = 24;
     # };
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.catppuccin-papirus-folders.override {
-        flavor = "mocha";
-        accent = "blue";
-      };
-    };
+    # iconTheme = {
+    #   name = "Papirus-Dark";
+    #   package = pkgs.catppuccin-papirus-folders.override {
+    #     flavor = "mocha";
+    #     accent = "blue";
+    #   };
+    # };
     gtk3.extraCss = builtins.readFile ./gtk-3.0/gtk.css;
     gtk4.extraCss = builtins.readFile ./gtk-4.0/gtk.css;
   };

@@ -19,7 +19,9 @@
     pnpm
     bun
     python3
+    uv
     claude-code
+    claude-monitor
     # tree-sitter
     lua5_4_compat
     # pkgs.yarn

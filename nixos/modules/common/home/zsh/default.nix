@@ -13,6 +13,7 @@
       initContent = ''
         source ~/.p10k.zsh
         source ~/.env.zsh
+        source ~/.path.zsh
         check_and_rebuild() {
           if [[ "$OSTYPE" == "linux-gnu"* ]]; then
             echo "Detected Linux environment."

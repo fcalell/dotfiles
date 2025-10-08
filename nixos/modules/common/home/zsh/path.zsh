@@ -1,1 +1,1 @@
-export PATH="$PATH:/Users/fcalell/.local/share/uv/tools"
+export PATH="$PATH:/Users/fcalell/.local/bin"

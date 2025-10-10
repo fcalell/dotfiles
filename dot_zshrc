@@ -1,0 +1,140 @@
+# ============================================
+# Zinit Installation
+# ============================================
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+# Download Zinit if not present
+if [[ ! -d "$ZINIT_HOME" ]]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Load Zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# ============================================
+# Zinit Plugins
+# ============================================
+
+# Syntax highlighting (must be loaded before autosuggestions)
+zinit light zsh-users/zsh-syntax-highlighting
+
+# Autosuggestions
+zinit light zsh-users/zsh-autosuggestions
+
+# Completions
+zinit light zsh-users/zsh-completions
+
+# History substring search (up/down arrow)
+zinit light zsh-users/zsh-history-substring-search
+
+# Fast directory navigation
+zinit light agkozak/zsh-z
+
+# FZF integration
+zinit light Aloxaf/fzf-tab
+
+# Load completions
+autoload -Uz compinit && compinit
+
+# Replay cached completions
+zinit cdreplay -q
+
+# ============================================
+# Keybindings
+# ============================================
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey '^p' history-substring-search-up
+bindkey '^n' history-substring-search-down
+
+# ============================================
+# History Configuration
+# ============================================
+HISTSIZE=10000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# ============================================
+# Completion Styling
+# ============================================
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --tree --color=always $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --tree --color=always $realpath'
+
+# ============================================
+# Aliases
+# ============================================
+# Modern replacements
+alias ls='eza --color=always --icons=always'
+alias ll='eza -la --color=always --icons=always'
+alias lt='eza --tree --color=always --icons=always'
+alias cat='bat --style=auto'
+
+# Git aliases
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline --graph'
+alias gd='git diff'
+alias gg='lazygit'
+
+# Zoxide (smart cd)
+alias cd='z'
+
+# Misc
+alias vim='nvim'
+alias vi='nvim'
+alias cl='clear'
+
+# ============================================
+# Environment Variables
+# ============================================
+export EDITOR='nvim'
+export VISUAL='nvim'
+export PAGER='bat'
+
+# FZF catppuccin theme
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+
+# Use fd for FZF
+export FZF_DEFAULT_COMMAND='fd --hidden --strip-cwd-prefix --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type=d --hidden --strip-cwd-prefix --exclude .git'
+
+# ============================================
+# Tool Initializations
+# ============================================
+
+# Starship prompt
+eval "$(starship init zsh)"
+
+# Zoxide (smart cd)
+eval "$(zoxide init zsh)"
+
+# FZF key bindings
+eval "$(fzf --zsh)"
+
+# Mise (version manager)
+eval "$(mise activate zsh)"
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac

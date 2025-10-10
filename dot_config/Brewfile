@@ -1,0 +1,48 @@
+# Brewfile - Declarative package management for macOS
+# Install with: brew bundle [--file=~/.config/Brewfile]
+
+# ===== Core System Tools =====
+brew "git"
+brew "curl"
+brew "wget"
+brew "chezmoi"
+
+# ===== Shell & Terminal =====
+brew "zsh"
+brew "starship"
+cask "kitty"
+
+# ===== Fonts =====
+cask "font-jetbrains-mono-nerd-font"  # Nerd Font variant includes icons
+
+# ===== Editor & Development =====
+brew "neovim", args: ["HEAD"] # Neovim nightly
+brew "tmux"           # Terminal multiplexer
+brew "fzf"            # Fuzzy finder - essential for productivity
+brew "ripgrep"        # Fast grep alternative (rg)
+brew "fd"             # Fast find alternative
+brew "bat"            # Cat with syntax highlighting
+brew "eza"            # Modern ls replacement (was exa)
+brew "zoxide"         # Smart cd command
+
+# ===== Development Tools =====
+brew "gh"             # GitHub CLI
+brew "lazygit"        # Terminal UI for git
+brew "delta"          # Better git diff
+brew "jq"             # JSON processor
+brew "yq"             # YAML processor
+
+# ===== Languages & Version Managers =====
+brew "mise"           # Polyglot version manager (for Node.js, etc.)
+brew "pnpm"           # Fast, disk-efficient package manager
+
+# ===== React Native Development (Commented for later) =====
+# brew "watchman"       # File watching service (required for React Native)
+# brew "cocoapods"      # iOS dependency manager
+# cask "android-studio" # Android development
+# cask "reactotron"     # React/React Native inspector
+
+# ===== System Utilities =====
+brew "btop"           # Modern resource monitor
+brew "tree"           # Directory visualization
+brew "tldr"           # Simplified man pages

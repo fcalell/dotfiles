@@ -88,7 +88,7 @@ alias gc='git commit'
 alias gp='git push'
 alias gl='git log --oneline --graph'
 alias gd='git diff'
-alias gg='lazygit'
+alias gg='lazygit --use-config-file="~/.config/lazygit/config.yml"'
 
 # Zoxide (smart cd)
 alias cd='z'

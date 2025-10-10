@@ -46,3 +46,7 @@ brew "pnpm"           # Fast, disk-efficient package manager
 brew "btop"           # Modern resource monitor
 brew "tree"           # Directory visualization
 brew "tldr"           # Simplified man pages
+
+# ===== Window Management =====
+cask "nikitabobko/tap/aerospace"
+

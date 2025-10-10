@@ -50,26 +50,23 @@ Snacks.setup({
 ╚═╝      ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚══════╝
 ]],
 			keys = {
-				{ icon = " ", key = "v", desc = "[V]iew files", action = ":lua Snacks.explorer()" },
+				{ key = "v", desc = "[V]iew files", action = ":lua Snacks.explorer()" },
 				{
-					icon = "󰱼 ",
 					key = "f",
 					desc = "[F]ind file",
 					action = ":lua Snacks.picker.git_files()",
 				},
 				{
-					icon = " ",
 					key = "s",
 					desc = "[S]earch in files",
 					action = ":lua Snacks.picker.grep()",
 				},
 				{
-					icon = "󰁯 ",
 					key = "r",
 					desc = "[R]estore session",
 					action = ":lua require('persistence').load()",
 				},
-				{ icon = " ", key = "q", desc = "[Q]uit nvim", action = ":qa" },
+				{ key = "q", desc = "[Q]uit nvim", action = ":qa" },
 			},
 		},
 		sections = {

@@ -1,7 +1,7 @@
 -- Keymap
 local map = function(mode, lhs, rhs, opts)
-  local map_opts = vim.tbl_extend("force", { silent = true }, opts or {})
-  vim.keymap.set(mode, lhs, rhs, map_opts)
+	local map_opts = vim.tbl_extend("force", { silent = true }, opts or {})
+	vim.keymap.set(mode, lhs, rhs, map_opts)
 end
 
 -- Better up/down (handles wrapped lines)
@@ -14,12 +14,6 @@ map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
--- H to move to the first non-blank character of the line
-map({ "n", "v", "o" }, "H", "^", { desc = "Move to first non-blank character" })
-
--- L to move to the last non-blank character of the line
-map({ "n", "v", "o" }, "L", "$", { desc = "Move to last non-blank character" })
-
 -- <C-c> should behave like <Esc>
 map("i", "<C-c>", "<Esc>", { desc = "Exit insert mode" })
 
@@ -30,6 +24,10 @@ map({ "i", "x" }, "<C-S>", "<Esc><Cmd>silent! update | redraw<CR>", { desc = "Sa
 -- Move Lines
 map("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move highlighted line down" })
 map("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move highlighted line up" })
+
+-- H/L to move to non-blank character of the line
+map({ "n", "v", "o" }, "H", "^", { desc = "Move to first non-blank character" })
+map({ "n", "v", "o" }, "L", "$", { desc = "Move to last non-blank character" })
 
 -- Macros
 map("n", "Q", "@h", { desc = "Record macro in registry h" })
@@ -63,33 +61,29 @@ map({ "n", "t" }, "<C-l>", "<C-w>l", { noremap = false, desc = "Focus on right w
 
 -- Window resize (respecting v:count)
 map(
-  "n",
-  "<C-Left>",
-  '"<Cmd>vertical resize -" . v:count1 . "<CR>"',
-  { expr = true, replace_keycodes = false, desc = "Decrease window width" }
+	"n",
+	"<C-Left>",
+	'"<Cmd>vertical resize -" . v:count1 . "<CR>"',
+	{ expr = true, replace_keycodes = false, desc = "Decrease window width" }
 )
 map(
-  "n",
-  "<C-Down>",
-  '"<Cmd>resize -" . v:count1 . "<CR>"',
-  { expr = true, replace_keycodes = false, desc = "Decrease window height" }
+	"n",
+	"<C-Down>",
+	'"<Cmd>resize -" . v:count1 . "<CR>"',
+	{ expr = true, replace_keycodes = false, desc = "Decrease window height" }
 )
 map(
-  "n",
-  "<C-Up>",
-  '"<Cmd>resize +" . v:count1 . "<CR>"',
-  { expr = true, replace_keycodes = false, desc = "Increase window height" }
+	"n",
+	"<C-Up>",
+	'"<Cmd>resize +" . v:count1 . "<CR>"',
+	{ expr = true, replace_keycodes = false, desc = "Increase window height" }
 )
 map(
-  "n",
-  "<C-Right>",
-  '"<Cmd>vertical resize +" . v:count1 . "<CR>"',
-  { expr = true, replace_keycodes = false, desc = "Increase window width" }
+	"n",
+	"<C-Right>",
+	'"<Cmd>vertical resize +" . v:count1 . "<CR>"',
+	{ expr = true, replace_keycodes = false, desc = "Increase window width" }
 )
-
--- Buffer navigation
-map("n", "<S-l>", ":bnext<CR>", { desc = "Next buffer" })
-map("n", "<S-h>", ":bprevious<CR>", { desc = "Previous buffer" })
 
 -- Alt+hjkl for arrow key movement (works in all modes)
 map({ "c", "i", "t", "n", "v" }, "<A-h>", "<Left>", { noremap = false, desc = "Left" })
@@ -98,12 +92,7 @@ map({ "c", "i", "t", "n", "v" }, "<A-k>", "<Up>", { noremap = false, desc = "Up"
 map({ "c", "i", "t", "n", "v" }, "<A-l>", "<Right>", { noremap = false, desc = "Right" })
 
 -- Search and replace current word
-map(
-  "n",
-  "<leader>sr",
-  ":%s/<C-r><C-w>//g<Left><Left>",
-  { silent = false, desc = "Search and replace current word" }
-)
+map("n", "<leader>sr", ":%s/<C-r><C-w>//g<Left><Left>", { silent = false, desc = "Search and replace current word" })
 
 -- Keywordprg
 map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })

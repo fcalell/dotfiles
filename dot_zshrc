@@ -31,9 +31,6 @@ zinit light zsh-users/zsh-history-substring-search
 # Fast directory navigation
 zinit light agkozak/zsh-z
 
-# FZF integration
-zinit light Aloxaf/fzf-tab
-
 # Load completions
 autoload -Uz compinit && compinit
 
@@ -41,12 +38,36 @@ autoload -Uz compinit && compinit
 zinit cdreplay -q
 
 # ============================================
+# Completion Configuration
+# ============================================
+# Case insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+# Colorize completions using default `ls` colors
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# Enable menu selection
+zstyle ':completion:*' menu select
+
+# Show directories first in completion
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
+
+# Complete . and .. special directories
+zstyle ':completion:*' special-dirs true
+
+# ============================================
 # Keybindings
 # ============================================
+# History search
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey '^p' history-substring-search-up
 bindkey '^n' history-substring-search-down
+
+# Tab completion
+bindkey '^I' complete-word  # Tab
+bindkey '^[[Z' reverse-menu-complete  # Shift-Tab
 
 # ============================================
 # History Configuration
@@ -64,15 +85,6 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 # ============================================
-# Completion Styling
-# ============================================
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --tree --color=always $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --tree --color=always $realpath'
-
-# ============================================
 # Aliases
 # ============================================
 # Modern replacements
@@ -88,15 +100,18 @@ alias gc='git commit'
 alias gp='git push'
 alias gl='git log --oneline --graph'
 alias gd='git diff'
-alias gg='lazygit --use-config-file="~/.config/lazygit/config.yml"'
+alias gg='lazygit'
 
 # Zoxide (smart cd)
-alias cd='z'
+# alias cd='z'
 
 # Misc
 alias vim='nvim'
 alias vi='nvim'
 alias cl='clear'
+
+# lf with cd on quit
+alias lf='lfcd'
 
 # ============================================
 # Environment Variables
@@ -105,36 +120,41 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='bat'
 
+# Use fd for FZF
+export FZF_DEFAULT_COMMAND='fd --hidden --strip-cwd-prefix --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type=d --hidden --strip-cwd-prefix --exclude .git'
+
 # FZF catppuccin theme
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
 --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
-# Use fd for FZF
-export FZF_DEFAULT_COMMAND='fd --hidden --strip-cwd-prefix --exclude .git'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND='fd --type=d --hidden --strip-cwd-prefix --exclude .git'
+# ============================================
+# Custom Prompt (Catppuccin Mocha colors)
+# ============================================
+# Enable parameter expansion in prompts
+setopt PROMPT_SUBST
 
+# Colors (Catppuccin Mocha)
+local blue="%F{#89b4fa}"
+local green="%F{#a6e3a1}"
+local red="%F{#f38ba8}"
+local reset="%f"
+
+# Simple prompt: directory + arrow
+PROMPT="${blue}%~${reset}
+%(?.${green}.${red})❯${reset} "
 # ============================================
 # Tool Initializations
 # ============================================
 
-# Starship prompt
-eval "$(starship init zsh)"
-
 # Zoxide (smart cd)
 eval "$(zoxide init zsh)"
 
-# FZF key bindings
+# FZF key bindings (Ctrl-T for files, Ctrl-R for history, Alt-C for directories)
 eval "$(fzf --zsh)"
 
 # Mise (version manager)
 eval "$(mise activate zsh)"
-
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac

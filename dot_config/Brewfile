@@ -24,6 +24,7 @@ brew "fd"             # Fast find alternative
 brew "bat"            # Cat with syntax highlighting
 brew "eza"            # Modern ls replacement (was exa)
 brew "zoxide"         # Smart cd command
+brew "lf"             # Terminal file manager
 
 # ===== Development Tools =====
 brew "gh"             # GitHub CLI
@@ -34,7 +35,6 @@ brew "yq"             # YAML processor
 
 # ===== Languages & Version Managers =====
 brew "mise"           # Polyglot version manager (for Node.js, etc.)
-brew "pnpm"           # Fast, disk-efficient package manager
 
 # ===== React Native Development (Commented for later) =====
 # brew "watchman"       # File watching service (required for React Native)

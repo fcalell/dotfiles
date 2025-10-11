@@ -8,6 +8,9 @@ vim.pack.add({
 })
 
 require("nvim-treesitter.configs").setup({
+	modules = {},
+	sync_install = false,
+	ignore_install = {},
 	highlight = {
 		enable = true,
 	},

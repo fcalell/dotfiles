@@ -33,23 +33,23 @@ crust = "#11111b"
 # Simple format: directory + git + prompt
 format = """
 $directory\
-$git_branch\
-$git_status\
 $character"""
 
 [directory]
 style = "bold blue"
 format = "[$path]($style) "
-truncation_length = 3
+truncation_length = 0
 truncation_symbol = "…/"
-truncate_to_repo = true
+truncate_to_repo = false 
 
 [git_branch]
+disabled = true
 symbol = ""
 style = "bold mauve"
 format = "[$symbol$branch]($style) "
 
 [git_status]
+disabled = true
 style = "bold yellow"
 format = '([$all_status$ahead_behind]($style) )'
 conflicted = "="
@@ -70,4 +70,3 @@ error_symbol = '[❯](bold red)'
 # Disable command duration
 [cmd_duration]
 disabled = true
-

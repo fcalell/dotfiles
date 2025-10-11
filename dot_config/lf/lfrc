@@ -1,0 +1,145 @@
+# Basic settings
+set preview true
+set hidden true
+set drawbox true
+set icons true
+set ignorecase true
+
+# Use nvim for editing
+set editor nvim
+
+# Set previewer script
+set previewer ~/.config/lf/preview.sh
+
+# Catppuccin Mocha colors
+# Note: lf uses standard terminal colors, so these will work with Kitty's Catppuccin theme
+
+# Custom functions
+cmd open ${{
+    case $(file --mime-type "$f" -bL) in
+        text/*|application/json|inode/x-empty) $EDITOR "$f";;
+        *) open "$f" ;;
+    esac
+}}
+
+# Trash with confirmation
+cmd trash ${{
+    set -f
+    printf "Trash $fx? [y/N] "
+    read ans
+    if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
+        if command -v trash &> /dev/null; then
+            trash "$fx"
+        else
+            echo "trash-cli not installed, using rm"
+            rm -rf "$fx"
+        fi
+    fi
+}}
+
+# Delete with confirmation
+cmd delete ${{
+    set -f
+    printf "Permanently delete $fx? [y/N] "
+    read ans
+    if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
+        rm -rf "$fx"
+    fi
+}}
+
+# Extract archives
+cmd extract ${{
+    set -f
+    case $f in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
+        *.tar.gz|*.tgz) tar xzvf $f;;
+        *.tar.xz|*.txz) tar xJvf $f;;
+        *.zip) unzip $f;;
+        *.rar) unrar x $f;;
+        *.7z) 7z x $f;;
+    esac
+}}
+
+# Compress current file or selected files with tar and gunzip
+cmd tar ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar czf $1.tar.gz $1
+    rm -rf $1
+}}
+
+# Compress current file or selected files with zip
+cmd zip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    zip -r $1.zip $1
+    rm -rf $1
+}}
+
+# Create directory
+cmd mkdir ${{
+    printf "Directory Name: "
+    read ans
+    mkdir -p "$ans"
+}}
+
+# Create file
+cmd touch ${{
+    printf "File Name: "
+    read ans
+    touch "$ans"
+}}
+
+# Rename file
+cmd rename ${{
+    old="$(basename "$f")"
+    printf "Rename '%s' to: " "$old"
+    read new
+    if [ -n "$new" ] && [ "$new" != "$old" ]; then
+        if [ -e "$new" ]; then
+            printf "File '%s' already exists\n" "$new"
+        else
+            mv "$f" "$new"
+        fi
+    fi
+}}
+
+# Show disk usage
+cmd usage $du -h -d1 | less
+
+# Key bindings
+# Remove defaults
+map m
+map d
+map c
+
+# File operations
+map d trash
+map D delete
+map <enter> open
+map r rename
+map . set hidden!
+map x extract
+
+# Directory operations
+map md mkdir
+map mf touch
+
+# Navigation
+map gh cd ~
+map gd cd ~/Downloads
+map gD cd ~/Documents
+map gp cd ~/Projects
+map gc cd ~/.config
+
+# Git integration
+map gs $lazygit
+
+# Archive
+map az zip
+map at tar
+
+# Show disk usage
+map u usage

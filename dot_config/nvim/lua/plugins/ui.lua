@@ -170,14 +170,6 @@ keymap("n", "[[", function()
 end, { desc = "Prev Reference" })
 
 -- Lualine
-local function show_macro_recording()
-	local recording_register = vim.fn.reg_recording()
-	if recording_register == "" then
-		return ""
-	else
-		return "Recording @" .. recording_register
-	end
-end
 require("lualine").setup({
 	options = {
 		globalstatus = true,
@@ -188,10 +180,6 @@ require("lualine").setup({
 	sections = {
 		lualine_a = {
 			"mode",
-			{
-				"macro-recording",
-				fmt = show_macro_recording,
-			},
 		},
 		lualine_b = { "branch" },
 		lualine_c = {

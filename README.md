@@ -15,6 +15,7 @@ Supports **macOS** (with Aerospace) and **Arch Linux** (with Hyprland).
 ## 🛠️ What's Included
 
 ### Universal Tools
+
 - **Shell**: zsh with zinit, modern CLI tools (eza, bat, fd, ripgrep, zoxide)
 - **Editor**: Neovim with LSP, treesitter, and modern plugins
 - **Terminal**: Kitty with Catppuccin theme
@@ -24,10 +25,12 @@ Supports **macOS** (with Aerospace) and **Arch Linux** (with Hyprland).
 ### Platform-Specific
 
 #### macOS
+
 - **Window Manager**: Aerospace (tiling WM)
 - **Package Manager**: Homebrew
 
 #### Arch Linux
+
 - **Window Manager**: Hyprland (Wayland compositor)
 - **Status Bar**: Waybar
 - **Launcher**: Wofi
@@ -44,6 +47,7 @@ curl -fsSL https://raw.githubusercontent.com/YOUR_USERNAME/dotfiles/main/install
 ```
 
 This will:
+
 1. Detect your OS
 2. Install prerequisites (Homebrew/pacman)
 3. Install chezmoi
@@ -68,33 +72,29 @@ chezmoi update
 ~/.local/share/chezmoi/
 ├── install.sh                          # Bootstrap script
 ├── README.md                           # This file
-├── .chezmoi.toml.tmpl                 # OS detection
+├── .chezmoi.toml.tmpl                  # OS detection
 ├── .chezmoidata/
 │   └── packages.toml                   # Unified package definitions
 │
-├── run_once_before_10-install-paru.sh.tmpl      # Install paru AUR helper (Linux)
-├── run_once_before_20-install-packages.sh.tmpl  # Install all packages
-├── run_once_after_30-setup-shell.sh.tmpl        # Configure shell (zsh, zinit)
-├── run_once_after_40-install-mise-tools.sh.tmpl # Install mise tools (node, pnpm, etc)
-├── run_once_after_50-setup-lazygit-config.sh.tmpl # Setup lazygit symlink (macOS)
+├── run_once_*.sh.tmpl                  # Install helpers
 │
 ├── dot_config/
-│   ├── Brewfile.tmpl                  # macOS packages
-│   ├── packages.txt.tmpl              # Arch official packages
-│   ├── packages-aur.txt.tmpl          # Arch AUR packages
+│   ├── Brewfile.tmpl                   # macOS packages
+│   ├── packages.txt.tmpl               # Arch official packages
+│   ├── packages-aur.txt.tmpl           # Arch AUR packages
 │   │
-│   ├── nvim/                          # Neovim config (universal)
-│   ├── kitty/                         # Kitty terminal (universal)
-│   ├── lazygit/                       # Lazygit config (universal)
-│   ├── mise/                          # Mise config (universal)
+│   ├── nvim/                           # Neovim config (universal)
+│   ├── kitty/                          # Kitty terminal (universal)
+│   ├── lazygit/                        # Lazygit config (universal)
+│   ├── mise/                           # Mise config (universal)
 │   │
-│   ├── aerospace/                     # macOS only
-│   ├── hypr/                          # Linux only (Hyprland)
-│   └── waybar/                        # Linux only
+│   ├── aerospace/                      # macOS only
+│   ├── hypr/                           # Linux only (Hyprland)
+│   └── waybar/                         # Linux only
 │
-├── dot_zshrc.tmpl                     # Shell config
-├── dot_zshenv.tmpl                    # Environment variables
-└── dot_gitconfig                      # Git config
+├── dot_zshrc.tmpl                      # Shell config
+├── dot_zshenv.tmpl                     # Environment variables
+└── dot_gitconfig                       # Git config
 ```
 
 ## 📦 Managing Packages
@@ -180,6 +180,7 @@ chezmoi apply
 ### Change Theme Colors
 
 Edit the Catppuccin color values in:
+
 - Kitty: `dot_config/kitty/kitty.conf`
 - Neovim: `dot_config/nvim/lua/plugins/colorscheme.lua`
 - Hyprland: `dot_config/hypr/hyprland.conf.tmpl`
@@ -198,6 +199,7 @@ Use chezmoi templates:
 ```
 
 Available variables:
+
 - `.is_macos` - true on macOS
 - `.is_linux` - true on Linux
 - `.is_arch` - true on Arch Linux
@@ -209,12 +211,14 @@ Available variables:
 ### Package Installation Fails
 
 **macOS:**
+
 ```bash
 # Re-run Homebrew bundle
 brew bundle --file=~/.config/Brewfile
 ```
 
 **Arch Linux:**
+
 ```bash
 # Update and re-install
 sudo pacman -Syu

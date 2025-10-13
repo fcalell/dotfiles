@@ -1,0 +1,27 @@
+[tools]
+# Node.js - LTS version
+node = "lts"
+
+# pnpm - Latest version
+pnpm = "latest"
+
+# uv - Python package manager
+uv = "latest"
+
+# jq - JSON processor
+jq = "latest"
+
+# yq - YAML processor
+yq="latest"
+
+# Optional: Add specific versions if needed
+# node = "22.0.0"
+# pnpm = "9.0.0"
+# uv = "0.4.0"
+
+[settings]
+# Automatically install missing tools
+auto_install = true
+
+# Use system node if available and matches version
+legacy_version_file = true

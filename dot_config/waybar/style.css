@@ -1,0 +1,71 @@
+/* Waybar Catppuccin Mocha Theme */
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #1e1e2e;
+    color: #cdd6f4;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    color: #cdd6f4;
+    background: transparent;
+}
+
+#workspaces button.active {
+    color: #89b4fa;
+    background: #313244;
+}
+
+#workspaces button:hover {
+    background: #45475a;
+}
+
+#window {
+    margin: 0 10px;
+    color: #cdd6f4;
+}
+
+#cpu,
+#memory,
+#battery,
+#clock {
+    padding: 0 10px;
+    margin: 0 5px;
+    background: #313244;
+    border-radius: 8px;
+}
+
+#cpu {
+    color: #a6e3a1;
+}
+
+#memory {
+    color: #f9e2af;
+}
+
+#battery {
+    color: #89b4fa;
+}
+
+#battery.charging {
+    color: #a6e3a1;
+}
+
+#battery.warning {
+    color: #f9e2af;
+}
+
+#battery.critical {
+    color: #f38ba8;
+}
+
+#clock {
+    color: #cba6f7;
+}

@@ -1,0 +1,20 @@
+{{- $osid := .chezmoi.os -}}
+{{- if hasKey .chezmoi.osRelease "id" -}}
+{{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+
+[data]
+    # OS Detection
+    os = {{ .chezmoi.os | quote }}
+    osid = {{ $osid | quote }}
+
+    # Platform booleans
+    is_macos = {{ eq .chezmoi.os "darwin" }}
+    is_linux = {{ eq .chezmoi.os "linux" }}
+    is_arch = {{ and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "arch") }}
+
+    # Architecture
+    arch = {{ .chezmoi.arch | quote }}
+
+    # Hostname
+    hostname = {{ .chezmoi.hostname | quote }}

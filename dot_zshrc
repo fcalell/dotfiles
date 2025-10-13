@@ -1,0 +1,196 @@
+# ============================================
+# Zinit Installation
+# ============================================
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+# Download Zinit if not present
+if [[ ! -d "$ZINIT_HOME" ]]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Load Zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# ============================================
+# Zinit Plugins
+# ============================================
+
+# Syntax highlighting (must be loaded before autosuggestions)
+zinit light zsh-users/zsh-syntax-highlighting
+
+# Autosuggestions
+zinit light zsh-users/zsh-autosuggestions
+
+# Completions
+zinit light zsh-users/zsh-completions
+
+# History substring search (up/down arrow)
+zinit light zsh-users/zsh-history-substring-search
+
+# Fast directory navigation
+zinit light agkozak/zsh-z
+
+# Load completions
+autoload -Uz compinit && compinit
+
+# Replay cached completions
+zinit cdreplay -q
+
+# ============================================
+# Completion Configuration
+# ============================================
+# Case insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+# Colorize completions using default `ls` colors
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# Enable menu selection
+zstyle ':completion:*' menu select
+
+# Show directories first in completion
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
+
+# Complete . and .. special directories
+zstyle ':completion:*' special-dirs true
+
+# ============================================
+# Keybindings
+# ============================================
+# History search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey '^p' history-substring-search-up
+bindkey '^n' history-substring-search-down
+
+# Tab completion
+bindkey '^I' complete-word  # Tab
+bindkey '^[[Z' reverse-menu-complete  # Shift-Tab
+
+# ============================================
+# History Configuration
+# ============================================
+HISTSIZE=10000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# ============================================
+# Aliases
+# ============================================
+# Modern replacements
+alias ls='eza --color=always --icons=always'
+alias ll='eza -la --color=always --icons=always'
+alias lt='eza --tree --color=always --icons=always'
+alias cat='bat --style=auto'
+
+# Git aliases
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline --graph'
+alias gd='git diff'
+alias gg='lazygit'
+
+# Zoxide (smart cd)
+# alias cd='z'
+
+# Misc
+alias vim='nvim'
+alias vi='nvim'
+alias cl='clear'
+
+# ============================================
+# Utility Functions
+# ============================================
+
+# Quick extract for archives
+extract() {
+  if [ -f "$1" ]; then
+    case "$1" in
+      *.tar.bz2) tar xjf "$1" ;;
+      *.tar.gz) tar xzf "$1" ;;
+      *.zip) unzip "$1" ;;
+      *.tar) tar xf "$1" ;;
+      *) echo "'$1' cannot be extracted" ;;
+    esac
+  fi
+}
+
+# Make directory and cd into it
+mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
+
+# Quick git commit with message
+gcm() {
+  git commit -m "$*"
+}
+
+# ============================================
+# Environment Variables
+# ============================================
+export EDITOR='nvim'
+export VISUAL='nvim'
+export PAGER='bat'
+
+# Use fd for FZF
+export FZF_DEFAULT_COMMAND='fd --hidden --strip-cwd-prefix --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type=d --hidden --strip-cwd-prefix --exclude .git'
+
+# FZF catppuccin theme
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+
+# Show file preview with bat (Ctrl+T)
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+# Show command preview (Ctrl+R for history)
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' --preview-window up:3:hidden:wrap
+  --bind 'ctrl-/:toggle-preview'"
+
+# ============================================
+# Custom Prompt (Catppuccin Mocha colors)
+# ============================================
+# Enable parameter expansion in prompts
+setopt PROMPT_SUBST
+
+# Colors (Catppuccin Mocha)
+local blue="%F{#89b4fa}"
+local green="%F{#a6e3a1}"
+local red="%F{#f38ba8}"
+local reset="%f"
+
+# Simple prompt: directory + arrow
+PROMPT="${blue}%~${reset}
+%(?.${green}.${red})❯${reset} "
+# ============================================
+# Tool Initializations
+# ============================================
+
+# Zoxide (smart cd)
+eval "$(zoxide init zsh)"
+
+# FZF key bindings (Ctrl-T for files, Ctrl-R for history, Alt-C for directories)
+eval "$(fzf --zsh)"
+
+# Mise (version manager)
+eval "$(mise activate zsh)"
+

@@ -1,0 +1,187 @@
+# ============================================
+# Unified Package Definitions
+# ============================================
+# Define packages once, they'll be installed on the appropriate OS
+# Structure:
+#   [packages.category.package_name]
+#   macos.brew = "package-name"       # Standard Homebrew package
+#   macos.cask = "package-name"       # Homebrew Cask (GUI apps)
+#   macos.tap = "tap/package"         # Homebrew Tap
+#   macos.args = ["arg1", "arg2"]     # Optional: Homebrew install arguments
+#   linux.pacman = "package-name"     # Official Arch package
+#   linux.aur = "package-name"        # AUR package (requires paru)
+#
+# Example with args:
+#   [packages.editor.neovim]
+#   macos.brew = "neovim"
+#   macos.args = ["HEAD"]  # Install nightly build from HEAD
+
+# ============================================
+# Core System Tools
+# ============================================
+
+[packages.core.git]
+macos.brew = "git"
+linux.pacman = "git"
+
+[packages.core.curl]
+macos.brew = "curl"
+linux.pacman = "curl"
+
+[packages.core.wget]
+macos.brew = "wget"
+linux.pacman = "wget"
+
+[packages.core.chezmoi]
+macos.brew = "chezmoi"
+linux.pacman = "chezmoi"
+
+# ============================================
+# Shell & Terminal
+# ============================================
+
+[packages.shell.zsh]
+macos.brew = "zsh"
+linux.pacman = "zsh"
+
+[packages.shell.kitty]
+macos.cask = "kitty"
+linux.pacman = "kitty"
+
+# ============================================
+# Fonts
+# ============================================
+
+[packages.fonts.jetbrains-mono-nerd]
+macos.cask = "font-jetbrains-mono-nerd-font"
+linux.pacman = "ttf-jetbrains-mono-nerd"
+
+# ============================================
+# Editor & Development
+# ============================================
+
+[packages.editor.neovim]
+macos.brew = "neovim"
+macos.args = ["HEAD"]  # Install nightly from HEAD
+linux.aur = "neovim-git"
+
+[packages.editor.tmux]
+macos.brew = "tmux"
+linux.pacman = "tmux"
+
+[packages.editor.fzf]
+macos.brew = "fzf"
+linux.pacman = "fzf"
+
+[packages.editor.ripgrep]
+macos.brew = "ripgrep"
+linux.pacman = "ripgrep"
+
+[packages.editor.fd]
+macos.brew = "fd"
+linux.pacman = "fd"
+
+[packages.editor.bat]
+macos.brew = "bat"
+linux.pacman = "bat"
+
+[packages.editor.eza]
+macos.brew = "eza"
+linux.pacman = "eza"
+
+[packages.editor.zoxide]
+macos.brew = "zoxide"
+linux.pacman = "zoxide"
+
+[packages.editor.lf]
+macos.brew = "lf"
+linux.pacman = "lf"
+
+# ============================================
+# Development Tools
+# ============================================
+
+[packages.dev.gh]
+macos.brew = "gh"
+linux.pacman = "github-cli"
+
+[packages.dev.lazygit]
+macos.brew = "lazygit"
+linux.pacman = "lazygit"
+
+[packages.dev.delta]
+macos.brew = "delta"
+linux.pacman = "git-delta"
+
+# ============================================
+# Languages & Version Managers
+# ============================================
+
+[packages.languages.mise]
+macos.brew = "mise"
+linux.aur = "mise-bin"
+
+# ============================================
+# System Utilities
+# ============================================
+
+[packages.utilities.btop]
+macos.brew = "btop"
+linux.pacman = "btop"
+
+[packages.utilities.tree]
+macos.brew = "tree"
+linux.pacman = "tree"
+
+[packages.utilities.tldr]
+macos.brew = "tldr"
+linux.pacman = "tldr"
+
+[packages.utilities.dust]
+macos.brew = "dust"
+linux.pacman = "dust"
+
+[packages.utilities.duf]
+macos.brew = "duf"
+linux.pacman = "duf"
+
+# ============================================
+# macOS-Only Packages
+# ============================================
+
+[packages.macos_only.aerospace]
+macos.tap = "nikitabobko/tap/aerospace"
+
+[packages.macos_only.claude-code]
+macos.cask = "claude-code"
+
+# ============================================
+# Linux-Only Packages
+# ============================================
+
+[packages.linux_only.hyprland]
+linux.pacman = "hyprland"
+
+[packages.linux_only.hyprpaper]
+linux.pacman = "hyprpaper"
+
+[packages.linux_only.waybar]
+linux.pacman = "waybar"
+
+[packages.linux_only.wofi]
+linux.pacman = "wofi"
+
+[packages.linux_only.dunst]
+linux.pacman = "dunst"
+
+[packages.linux_only.xdg-desktop-portal-hyprland]
+linux.pacman = "xdg-desktop-portal-hyprland"
+
+[packages.linux_only.qt5-wayland]
+linux.pacman = "qt5-wayland"
+
+[packages.linux_only.qt6-wayland]
+linux.pacman = "qt6-wayland"
+
+[packages.linux_only.base-devel]
+linux.pacman = "base-devel"

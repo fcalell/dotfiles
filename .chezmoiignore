@@ -1,0 +1,18 @@
+{{- if .is_macos }}
+# Linux-only files (ignore on macOS)
+10-install-paru.sh
+20-install-pacman-packages.sh
+30-setup-shell-linux.sh
+.config/hypr/
+.config/waybar/
+.config/packages.txt
+.config/packages-aur.txt
+{{- end }}
+
+{{- if .is_linux }}
+# macOS-only files (ignore on Linux)
+20-install-homebrew-packages.sh
+50-setup-lazygit-config.sh
+.config/aerospace/
+.config/Brewfile
+{{- end }}

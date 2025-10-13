@@ -1,0 +1,7 @@
+# ============================================
+# Environment Variables & PATH
+# ============================================
+
+# PATH additions
+export UV_TOOL_BIN_DIR="$HOME/.local/bin"
+export PATH="$UV_TOOL_BIN_DIR:$PATH"

@@ -1,0 +1,103 @@
+gui:
+  # Theme
+  theme:
+    activeBorderColor:
+      - "#89b4fa" # Blue
+      - bold
+    inactiveBorderColor:
+      - "#a6adc8" # Overlay0
+    optionsTextColor:
+      - "#89b4fa" # Blue
+    selectedLineBgColor:
+      - "#313244" # Surface0
+    selectedRangeBgColor:
+      - "#313244" # Surface0
+    cherryPickedCommitBgColor:
+      - "#94e2d5" # Teal
+    cherryPickedCommitFgColor:
+      - "#89b4fa" # Blue
+    unstagedChangesColor:
+      - "#f38ba8" # Red
+    defaultFgColor:
+      - "#cdd6f4" # Text
+    searchingActiveBorderColor:
+      - "#f9e2af" # Yellow
+  
+  # Show file icons (requires nerd font)
+  showFileIcons: true
+  
+  # Show branch heads
+  showBranchCommitHash: true
+  
+  # Commit length
+  commitLength:
+    show: true
+  
+  # Mouse support
+  mouseEvents: true
+  
+  # Skip stash warning
+  skipStashWarning: false
+  
+  # Show bottom line
+  showBottomLine: true
+  
+  # Show command log
+  showCommandLog: false
+  
+  # Show file tree
+  showFileTree: true
+  
+  # Command log size
+  commandLogSize: 8
+  
+  # Split diff
+  splitDiff: "auto"
+  
+  # Border style
+  border: "rounded"
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+  
+  commit:
+    signOff: false
+  
+  merging:
+    # Only merge when fast-forward
+    manualCommit: false
+    args: ""
+  
+  skipHookPrefix: WIP
+  
+  # Auto-fetch interval (seconds)
+  autoFetch: true
+  autoRefresh: true
+  
+  branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --"
+  
+  overrideGpg: false
+  
+  disableForcePushing: false
+  
+  parseEmoji: true
+
+os:
+  editCommand: 'nvim'
+  editCommandTemplate: '{{editor}} {{filename}}'
+  openCommand: 'open {{filename}}'
+
+refresher:
+  refreshInterval: 10
+  fetchInterval: 60
+
+update:
+  method: prompt
+
+confirmOnQuit: false
+
+notARepository: 'prompt'
+
+promptToReturnFromSubprocess: true

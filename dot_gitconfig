@@ -1,0 +1,48 @@
+[user]
+	name = fcalell
+	email = frankie.calella@gmail.com
+
+[core]
+	editor = nvim
+	pager = delta
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	line-numbers = true
+	syntax-theme = Catppuccin-mocha
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
+
+[rerere]
+	enabled = true
+	autoUpdate = true
+
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	ci = commit
+	lg = log --oneline --graph --decorate --all
+	last = log -1 HEAD
+	unstage = reset HEAD --
+	amend = commit --amend
+	undo = reset HEAD~1 --mixed
+	amend-ne = commit --amend --no-edit
+	files = diff-tree --no-commit-id --name-only -r HEAD
+	aliases = config --get-regexp alias

@@ -1,0 +1,13 @@
+# Chezmoi state
+.chezmoi.toml
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/

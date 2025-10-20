@@ -254,7 +254,10 @@ linux.pacman = "hyprpolkitagent"
 linux.pacman = "waybar"
 
 [walker]
-linux.aur = "walker"
+linux.aur = "walker-bin"
+
+[elephant]
+linux.aur = "elephant"
 
 [dunst]
 linux.pacman = "dunst"
@@ -285,9 +288,6 @@ linux.pacman = "greetd"
 
 [greetd-tuigreet]
 linux.pacman = "greetd-tuigreet"
-
-[uwsm]
-linux.pacman = "uwsm"
 
 [wofi]
 linux.pacman = "wofi"

@@ -56,6 +56,10 @@ linux.pacman = "kitty"
 macos.cask = "font-jetbrains-mono-nerd-font"
 linux.pacman = "ttf-jetbrains-mono-nerd"
 
+[packages.fonts.noto-fonts-emoji]
+macos.cask = "font-noto-emoji"
+linux.pacman = "noto-fonts-emoji"
+
 # ============================================
 # Editor & Development
 # ============================================
@@ -113,6 +117,10 @@ linux.pacman = "lazygit"
 macos.brew = "delta"
 linux.pacman = "git-delta"
 
+[packages.dev.claude-code]
+macos.cask = "claude-code"
+linux.aur = "claude-code"
+
 # ============================================
 # Languages & Version Managers
 # ============================================
@@ -146,14 +154,17 @@ macos.brew = "duf"
 linux.pacman = "duf"
 
 # ============================================
+# Browser
+# ============================================
+[packages.browsers.chrome]
+linux.aur = "google-chrome"
+
+# ============================================
 # macOS-Only Packages
 # ============================================
 
 [packages.macos_only.aerospace]
 macos.tap = "nikitabobko/tap/aerospace"
-
-[packages.macos_only.claude-code]
-macos.cask = "claude-code"
 
 # ============================================
 # Linux-Only Packages
@@ -168,8 +179,8 @@ linux.pacman = "hyprpaper"
 [packages.linux_only.waybar]
 linux.pacman = "waybar"
 
-[packages.linux_only.wofi]
-linux.pacman = "wofi"
+[packages.linux_only.hyprlauncher]
+linux.pacman = "hyprlauncher"
 
 [packages.linux_only.dunst]
 linux.pacman = "dunst"

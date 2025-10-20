@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Install packages via pacman (Arch Linux official repositories)
+# {{ include "dot_config/packages-pacman.txt.tmpl" | sha256sum }}
 
 set -euo pipefail
 
@@ -20,7 +21,7 @@ sudo pacman -Sy
 mapfile -t pacman_packages < <(grep -v '^$' "$PACKAGE_LIST")
 
 if [ ${#pacman_packages[@]} -gt 0 ]; then
-  sudo pacman -S --needed --noconfirm "${pacman_packages[@]}"
+  sudo pacman -S --needed "${pacman_packages[@]}"
   echo "✓ Official packages installed (${#pacman_packages[@]} packages)"
 else
   echo "No pacman packages to install"

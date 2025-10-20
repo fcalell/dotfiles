@@ -244,6 +244,13 @@ macos.tap = "nikitabobko/tap/aerospace"
 # Linux-Only Packages
 # ============================================
 
+# Themes
+[catppuccin-gtk]
+linux.aur = "catppuccin-gtk-theme-mocha"
+
+[papirus-icon-theme]
+linux.pacman = "papirus-icon-theme"
+
 [hyprland]
 linux.pacman = "hyprland"
 
@@ -272,7 +279,7 @@ linux.aur = "elephant"
 linux.pacman = "dunst"
 
 [wlogout]
-linux.pacman = "wlogout"
+linux.aur = "wlogout"
 
 [xdg-desktop-portal-hyprland]
 linux.pacman = "xdg-desktop-portal-hyprland"

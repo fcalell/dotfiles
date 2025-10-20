@@ -16,11 +16,13 @@ button {
   color: #cdd6f4;
   background-color: #1e1e2e;
   border: 2px solid #45475a;
-  border-radius: 16px;
+  border-radius: 12px;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 30%;
-  margin: 16px;
+  background-size: 48px;
+  margin: 10px;
+  min-width: 120px;
+  min-height: 120px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

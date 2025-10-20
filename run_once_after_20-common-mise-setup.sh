@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Install mise-managed tools (Node.js, pnpm, uv, etc.)
 
-set -e
+set -euo pipefail
 
 echo "📦 Installing mise tools..."
 

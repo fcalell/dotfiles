@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Install packages via Homebrew (macOS only)
 
-set -e
+set -euo pipefail
 
 echo "🍺 Installing packages via Homebrew..."
 

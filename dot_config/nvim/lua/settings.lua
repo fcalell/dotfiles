@@ -28,6 +28,7 @@ opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.showmode = false
 opt.cmdheight = 1
+vim.o.winborder = "rounded"
 
 -- Behavior
 opt.mouse = "a"

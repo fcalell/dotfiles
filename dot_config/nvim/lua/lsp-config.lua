@@ -23,17 +23,6 @@ require("mason-tool-installer").setup({
 	},
 })
 
--- Customize LSP floating windows
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-  vim.lsp.handlers.hover,
-  { border = 'rounded' }
-)
-
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-  vim.lsp.handlers.signature_help,
-  { border = 'rounded' }
-)
-
 -- On LSP attach
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("fcalell-lsp-attach", { clear = true }),
@@ -46,8 +35,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
 		map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
 		map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code Rename" })
-		map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
-		map("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
 		-- Autocomplete
 		--local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
 		--if (client:supports_method('textDocument/completion')) then
@@ -76,6 +63,19 @@ vim.lsp.config("lua_ls", {
 				enable = false,
 			},
 		},
+	},
+})
+
+-- Biome - exclude CSS files (doesn't support Tailwind v4 directives)
+vim.lsp.config("biome", {
+	filetypes = {
+		"javascript",
+		"javascriptreact",
+		"json",
+		"jsonc",
+		"typescript",
+		"typescriptreact",
+		-- Explicitly exclude CSS from Biome LSP
 	},
 })
 

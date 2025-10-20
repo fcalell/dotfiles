@@ -3,7 +3,7 @@
 
 set -euo pipefail
 
-echo "📦 Installing mise tools..."
+echo "Installing mise tools..."
 
 # Check if mise is available
 if ! command -v mise &>/dev/null; then

@@ -9,5 +9,6 @@ if command -v hyprland &>/dev/null; then
     systemctl --user enable --now pipewire.service || echo "⚠ Failed to enable pipewire.service"
     systemctl --user enable --now pipewire-pulse.service || echo "⚠ Failed to enable pipewire-pulse.service"
     systemctl --user enable --now wireplumber.service || echo "⚠ Failed to enable wireplumber.service"
+    systemctl --user enable --now hyprpolkitagent.service || echo "⚠ Failed to enable hyprpolkitagent.service"
     echo "✓ Systemd services setup complete"
 fi

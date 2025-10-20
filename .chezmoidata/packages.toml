@@ -3,7 +3,7 @@
 # ============================================
 # Define packages once, they'll be installed on the appropriate OS
 # Structure:
-#   [packages.category.package_name]
+#   [package_name]
 #   macos.brew = "package-name"       # Standard Homebrew package
 #   macos.cask = "package-name"       # Homebrew Cask (GUI apps)
 #   macos.tap = "tap/package"         # Homebrew Tap
@@ -12,7 +12,7 @@
 #   linux.aur = "package-name"        # AUR package (requires paru)
 #
 # Example with args:
-#   [packages.editor.neovim]
+#   [neovim]
 #   macos.brew = "neovim"
 #   macos.args = ["HEAD"]  # Install nightly build from HEAD
 
@@ -20,19 +20,19 @@
 # Core System Tools
 # ============================================
 
-[packages.core.git]
+[git]
 macos.brew = "git"
 linux.pacman = "git"
 
-[packages.core.curl]
+[curl]
 macos.brew = "curl"
 linux.pacman = "curl"
 
-[packages.core.wget]
+[wget]
 macos.brew = "wget"
 linux.pacman = "wget"
 
-[packages.core.chezmoi]
+[chezmoi]
 macos.brew = "chezmoi"
 linux.pacman = "chezmoi"
 
@@ -40,11 +40,11 @@ linux.pacman = "chezmoi"
 # Shell & Terminal
 # ============================================
 
-[packages.shell.zsh]
+[zsh]
 macos.brew = "zsh"
 linux.pacman = "zsh"
 
-[packages.shell.kitty]
+[kitty]
 macos.cask = "kitty"
 linux.pacman = "kitty"
 
@@ -52,11 +52,11 @@ linux.pacman = "kitty"
 # Fonts
 # ============================================
 
-[packages.fonts.jetbrains-mono-nerd]
+[jetbrains-mono-nerd]
 macos.cask = "font-jetbrains-mono-nerd-font"
 linux.pacman = "ttf-jetbrains-mono-nerd"
 
-[packages.fonts.noto-fonts-emoji]
+[noto-fonts-emoji]
 macos.cask = "font-noto-emoji"
 linux.pacman = "noto-fonts-emoji"
 
@@ -64,40 +64,40 @@ linux.pacman = "noto-fonts-emoji"
 # Editor & Development
 # ============================================
 
-[packages.editor.neovim]
+[neovim]
 macos.brew = "neovim"
 macos.args = ["HEAD"]  # Install nightly from HEAD
 linux.aur = "neovim-git"
 
-[packages.editor.tmux]
+[tmux]
 macos.brew = "tmux"
 linux.pacman = "tmux"
 
-[packages.editor.fzf]
+[fzf]
 macos.brew = "fzf"
 linux.pacman = "fzf"
 
-[packages.editor.ripgrep]
+[ripgrep]
 macos.brew = "ripgrep"
 linux.pacman = "ripgrep"
 
-[packages.editor.fd]
+[fd]
 macos.brew = "fd"
 linux.pacman = "fd"
 
-[packages.editor.bat]
+[bat]
 macos.brew = "bat"
 linux.pacman = "bat"
 
-[packages.editor.eza]
+[eza]
 macos.brew = "eza"
 linux.pacman = "eza"
 
-[packages.editor.zoxide]
+[zoxide]
 macos.brew = "zoxide"
 linux.pacman = "zoxide"
 
-[packages.editor.lf]
+[lf]
 macos.brew = "lf"
 linux.pacman = "lf"
 
@@ -105,19 +105,19 @@ linux.pacman = "lf"
 # Development Tools
 # ============================================
 
-[packages.dev.gh]
+[gh]
 macos.brew = "gh"
 linux.pacman = "github-cli"
 
-[packages.dev.lazygit]
+[lazygit]
 macos.brew = "lazygit"
 linux.pacman = "lazygit"
 
-[packages.dev.delta]
+[delta]
 macos.brew = "delta"
 linux.pacman = "git-delta"
 
-[packages.dev.claude-code]
+[claude-code]
 macos.cask = "claude-code"
 linux.aur = "claude-code"
 
@@ -125,7 +125,7 @@ linux.aur = "claude-code"
 # Languages & Version Managers
 # ============================================
 
-[packages.languages.mise]
+[mise]
 macos.brew = "mise"
 linux.pacman = "mise"
 
@@ -133,66 +133,69 @@ linux.pacman = "mise"
 # System Utilities
 # ============================================
 
-[packages.utilities.btop]
+[btop]
 macos.brew = "btop"
 linux.pacman = "btop"
 
-[packages.utilities.tree]
+[tree]
 macos.brew = "tree"
 linux.pacman = "tree"
 
-[packages.utilities.tldr]
+[tldr]
 macos.brew = "tldr"
 linux.pacman = "tldr"
 
-[packages.utilities.dust]
+[dust]
 macos.brew = "dust"
 linux.pacman = "dust"
 
-[packages.utilities.duf]
+[duf]
 macos.brew = "duf"
 linux.pacman = "duf"
 
 # ============================================
 # Browser
 # ============================================
-[packages.browsers.chrome]
+[chrome]
 linux.aur = "google-chrome"
 
 # ============================================
 # macOS-Only Packages
 # ============================================
 
-[packages.macos_only.aerospace]
+[aerospace]
 macos.tap = "nikitabobko/tap/aerospace"
 
 # ============================================
 # Linux-Only Packages
 # ============================================
 
-[packages.linux_only.hyprland]
+[hyprland]
 linux.pacman = "hyprland"
 
-[packages.linux_only.hyprpaper]
+[hyprpaper]
 linux.pacman = "hyprpaper"
 
-[packages.linux_only.waybar]
+[hyprpolkitagent]
+linux.pacman = "hyprpolkitagent"
+
+[waybar]
 linux.pacman = "waybar"
 
-[packages.linux_only.hyprlauncher]
+[hyprlauncher]
 linux.pacman = "hyprlauncher"
 
-[packages.linux_only.dunst]
+[dunst]
 linux.pacman = "dunst"
 
-[packages.linux_only.xdg-desktop-portal-hyprland]
+[xdg-desktop-portal-hyprland]
 linux.pacman = "xdg-desktop-portal-hyprland"
 
-[packages.linux_only.qt5-wayland]
+[qt5-wayland]
 linux.pacman = "qt5-wayland"
 
-[packages.linux_only.qt6-wayland]
+[qt6-wayland]
 linux.pacman = "qt6-wayland"
 
-[packages.linux_only.base-devel]
+[base-devel]
 linux.pacman = "base-devel"

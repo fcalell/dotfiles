@@ -119,7 +119,7 @@ linux.pacman = "git-delta"
 
 [packages.languages.mise]
 macos.brew = "mise"
-linux.aur = "mise-bin"
+linux.pacman = "mise"
 
 # ============================================
 # System Utilities

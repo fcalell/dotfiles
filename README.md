@@ -43,7 +43,7 @@ Supports **macOS** (with Aerospace) and **Arch Linux** (with Hyprland).
 Run this single command on a fresh macOS or Arch Linux install:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/YOUR_USERNAME/dotfiles/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/YOUR_USERNAME/dotfiles/master/install.sh | bash
 ```
 
 This will:

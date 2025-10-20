@@ -20,6 +20,21 @@
 # Core System Tools
 # ============================================
 
+[base]
+linux.pacman = "base"
+
+[linux]
+linux.pacman = "linux"
+
+[linux-firmware]
+linux.pacman = "linux-firmware"
+
+[amd-ucode]
+linux.pacman = "amd-ucode"
+
+[efibootmgr]
+linux.pacman = "efibootmgr"
+
 [git]
 macos.brew = "git"
 linux.pacman = "git"
@@ -35,6 +50,12 @@ linux.pacman = "wget"
 [chezmoi]
 macos.brew = "chezmoi"
 linux.pacman = "chezmoi"
+
+[openssh]
+linux.pacman = "openssh"
+
+[vim]
+linux.pacman = "vim"
 
 # ============================================
 # Shell & Terminal
@@ -153,6 +174,56 @@ linux.pacman = "dust"
 macos.brew = "duf"
 linux.pacman = "duf"
 
+[smartmontools]
+linux.pacman = "smartmontools"
+
+[xdg-utils]
+linux.pacman = "xdg-utils"
+
+# ============================================
+# Audio
+# ============================================
+
+[pipewire]
+linux.pacman = "pipewire"
+
+[pipewire-alsa]
+linux.pacman = "pipewire-alsa"
+
+[pipewire-jack]
+linux.pacman = "pipewire-jack"
+
+[pipewire-pulse]
+linux.pacman = "pipewire-pulse"
+
+[wireplumber]
+linux.pacman = "wireplumber"
+
+[libpulse]
+linux.pacman = "libpulse"
+
+[gst-plugin-pipewire]
+linux.pacman = "gst-plugin-pipewire"
+
+# ============================================
+# Hardware/Graphics
+# ============================================
+
+[vulkan-radeon]
+linux.pacman = "vulkan-radeon"
+
+[xf86-video-amdgpu]
+linux.pacman = "xf86-video-amdgpu"
+
+[xf86-video-ati]
+linux.pacman = "xf86-video-ati"
+
+[xorg-server]
+linux.pacman = "xorg-server"
+
+[xorg-xinit]
+linux.pacman = "xorg-xinit"
+
 # ============================================
 # Browser
 # ============================================
@@ -182,8 +253,8 @@ linux.pacman = "hyprpolkitagent"
 [waybar]
 linux.pacman = "waybar"
 
-[hyprlauncher]
-linux.pacman = "hyprlauncher"
+[walker]
+linux.aur = "walker"
 
 [dunst]
 linux.pacman = "dunst"
@@ -199,3 +270,33 @@ linux.pacman = "qt6-wayland"
 
 [base-devel]
 linux.pacman = "base-devel"
+
+[grim]
+linux.pacman = "grim"
+
+[grimblast]
+linux.aur = "grimblast-git"
+
+[slurp]
+linux.pacman = "slurp"
+
+[greetd]
+linux.pacman = "greetd"
+
+[greetd-tuigreet]
+linux.pacman = "greetd-tuigreet"
+
+[uwsm]
+linux.pacman = "uwsm"
+
+[wofi]
+linux.pacman = "wofi"
+
+[dolphin]
+linux.pacman = "dolphin"
+
+[polkit-kde-agent]
+linux.pacman = "polkit-kde-agent"
+
+[zram-generator]
+linux.pacman = "zram-generator"

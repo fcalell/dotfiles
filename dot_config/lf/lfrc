@@ -92,18 +92,9 @@ cmd touch ${{
     touch "$ans"
 }}
 
-# Rename file
-cmd rename ${{
-    old="$(basename "$f")"
-    printf "Rename '%s' to: " "$old"
-    read new
-    if [ -n "$new" ] && [ "$new" != "$old" ]; then
-        if [ -e "$new" ]; then
-            printf "File '%s' already exists\n" "$new"
-        else
-            mv "$f" "$new"
-        fi
-    fi
+# Rename file with pre-filled name
+cmd rename %{{
+    lf -remote "send $id push :rename<space>$(basename "$f")<a-b><c-b>"
 }}
 
 # Show disk usage
@@ -121,7 +112,8 @@ map D delete
 map <enter> open
 map r rename
 map . set hidden!
-map x extract
+map x cut
+map p paste
 
 # Directory operations
 map md mkdir

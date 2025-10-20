@@ -1,0 +1,13 @@
+README.md
+SETUP.md
+
+{{- if .is_macos }}
+.chezmoiscripts/run_onchange_after_11-linux-setup-systemd.sh
+.config/hypr/
+.config/waybar/
+{{- end }}
+
+{{- if .is_linux }}
+.chezmoiscripts/run_once_after_30-macos-lazygit-config.sh
+.config/aerospace/
+{{- end }}

@@ -1,71 +1,113 @@
-/* Waybar Catppuccin Mocha Theme */
+/* Waybar Catppuccin Mocha Floating Buttons Theme */
 * {
-    border: none;
-    border-radius: 0;
-    font-family: "JetBrainsMono Nerd Font";
-    font-size: 13px;
-    min-height: 0;
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
+  font-size: 14px;
+  font-weight: 600;
+  min-height: 0;
 }
 
 window#waybar {
-    background: #1e1e2e;
-    color: #cdd6f4;
+  background: transparent;
+  color: #cdd6f4;
+}
+
+/* Floating button base style */
+#workspaces,
+#clock,
+#tray,
+#custom-power,
+#pulseaudio {
+  background: #1e1e2e;
+  border-radius: 12px;
+  padding: 0px 14px;
+  margin: 5px 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Workspaces */
+#workspaces {
+  padding: 0px 6px;
 }
 
 #workspaces button {
-    padding: 0 10px;
-    color: #cdd6f4;
-    background: transparent;
+  padding: 0px 10px;
+  margin: 4px 3px;
+  color: #6c7086;
+  background: transparent;
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #workspaces button.active {
-    color: #89b4fa;
-    background: #313244;
+  color: #1e1e2e;
+  background: linear-gradient(135deg, #89b4fa 0%, #74c7ec 100%);
+  box-shadow: 0 0 3px rgba(137, 180, 250, 0.9);
+  min-width: 35px;
 }
 
 #workspaces button:hover {
-    background: #45475a;
+  background: #313244;
+  color: #cdd6f4;
+  box-shadow: 0 0 2px rgba(49, 50, 68, 1);
 }
 
-#window {
-    margin: 0 10px;
-    color: #cdd6f4;
-}
-
-#cpu,
-#memory,
-#battery,
+/* Clock */
 #clock {
-    padding: 0 10px;
-    margin: 0 5px;
-    background: #313244;
-    border-radius: 8px;
+  color: #cba6f7;
+  font-weight: 700;
+  padding: 0px 18px;
+  background: linear-gradient(135deg, #1e1e2e 0%, #313244 100%);
+  border: 2px solid #45475a;
 }
 
-#cpu {
-    color: #a6e3a1;
+#clock:hover {
+  background: linear-gradient(135deg, #313244 0%, #45475a 100%);
+  border-color: #585b70;
 }
 
-#memory {
-    color: #f9e2af;
+/* System Tray */
+#tray {
+  padding: 0px 12px;
 }
 
-#battery {
-    color: #89b4fa;
+#tray > .passive {
+  -gtk-icon-effect: dim;
 }
 
-#battery.charging {
-    color: #a6e3a1;
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: #f38ba8;
 }
 
-#battery.warning {
-    color: #f9e2af;
+/* Power Button */
+#custom-power {
+  color: #f38ba8;
+  font-size: 18px;
+  padding: 0px 14px;
+  background: #1e1e2e;
+  border: 2px solid #45475a;
 }
 
-#battery.critical {
-    color: #f38ba8;
+#custom-power:hover {
+  background: #f38ba8;
+  color: #1e1e2e;
+  box-shadow: 0 0 3px rgba(243, 139, 168, 1);
 }
 
-#clock {
-    color: #cba6f7;
+/* Audio */
+#pulseaudio {
+  color: #89dceb;
+  padding: 0px 14px;
+}
+
+#pulseaudio:hover {
+  background: #313244;
+  box-shadow: 0 0 3px rgba(137, 220, 235, 0.8);
+}
+
+#pulseaudio.muted {
+  color: #6c7086;
+  background: #1e1e2e;
 }

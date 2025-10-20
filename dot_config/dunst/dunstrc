@@ -1,0 +1,135 @@
+# Dunst Configuration - Catppuccin Mocha Theme
+
+[global]
+    # Display
+    monitor = 0
+    follow = mouse
+
+    # Geometry
+    width = (300, 400)
+    height = 300
+    origin = top-right
+    offset = 20x50
+    scale = 0
+    notification_limit = 3
+
+    # Progress bar
+    progress_bar = true
+    progress_bar_height = 10
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 150
+    progress_bar_max_width = 300
+    progress_bar_corner_radius = 5
+
+    # Style
+    padding = 12
+    horizontal_padding = 12
+    text_icon_padding = 12
+    frame_width = 2
+    gap_size = 6
+    separator_height = 2
+    separator_color = frame
+    sort = yes
+
+    # Text
+    font = JetBrainsMono Nerd Font 11
+    line_height = 0
+    markup = full
+    format = "<b>%s</b>\n%b"
+    alignment = left
+    vertical_alignment = center
+    show_age_threshold = 60
+    ellipsize = middle
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = yes
+
+    # Icons
+    enable_recursive_icon_lookup = true
+    icon_theme = Papirus-Dark
+    icon_position = left
+    min_icon_size = 32
+    max_icon_size = 48
+    icon_corner_radius = 8
+
+    # History
+    sticky_history = yes
+    history_length = 20
+
+    # Misc/Advanced
+    dmenu = /usr/bin/walker --dmenu
+    browser = /usr/bin/xdg-open
+    always_run_script = true
+    title = Dunst
+    class = Dunst
+    corner_radius = 12
+    ignore_dbusclose = false
+    force_xwayland = false
+    force_xinerama = false
+
+    # Mouse
+    mouse_left_click = do_action, close_current
+    mouse_middle_click = close_current
+    mouse_right_click = close_all
+
+# Catppuccin Mocha Colors
+[urgency_low]
+    background = "#1e1e2e"
+    foreground = "#cdd6f4"
+    frame_color = "#89b4fa"
+    timeout = 5
+    default_icon = /usr/share/icons/Papirus-Dark/symbolic/status/dialog-information-symbolic.svg
+
+[urgency_normal]
+    background = "#1e1e2e"
+    foreground = "#cdd6f4"
+    frame_color = "#89b4fa"
+    timeout = 10
+    override_pause_level = 30
+    default_icon = /usr/share/icons/Papirus-Dark/symbolic/status/dialog-information-symbolic.svg
+
+[urgency_critical]
+    background = "#1e1e2e"
+    foreground = "#cdd6f4"
+    frame_color = "#f38ba8"
+    timeout = 0
+    override_pause_level = 60
+    default_icon = /usr/share/icons/Papirus-Dark/symbolic/status/dialog-warning-symbolic.svg
+
+# Application-specific rules for better colors
+[spotify]
+    appname = Spotify
+    frame_color = "#a6e3a1"
+
+[discord]
+    appname = discord
+    frame_color = "#89b4fa"
+
+[volume]
+    summary = "Volume"
+    frame_color = "#89dceb"
+    set_stack_tag = volume
+
+[brightness]
+    summary = "Brightness"
+    frame_color = "#f9e2af"
+    set_stack_tag = brightness
+
+[battery]
+    appname = "Power"
+    frame_color = "#f9e2af"
+
+[battery_critical]
+    summary = "*battery*"
+    summary = "*power*"
+    frame_color = "#f38ba8"
+    timeout = 0
+
+[screenshot]
+    appname = "screenshot"
+    frame_color = "#cba6f7"
+
+[network]
+    appname = "NetworkManager"
+    frame_color = "#94e2d5"

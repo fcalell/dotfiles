@@ -1,0 +1,62 @@
+{
+  "placeholder": "Search...",
+  "terminal": "kitty",
+  "fullscreen": false,
+  "ignore_mouse": false,
+  "type_to_search": true,
+  "prefix": "",
+  "search": {
+    "delay": 100,
+    "placeholder": "Search..."
+  },
+  "list": {
+    "height": 500,
+    "always_show": true,
+    "hide_sub": false,
+    "max_entries": 8
+  },
+  "modules": [
+    {
+      "name": "applications",
+      "prefix": ""
+    },
+    {
+      "name": "runner",
+      "prefix": ">"
+    },
+    {
+      "name": "websearch",
+      "prefix": "?",
+      "url": "https://www.google.com/search?q=%s"
+    },
+    {
+      "name": "clipboard",
+      "prefix": "="
+    }
+  ],
+  "clipboard": {
+    "max_entries": 15,
+    "image_height": 200
+  },
+  "icons": {
+    "size": 28,
+    "theme": "Papirus-Dark",
+    "hide": false,
+    "image_height": 200
+  },
+  "activation_mode": {
+    "disabled": false,
+    "use_alt": true,
+    "labels": [
+      "a",
+      "s",
+      "d",
+      "f",
+      "g",
+      "h",
+      "j",
+      "k",
+      "l"
+    ]
+  }
+}

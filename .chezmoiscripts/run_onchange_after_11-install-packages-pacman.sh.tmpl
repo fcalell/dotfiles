@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Install packages via pacman (Arch Linux official repositories)
+
+set -euo pipefail
+
+{{ if eq .chezmoi.os "linux" -}}
+echo "Installing packages via pacman..."
+
+PACKAGE_LIST="$HOME/.config/packages-pacman.txt"
+
+if [ ! -f "$PACKAGE_LIST" ]; then
+  echo "⚠ Package list not found: $PACKAGE_LIST"
+  exit 1
+fi
+
+# Update package database
+sudo pacman -Sy
+
+# Read packages from file into array, filtering out empty lines
+mapfile -t pacman_packages < <(grep -v '^$' "$PACKAGE_LIST")
+
+if [ ${#pacman_packages[@]} -gt 0 ]; then
+  sudo pacman -S --needed --noconfirm "${pacman_packages[@]}"
+  echo "✓ Official packages installed (${#pacman_packages[@]} packages)"
+else
+  echo "No pacman packages to install"
+fi
+{{ else -}}
+echo "Skipping pacman installation (not on Linux)"
+{{ end -}}

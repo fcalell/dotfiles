@@ -1,0 +1,103 @@
+/* Wlogout Catppuccin Mocha Theme */
+
+* {
+  background-image: none;
+  box-shadow: none;
+  font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
+  font-size: 16px;
+  font-weight: 600;
+}
+
+window {
+  background-color: rgba(30, 30, 46, 0.95);
+}
+
+button {
+  color: #cdd6f4;
+  background-color: #1e1e2e;
+  border: 2px solid #45475a;
+  border-radius: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 30%;
+  margin: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:focus,
+button:active {
+  background-color: #313244;
+  outline-style: none;
+}
+
+button:hover {
+  background-color: #313244;
+  border-color: #585b70;
+  box-shadow: 0 0 8px rgba(205, 214, 244, 0.3);
+}
+
+#lock {
+  background-image: image(url("/usr/share/wlogout/icons/lock.png"));
+  border-color: #f9e2af;
+}
+
+#lock:hover {
+  background-color: #313244;
+  border-color: #f9e2af;
+  box-shadow: 0 0 12px rgba(249, 226, 175, 0.6);
+}
+
+#logout {
+  background-image: image(url("/usr/share/wlogout/icons/logout.png"));
+  border-color: #89b4fa;
+}
+
+#logout:hover {
+  background-color: #313244;
+  border-color: #89b4fa;
+  box-shadow: 0 0 12px rgba(137, 180, 250, 0.6);
+}
+
+#suspend {
+  background-image: image(url("/usr/share/wlogout/icons/suspend.png"));
+  border-color: #94e2d5;
+}
+
+#suspend:hover {
+  background-color: #313244;
+  border-color: #94e2d5;
+  box-shadow: 0 0 12px rgba(148, 226, 213, 0.6);
+}
+
+#hibernate {
+  background-image: image(url("/usr/share/wlogout/icons/hibernate.png"));
+  border-color: #cba6f7;
+}
+
+#hibernate:hover {
+  background-color: #313244;
+  border-color: #cba6f7;
+  box-shadow: 0 0 12px rgba(203, 166, 247, 0.6);
+}
+
+#shutdown {
+  background-image: image(url("/usr/share/wlogout/icons/shutdown.png"));
+  border-color: #f38ba8;
+}
+
+#shutdown:hover {
+  background-color: #313244;
+  border-color: #f38ba8;
+  box-shadow: 0 0 12px rgba(243, 139, 168, 0.6);
+}
+
+#reboot {
+  background-image: image(url("/usr/share/wlogout/icons/reboot.png"));
+  border-color: #a6e3a1;
+}
+
+#reboot:hover {
+  background-color: #313244;
+  border-color: #a6e3a1;
+  box-shadow: 0 0 12px rgba(166, 227, 161, 0.6);
+}

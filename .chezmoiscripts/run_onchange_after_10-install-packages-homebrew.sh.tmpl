@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Install packages via Homebrew (macOS)
+
+set -euo pipefail
+
+{{ if eq .chezmoi.os "darwin" -}}
+echo "Installing packages via Homebrew..."
+
+PACKAGE_LIST="$HOME/.config/packages-homebrew.txt"
+
+if [ ! -f "$PACKAGE_LIST" ]; then
+  echo "⚠ Package list not found: $PACKAGE_LIST"
+  exit 1
+fi
+
+# Install packages using brew bundle
+brew bundle --no-lock --file="$PACKAGE_LIST"
+
+echo "✓ Homebrew packages installed"
+{{ else -}}
+echo "Skipping Homebrew installation (not on macOS)"
+{{ end -}}

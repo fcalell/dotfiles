@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Install packages via paru (Arch Linux AUR)
+
+set -euo pipefail
+
+{{ if eq .chezmoi.os "linux" -}}
+# Check if paru is installed
+if ! command -v paru &>/dev/null; then
+  echo "⚠ paru not found - skipping AUR packages"
+  echo "  Install paru first to enable AUR package installation"
+  exit 0
+fi
+
+echo "Installing AUR packages via paru..."
+
+PACKAGE_LIST="$HOME/.config/packages-aur.txt"
+
+if [ ! -f "$PACKAGE_LIST" ]; then
+  echo "⚠ Package list not found: $PACKAGE_LIST"
+  exit 1
+fi
+
+# Read packages from file into array, filtering out empty lines
+mapfile -t aur_packages < <(grep -v '^$' "$PACKAGE_LIST")
+
+if [ ${#aur_packages[@]} -gt 0 ]; then
+  paru -S --needed --noconfirm "${aur_packages[@]}"
+  echo "✓ AUR packages installed (${#aur_packages[@]} packages)"
+else
+  echo "No AUR packages to install"
+fi
+{{ else -}}
+echo "Skipping AUR installation (not on Linux)"
+{{ end -}}

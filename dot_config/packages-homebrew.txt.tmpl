@@ -1,0 +1,14 @@
+{{- range $name, $pkg := . -}}
+{{- if kindIs "map" $pkg -}}
+{{- if hasKey $pkg "macos" -}}
+{{- if hasKey $pkg.macos "tap" -}}
+{{- $tapParts := splitList "/" $pkg.macos.tap -}}
+tap {{ index $tapParts 0 }}/{{ index $tapParts 1 }}
+{{ else if hasKey $pkg.macos "brew" -}}
+brew {{ $pkg.macos.brew }}{{- if hasKey $pkg.macos "args" }}, args: {{ $pkg.macos.args | toJson }}{{- end }}
+{{ else if hasKey $pkg.macos "cask" -}}
+cask {{ $pkg.macos.cask }}{{- if hasKey $pkg.macos "args" }}, args: {{ $pkg.macos.args | toJson }}{{- end }}
+{{ end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}

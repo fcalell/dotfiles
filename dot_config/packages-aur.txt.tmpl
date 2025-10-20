@@ -1,0 +1,9 @@
+{{- range $name, $pkg := . -}}
+{{- if kindIs "map" $pkg -}}
+{{- if hasKey $pkg "linux" -}}
+{{- if hasKey $pkg.linux "aur" -}}
+{{ $pkg.linux.aur }}
+{{ end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}

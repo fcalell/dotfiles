@@ -88,7 +88,7 @@ linux.pacman = "noto-fonts-emoji"
 [neovim]
 macos.brew = "neovim"
 macos.args = ["HEAD"]  # Install nightly from HEAD
-linux.aur = "neovim-git"
+linux.aur = "neovim-nightly-bin"
 
 [tmux]
 macos.brew = "tmux"
@@ -273,10 +273,13 @@ linux.pacman = "waybar"
 linux.aur = "walker-bin"
 
 [elephant]
-linux.aur = "elephant"
+linux.aur = "elephant-bin"
 
 [dunst]
 linux.pacman = "dunst"
+
+[libnotify]
+linux.pacman = "libnotify"
 
 [wlogout]
 linux.aur = "wlogout"
@@ -302,6 +305,9 @@ linux.aur = "grimblast-git"
 [slurp]
 linux.pacman = "slurp"
 
+[wl-clipboard]
+linux.pacman = "wl-clipboard"
+
 [greetd]
 linux.pacman = "greetd"
 
@@ -311,8 +317,23 @@ linux.pacman = "greetd-tuigreet"
 [wofi]
 linux.pacman = "wofi"
 
-[dolphin]
-linux.pacman = "dolphin"
+[thunar]
+linux.pacman = "thunar"
+
+[thunar-volman]
+linux.pacman = "thunar-volman"
+
+[thunar-archive-plugin]
+linux.pacman = "thunar-archive-plugin"
+
+[tumbler]
+linux.pacman = "tumbler"
+
+[gvfs]
+linux.pacman = "gvfs"
+
+[ffmpegthumbnailer]
+linux.pacman = "ffmpegthumbnailer"
 
 [polkit-kde-agent]
 linux.pacman = "polkit-kde-agent"

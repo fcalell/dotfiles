@@ -93,6 +93,14 @@ alias ll='eza -la --color=always --icons=always'
 alias lt='eza --tree --color=always --icons=always'
 alias cat='bat --style=auto'
 
+# Clipboard (Wayland)
+if command -v wl-copy &> /dev/null; then
+  alias pbcopy='wl-copy'
+  alias pbpaste='wl-paste'
+  alias clip='wl-copy'
+  alias paste='wl-paste'
+fi
+
 # Git aliases
 alias gs='git status'
 alias ga='git add'

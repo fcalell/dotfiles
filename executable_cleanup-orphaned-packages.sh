@@ -16,6 +16,16 @@ NC='\033[0m' # No Color
 
 echo -e "${BLUE}=== Package Manager Cleanup Tool ===${NC}\n"
 
+# Packages to always exclude from orphan detection (critical system packages)
+EXCLUDE_PACKAGES=(
+    "paru"
+    "paru-bin"
+    "paru-debug"
+    "yay"
+    "yay-bin"
+    "yay-git"
+)
+
 # Determine OS and package managers
 PACKAGES_TOML="${HOME}/.local/share/chezmoi/.chezmoidata/packages.toml"
 if [[ ! -f "$PACKAGES_TOML" ]]; then
@@ -76,13 +86,28 @@ process_package_manager() {
         return
     fi
 
-    # Extract packages from packages.toml that use this package manager
-    local toml_packages=$(grep -B1 "$pm_key = " "$PACKAGES_TOML" | grep '^\[' | sed 's/\[\(.*\)\]/\1/' | sort -u)
+    # Extract actual package names from packages.toml for this package manager
+    # This gets the actual package names from lines like: linux.aur = "package-name"
+    local toml_packages=$(grep "$pm_key = " "$PACKAGES_TOML" | sed 's/.*= "\(.*\)"/\1/' | sort -u)
 
     # Find orphaned packages (installed but not in packages.toml)
     local orphaned=()
     while IFS= read -r pkg; do
-        if ! echo "$DEFINED_PACKAGES" | grep -q "^${pkg}$"; then
+        # Check if package is in toml_packages
+        if echo "$toml_packages" | grep -q "^${pkg}$"; then
+            continue
+        fi
+
+        # Check if package is in exclusion list
+        local excluded=false
+        for excl in "${EXCLUDE_PACKAGES[@]}"; do
+            if [[ "$pkg" == "$excl" ]]; then
+                excluded=true
+                break
+            fi
+        done
+
+        if [[ "$excluded" == false ]]; then
             orphaned+=("$pkg")
         fi
     done <<< "$installed_packages"

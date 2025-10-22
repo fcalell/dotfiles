@@ -5,6 +5,9 @@ node = "lts"
 # pnpm - Latest version
 pnpm = "latest"
 
+# pnpm - Latest version
+yarn = "latest"
+
 # uv - Python package manager
 uv = "latest"
 

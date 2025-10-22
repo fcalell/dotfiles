@@ -18,6 +18,7 @@ require("mason-tool-installer").setup({
 		"html",
 		"tailwindcss",
 		"vtsls",
+		"graphql",
 		"jsonls",
 		"prettier",
 	},

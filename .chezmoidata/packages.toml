@@ -81,6 +81,15 @@ linux.pacman = "ttf-jetbrains-mono-nerd"
 macos.cask = "font-noto-emoji"
 linux.pacman = "noto-fonts-emoji"
 
+[ttf-liberation]
+linux.pacman = "ttf-liberation"
+
+[wqy-zenhei]
+linux.pacman = "wqy-zenhei"
+
+[lib32-fontconfig]
+linux.pacman = "lib32-fontconfig"
+
 # ============================================
 # Editor & Development
 # ============================================
@@ -227,11 +236,36 @@ linux.pacman = "xorg-server"
 [xorg-xinit]
 linux.pacman = "xorg-xinit"
 
+[networkmanager]
+linux.pacman = "networkmanager"
+
+[network-manager-applet]
+linux.pacman = "network-manager-applet"
+
 # ============================================
 # Browser
 # ============================================
 [chrome]
 linux.aur = "google-chrome"
+
+# ============================================
+# Gaming
+# ============================================
+[steam]
+linux.pacman = "steam"
+
+[gamescope]
+linux.pacman = "gamescope"
+
+[mangohud]
+linux.pacman = "mangohud"
+[lib32-mangohud]
+linux.pacman = "lib32-mangohud"
+
+[gamemode]
+linux.pacman = "gamemode"
+[lib32-gamemode]
+linux.pacman = "lib32-gamemode"
 
 # ============================================
 # macOS-Only Packages
@@ -273,7 +307,7 @@ linux.pacman = "waybar"
 linux.aur = "walker-bin"
 
 [elephant]
-linux.aur = "elephant-bin"
+linux.aur = "elephant"
 
 [dunst]
 linux.pacman = "dunst"

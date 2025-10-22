@@ -47,7 +47,7 @@ window#waybar {
   min-width: 35px;
 }
 
-#workspaces button:hover {
+#workspaces button:hover:not(.active) {
   background: #313244;
   color: #cdd6f4;
   box-shadow: 0 0 2px rgba(49, 50, 68, 1);

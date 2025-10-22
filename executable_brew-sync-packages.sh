@@ -1,12 +1,6 @@
-#!/usr/bin/env bash
-# Install packages via Homebrew (macOS)
-# {{ include "dot_config/packages-homebrew.txt.tmpl" | sha256sum }}
-
 set -euo pipefail
 
-{{ if eq .chezmoi.os "darwin" -}}
 echo "Installing packages via Homebrew..."
-
 PACKAGE_LIST="$HOME/.config/packages-homebrew.txt"
 
 if [ ! -f "$PACKAGE_LIST" ]; then
@@ -18,6 +12,3 @@ fi
 brew bundle --no-lock --file="$PACKAGE_LIST"
 
 echo "✓ Homebrew packages installed"
-{{ else -}}
-echo "Skipping Homebrew installation (not on macOS)"
-{{ end -}}

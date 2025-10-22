@@ -22,31 +22,6 @@ cmd open ${{
     esac
 }}
 
-# Trash with confirmation
-cmd trash ${{
-    set -f
-    printf "Trash $fx? [y/N] "
-    read ans
-    if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
-        if command -v trash &> /dev/null; then
-            trash "$fx"
-        else
-            echo "trash-cli not installed, using rm"
-            rm -rf "$fx"
-        fi
-    fi
-}}
-
-# Delete with confirmation
-cmd delete ${{
-    set -f
-    printf "Permanently delete $fx? [y/N] "
-    read ans
-    if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
-        rm -rf "$fx"
-    fi
-}}
-
 # Extract archives
 cmd extract ${{
     set -f
@@ -92,11 +67,6 @@ cmd touch ${{
     touch "$ans"
 }}
 
-# Rename file with pre-filled name
-cmd rename %{{
-    lf -remote "send $id push :rename<space>$(basename "$f")<a-b><c-b>"
-}}
-
 # Show disk usage
 cmd usage $du -h -d1 | less
 
@@ -107,8 +77,7 @@ map d
 map c
 
 # File operations
-map d trash
-map D delete
+map d delete
 map <enter> open
 map r rename
 map . set hidden!

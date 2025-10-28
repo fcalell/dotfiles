@@ -67,16 +67,11 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
--- Biome - exclude CSS files (doesn't support Tailwind v4 directives)
-vim.lsp.config("biome", {
-	filetypes = {
-		"javascript",
-		"javascriptreact",
-		"json",
-		"jsonc",
-		"typescript",
-		"typescriptreact",
-		-- Explicitly exclude CSS from Biome LSP
+vim.lsp.config("tailwindcss", {
+	settings = {
+		tailwindCSS = {
+			classFunctions = { "cva", "cn" },
+		},
 	},
 })
 

@@ -80,6 +80,15 @@ vim.lsp.config("biome", {
 	},
 })
 
+vim.lsp.config("graphql", {
+	filetypes = {
+		"graphql",
+		"typescriptreact",
+		"javascriptreact",
+		"typescript",
+	},
+})
+
 -- Autocomplete
 require("blink.cmp").setup({
 	sources = {

@@ -25,6 +25,10 @@ vim.pack.add({
 	{
 		src = "https://github.com/windwp/nvim-spectre",
 	},
+	-- Dependency for Spectre
+	{
+		src = "https://github.com/nvim-lua/plenary.nvim",
+	},
 	-- Gitsigns - Git decorations
 	{
 		src = "https://github.com/lewis6991/gitsigns.nvim",

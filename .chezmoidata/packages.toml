@@ -217,6 +217,9 @@ linux.pacman = "gst-plugin-pipewire"
 [pavucontrol]
 linux.pacman = "pavucontrol"
 
+[spotify]
+linux.aur = "spotify"
+
 # ============================================
 # Hardware/Graphics
 # ============================================
@@ -254,18 +257,14 @@ linux.aur = "google-chrome"
 [steam]
 linux.pacman = "steam"
 
-[gamescope]
-linux.pacman = "gamescope"
+[lutris]
+linux.pacman = "lutris"
 
-[mangohud]
-linux.pacman = "mangohud"
-[lib32-mangohud]
-linux.pacman = "lib32-mangohud"
-
-[gamemode]
-linux.pacman = "gamemode"
-[lib32-gamemode]
-linux.pacman = "lib32-gamemode"
+# ============================================
+# Utilities
+# ============================================
+[qbittorrent]
+linux.pacman = "qbittorrent"
 
 # ============================================
 # macOS-Only Packages
@@ -374,3 +373,10 @@ linux.pacman = "polkit-kde-agent"
 
 [zram-generator]
 linux.pacman = "zram-generator"
+
+[iwd]
+linux.pacman = "iwd"
+
+[wpa_supplicant]
+linux.pacman = "wpa_supplicant"
+

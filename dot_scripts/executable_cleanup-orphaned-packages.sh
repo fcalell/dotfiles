@@ -4,7 +4,8 @@
 # This compares installed packages from each package manager with packages.toml
 # and helps remove orphaned packages or add them to the configuration
 
-set -e
+# Don't use set -e for interactive scripts, as it will exit on user cancellations
+set -o pipefail
 
 # Colors for output
 RED='\033[0;31m'
@@ -33,11 +34,6 @@ if [[ ! -f "$PACKAGES_TOML" ]]; then
     exit 1
 fi
 
-# Extract defined package names from packages.toml (section headers)
-DEFINED_PACKAGES=$(grep -E '^\[.*\]$' "$PACKAGES_TOML" | sed 's/\[\(.*\)\]/\1/' | sort -u)
-
-echo -e "${CYAN}Defined packages in packages.toml: $(echo "$DEFINED_PACKAGES" | wc -l)${NC}\n"
-
 # Function to process package manager
 process_package_manager() {
     local pm_name=$1
@@ -47,7 +43,7 @@ process_package_manager() {
     echo -e "${YELLOW}=== Checking $pm_name ===${NC}"
 
     # Check if package manager exists
-    if ! command -v $pm_command &> /dev/null; then
+    if ! command -v "$pm_command" &> /dev/null; then
         echo -e "${BLUE}$pm_command not found, skipping${NC}\n"
         return
     fi
@@ -57,11 +53,7 @@ process_package_manager() {
     case "$pm_name" in
         "Pacman (official)")
             # Get explicitly installed packages from official repos only
-            installed_packages=$(pacman -Qqe | while read pkg; do
-                if pacman -Qi "$pkg" 2>/dev/null | grep -q "Repository.*:.*core\|extra\|multilib"; then
-                    echo "$pkg"
-                fi
-            done | sort)
+            installed_packages=$(pacman -Qqen | sort)
             ;;
         "AUR (paru/yay)")
             # Get explicitly installed AUR packages
@@ -88,13 +80,15 @@ process_package_manager() {
 
     # Extract actual package names from packages.toml for this package manager
     # This gets the actual package names from lines like: linux.aur = "package-name"
-    local toml_packages=$(grep "$pm_key = " "$PACKAGES_TOML" | sed 's/.*= "\(.*\)"/\1/' | sort -u)
+    # Escape dots in pm_key for proper regex matching
+    local escaped_pm_key="${pm_key//./\\.}"
+    local toml_packages=$(grep -E "^${escaped_pm_key} = " "$PACKAGES_TOML" | sed 's/.*= "\(.*\)"/\1/' | sort -u)
 
     # Find orphaned packages (installed but not in packages.toml)
     local orphaned=()
     while IFS= read -r pkg; do
-        # Check if package is in toml_packages
-        if echo "$toml_packages" | grep -q "^${pkg}$"; then
+        # Check if package is in toml_packages (use -F for literal matching, -x for exact match)
+        if echo "$toml_packages" | grep -Fxq "$pkg"; then
             continue
         fi
 
@@ -112,7 +106,11 @@ process_package_manager() {
         fi
     done <<< "$installed_packages"
 
-    local total_installed=$(echo "$installed_packages" | wc -l)
+    # Count installed packages correctly (handle empty string case)
+    local total_installed=0
+    if [[ -n "$installed_packages" ]]; then
+        total_installed=$(echo "$installed_packages" | wc -l)
+    fi
     local total_orphaned=${#orphaned[@]}
 
     echo -e "${CYAN}Total installed: $total_installed${NC}"
@@ -145,29 +143,43 @@ process_package_manager() {
         case $choice in
             1)
                 echo -e "\n${YELLOW}Uninstalling orphaned packages...${NC}"
+                local uninstall_success=true
                 case "$pm_name" in
-                    "Pacman (official)")
-                        sudo pacman -Rns "${orphaned[@]}"
-                        ;;
-                    "AUR (paru/yay)")
-                        sudo pacman -Rns "${orphaned[@]}"
+                    "Pacman (official)"|"AUR (paru/yay)")
+                        if ! sudo pacman -Rns "${orphaned[@]}"; then
+                            uninstall_success=false
+                        fi
                         ;;
                     "Homebrew")
-                        brew uninstall "${orphaned[@]}"
+                        if ! brew uninstall "${orphaned[@]}"; then
+                            uninstall_success=false
+                        fi
                         ;;
                     "Homebrew Cask")
-                        brew uninstall --cask "${orphaned[@]}"
+                        if ! brew uninstall --cask "${orphaned[@]}"; then
+                            uninstall_success=false
+                        fi
                         ;;
                 esac
-                echo -e "${GREEN}✓ Packages uninstalled${NC}\n"
+                if [[ "$uninstall_success" == true ]]; then
+                    echo -e "${GREEN}✓ Packages uninstalled${NC}\n"
+                else
+                    echo -e "${RED}✗ Some packages failed to uninstall${NC}\n"
+                fi
                 break
                 ;;
             2)
                 echo -e "\n${YELLOW}Adding packages to packages.toml...${NC}"
+                # Build all entries first, then write atomically
+                local entries=""
                 for pkg in "${orphaned[@]}"; do
-                    echo "" >> "$PACKAGES_TOML"
-                    echo "[$pkg]" >> "$PACKAGES_TOML"
-                    echo "$pm_key = \"$pkg\"" >> "$PACKAGES_TOML"
+                    entries+=$'\n'
+                    entries+="[$pkg]"$'\n'
+                    entries+="$pm_key = \"$pkg\""$'\n'
+                done
+                # Append all entries at once
+                echo "$entries" >> "$PACKAGES_TOML"
+                for pkg in "${orphaned[@]}"; do
                     echo -e "${GREEN}✓ Added $pkg${NC}"
                 done
                 echo -e "\n${GREEN}✓ All packages added${NC}"
@@ -194,24 +206,37 @@ process_package_manager() {
                         read -p "Action for $pkg? [u]ninstall, [a]dd to packages.toml, [s]kip: " action
                         case "$action" in
                             u|U)
+                                local pkg_uninstall_success=true
                                 case "$pm_name" in
                                     "Pacman (official)"|"AUR (paru/yay)")
-                                        sudo pacman -Rns "$pkg"
+                                        if ! sudo pacman -Rns "$pkg"; then
+                                            pkg_uninstall_success=false
+                                        fi
                                         ;;
                                     "Homebrew")
-                                        brew uninstall "$pkg"
+                                        if ! brew uninstall "$pkg"; then
+                                            pkg_uninstall_success=false
+                                        fi
                                         ;;
                                     "Homebrew Cask")
-                                        brew uninstall --cask "$pkg"
+                                        if ! brew uninstall --cask "$pkg"; then
+                                            pkg_uninstall_success=false
+                                        fi
                                         ;;
                                 esac
-                                echo -e "${GREEN}✓ Uninstalled $pkg${NC}\n"
+                                if [[ "$pkg_uninstall_success" == true ]]; then
+                                    echo -e "${GREEN}✓ Uninstalled $pkg${NC}\n"
+                                else
+                                    echo -e "${RED}✗ Failed to uninstall $pkg${NC}\n"
+                                fi
                                 break
                                 ;;
                             a|A)
-                                echo "" >> "$PACKAGES_TOML"
-                                echo "[$pkg]" >> "$PACKAGES_TOML"
-                                echo "$pm_key = \"$pkg\"" >> "$PACKAGES_TOML"
+                                {
+                                    echo ""
+                                    echo "[$pkg]"
+                                    echo "$pm_key = \"$pkg\""
+                                } >> "$PACKAGES_TOML"
                                 echo -e "${GREEN}✓ Added $pkg to packages.toml${NC}\n"
                                 break
                                 ;;

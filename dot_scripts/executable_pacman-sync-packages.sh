@@ -9,9 +9,9 @@ if [ ! -f "$PACKAGE_LIST" ]; then
   exit 1
 fi
 
-# Update package database
-sudo pacman -Sy
+# Update package database and system (avoid partial upgrades)
+sudo pacman -Syu --noconfirm
 
-sudo pacman -S --needed - < $PACKAGE_LIST
+sudo pacman -S --needed - < "$PACKAGE_LIST"
 
 echo "✓ Pacman packages installed"

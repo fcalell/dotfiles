@@ -9,6 +9,6 @@ if [ ! -f "$PACKAGE_LIST" ]; then
 fi
 
 # Install packages using brew bundle
-brew bundle --no-lock --file="$PACKAGE_LIST"
+brew bundle --file="$PACKAGE_LIST"
 
 echo "✓ Homebrew packages installed"

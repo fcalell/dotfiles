@@ -8,7 +8,6 @@ vim.pack.add({
 })
 
 require("mason").setup()
-require("mason-lspconfig").setup()
 require("mason-tool-installer").setup({
 	ensure_installed = {
 		"lua_ls",
@@ -23,6 +22,7 @@ require("mason-tool-installer").setup({
 		"prettier",
 	},
 })
+require("mason-lspconfig").setup()
 
 -- On LSP attach
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -62,6 +62,16 @@ vim.lsp.config("lua_ls", {
 			},
 			telemetry = {
 				enable = false,
+			},
+		},
+	},
+})
+
+vim.lsp.config("cssls", {
+	settings = {
+		css = {
+			lint = {
+				unknownAtRules = "ignore",
 			},
 		},
 	},

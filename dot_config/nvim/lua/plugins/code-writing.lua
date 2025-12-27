@@ -38,6 +38,7 @@ require("nvim-treesitter.configs").setup({
 	},
 	auto_install = true,
 	ensure_installed = {
+		"astro",
 		"graphql",
 		"html",
 		"css",
@@ -84,7 +85,12 @@ require("Comment").setup({
 	mappings = false,
 })
 vim.keymap.set("n", "<leader>cc", "<Plug>(comment_toggle_linewise_current)", { silent = true, desc = "Toggle comment" })
-vim.keymap.set("v", "<leader>cc", "<Plug>(comment_toggle_linewise_visual)", { silent = true, desc = "Toggle comment (visual)" })
+vim.keymap.set(
+	"v",
+	"<leader>cc",
+	"<Plug>(comment_toggle_linewise_visual)",
+	{ silent = true, desc = "Toggle comment (visual)" }
+)
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle undotree" })
 

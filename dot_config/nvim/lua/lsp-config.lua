@@ -10,6 +10,8 @@ vim.pack.add({
 require("mason").setup()
 require("mason-tool-installer").setup({
 	ensure_installed = {
+		"astro",
+		"mdx_analyzer",
 		"lua_ls",
 		"stylua",
 		"biome",
@@ -130,6 +132,7 @@ require("conform").setup({
 		},
 	},
 	formatters_by_ft = {
+		astro = { "biome-check" },
 		javascript = { "biome-check" },
 		typescript = { "biome-check" },
 		javascriptreact = { "biome-check" },

@@ -41,7 +41,7 @@ opt.updatetime = 250
 opt.timeoutlen = 1000
 opt.splitright = true
 opt.splitbelow = true
-opt.wrap = false
+opt.wrap = true
 opt.errorbells = false --- Disables sound effect for errors
 opt.iskeyword:append("-")
 opt.iskeyword:append("_")

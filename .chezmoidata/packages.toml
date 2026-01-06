@@ -189,6 +189,9 @@ linux.pacman = "smartmontools"
 [xdg-utils]
 linux.pacman = "xdg-utils"
 
+[socat]
+linux.pacman = "socat"
+
 # ============================================
 # Audio
 # ============================================

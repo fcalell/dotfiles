@@ -105,7 +105,8 @@ fi
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
-alias gp='git push'
+alias gp='git pull'
+alias gP='git push'
 alias gl='git log --oneline --graph'
 alias gd='git diff'
 alias gg='lazygit'
@@ -130,6 +131,7 @@ extract() {
       *.tar.gz) tar xzf "$1" ;;
       *.zip) unzip "$1" ;;
       *.tar) tar xf "$1" ;;
+      *.rar) 7z x "$1" ;;
       *) echo "'$1' cannot be extracted" ;;
     esac
   fi
@@ -189,6 +191,7 @@ local reset="%f"
 # Simple prompt: directory + arrow
 PROMPT="${blue}%~${reset}
 %(?.${green}.${red})❯${reset} "
+
 # ============================================
 # Tool Initializations
 # ============================================

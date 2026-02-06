@@ -23,6 +23,7 @@ vitest --reporter=verbose       # Detailed test output
 ## Test Structure Pattern
 
 <template id="test-structure">
+
 ```typescript
 // src/utils/calculate.test.ts
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
@@ -50,6 +51,7 @@ describe("calculate function", () => {
 ## Mocking Database/ORM
 
 <template id="database-mock">
+
 ```typescript
 // src/db/queries.test.ts
 import { describe, it, expect, vi } from "vitest";
@@ -79,6 +81,7 @@ describe("findUser", () => {
 ## API Procedure/Handler Tests
 
 <template id="handler-test">
+
 ```typescript
 // src/api/users.test.ts
 import { describe, it, expect, vi } from "vitest";
@@ -114,6 +117,7 @@ describe("getUserHandler", () => {
 ## React Hook Testing
 
 <template id="hook-test">
+
 ```typescript
 // src/hooks/useUser.test.ts
 import { describe, it, expect } from "vitest";
@@ -169,6 +173,7 @@ describe("useUser hook", () => {
 </template>
 
 <instructions>
+
 - Co-locate unit tests with source code for easy discoverability
 - Mock only external dependencies (databases, APIs); test real business logic
 - Use `vi.mock()` for module-level mocks (Vitest hoists them automatically)
@@ -180,6 +185,7 @@ describe("useUser hook", () => {
 </instructions>
 
 <anti-patterns>
+
 - Placing unit tests in separate `__tests__` folder (hurts discoverability)
 - Testing implementation details instead of public behavior
 - Over-mocking: mocking everything instead of testing business logic

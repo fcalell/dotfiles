@@ -30,6 +30,7 @@ src/routes/
 ## Core Templates
 
 <template id="router-context">
+
 ```tsx
 // __root.tsx - Define router context available to all routes
 import { createRootRouteWithContext } from "@tanstack/react-router"
@@ -58,9 +59,11 @@ function RootComponent() {
 **Customize:**
 - Add any global context that routes need (user, theme, permissions)
 - This context flows to all child routes via `Route.useRouteContext()`
+
 </template>
 
 <template id="protected-layout">
+
 ```tsx
 // _protected.tsx - Protect all routes under this group
 import { createFileRoute, redirect, Outlet } from "@tanstack/react-router"
@@ -102,9 +105,11 @@ function ProtectedLayout({ children }) {
 - Replace auth check with your actual authentication method
 - Update login redirect path to match your auth route
 - Add additional guards (permissions, feature flags, etc.)
+
 </template>
 
 <template id="route-search-params">
+
 ```tsx
 // _protected/items.tsx - Route with validated search parameters
 import { createFileRoute } from "@tanstack/react-router"
@@ -150,9 +155,11 @@ function ItemsPage() {
 - Add/remove fields from searchSchema based on filtering needs
 - Use Zod coercion for numeric/enum parameters from URL
 - Validate to prevent invalid URL states
+
 </template>
 
 <template id="dynamic-route">
+
 ```tsx
 // _protected/item.$id.tsx - Route with dynamic parameter
 import { createFileRoute, useLoaderData } from "@tanstack/react-router"
@@ -182,9 +189,11 @@ function ItemDetailPage() {
 - Use `loader` for fetching required data before navigation
 - Access params via `Route.useParams()`
 - Pair with error boundary for failed loads
+
 </template>
 
 <template id="navigation">
+
 ```tsx
 // Navigate programmatically
 const navigate = Route.useNavigate()
@@ -215,6 +224,7 @@ import { Link } from "@tanstack/react-router"
 **Customize:**
 - Use type-safe navigation with params object
 - Pass search params to maintain UI state across navigation
+
 </template>
 
 ## Key Patterns
@@ -229,6 +239,7 @@ import { Link } from "@tanstack/react-router"
 ## Anti-Patterns
 
 <anti-patterns id="routing-mistakes">
+
 - Creating protected routes outside protected layout group
 - Forgetting to preserve redirect URL on auth failure (users lose context)
 - Not validating search parameters (invalid states in URL)
@@ -236,4 +247,5 @@ import { Link } from "@tanstack/react-router"
 - Not using `navigate()` for programmatic transitions (manual link construction)
 - Mixing routable and non-routable path segments
 - Assuming route context without checking it exists
+
 </anti-patterns>

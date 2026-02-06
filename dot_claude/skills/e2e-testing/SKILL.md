@@ -17,6 +17,7 @@ npx playwright install --with-deps chromium
 ## Configuration
 
 <template id="playwright-config">
+
 ```typescript
 // playwright.config.ts (repo root)
 import { defineConfig } from "@playwright/test"
@@ -44,6 +45,7 @@ export default defineConfig({
 - `baseURL`: Local dev server URL
 - `webServer.command`: How to start your dev server
 - `webServer.port`: Port where dev server runs
+
 </template>
 
 ## Test Structure
@@ -67,6 +69,7 @@ tests/
 ## Page Object Pattern
 
 <template id="page-object">
+
 ```typescript
 // tests/pages/login.page.ts
 import type { Page } from "@playwright/test"
@@ -103,11 +106,13 @@ export class LoginPage {
 - Use semantic locators: `getByRole()`, `getByLabel()`, `getByText()`
 - Group related interactions into methods
 - Methods should describe user actions, not implementation
+
 </template>
 
 ## Auth Fixture (Reuse Login State)
 
 <template id="auth-fixture">
+
 ```typescript
 // tests/fixtures/auth.ts
 import { test as base } from "@playwright/test"
@@ -144,11 +149,13 @@ test("authenticated flow", async ({ page }) => {
   await page.goto("/dashboard")
 })
 ```
+
 </template>
 
 ## Critical Flow Tests
 
 <template id="critical-flow">
+
 ```typescript
 // tests/e2e/critical-flow.spec.ts
 import { test, expect } from "../fixtures/auth"
@@ -206,6 +213,7 @@ test.describe("Critical User Flow", () => {
 - Include empty state guidance
 - Validate error handling
 - Replace resource names with your domain entities
+
 </template>
 
 ## Semantic Selectors (Prefer These)
@@ -247,6 +255,7 @@ npx playwright test --headed --workers=1 # Single-threaded visible run
 ## Key Patterns
 
 <template id="wait-patterns">
+
 ```typescript
 // Wait for element visibility (prefer)
 await page.locator('button[type="submit"]').waitFor()
@@ -263,6 +272,7 @@ const response = await page.waitForResponse(
 // Never use (flaky)
 await page.waitForTimeout(3000)
 ```
+
 </template>
 
 ## Debugging
@@ -282,6 +292,7 @@ npx playwright test --debug
 ## Key Rules
 
 <instructions id="testing-rules">
+
 - Test critical revenue/engagement paths: signup → onboard → create entity → verify
 - Use Page Object pattern for all page interactions (never raw selectors in tests)
 - Use auth fixture with `storageState` to avoid re-logging in every test (saves time)
@@ -290,11 +301,13 @@ npx playwright test --debug
 - Add `data-testid` only when semantic selectors insufficient
 - Keep tests independent: each test must work alone, in any order, with no side effects
 - Test error states and edge cases: empty states, validation, missing resources
+
 </instructions>
 
 ## Anti-Patterns
 
 <anti-patterns id="test-mistakes">
+
 - Testing implementation details (CSS classes, DOM structure) not user behavior
 - Sharing state between tests (global variables, test dependencies)
 - Hardcoding wait times (`page.waitForTimeout(3000)`)
@@ -303,4 +316,5 @@ npx playwright test --debug
 - Creating unnecessarily complex test selectors
 - Not testing the actual user flow (getting too unit-test focused)
 - Flaky tests with race conditions (always wait for elements, not times)
+
 </anti-patterns>

@@ -113,6 +113,7 @@ export default defineConfig(
 ## Anti-Patterns
 
 <anti-patterns id="config-mistakes">
+
 - Using server functions in SPA mode (only work in SSR)
 - Missing `VITE_` prefix on client-side environment variables
 - Mixing SSR and SPA configurations in same vite.config.ts
@@ -120,4 +121,5 @@ export default defineConfig(
 - Storing secrets in client-side env vars
 - Forgetting to add React Compiler plugin (missing performance gains)
 - Using relative imports for root components
+
 </anti-patterns>

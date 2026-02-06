@@ -10,6 +10,7 @@ React form library with built-in validation, error handling, and minimal re-rend
 ## Core Form Pattern
 
 <template id="basic-form">
+
 ```tsx
 import { useForm } from "@tanstack/react-form"
 import { z } from "zod"
@@ -79,9 +80,11 @@ function ContactForm() {
 - Update validation rules based on requirements
 - Add custom error messages to validation
 - Change input types (email, password, tel, etc.)
+
 </template>
 
 <template id="select-field">
+
 ```tsx
 <form.Field name="category">
   {(field) => (
@@ -104,9 +107,11 @@ function ContactForm() {
   )}
 </form.Field>
 ```
+
 </template>
 
 <template id="checkbox-field">
+
 ```tsx
 <form.Field name="agree" mode="boolean">
   {(field) => (
@@ -121,9 +126,11 @@ function ContactForm() {
   )}
 </form.Field>
 ```
+
 </template>
 
 <template id="array-field">
+
 ```tsx
 <form.Field name="items" mode="array">
   {(field) => (
@@ -165,9 +172,11 @@ function ContactForm() {
 - Form needs dynamic list of entries
 - Users add/remove items (tags, line items, contacts)
 - Nested validation on each array element
+
 </template>
 
 <template id="dialog-form">
+
 ```tsx
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
@@ -225,11 +234,13 @@ function CreateDialog({ open, onOpenChange }: Props) {
 - Replace `submitFormData` with your API call
 - Update invalidation queryKey to match your cache
 - Add more fields as needed
+
 </template>
 
 ## Validation Patterns
 
 <template id="conditional-validation">
+
 ```tsx
 // Validate based on other field values
 const formSchema = z.object({
@@ -253,9 +264,11 @@ const formSchema = z.object({
 - Field dependencies (show/hide/validate based on other fields)
 - Mutually exclusive fields
 - Cross-field validation
+
 </template>
 
 <template id="async-validation">
+
 ```tsx
 const formSchema = z.object({
   username: z.string()
@@ -274,6 +287,7 @@ const formSchema = z.object({
 - Checking availability (username, email, domain)
 - Real-time validation feedback
 - Server-side business rules
+
 </template>
 
 ## Field State Reference
@@ -309,6 +323,7 @@ field.moveValue(from, to)        // Array: reorder
 ## Anti-Patterns
 
 <anti-patterns id="form-mistakes">
+
 - Validating without Zod schema (manual error handling)
 - Not using field render functions (accessing state incorrectly)
 - Forgetting to call `form.reset()` after successful submission
@@ -317,4 +332,5 @@ field.moveValue(from, to)        // Array: reorder
 - Using `defaultValue` instead of `defaultValues` in useForm
 - Not tracking form dirty/touched state (can't implement save prompts)
 - Mixing controlled and uncontrolled inputs
+
 </anti-patterns>

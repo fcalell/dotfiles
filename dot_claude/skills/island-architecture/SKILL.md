@@ -10,6 +10,7 @@ Components are organized as self-contained data-fetching units. Parent component
 ## Component Classification
 
 <template id="island">
+
 Self-contained unit that fetches data, handles loading/error/empty states. Receives config as props, not data.
 
 ```tsx
@@ -53,9 +54,11 @@ export function ResourceGrid({ status, limit }: Props) {
 - Handles all loading/error/empty states inline
 - Receives config (filters, IDs) as props, never fetched data
 - Children are presentation components receiving data
+
 </template>
 
 <template id="layout">
+
 Orchestrates islands and manages page structure. No data fetching.
 
 ```tsx
@@ -90,9 +93,11 @@ export function ResourcesPage() {
 - Manages UI state (dialogs, filters, layout)
 - Passes config to islands, not data
 - Orchestrates multiple islands
+
 </template>
 
 <template id="presentation">
+
 Pure rendering layer receiving data as props. No hooks, no state, no fetching.
 
 ```tsx
@@ -114,9 +119,11 @@ export function ResourceCard({ resource }: { resource: Resource }) {
 - Only renders, no logic
 - Reusable across different contexts
 - Testable without mocking data fetching
+
 </template>
 
 <template id="skeleton">
+
 Loading placeholder matching presentation structure.
 
 ```tsx
@@ -141,9 +148,11 @@ export function ResourceSkeleton({ count = 6 }: Props) {
 - Uses stable keys (prevents re-renders)
 - Shows during data fetching
 - Same visual grid as actual content
+
 </template>
 
 <template id="empty-state">
+
 Shown when island has no data. Often triggers dialogs.
 
 ```tsx
@@ -173,9 +182,11 @@ export function EmptyResourceState() {
 - Encourages action (dialog trigger)
 - Self-contained (can fetch dependencies)
 - Clear, helpful messaging
+
 </template>
 
 <template id="dialog-island">
+
 Dialog fetches its own dependencies and handles mutations.
 
 ```tsx
@@ -257,9 +268,11 @@ export function CreateResourceDialog({ open, onOpenChange }: Props) {
 - Handles mutation and cache updates
 - Self-contained form logic
 - Dialogs are islands, not layout
+
 </template>
 
 <template id="dependent-query">
+
 One query depends on another completing first.
 
 ```tsx
@@ -287,6 +300,7 @@ const { data: members } = useQuery({
 - Dialogs with related data dependencies
 - Islands that need parent context
 - Chain-dependent queries
+
 </template>
 
 ## File Structure Template
@@ -322,6 +336,7 @@ src/features/resource/
 ## Anti-Patterns
 
 <anti-patterns id="architecture-mistakes">
+
 - Passing fetched data as props to islands (breaks encapsulation)
 - Handling load/error states in parent components (should be in island)
 - Mixing data fetching with layout orchestration
@@ -329,4 +344,5 @@ src/features/resource/
 - Creating presentation components with hooks
 - Using `isFetching` for initial load (use `isPending`)
 - Creating deeply nested dependencies (flatten query dependencies)
+
 </anti-patterns>

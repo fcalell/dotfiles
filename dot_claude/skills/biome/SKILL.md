@@ -26,6 +26,7 @@ Biome is configured at `biome.json` with:
 ## Ignoring Rules
 
 <template id="ignoring-rules">
+
 ```typescript
 // biome-ignore lint/suspicious/noExplicitAny: legacy API return type
 const data: any = legacyApiCall()
@@ -39,6 +40,7 @@ Always include explanation after the colon.
 </template>
 
 <instructions>
+
 - Run `biome check --write` before committing
 - Always explain rule ignores with clear reasoning
 - Use auto-fix when possible: `biome lint --write`
@@ -48,6 +50,7 @@ Always include explanation after the colon.
 </instructions>
 
 <anti-patterns>
+
 - Ignoring rules without explanation
 - Disabling rules globally instead of per-line
 - Not running check before committing

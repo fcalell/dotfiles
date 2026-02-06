@@ -29,6 +29,7 @@ These decisions inform every design token and component.
 All colors trace back to core semantic primitives:
 
 <template id="token-system">
+
 ```typescript
 // Semantic primitives (define once, use everywhere)
 const palette = {
@@ -82,6 +83,7 @@ const typography = {
 ```
 
 **Principle:** Colors mean something. Default color should not jump out.
+
 </template>
 
 ## Design Validation Checks
@@ -89,6 +91,7 @@ const typography = {
 Before shipping any design, validate against signature:
 
 <template id="validation-checks">
+
 **Swap test:** If you swapped fonts/colors/layout for generic ones, would anyone notice it's your product?
 
 **Squint test:** Blur your eyes. Can you still perceive hierarchy? Borders shouldn't dominate.
@@ -105,6 +108,7 @@ Before shipping any design, validate against signature:
 - ❌ `--blue-500`, `--padding-16`, `--generic-font`
 
 **Depth test:** Surfaces should feel stacked, not dramatic. If borders are the first thing you notice, they're too strong.
+
 </template>
 
 ## Surface & Elevation Architecture
@@ -112,6 +116,7 @@ Before shipping any design, validate against signature:
 Surfaces stack with clear but subtle hierarchy:
 
 <template id="surface-architecture">
+
 ```typescript
 // Surface elevation levels
 const elevation = {
@@ -145,11 +150,13 @@ const elevation = {
 ```
 
 **Key:** Elevations exist but whisper rather than shout. Users shouldn't consciously notice them.
+
 </template>
 
 ## Common Component Patterns
 
 <template id="component-patterns">
+
 **Cards:**
 - 1px border, subtle color
 - Padding: 24px (loose) or 16px (compact)
@@ -178,11 +185,13 @@ const elevation = {
 - Invert background/foreground values
 - Borders over shadows (always)
 - Same structure, inverted semantic colors
+
 </template>
 
 ## Workflow
 
 <template id="design-workflow">
+
 1. **Read system.md** if exists — understand established patterns
 2. **Check pattern library** before proposing new component
 3. **Propose with intent** — "This dropdown shows status filters. Should feel scannable and dense."
@@ -194,6 +203,7 @@ const elevation = {
 - What's the intent of this UI section?
 - Is the color choice meaningful or decorative?
 - Will borders/spacing work across all states (hover, disabled, loading)?
+
 </template>
 
 ## Key Rules
@@ -209,6 +219,7 @@ const elevation = {
 ## Anti-Patterns
 
 <anti-patterns id="design-mistakes">
+
 - Harsh borders — if borders are the first thing you see, they're too strong
 - Dramatic surface jumps — elevation changes should be whisper-quiet
 - Inconsistent spacing — clearest sign of no system
@@ -219,6 +230,7 @@ const elevation = {
 - Pure white cards on white background — no distinction
 - Large radius on all elements — breaks signature
 - Inconsistent typography — multiple font sizes that don't scale
+
 </anti-patterns>
 
 ## Documentation Template

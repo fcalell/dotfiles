@@ -8,6 +8,7 @@ description: Structured logging, error tracking, and monitoring patterns. Use wh
 ## Structured Logging
 
 <template id="structured-logger">
+
 ```typescript
 // src/lib/logger.ts
 type LogLevel = "debug" | "info" | "warn" | "error";
@@ -65,6 +66,7 @@ app.use("*", async (c, next) => {
 ## Error Tracking
 
 <template id="error-tracking">
+
 ```typescript
 // src/lib/error-tracking.ts
 // Choose provider based on your platform (Sentry, Datadog, etc.)
@@ -100,6 +102,7 @@ try {
 ## Request Tracing
 
 <template id="request-tracing">
+
 ```typescript
 // Add request ID to all responses for client reference in support tickets
 app.use("*", async (c, next) => {
@@ -120,6 +123,7 @@ throw new AppError("INTERNAL_SERVER_ERROR", {
 ## Health Check Endpoint
 
 <template id="health-check">
+
 ```typescript
 // src/routes/health.ts
 app.get("/health", async (c) => {
@@ -163,6 +167,7 @@ app.get("/health", async (c) => {
 ## Production Monitoring Checklist
 
 <checklist id="production-readiness">
+
 - [ ] Structured JSON logging with request IDs on all endpoints
 - [ ] Error tracking integrated with appropriate sample rate (0.1 prod, 1.0 dev)
 - [ ] Health check endpoint that verifies critical dependencies
@@ -174,6 +179,7 @@ app.get("/health", async (c) => {
 </checklist>
 
 <instructions>
+
 - Always log structured JSON (never unstructured strings)
 - Include requestId in every log entry and error response
 - Use cloud provider request ID header when available
@@ -186,6 +192,7 @@ app.get("/health", async (c) => {
 </instructions>
 
 <anti-patterns>
+
 - Unstructured console.log("something happened") in production
 - Missing requestId correlation across log entries
 - Logging full request/response bodies (PII risk + cost explosion)

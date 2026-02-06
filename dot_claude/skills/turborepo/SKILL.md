@@ -70,6 +70,7 @@ packages/
 **Customize:** Adjust structure to your project's needs. Keep apps/ for user-facing products, packages/ for libraries.
 
 <template id="package-json">
+
 ```json
 {
   "name": "@repo/package-name",
@@ -90,11 +91,13 @@ packages/
 - Use `@repo/` scope for all internal packages
 - Define scripts that turbo can orchestrate
 - No version numbers in package.json (monorepo symlinks via workspace:*)
+
 </template>
 
 ## Dependency Management
 
 <template id="internal-dependencies">
+
 ```json
 // package.json in apps/webapp
 {
@@ -112,11 +115,13 @@ packages/
 - Never use relative paths (`../`) for dependencies
 - Never hardcode versions of internal packages
 - pnpm automatically handles workspace resolution
+
 </template>
 
 ## Turbo Configuration
 
 <template id="turbo-config">
+
 ```json
 // turbo.json (repo root)
 {
@@ -168,6 +173,7 @@ packages/
 - `dependsOn: ["^build"]` means "wait for dependencies to build first"
 - `persistent: true` keeps task running (good for dev servers)
 - `outputs` tells turbo what to cache and when to skip
+
 </template>
 
 ## Task Filtering
@@ -192,6 +198,7 @@ pnpm build --changed
 ## Development Workflow
 
 <template id="dev-workflow">
+
 ```bash
 # Terminal 1: Start all dev servers
 pnpm dev
@@ -212,6 +219,7 @@ pnpm --filter @repo/api test -- --watch
 ```
 
 **Tip:** Use task dependencies in turbo.json to run setup tasks before dev.
+
 </template>
 
 ## Build Process
@@ -236,6 +244,7 @@ pnpm build --changed
 ## Common Tasks
 
 <template id="common-patterns">
+
 ```bash
 # Setup: install all dependencies
 pnpm install
@@ -261,11 +270,13 @@ pnpm --filter @repo/api remove express
 # List workspace packages
 pnpm ls -r --depth 0
 ```
+
 </template>
 
 ## Key Rules
 
 <instructions id="monorepo-rules">
+
 1. Always run commands from repo root (never `cd` into packages)
 2. Use `workspace:*` for internal dependencies
 3. Keep `package.json` names consistent with `@repo/` scope
@@ -274,11 +285,13 @@ pnpm ls -r --depth 0
 6. Cache build/test/lint tasks, not dev tasks
 7. Group related packages (apps/ vs packages/)
 8. Document package purposes in README
+
 </instructions>
 
 ## Anti-Patterns
 
 <anti-patterns id="monorepo-mistakes">
+
 - Running commands from inside packages (`cd packages/api && pnpm build`)
 - Using relative paths for internal dependencies (`"@repo/ui": "../ui"`)
 - Hardcoding versions of internal packages
@@ -288,4 +301,5 @@ pnpm ls -r --depth 0
 - Mixing app and library code in one package
 - Forgetting to configure `outputs` in turbo.json
 - Installing dev dependencies at workspace root (install in packages)
+
 </anti-patterns>

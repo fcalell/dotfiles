@@ -6,4 +6,3 @@
 export UV_TOOL_BIN_DIR="$HOME/.local/bin"
 export SCRIPTS_DIR="$HOME/.scripts"
 export PATH="$UV_TOOL_BIN_DIR:$SCRIPTS_DIR:$PATH"
-export ENABLE_LSP_TOOL=1

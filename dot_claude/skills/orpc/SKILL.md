@@ -17,7 +17,9 @@ const baseProcedure = os.$context<BaseContext>();
 const authProcedure = baseProcedure.use(authenticationMiddleware);
 
 // Layer 3: Authorized (checks permissions for resource and action)
-authProcedure.use(authorizationMiddleware({ resource: "project", action: "read" }));
+authProcedure.use(
+  authorizationMiddleware({ resource: "project", action: "read" }),
+);
 
 // Layer 4: Business logic validation (tenant context, state checks)
 authProcedure.use(tenantContextMiddleware);
@@ -60,19 +62,19 @@ const create = authProcedure
   )
   .use(authorizationMiddleware({ resource: "{entity}", action: "create" }))
   .handler(async ({ input, context }) => {
-    const { db, user, session } = context
-    const id = generateId() // uuid(), ulid(), nanoid(), etc.
-    const now = new Date()
+    const { db, user, session } = context;
+    const id = generateId(); // uuid(), ulid(), nanoid(), etc.
+    const now = new Date();
 
     // Validate tenant context exists
     if (!session.tenantId && !context.tenantId) {
-      throw new Error("BAD_REQUEST: No active tenant context")
+      throw new Error("BAD_REQUEST: No active tenant context");
     }
 
-    const tenantId = session.tenantId || context.tenantId
+    const tenantId = session.tenantId || context.tenantId;
 
     const [entity] = await db
-      .insert({entityTable})
+      .insert({ entityTable })
       .values({
         id,
         tenantId,
@@ -81,14 +83,14 @@ const create = authProcedure
         createdAt: now,
         updatedAt: now,
       })
-      .returning()
+      .returning();
 
     if (!entity) {
-      throw new Error("INTERNAL_SERVER_ERROR: Failed to create {entity}")
+      throw new Error("INTERNAL_SERVER_ERROR: Failed to create {entity}");
     }
 
-    return entity
-  })
+    return entity;
+  });
 ```
 
 </template>
@@ -136,15 +138,15 @@ const delete_ = authProcedure
   .use(authorizationMiddleware({ resource: "{entity}", action: "delete" }))
   .handler(async ({ input, context }) => {
     const result = await context.db
-      .delete({entityTable})
-      .where(eq({entityTable}.id, input.id))
+      .delete({ entityTable })
+      .where(eq({ entityTable }.id, input.id));
 
     if (!result.changes) {
-      throw new Error("NOT_FOUND: {EntityName} not found")
+      throw new Error("NOT_FOUND: {EntityName} not found");
     }
 
-    return { success: true, id: input.id }
-  })
+    return { success: true, id: input.id };
+  });
 ```
 
 </template>
@@ -176,36 +178,38 @@ try {
 
 ```typescript
 const list = authProcedure
-  .input(z.object({
-    tenantId: z.string(),
-    limit: z.number().int().min(1).max(100).default(20),
-    offset: z.number().int().min(0).default(0),
-    search: z.string().optional(),
-  }))
+  .input(
+    z.object({
+      tenantId: z.string(),
+      limit: z.number().int().min(1).max(100).default(20),
+      offset: z.number().int().min(0).default(0),
+      search: z.string().optional(),
+    }),
+  )
   .use(authorizationMiddleware({ resource: "{entity}", action: "read" }))
   .handler(async ({ input, context }) => {
     const query = context.db
       .select()
-      .from({entityTable})
-      .where(eq({entityTable}.tenantId, input.tenantId))
+      .from({ entityTable })
+      .where(eq({ entityTable }.tenantId, input.tenantId));
 
     // Add search filter if provided
     if (input.search) {
-      query.where(like({entityTable}.name, `%${input.search}%`))
+      query.where(like({ entityTable }.name, `%${input.search}%`));
     }
 
     const items = await query
       .limit(input.limit)
       .offset(input.offset)
-      .orderBy(desc({entityTable}.createdAt))
+      .orderBy(desc({ entityTable }.createdAt));
 
     const [{ count }] = await context.db
       .select({ count: sql`count(*)` })
-      .from({entityTable})
-      .where(eq({entityTable}.tenantId, input.tenantId))
+      .from({ entityTable })
+      .where(eq({ entityTable }.tenantId, input.tenantId));
 
-    return { items, total: count, offset: input.offset, limit: input.limit }
-  })
+    return { items, total: count, offset: input.offset, limit: input.limit };
+  });
 ```
 
 </template>
@@ -214,32 +218,30 @@ const list = authProcedure
 
 ```typescript
 // Custom middleware: tenant context validation
-const tenantContextMiddleware = os.$context<TenantContext>().meta(
-  "tenantContext",
-  async (utils) => {
+const tenantContextMiddleware = os
+  .$context<TenantContext>()
+  .meta("tenantContext", async (utils) => {
     return async () => {
-      const { context } = utils
+      const { context } = utils;
       // Middleware receives context and can modify it
       if (!context.session.tenantId) {
-        throw new Error("BAD_REQUEST: No tenant context")
+        throw new Error("BAD_REQUEST: No tenant context");
       }
       // Continue to next middleware/handler
-      return await utils.next()
-    }
-  },
-)
+      return await utils.next();
+    };
+  });
 
 // Custom middleware: input transformation
-const normalizeInputMiddleware = os.$context<BaseContext>().meta(
-  "normalize",
-  async (utils) => {
+const normalizeInputMiddleware = os
+  .$context<BaseContext>()
+  .meta("normalize", async (utils) => {
     return async () => {
       // Transform input before handler
-      const transformed = normalizeInput(utils.input)
-      return await utils.next({ input: transformed })
-    }
-  },
-)
+      const transformed = normalizeInput(utils.input);
+      return await utils.next({ input: transformed });
+    };
+  });
 
 // Stack multiple middlewares
 authProcedure
@@ -248,7 +250,7 @@ authProcedure
   .use(normalizeInputMiddleware)
   .handler(async ({ input, context }) => {
     // Handler runs after all middleware
-  })
+  });
 ```
 
 </template>
@@ -267,18 +269,3 @@ authProcedure
 10. Stack middleware in logical order: auth → authorization → business logic
 
 </instructions>
-
-<anti-patterns>
-
-- Using baseProcedure for authenticated endpoints
-- Missing authorization middleware on protected procedures
-- Using FORBIDDEN which reveals resource existence
-- Forgetting .returning() on insert/update/delete
-- Not checking for null after database operations
-- Missing tenant filter in queries even after middleware
-- Not validating input with Zod schemas
-- Hard-coding magic numbers or strings (use constants)
-- Mixing business logic validation with middleware
-- Not handling unique constraint violations
-
-</anti-patterns>

@@ -54,7 +54,7 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
   ],
   viewer: ["tenant:read", "member:read", "resource:read"],
   contributor: ["resource:create", "resource:read", "resource:update"],
-}
+};
 
 // Domain-specific roles (replace with your actual roles)
 // Examples: developer, analyst, moderator, reviewer, author, etc.
@@ -191,12 +191,12 @@ unique("unique_{resource}_slug").on({resourceTable}.tenantId, {resourceTable}.sl
 ```typescript
 // Anti-pattern: reveals resource existence
 if (!resource) {
-  throw new Error("FORBIDDEN: Access denied") // Client learns resource exists
+  throw new Error("FORBIDDEN: Access denied"); // Client learns resource exists
 }
 
 // Correct: prevents enumeration
 if (!resource) {
-  throw new Error("NOT_FOUND: Resource not found") // Same error for "not found" and "no access"
+  throw new Error("NOT_FOUND: Resource not found"); // Same error for "not found" and "no access"
 }
 
 // This forces attacker to use timing attacks or other side-channels
@@ -212,7 +212,9 @@ if (!resource) {
 export const members = sqliteTable(
   "members",
   {
-    id: text("id").primaryKey().$defaultFn(() => createId()),
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => createId()),
     tenantId: text("tenant_id")
       .notNull()
       .references(() => tenants.id, { onDelete: "cascade" }),
@@ -227,15 +229,15 @@ export const members = sqliteTable(
     invitedBy: text("invited_by"),
     acceptedAt: integer("accepted_at", { mode: "timestamp" }),
     createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(
-      () => new Date()
+      () => new Date(),
     ),
   },
   (table) => [
     unique("unique_member").on(table.tenantId, table.userId),
     index("idx_members_tenant").on(table.tenantId),
     index("idx_members_user").on(table.userId),
-  ]
-)
+  ],
+);
 ```
 
 </template>
@@ -295,18 +297,3 @@ const setActiveTenant = authProcedure
 10. Test authorization with different roles and tenants before deployment
 
 </instructions>
-
-<anti-patterns>
-
-- Using FORBIDDEN error which reveals resource existence
-- Missing tenant filter in queries after middleware check
-- Not indexing tenantId/parentId columns (slow queries)
-- Bypassing authorization middleware for "internal" operations
-- Returning different errors for "not found" vs "access denied"
-- Join operations without explicit tenant filtering (cross-tenant leakage)
-- Missing cascade delete rules (orphaned child data)
-- No verification that user belongs to requested tenant
-- Trusting client-provided tenant ID without server validation
-- Not testing authorization with multiple users and roles
-
-</anti-patterns>

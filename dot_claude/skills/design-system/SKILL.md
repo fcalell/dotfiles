@@ -18,6 +18,7 @@ Before designing, establish the product context:
 ```
 
 **Example contexts:**
+
 - Engineering dashboard: "Help engineers configure systems" → precise, data-dense, technical
 - Creative tool: "Help designers explore ideas" → experimental, playful, forgiving
 - Analytics: "Help executives understand trends" → clear, scannable, authoritative
@@ -34,28 +35,28 @@ All colors trace back to core semantic primitives:
 // Semantic primitives (define once, use everywhere)
 const palette = {
   foreground: {
-    primary: "#000000",     // Primary text
-    secondary: "#666666",   // Secondary text
-    tertiary: "#999999",    // Tertiary text
-    muted: "#cccccc",       // Disabled/subtle
+    primary: "#000000", // Primary text
+    secondary: "#666666", // Secondary text
+    tertiary: "#999999", // Tertiary text
+    muted: "#cccccc", // Disabled/subtle
   },
   background: {
-    base: "#ffffff",        // Default surface
-    elevated: "#f9f9f9",    // Cards, modals
-    overlay: "#000000cc",   // Overlays
+    base: "#ffffff", // Default surface
+    elevated: "#f9f9f9", // Cards, modals
+    overlay: "#000000cc", // Overlays
   },
   border: {
-    default: "#e0e0e0",     // Standard borders
-    subtle: "#f0f0f0",      // Faint division
-    strong: "#999999",      // Emphasis
+    default: "#e0e0e0", // Standard borders
+    subtle: "#f0f0f0", // Faint division
+    strong: "#999999", // Emphasis
   },
   semantic: {
     destructive: "#ef4444", // Delete, cancel, error
-    warning: "#f59e0b",     // Caution
-    success: "#10b981",     // Success
-    info: "#3b82f6",        // Information
+    warning: "#f59e0b", // Caution
+    success: "#10b981", // Success
+    info: "#3b82f6", // Information
   },
-}
+};
 
 // Surface elevations (builds hierarchy)
 const surfaces = {
@@ -71,15 +72,15 @@ const surfaces = {
     background: palette.background.elevated,
     border: palette.border.strong,
   },
-}
+};
 
 // Text hierarchy
 const typography = {
-  primary: palette.foreground.primary,    // Main content
+  primary: palette.foreground.primary, // Main content
   secondary: palette.foreground.secondary, // Supporting
-  tertiary: palette.foreground.tertiary,   // De-emphasized
-  muted: palette.foreground.muted,         // Disabled
-}
+  tertiary: palette.foreground.tertiary, // De-emphasized
+  muted: palette.foreground.muted, // Disabled
+};
 ```
 
 **Principle:** Colors mean something. Default color should not jump out.
@@ -97,6 +98,7 @@ Before shipping any design, validate against signature:
 **Squint test:** Blur your eyes. Can you still perceive hierarchy? Borders shouldn't dominate.
 
 **Signature test:** Can you identify 5 elements where the design signature appears?
+
 - Specific border treatment
 - Typography choices
 - Color usage
@@ -104,6 +106,7 @@ Before shipping any design, validate against signature:
 - Spacing ratios
 
 **Token test:** Do CSS variable names sound like they belong to THIS product?
+
 - ✅ `--color-status-focus`, `--spacing-section-gap`, `--font-data`
 - ❌ `--blue-500`, `--padding-16`, `--generic-font`
 
@@ -143,7 +146,7 @@ const elevation = {
     background: "bg-surface-overlay",
     border: "border border-border-strong",
   },
-}
+};
 
 // Visual difference: barely perceptible but clear under scrutiny
 // Each level: lighter background OR stronger border, not both
@@ -158,30 +161,35 @@ const elevation = {
 <template id="component-patterns">
 
 **Cards:**
+
 - 1px border, subtle color
 - Padding: 24px (loose) or 16px (compact)
 - No shadows
 - Headers use 600 weight
 
 **Buttons:**
+
 - 44px height (default), 36px (compact)
 - Explicit variant: `variant="default" | "secondary" | "ghost" | "destructive"`
 - 0px radius
 - Focus ring: ring-2 ring-ring offset-2
 
 **Forms:**
+
 - Input height: 40px
 - Label weight: 500
 - Error color semantic (red)
 - Help text smaller, muted color
 
 **Data tables:**
+
 - Bottom borders only (no grid lines)
 - Monospace font for numeric data
 - Compact padding
 - Hover row color very subtle
 
 **Dark mode:**
+
 - Invert background/foreground values
 - Borders over shadows (always)
 - Same structure, inverted semantic colors
@@ -192,13 +200,14 @@ const elevation = {
 
 <template id="design-workflow">
 
-1. **Read system.md** if exists — understand established patterns
+1. **Read .claude/project-management/design-system.md** if exists — understand established patterns
 2. **Check pattern library** before proposing new component
 3. **Propose with intent** — "This dropdown shows status filters. Should feel scannable and dense."
 4. **Get confirmation** before implementing
-5. **Offer to save** new patterns to system.md for future reference
+5. **Offer to save** new patterns to design-system.md for future reference
 
 **Questions to ask:**
+
 - Does this component pattern already exist?
 - What's the intent of this UI section?
 - Is the color choice meaningful or decorative?
@@ -235,35 +244,44 @@ const elevation = {
 
 ## Documentation Template
 
-If creating new system.md:
+If creating new .claude/project-management/design-system.md:
 
 ```markdown
 # Design System
 
 ## Intent
+
 [Who are users, what's their mindset, what's our brand voice?]
 
 ## Signature Elements
+
 [What makes this product visually distinct?]
 
 ## Spacing Scale
+
 [Define token progression: none, xs, sm, md, lg, xl, 2xl]
 
 ## Color Palette
+
 [Semantic primitives: foreground, background, border, semantic colors]
 
 ## Typography
+
 [Font families, weights, scale, hierarchy]
 
 ## Surface Architecture
+
 [How surfaces stack: base, elevated, strong, overlay]
 
 ## Components
+
 [Pattern library: cards, buttons, forms, tables, dialogs]
 
 ## Dark Mode
+
 [How palette inverts/adapts]
 
 ## Do's and Don'ts
+
 [Common mistakes to avoid]
 ```

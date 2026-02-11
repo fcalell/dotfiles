@@ -17,19 +17,19 @@ Use any HTTP-based email service (Resend, SendGrid, Mailgun, AWS SES, etc.).
 // Generic email client wrapper
 export interface EmailProvider {
   send(opts: {
-    to: string
-    subject: string
-    html: string
-    from?: string
-    replyTo?: string
-  }): Promise<{ messageId: string }>
+    to: string;
+    subject: string;
+    html: string;
+    from?: string;
+    replyTo?: string;
+  }): Promise<{ messageId: string }>;
 }
 
 // Resend implementation
-import { Resend } from "resend"
+import { Resend } from "resend";
 
 export function createEmailClient(apiKey: string): EmailProvider {
-  const resend = new Resend(apiKey)
+  const resend = new Resend(apiKey);
   return {
     async send(opts) {
       const { data, error } = await resend.emails.send({
@@ -38,18 +38,18 @@ export function createEmailClient(apiKey: string): EmailProvider {
         subject: opts.subject,
         html: opts.html,
         replyTo: opts.replyTo,
-      })
-      if (error) throw new Error(`Email failed: ${error.message}`)
-      return { messageId: data.id }
+      });
+      if (error) throw new Error(`Email failed: ${error.message}`);
+      return { messageId: data.id };
     },
-  }
+  };
 }
 
 // SendGrid implementation
-import sgMail from "@sendgrid/mail"
+import sgMail from "@sendgrid/mail";
 
 export function createSendGridClient(apiKey: string): EmailProvider {
-  sgMail.setApiKey(apiKey)
+  sgMail.setApiKey(apiKey);
   return {
     async send(opts) {
       const [{ headers }] = await sgMail.send({
@@ -58,10 +58,10 @@ export function createSendGridClient(apiKey: string): EmailProvider {
         subject: opts.subject,
         html: opts.html,
         replyTo: opts.replyTo,
-      })
-      return { messageId: headers["x-message-id"] }
+      });
+      return { messageId: headers["x-message-id"] };
     },
-  }
+  };
 }
 ```
 
@@ -72,24 +72,29 @@ export function createSendGridClient(apiKey: string): EmailProvider {
 ```typescript
 // Send transactional email directly from procedure (fire-and-forget)
 const sendInvite = authProcedure
-  .input(z.object({
-    recipientEmail: z.string().email(),
-    tenantName: z.string(),
-  }))
+  .input(
+    z.object({
+      recipientEmail: z.string().email(),
+      tenantName: z.string(),
+    }),
+  )
   .use(authorizationMiddleware({ resource: "member", action: "invite" }))
   .handler(async ({ input, context }) => {
-    const emailClient = createEmailClient(context.env.EMAIL_API_KEY)
+    const emailClient = createEmailClient(context.env.EMAIL_API_KEY);
 
     // Create invitation record in database
-    const inviteToken = crypto.randomUUID()
-    const [invite] = await context.db.insert(invitations).values({
-      id: createId(),
-      tenantId: context.session.activeTenantId,
-      email: input.recipientEmail,
-      token: inviteToken,
-      createdAt: new Date(),
-      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
-    }).returning()
+    const inviteToken = crypto.randomUUID();
+    const [invite] = await context.db
+      .insert(invitations)
+      .values({
+        id: createId(),
+        tenantId: context.session.activeTenantId,
+        email: input.recipientEmail,
+        token: inviteToken,
+        createdAt: new Date(),
+        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
+      })
+      .returning();
 
     // Send email (fire-and-forget)
     try {
@@ -100,14 +105,14 @@ const sendInvite = authProcedure
           inviteUrl: `https://yourdomain.com/invites/${inviteToken}`,
           tenantName: input.tenantName,
         }),
-      })
+      });
     } catch (error) {
-      console.error("Failed to send invite email:", error)
+      console.error("Failed to send invite email:", error);
       // Don't fail the procedure — email is best-effort
     }
 
-    return { success: true, inviteId: invite.id }
-  })
+    return { success: true, inviteId: invite.id };
+  });
 ```
 
 </template>
@@ -121,18 +126,18 @@ For critical emails, use async queues to decouple sending from the request.
 ```typescript
 // Define queue message type
 interface EmailQueueMessage {
-  to: string
-  subject: string
-  template: string
-  data: Record<string, any>
-  retries?: number
+  to: string;
+  subject: string;
+  template: string;
+  data: Record<string, any>;
+  retries?: number;
 }
 
 // Producer: queue email from any procedure
 const sendPasswordReset = baseProcedure
   .input(z.object({ email: z.string().email() }))
   .handler(async ({ input, context }) => {
-    const resetToken = crypto.randomUUID()
+    const resetToken = crypto.randomUUID();
 
     // Create password reset record
     await context.db.insert(passwordResets).values({
@@ -140,7 +145,7 @@ const sendPasswordReset = baseProcedure
       email: input.email,
       token: resetToken,
       createdAt: new Date(),
-    })
+    });
 
     // Queue the email for async delivery
     await context.env.EMAIL_QUEUE?.send({
@@ -148,47 +153,47 @@ const sendPasswordReset = baseProcedure
       subject: "Reset your password",
       template: "password-reset",
       data: { resetUrl: `https://yourdomain.com/reset/${resetToken}` },
-    })
+    });
 
-    return { success: true, message: "Check your email for reset link" }
-  })
+    return { success: true, message: "Check your email for reset link" };
+  });
 
 // Consumer: process email queue (in separate worker/service)
 export default {
   async queue(batch: MessageBatch<EmailQueueMessage>, env: Bindings) {
-    const emailClient = createEmailClient(env.EMAIL_API_KEY)
+    const emailClient = createEmailClient(env.EMAIL_API_KEY);
 
     for (const msg of batch.messages) {
       try {
-        const html = renderEmailTemplate(msg.body.template, msg.body.data)
+        const html = renderEmailTemplate(msg.body.template, msg.body.data);
 
         await emailClient.send({
           to: msg.body.to,
           subject: msg.body.subject,
           html,
-        })
+        });
 
-        msg.ack() // Mark as successfully sent
+        msg.ack(); // Mark as successfully sent
       } catch (error) {
         console.error("Email send failed:", {
           error,
           template: msg.body.template,
           recipient: msg.body.to,
           attempts: msg.attempts,
-        })
+        });
 
         // Retry with exponential backoff
         if (msg.attempts < 3) {
           msg.retry({
             delaySeconds: Math.pow(2, msg.attempts) * 60, // 1min, 2min, 4min
-          })
+          });
         } else {
           // After max retries, message goes to dead letter queue
         }
       }
     }
   },
-}
+};
 ```
 
 </template>
@@ -200,26 +205,32 @@ Store notifications in database, poll via client.
 <template id="notifications-schema">
 
 ```typescript
-export const notifications = sqliteTable("notifications", {
-  id: text("id").primaryKey().$defaultFn(() => createId()),
-  userId: text("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
-  tenantId: text("tenant_id").notNull(), // Tenant context
-  type: text("type").notNull(), // "invite", "alert", "update", etc.
-  title: text("title").notNull(),
-  body: text("body"),
-  href: text("href"), // Link to relevant resource
-  read: integer("read", { mode: "boolean" }).notNull().default(false),
-  readAt: integer("read_at", { mode: "timestamp" }),
-  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(
-    () => new Date()
-  ),
-}, (table) => [
-  // Composite index for common query: get unread for user
-  index("idx_notifications_user_unread").on(table.userId, table.read),
-  index("idx_notifications_tenant").on(table.tenantId),
-])
+export const notifications = sqliteTable(
+  "notifications",
+  {
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => createId()),
+    userId: text("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    tenantId: text("tenant_id").notNull(), // Tenant context
+    type: text("type").notNull(), // "invite", "alert", "update", etc.
+    title: text("title").notNull(),
+    body: text("body"),
+    href: text("href"), // Link to relevant resource
+    read: integer("read", { mode: "boolean" }).notNull().default(false),
+    readAt: integer("read_at", { mode: "timestamp" }),
+    createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(
+      () => new Date(),
+    ),
+  },
+  (table) => [
+    // Composite index for common query: get unread for user
+    index("idx_notifications_user_unread").on(table.userId, table.read),
+    index("idx_notifications_tenant").on(table.tenantId),
+  ],
+);
 
 // Procedure to list notifications
 const listNotifications = authProcedure
@@ -228,16 +239,14 @@ const listNotifications = authProcedure
     let query = context.db
       .select()
       .from(notifications)
-      .where(eq(notifications.userId, context.user.id))
+      .where(eq(notifications.userId, context.user.id));
 
     if (input.unreadOnly) {
-      query = query.where(eq(notifications.read, false))
+      query = query.where(eq(notifications.read, false));
     }
 
-    return await query
-      .orderBy(desc(notifications.createdAt))
-      .limit(50)
-  })
+    return await query.orderBy(desc(notifications.createdAt)).limit(50);
+  });
 
 // Procedure to mark as read
 const markNotificationRead = authProcedure
@@ -249,13 +258,13 @@ const markNotificationRead = authProcedure
       .where(
         and(
           eq(notifications.id, input.id),
-          eq(notifications.userId, context.user.id)
-        )
+          eq(notifications.userId, context.user.id),
+        ),
       )
-      .returning()
+      .returning();
 
-    return updated
-  })
+    return updated;
+  });
 ```
 
 Client-side polling:
@@ -266,7 +275,7 @@ const { data: notifications, isLoading } = useQuery({
   queryKey: ["notifications"],
   queryFn: () => orpc.notifications.list.query({ unreadOnly: true }),
   refetchInterval: 30000, // Poll every 30 seconds
-})
+});
 ```
 
 </template>
@@ -281,7 +290,7 @@ Keep templates as simple TypeScript functions returning HTML.
 // Template registry
 export function renderEmailTemplate(
   type: string,
-  data: Record<string, any>
+  data: Record<string, any>,
 ): string {
   const templates: Record<string, (data: any) => string> = {
     welcome: (d) => `
@@ -332,14 +341,14 @@ export function renderEmailTemplate(
         ${d.actionUrl ? `<a href="${d.actionUrl}" style="display: inline-block; padding: 12px 24px; background: #2563eb; color: white; text-decoration: none; border-radius: 6px;">View</a>` : ""}
       </div>
     `,
-  }
+  };
 
-  const template = templates[type]
+  const template = templates[type];
   if (!template) {
-    return `<p>Email notification: ${type}</p>`
+    return `<p>Email notification: ${type}</p>`;
   }
 
-  return template(data)
+  return template(data);
 }
 ```
 
@@ -359,18 +368,3 @@ export function renderEmailTemplate(
 - Implement dead letter queue for failed email delivery
 
 </instructions>
-
-<anti-patterns>
-
-- Sending critical emails synchronously in request path (use queues)
-- Storing notification preferences in transactional database (use KV)
-- Building WebSocket notifications before polling is insufficient
-- Using HTML template engines when template literals work
-- Hard-coding sender addresses (centralize in configuration)
-- Missing error handling for email failures
-- No retry strategy for failed deliveries
-- Storing provider API keys in code
-- Not testing OAuth/sender domain verification
-- Missing unsubscribe links in transactional emails
-
-</anti-patterns>

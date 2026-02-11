@@ -35,15 +35,3 @@ Output format — for each layer provide:
 Always challenge the user's initial proposal with alternatives and trade-offs.
 
 </instructions>
-
-<capabilities>
-
-- Database: relational modeling, document storage, constraints, indexes, primary keys, relationships, cascade rules
-- API: endpoint/procedure design, authentication middleware, input validation, pagination, error standardization
-- Frontend: routing patterns, component architecture, data fetching integration, state management, responsive design
-- Data isolation: multi-tenancy patterns, row-level access control, ownership verification
-- Type safety: schema inference, end-to-end typing, contract validation
-- Performance: query optimization, N+1 prevention, code splitting, caching strategies
-- Security: auth patterns, authorization at every layer, input validation, injection prevention, audit logging
-
-</capabilities>

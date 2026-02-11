@@ -14,7 +14,11 @@ description: Structured logging, error tracking, and monitoring patterns. Use wh
 type LogLevel = "debug" | "info" | "warn" | "error";
 
 export function createLogger(requestId: string, environment: string) {
-  const log = (level: LogLevel, message: string, data?: Record<string, unknown>) => {
+  const log = (
+    level: LogLevel,
+    message: string,
+    data?: Record<string, unknown>,
+  ) => {
     console[level === "error" ? "error" : level === "warn" ? "warn" : "log"](
       JSON.stringify({
         level,
@@ -23,15 +27,19 @@ export function createLogger(requestId: string, environment: string) {
         environment,
         timestamp: new Date().toISOString(),
         ...data,
-      })
+      }),
     );
   };
 
   return {
-    debug: (msg: string, data?: Record<string, unknown>) => log("debug", msg, data),
-    info: (msg: string, data?: Record<string, unknown>) => log("info", msg, data),
-    warn: (msg: string, data?: Record<string, unknown>) => log("warn", msg, data),
-    error: (msg: string, data?: Record<string, unknown>) => log("error", msg, data),
+    debug: (msg: string, data?: Record<string, unknown>) =>
+      log("debug", msg, data),
+    info: (msg: string, data?: Record<string, unknown>) =>
+      log("info", msg, data),
+    warn: (msg: string, data?: Record<string, unknown>) =>
+      log("warn", msg, data),
+    error: (msg: string, data?: Record<string, unknown>) =>
+      log("error", msg, data),
   };
 }
 ```
@@ -190,16 +198,3 @@ app.get("/health", async (c) => {
 - Test health checks in staging before production
 
 </instructions>
-
-<anti-patterns>
-
-- Unstructured console.log("something happened") in production
-- Missing requestId correlation across log entries
-- Logging full request/response bodies (PII risk + cost explosion)
-- Error tracking sample rate 1.0 in production (expensive)
-- No health check endpoint (harder to diagnose outages)
-- Catching errors silently without logging or re-throwing
-- Health checks that don't cover critical dependencies
-- Forgetting to load error tracking credentials from environment
-
-</anti-patterns>

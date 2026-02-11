@@ -88,9 +88,10 @@ packages/
 ```
 
 **Conventions:**
+
 - Use `@repo/` scope for all internal packages
 - Define scripts that turbo can orchestrate
-- No version numbers in package.json (monorepo symlinks via workspace:*)
+- No version numbers in package.json (monorepo symlinks via workspace:\*)
 
 </template>
 
@@ -111,6 +112,7 @@ packages/
 ```
 
 **Rules:**
+
 - Use `workspace:*` for internal dependencies (symlinks locally, resolves on publish)
 - Never use relative paths (`../`) for dependencies
 - Never hardcode versions of internal packages
@@ -168,6 +170,7 @@ packages/
 ```
 
 **Key concepts:**
+
 - `cache: false` for dev tasks (always run)
 - `cache: true` for build/lint/test (skip if unchanged)
 - `dependsOn: ["^build"]` means "wait for dependencies to build first"
@@ -287,19 +290,3 @@ pnpm ls -r --depth 0
 8. Document package purposes in README
 
 </instructions>
-
-## Anti-Patterns
-
-<anti-patterns id="monorepo-mistakes">
-
-- Running commands from inside packages (`cd packages/api && pnpm build`)
-- Using relative paths for internal dependencies (`"@repo/ui": "../ui"`)
-- Hardcoding versions of internal packages
-- Creating circular dependencies between packages
-- Forgetting to update turbo.json when adding new tasks
-- Not caching build outputs (wastes CI time)
-- Mixing app and library code in one package
-- Forgetting to configure `outputs` in turbo.json
-- Installing dev dependencies at workspace root (install in packages)
-
-</anti-patterns>

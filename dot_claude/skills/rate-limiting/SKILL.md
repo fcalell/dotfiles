@@ -12,40 +12,43 @@ Patterns for rate limiting, quota enforcement, and abuse prevention.
 ```typescript
 // Generic rate limiting middleware
 export function rateLimitMiddleware(opts?: {
-  limit?: number // Requests per period
-  period?: number // Time period in seconds
+  limit?: number; // Requests per period
+  period?: number; // Time period in seconds
 }) {
   return async (c: Context<{ Bindings: Bindings }>, next: Next) => {
-    const limit = opts?.limit ?? 100
-    const period = opts?.period ?? 60
+    const limit = opts?.limit ?? 100;
+    const period = opts?.period ?? 60;
 
     // Key by authenticated user, fall back to IP
-    const userId = c.get("user")?.id
-    const ip = c.req.header("cf-connecting-ip") ?? "unknown"
-    const key = userId ? `user:${userId}` : `ip:${ip}`
+    const userId = c.get("user")?.id;
+    const ip = c.req.header("cf-connecting-ip") ?? "unknown";
+    const key = userId ? `user:${userId}` : `ip:${ip}`;
 
     // Check rate limit (use your provider's API)
     // This is a generic example; replace with your provider
-    const remaining = await checkRateLimit(c.env, key, limit, period)
+    const remaining = await checkRateLimit(c.env, key, limit, period);
 
     // Set standard rate limit headers
-    c.header("X-RateLimit-Limit", String(limit))
-    c.header("X-RateLimit-Remaining", String(Math.max(0, remaining)))
-    c.header("X-RateLimit-Reset", String(Math.ceil(Date.now() / 1000) + period))
+    c.header("X-RateLimit-Limit", String(limit));
+    c.header("X-RateLimit-Remaining", String(Math.max(0, remaining)));
+    c.header(
+      "X-RateLimit-Reset",
+      String(Math.ceil(Date.now() / 1000) + period),
+    );
 
     if (remaining < 0) {
-      c.header("Retry-After", String(period))
+      c.header("Retry-After", String(period));
       return c.json(
         {
           error: "Too many requests",
           retryAfter: period,
         },
-        429
-      )
+        429,
+      );
     }
 
-    await next()
-  }
+    await next();
+  };
 }
 
 // Helper to check rate limit (adapt to your provider)
@@ -53,17 +56,17 @@ async function checkRateLimit(
   env: Bindings,
   key: string,
   limit: number,
-  period: number
+  period: number,
 ): Promise<number> {
   // Example: Cloudflare Rate Limiting API
   if (env.RATE_LIMITER) {
-    const { success, remaining } = await env.RATE_LIMITER.limit({ key })
-    return remaining
+    const { success, remaining } = await env.RATE_LIMITER.limit({ key });
+    return remaining;
   }
 
   // Fallback: simple in-memory tracking (not suitable for production)
   // Use Durable Objects, KV, or external service for real deployments
-  return limit
+  return limit;
 }
 ```
 
@@ -89,37 +92,37 @@ const ENDPOINT_LIMITS: Record<string, { limit: number; period: number }> = {
 
   // Default: moderate baseline
   default: { limit: 100, period: 60 },
-}
+};
 
 // Middleware that applies per-endpoint limits
 export function endpointRateLimitMiddleware() {
   return async (c: Context<{ Bindings: Bindings }>, next: Next) => {
-    const method = c.req.method
-    const path = new URL(c.req.url).pathname
-    const endpoint = `${method} ${path}`
+    const method = c.req.method;
+    const path = new URL(c.req.url).pathname;
+    const endpoint = `${method} ${path}`;
 
     // Look up config for this endpoint
-    const config = ENDPOINT_LIMITS[endpoint] ?? ENDPOINT_LIMITS["default"]
+    const config = ENDPOINT_LIMITS[endpoint] ?? ENDPOINT_LIMITS["default"];
 
     // Key by user ID if authenticated, else IP
-    const userId = c.get("user")?.id
-    const ip = c.req.header("cf-connecting-ip") ?? "unknown"
-    const key = `${userId ?? ip}:${endpoint}`
+    const userId = c.get("user")?.id;
+    const ip = c.req.header("cf-connecting-ip") ?? "unknown";
+    const key = `${userId ?? ip}:${endpoint}`;
 
     // Check rate limit
     const remaining = await checkRateLimit(
       c.env,
       key,
       config.limit,
-      config.period
-    )
+      config.period,
+    );
 
-    c.header("X-RateLimit-Limit", String(config.limit))
-    c.header("X-RateLimit-Remaining", String(Math.max(0, remaining)))
+    c.header("X-RateLimit-Limit", String(config.limit));
+    c.header("X-RateLimit-Remaining", String(Math.max(0, remaining)));
 
     if (remaining < 0) {
-      const resetAfter = Math.ceil(config.period)
-      c.header("Retry-After", String(resetAfter))
+      const resetAfter = Math.ceil(config.period);
+      c.header("Retry-After", String(resetAfter));
       return c.json(
         {
           error: "Rate limit exceeded",
@@ -128,16 +131,16 @@ export function endpointRateLimitMiddleware() {
           period: config.period,
           retryAfter: resetAfter,
         },
-        429
-      )
+        429,
+      );
     }
 
-    await next()
-  }
+    await next();
+  };
 }
 
 // Apply to Hono app
-app.use("/api/*", endpointRateLimitMiddleware())
+app.use("/api/*", endpointRateLimitMiddleware());
 ```
 
 </template>
@@ -150,13 +153,15 @@ const TIER_LIMITS: Record<string, { limit: number; period: number }> = {
   free: { limit: 1000, period: 3600 }, // 1k/hour
   pro: { limit: 50000, period: 3600 }, // 50k/hour
   enterprise: { limit: 500000, period: 3600 }, // 500k/hour
-}
+};
 
 // Schema for API key management
 export const apiKeys = sqliteTable(
   "api_keys",
   {
-    id: text("id").primaryKey().$defaultFn(() => createId()),
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => createId()),
     tenantId: text("tenant_id").notNull(),
     key: text("key")
       .notNull()
@@ -167,70 +172,73 @@ export const apiKeys = sqliteTable(
     enabled: integer("enabled", { mode: "boolean" }).notNull().default(true),
     lastUsedAt: integer("last_used_at", { mode: "timestamp" }),
     createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(
-      () => new Date()
+      () => new Date(),
     ),
   },
   (table) => [
     index("idx_api_keys_key").on(table.key),
     index("idx_api_keys_tenant").on(table.tenantId),
-  ]
-)
+  ],
+);
 
 // Middleware: authenticate and apply tier-based limits
 export function apiKeyRateLimitMiddleware() {
   return async (c: Context<{ Bindings: Bindings }>, next: Next) => {
-    const authHeader = c.req.header("Authorization") || ""
-    const apiKey = authHeader.replace("Bearer ", "")
+    const authHeader = c.req.header("Authorization") || "";
+    const apiKey = authHeader.replace("Bearer ", "");
 
     if (!apiKey) {
       // Public endpoints get anonymous limits
-      const remaining = await checkRateLimit(c.env, "anonymous", 10, 60)
+      const remaining = await checkRateLimit(c.env, "anonymous", 10, 60);
       if (remaining < 0) {
-        return c.json({ error: "Rate limit exceeded" }, 429)
+        return c.json({ error: "Rate limit exceeded" }, 429);
       }
-      return await next()
+      return await next();
     }
 
     // Look up API key and tier
-    const db = createDbClient(c.env.DB)
+    const db = createDbClient(c.env.DB);
     const keyRecord = await db.query.apiKeys.findFirst({
       where: eq(apiKeys.key, apiKey),
-    })
+    });
 
     if (!keyRecord || !keyRecord.enabled) {
-      return c.json({ error: "Invalid API key" }, 401)
+      return c.json({ error: "Invalid API key" }, 401);
     }
 
     // Apply tier-based limit
-    const tierLimit = TIER_LIMITS[keyRecord.tier] ?? TIER_LIMITS["free"]
-    const rateLimitKey = `api_key:${apiKey}`
+    const tierLimit = TIER_LIMITS[keyRecord.tier] ?? TIER_LIMITS["free"];
+    const rateLimitKey = `api_key:${apiKey}`;
 
     const remaining = await checkRateLimit(
       c.env,
       rateLimitKey,
       tierLimit.limit,
-      tierLimit.period
-    )
+      tierLimit.period,
+    );
 
     // Update last used timestamp
     await db
       .update(apiKeys)
       .set({ lastUsedAt: new Date() })
-      .where(eq(apiKeys.id, keyRecord.id))
+      .where(eq(apiKeys.id, keyRecord.id));
 
-    c.header("X-RateLimit-Limit", String(tierLimit.limit))
-    c.header("X-RateLimit-Remaining", String(Math.max(0, remaining)))
+    c.header("X-RateLimit-Limit", String(tierLimit.limit));
+    c.header("X-RateLimit-Remaining", String(Math.max(0, remaining)));
 
     if (remaining < 0) {
-      c.header("Retry-After", String(tierLimit.period))
-      return c.json({ error: "Rate limit exceeded", tier: keyRecord.tier }, 429)
+      c.header("Retry-After", String(tierLimit.period));
+      return c.json(
+        { error: "Rate limit exceeded", tier: keyRecord.tier },
+        429,
+      );
     }
 
     // Attach key context to request
-    c.set("apiKey", keyRecord)
+    c.set("apiKey", keyRecord);
 
-    await next()
-  }
+    await next();
+  };
 }
 ```
 
@@ -244,27 +252,27 @@ async function slidingWindowRateLimit(
   env: Bindings,
   key: string,
   limit: number,
-  windowSeconds: number
+  windowSeconds: number,
 ): Promise<{ allowed: boolean; remaining: number; resetAt: number }> {
-  const kv = env.CACHE_KV // Use KV for tracking requests
-  const now = Date.now()
-  const windowStart = now - windowSeconds * 1000
+  const kv = env.CACHE_KV; // Use KV for tracking requests
+  const now = Date.now();
+  const windowStart = now - windowSeconds * 1000;
 
   // Get current window data
-  const windowKey = `ratelimit:${key}:${Math.floor(now / (windowSeconds * 1000))}`
-  let count = (await kv.get<number>(windowKey, "json")) ?? 0
+  const windowKey = `ratelimit:${key}:${Math.floor(now / (windowSeconds * 1000))}`;
+  let count = (await kv.get<number>(windowKey, "json")) ?? 0;
 
   // Increment counter
-  count++
+  count++;
   await kv.put(windowKey, JSON.stringify(count), {
     expirationTtl: windowSeconds + 60, // Keep slightly longer for cleanup
-  })
+  });
 
-  const allowed = count <= limit
-  const remaining = Math.max(0, limit - count)
-  const resetAt = Math.ceil((windowStart + windowSeconds * 1000) / 1000)
+  const allowed = count <= limit;
+  const remaining = Math.max(0, limit - count);
+  const resetAt = Math.ceil((windowStart + windowSeconds * 1000) / 1000);
 
-  return { allowed, remaining, resetAt }
+  return { allowed, remaining, resetAt };
 }
 ```
 
@@ -284,18 +292,3 @@ async function slidingWindowRateLimit(
 10. Monitor rate limit headers in client logs to detect quota issues
 
 </instructions>
-
-<anti-patterns>
-
-- Rate limiting only by IP (shared IPs punish legitimate users; prefer user ID)
-- Same limit for all endpoints (login needs 5/min, not 100/min)
-- Missing Retry-After header (clients can't implement proper backoff)
-- Rate limiting after expensive work is done (check FIRST in middleware)
-- Hardcoding API keys in code (use database + environment variables)
-- No rate limiting on auth endpoints (enables credential stuffing)
-- In-memory tracking without persistence (resets on deploy, inaccurate in distributed systems)
-- Not exposing remaining quota to clients (clients can't implement smart retries)
-- Using fixed window instead of sliding window (less accurate)
-- Not testing rate limit thresholds in staging
-
-</anti-patterns>

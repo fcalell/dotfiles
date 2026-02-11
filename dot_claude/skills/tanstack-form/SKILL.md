@@ -12,17 +12,17 @@ React form library with built-in validation, error handling, and minimal re-rend
 <template id="basic-form">
 
 ```tsx
-import { useForm } from "@tanstack/react-form"
-import { z } from "zod"
+import { useForm } from "@tanstack/react-form";
+import { z } from "zod";
 
 // 1. Define schema with validation rules
 const formSchema = z.object({
   email: z.string().email("Invalid email"),
   name: z.string().min(1, "Name required").max(100),
   message: z.string().optional(),
-})
+});
 
-type FormData = z.infer<typeof formSchema>
+type FormData = z.infer<typeof formSchema>;
 
 // 2. Create form with useForm
 function ContactForm() {
@@ -33,18 +33,23 @@ function ContactForm() {
       message: "",
     },
     validators: {
-      onChange: formSchema,  // Validate on each change
+      onChange: schema,
+      onBlur: schema,
     },
+    validationLogic: revalidateLogic({
+      mode: "blur", // Before submit: Only check when user leaves a field
+      modeAfterSubmission: "change", // After submit: Check on every keystroke for fast fixes
+    }),
     onSubmit: async ({ value }) => {
       // Handle form submission
-      await submitForm(value)
+      await submitForm(value);
     },
-  })
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    form.handleSubmit()
-  }
+    e.preventDefault();
+    form.handleSubmit();
+  };
 
   // 3. Render form with field state
   return (
@@ -63,7 +68,9 @@ function ContactForm() {
               aria-invalid={!!field.state.meta.errors.length}
             />
             {field.state.meta.errors.length > 0 && (
-              <span className="error">{field.state.meta.errors[0]?.message}</span>
+              <span className="error">
+                {field.state.meta.errors[0]?.message}
+              </span>
             )}
           </div>
         )}
@@ -71,222 +78,17 @@ function ContactForm() {
 
       <button type="submit">Submit</button>
     </form>
-  )
+  );
 }
 ```
 
 **Customize:**
+
 - Add/remove fields in schema and form
 - Update validation rules based on requirements
 - Add custom error messages to validation
 - Change input types (email, password, tel, etc.)
-
-</template>
-
-<template id="select-field">
-
-```tsx
-<form.Field name="category">
-  {(field) => (
-    <div>
-      <label htmlFor={field.name}>Category</label>
-      <select
-        id={field.name}
-        name={field.name}
-        value={field.state.value}
-        onChange={(e) => field.handleChange(e.target.value)}
-      >
-        <option value="">Select category</option>
-        <option value="tech">Technology</option>
-        <option value="design">Design</option>
-      </select>
-      {field.state.meta.errors.length > 0 && (
-        <span className="error">{field.state.meta.errors[0]?.message}</span>
-      )}
-    </div>
-  )}
-</form.Field>
-```
-
-</template>
-
-<template id="checkbox-field">
-
-```tsx
-<form.Field name="agree" mode="boolean">
-  {(field) => (
-    <label>
-      <input
-        type="checkbox"
-        checked={field.state.value}
-        onChange={(e) => field.handleChange(e.target.checked)}
-      />
-      I agree to terms
-    </label>
-  )}
-</form.Field>
-```
-
-</template>
-
-<template id="array-field">
-
-```tsx
-<form.Field name="items" mode="array">
-  {(field) => (
-    <div>
-      <label>Items</label>
-      <div>
-        {field.state.value.map((_, index) => (
-          <div key={index}>
-            <form.Field name={`items[${index}].name`}>
-              {(subField) => (
-                <input
-                  value={subField.state.value}
-                  onChange={(e) => subField.handleChange(e.target.value)}
-                  placeholder="Item name"
-                />
-              )}
-            </form.Field>
-            <button
-              type="button"
-              onClick={() => field.removeValue(index)}
-            >
-              Remove
-            </button>
-          </div>
-        ))}
-      </div>
-      <button
-        type="button"
-        onClick={() => field.pushValue({ name: "" })}
-      >
-        Add Item
-      </button>
-    </div>
-  )}
-</form.Field>
-```
-
-**Use when:**
-- Form needs dynamic list of entries
-- Users add/remove items (tags, line items, contacts)
-- Nested validation on each array element
-
-</template>
-
-<template id="dialog-form">
-
-```tsx
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-
-function CreateDialog({ open, onOpenChange }: Props) {
-  const queryClient = useQueryClient()
-
-  // Mutation for submission
-  const mutation = useMutation({
-    mutationFn: submitFormData,
-    onSuccess: () => {
-      // Invalidate related queries
-      queryClient.invalidateQueries({ queryKey: ["items"] })
-      onOpenChange(false)
-    },
-  })
-
-  const form = useForm({
-    defaultValues: { name: "" },
-    validators: { onChange: formSchema },
-    onSubmit: async ({ value }) => {
-      await mutation.mutateAsync(value)
-      form.reset()
-    },
-  })
-
-  return (
-    <div>
-      {open && (
-        <dialog>
-          <h2>Create Item</h2>
-          <form onSubmit={(e) => {
-            e.preventDefault()
-            form.handleSubmit()
-          }}>
-            <form.Field name="name">
-              {(field) => (
-                <input
-                  value={field.state.value}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                />
-              )}
-            </form.Field>
-            <button type="submit" disabled={mutation.isPending}>
-              {mutation.isPending ? "Creating..." : "Create"}
-            </button>
-          </form>
-        </dialog>
-      )}
-    </div>
-  )
-}
-```
-
-**Customize:**
-- Replace `submitFormData` with your API call
-- Update invalidation queryKey to match your cache
-- Add more fields as needed
-
-</template>
-
-## Validation Patterns
-
-<template id="conditional-validation">
-
-```tsx
-// Validate based on other field values
-const formSchema = z.object({
-  contactMethod: z.enum(["email", "phone"]),
-  email: z.string().email().optional(),
-  phone: z.string().optional(),
-}).refine(
-  (data) => {
-    if (data.contactMethod === "email") return !!data.email
-    if (data.contactMethod === "phone") return !!data.phone
-    return true
-  },
-  {
-    message: "Provide the contact method you selected",
-    path: ["email"], // Show error on email field
-  }
-)
-```
-
-**Use for:**
-- Field dependencies (show/hide/validate based on other fields)
-- Mutually exclusive fields
-- Cross-field validation
-
-</template>
-
-<template id="async-validation">
-
-```tsx
-const formSchema = z.object({
-  username: z.string()
-    .min(3, "Min 3 characters")
-    .refine(
-      async (val) => {
-        const res = await fetch(`/api/check-username?username=${val}`)
-        return res.ok
-      },
-      { message: "Username already taken" }
-    ),
-})
-```
-
-**Use for:**
-- Checking availability (username, email, domain)
-- Real-time validation feedback
-- Server-side business rules
+- Change input components based on the design system
 
 </template>
 
@@ -319,18 +121,3 @@ field.moveValue(from, to)        // Array: reorder
 4. **Array fields**: Use `mode="array"` and `pushValue`/`removeValue` methods
 5. **Form submission**: Call `form.handleSubmit()` in submit handler
 6. **Reset after submit**: Call `form.reset()` to clear form on success
-
-## Anti-Patterns
-
-<anti-patterns id="form-mistakes">
-
-- Validating without Zod schema (manual error handling)
-- Not using field render functions (accessing state incorrectly)
-- Forgetting to call `form.reset()` after successful submission
-- Hard-coded validation messages (should be in Zod schema)
-- Not showing errors to user (silent validation failures)
-- Using `defaultValue` instead of `defaultValues` in useForm
-- Not tracking form dirty/touched state (can't implement save prompts)
-- Mixing controlled and uncontrolled inputs
-
-</anti-patterns>

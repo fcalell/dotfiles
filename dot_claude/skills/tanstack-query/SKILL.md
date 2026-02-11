@@ -12,45 +12,50 @@ Server state management library for fetching, caching, and synchronizing data.
 <template id="basic-queries">
 
 ```tsx
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 // Basic list query with filters
-const { data: items, isPending, error } = useQuery({
+const {
+  data: items,
+  isPending,
+  error,
+} = useQuery({
   queryKey: ["items", { status: "active" }],
   queryFn: async () => {
-    const res = await fetch("/api/items?status=active")
-    return res.json()
-  }
-})
+    const res = await fetch("/api/items?status=active");
+    return res.json();
+  },
+});
 
 // Detail query for single item
 const { data: item } = useQuery({
   queryKey: ["item", id],
   queryFn: async () => {
-    const res = await fetch(`/api/items/${id}`)
-    return res.json()
+    const res = await fetch(`/api/items/${id}`);
+    return res.json();
   },
-  enabled: !!id,  // Only fetch when ID exists
-})
+  enabled: !!id, // Only fetch when ID exists
+});
 
 // Mutation with cache invalidation
 const mutation = useMutation({
   mutationFn: async (newItem) => {
     const res = await fetch("/api/items", {
       method: "POST",
-      body: JSON.stringify(newItem)
-    })
-    return res.json()
+      body: JSON.stringify(newItem),
+    });
+    return res.json();
   },
   onSuccess: () => {
     queryClient.invalidateQueries({
-      queryKey: ["items"]
-    })
-  }
-})
+      queryKey: ["items"],
+    });
+  },
+});
 ```
 
 **Customize:**
+
 - Replace array query keys with your actual data types
 - Add filter parameters to queryKey tuples for proper cache management
 - Update API endpoints to match your backend
@@ -65,24 +70,25 @@ const mutation = useMutation({
 const { data: parent } = useQuery({
   queryKey: ["parent", parentId],
   queryFn: async () => {
-    const res = await fetch(`/api/parent/${parentId}`)
-    return res.json()
-  }
-})
+    const res = await fetch(`/api/parent/${parentId}`);
+    return res.json();
+  },
+});
 
 // Dependent query: fetch children only when parent exists
 const { data: children } = useQuery({
   queryKey: ["children", parent?.id],
   queryFn: async () => {
-    const res = await fetch(`/api/children?parentId=${parent.id}`)
-    return res.json()
+    const res = await fetch(`/api/children?parentId=${parent.id}`);
+    return res.json();
   },
   // Only run when parent ID exists - prevents null errors
   enabled: !!parent?.id,
-})
+});
 ```
 
 **Customize:**
+
 - Replace parent and child entity names with actual types
 - Chain multiple dependent queries if needed
 - Always validate the `enabled` condition before using parent data
@@ -93,38 +99,39 @@ const { data: children } = useQuery({
 <template id="optimistic-updates">
 
 ```tsx
-const queryClient = useQueryClient()
+const queryClient = useQueryClient();
 
 const mutation = useMutation({
   mutationFn: updateItem,
   onMutate: async (updatedItem) => {
     // Cancel any ongoing queries for this item
     await queryClient.cancelQueries({
-      queryKey: ["items"]
-    })
+      queryKey: ["items"],
+    });
 
     // Save previous data
-    const previousItems = queryClient.getQueryData(["items"])
+    const previousItems = queryClient.getQueryData(["items"]);
 
     // Update cache optimistically
     queryClient.setQueryData(["items"], (old) =>
-      old.map(item => item.id === updatedItem.id ? updatedItem : item)
-    )
+      old.map((item) => (item.id === updatedItem.id ? updatedItem : item)),
+    );
 
-    return { previousItems }
+    return { previousItems };
   },
   onError: (err, newData, context) => {
     // Revert on error
-    queryClient.setQueryData(["items"], context?.previousItems)
+    queryClient.setQueryData(["items"], context?.previousItems);
   },
   onSuccess: () => {
     // Refetch fresh data after success
-    queryClient.invalidateQueries({ queryKey: ["items"] })
-  }
-})
+    queryClient.invalidateQueries({ queryKey: ["items"] });
+  },
+});
 ```
 
 **Use when:**
+
 - Mutations should appear instant to user (forms, toggles)
 - Bad UX to show spinners for fast mutations
 - Important to revert on error (financial operations)
@@ -137,32 +144,132 @@ const mutation = useMutation({
 const { data, fetchNextPage, hasNextPage, isPending } = useInfiniteQuery({
   queryKey: ["items"],
   queryFn: async ({ pageParam = 0 }) => {
-    const res = await fetch(`/api/items?page=${pageParam}&limit=20`)
-    return res.json()
+    const res = await fetch(`/api/items?page=${pageParam}&limit=20`);
+    return res.json();
   },
   getNextPageParam: (lastPage) => {
-    return lastPage.hasMore ? lastPage.nextPage : undefined
+    return lastPage.hasMore ? lastPage.nextPage : undefined;
   },
   initialPageParam: 0,
-})
+});
 
 return (
   <InfiniteScroll
-    dataLength={data?.pages.flatMap(p => p.items).length ?? 0}
+    dataLength={data?.pages.flatMap((p) => p.items).length ?? 0}
     next={fetchNextPage}
     hasMore={hasNextPage ?? false}
   >
-    {data?.pages.map(page =>
-      page.items.map(item => <ItemCard key={item.id} {...item} />)
+    {data?.pages.map((page) =>
+      page.items.map((item) => <ItemCard key={item.id} {...item} />),
     )}
   </InfiniteScroll>
-)
+);
 ```
 
 **Customize:**
+
 - Adjust pageParam logic based on your pagination (offset, cursor, etc.)
 - Update limit and API endpoint to match backend
 - Use flatMap to flatten pages into single array for display
+
+</template>
+
+## oRPC Integration
+
+<template id="orpc-setup">
+
+```typescript
+import { createORPCClient } from "@orpc/client";
+import { RPCLink } from "@orpc/client/fetch";
+import { createTanstackQueryUtils } from "@orpc/tanstack-query";
+import type { RouterClient } from "@orpc/server";
+import type { router } from "./server/router";
+
+// 1. Create the oRPC client
+const link = new RPCLink({
+  url: "/api/rpc",
+});
+
+const client: RouterClient<typeof router> = createORPCClient(link);
+
+// 2. Create TanStack Query utils — this is used everywhere instead of manual queryKey/queryFn
+export const orpc = createTanstackQueryUtils(client);
+```
+
+</template>
+
+<template id="orpc-queries">
+
+```tsx
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { orpc } from "./orpc";
+
+// List query — queryKey and queryFn are generated automatically
+const { data: items, isPending } = useQuery(
+  orpc.item.list.queryOptions({
+    input: { status: "active", limit: 20, offset: 0 },
+  }),
+);
+
+// Detail query with enabled flag
+const { data: item } = useQuery(
+  orpc.item.get.queryOptions({
+    input: { id },
+    enabled: !!id,
+  }),
+);
+
+// Mutation with typed cache invalidation
+const queryClient = useQueryClient();
+
+const createMutation = useMutation(
+  orpc.item.create.mutationOptions({
+    onSuccess: () => {
+      // Invalidate all item queries (list + detail)
+      queryClient.invalidateQueries({ queryKey: orpc.item.key() });
+    },
+  }),
+);
+
+const updateMutation = useMutation(
+  orpc.item.update.mutationOptions({
+    onSuccess: (_data, variables) => {
+      // Invalidate specific item + list
+      queryClient.invalidateQueries({ queryKey: orpc.item.get.key({ input: { id: variables.id } }) });
+      queryClient.invalidateQueries({ queryKey: orpc.item.list.key() });
+    },
+  }),
+);
+```
+
+**Key differences from manual queries:**
+
+- No hand-written `queryKey` or `queryFn` — generated from the oRPC router
+- `orpc.{entity}.key()` for cache invalidation instead of string arrays
+- `orpc.{entity}.{procedure}.key({ input })` for granular invalidation
+- Full end-to-end type safety from procedure input/output to component props
+
+</template>
+
+<template id="orpc-infinite-queries">
+
+```tsx
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { orpc } from "./orpc";
+
+const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  useInfiniteQuery(
+    orpc.item.list.infiniteOptions({
+      input: (pageParam) => ({
+        limit: 20,
+        cursor: pageParam,
+      }),
+      initialPageParam: 0,
+      getNextPageParam: (lastPage) =>
+        lastPage.items.length === 20 ? lastPage.nextCursor : undefined,
+    }),
+  );
+```
 
 </template>
 
@@ -174,17 +281,3 @@ return (
 4. **staleTime & gcTime**: Set `staleTime` to reduce refetches, `gcTime` (was `cacheTime`) for memory cleanup
 5. **Manual cache updates**: Use `setQueryData` for optimistic updates to feel instant
 6. **isPending vs isFetching**: Use `isPending` for initial load, `isFetching` for background updates
-
-## Anti-Patterns
-
-<anti-patterns id="common-mistakes">
-
-- Hardcoding queryKey strings instead of using arrays for consistency
-- Forgetting to invalidate queries after mutations
-- Not using `enabled` for dependent queries (causes errors)
-- Using wrong queryKey for invalidation (cache won't clear)
-- Setting `staleTime` too high (users see outdated data)
-- Not handling error state in UI (silent failures)
-- Over-fetching data without pagination
-
-</anti-patterns>

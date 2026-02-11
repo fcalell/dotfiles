@@ -16,28 +16,31 @@ Fire-and-forget async processing for expensive operations.
 ```typescript
 // Define queue message types
 interface TaskQueueMessage {
-  type: string // Task identifier
-  tenantId?: string
-  userId?: string
-  data: Record<string, any>
-  timestamp: number
+  type: string; // Task identifier
+  tenantId?: string;
+  userId?: string;
+  data: Record<string, any>;
+  timestamp: number;
 }
 
 // Producer: queue a task from any procedure
 const exportData = authProcedure
   .input(z.object({ format: z.enum(["json", "csv"]) }))
   .handler(async ({ input, context }) => {
-    const exportId = createId()
+    const exportId = createId();
 
     // Create export record in database
-    const [exportRecord] = await context.db.insert(exports).values({
-      id: exportId,
-      tenantId: context.session.activeTenantId,
-      userId: context.user.id,
-      format: input.format,
-      status: "queued",
-      createdAt: new Date(),
-    }).returning()
+    const [exportRecord] = await context.db
+      .insert(exports)
+      .values({
+        id: exportId,
+        tenantId: context.session.activeTenantId,
+        userId: context.user.id,
+        format: input.format,
+        status: "queued",
+        createdAt: new Date(),
+      })
+      .returning();
 
     // Queue the task (using your queue provider)
     await context.env.TASK_QUEUE?.send({
@@ -49,10 +52,10 @@ const exportData = authProcedure
         format: input.format,
       },
       timestamp: Date.now(),
-    })
+    });
 
-    return { success: true, exportId, status: "queued" }
-  })
+    return { success: true, exportId, status: "queued" };
+  });
 ```
 
 </template>
@@ -68,85 +71,85 @@ export default {
         // Route task to appropriate handler
         switch (msg.body.type) {
           case "export_data":
-            await handleExportData(msg.body.data, env)
-            break
+            await handleExportData(msg.body.data, env);
+            break;
           case "send_notification":
-            await handleNotification(msg.body.data, env)
-            break
+            await handleNotification(msg.body.data, env);
+            break;
           case "sync_external":
-            await handleExternalSync(msg.body.data, env)
-            break
+            await handleExternalSync(msg.body.data, env);
+            break;
           default:
-            console.warn("Unknown task type:", msg.body.type)
+            console.warn("Unknown task type:", msg.body.type);
         }
 
-        msg.ack() // Mark as successfully processed
+        msg.ack(); // Mark as successfully processed
       } catch (error) {
         console.error("Task processing failed:", {
           error,
           type: msg.body.type,
           attempt: msg.attempts,
-        })
+        });
 
         // Retry with exponential backoff
         if (msg.attempts < 3) {
-          const delaySeconds = Math.pow(2, msg.attempts) * 10 // 10s, 20s, 40s
-          msg.retry({ delaySeconds })
+          const delaySeconds = Math.pow(2, msg.attempts) * 10; // 10s, 20s, 40s
+          msg.retry({ delaySeconds });
         } else {
           // After max retries, message goes to dead letter queue
         }
       }
     }
   },
-}
+};
 
 // Task handlers
 async function handleExportData(data: any, env: Bindings) {
-  const db = createDbClient(env.DB)
+  const db = createDbClient(env.DB);
   const [exportRecord] = await db
     .update(exports)
     .set({ status: "processing" })
     .where(eq(exports.id, data.exportId))
-    .returning()
+    .returning();
 
   try {
     // Generate export file
     const items = await db
       .select()
       .from(items as any)
-      .where(eq((items as any).tenantId, data.tenantId))
+      .where(eq((items as any).tenantId, data.tenantId));
 
     const content =
-      data.format === "json" ? JSON.stringify(items) : convertToCSV(items)
+      data.format === "json" ? JSON.stringify(items) : convertToCSV(items);
 
     // Store in object storage
     if (env.BUCKET) {
-      const key = `exports/${data.tenantId}/${data.exportId}.${data.format}`
-      await env.BUCKET.put(key, content)
+      const key = `exports/${data.tenantId}/${data.exportId}.${data.format}`;
+      await env.BUCKET.put(key, content);
     }
 
     // Mark complete
     await db
       .update(exports)
       .set({ status: "completed", completedAt: new Date() })
-      .where(eq(exports.id, data.exportId))
+      .where(eq(exports.id, data.exportId));
   } catch (error) {
     await db
       .update(exports)
       .set({ status: "failed", error: String(error) })
-      .where(eq(exports.id, data.exportId))
-    throw error
+      .where(eq(exports.id, data.exportId));
+    throw error;
   }
 }
 
 async function handleNotification(data: any, env: Bindings) {
-  const emailClient = createEmailClient(env.EMAIL_API_KEY)
+  const emailClient = createEmailClient(env.EMAIL_API_KEY);
 
   await emailClient.send({
     to: data.email,
     subject: data.subject,
     html: data.html,
-  })
+  });
 }
 ```
 
@@ -163,7 +166,7 @@ export const dlqHandler = {
         type: msg.body.type,
         data: msg.body.data,
         attempts: msg.attempts,
-      })
+      });
 
       // Alert via monitoring service
       try {
@@ -174,15 +177,15 @@ export const dlqHandler = {
             message: `Task ${msg.body.type} failed after ${msg.attempts} attempts`,
             data: msg.body,
           }),
-        })
+        });
       } catch (error) {
-        console.error("Failed to send alert:", error)
+        console.error("Failed to send alert:", error);
       }
 
-      msg.ack() // Mark DLQ message as processed
+      msg.ack(); // Mark DLQ message as processed
     }
   },
-}
+};
 ```
 
 </template>
@@ -201,63 +204,65 @@ export default {
       // Route based on cron pattern
       switch (event.cron) {
         case "0 0 * * *": // Daily at midnight UTC
-          await performDailyCleanup(env)
-          break
+          await performDailyCleanup(env);
+          break;
 
         case "0 */6 * * *": // Every 6 hours
-          await aggregateMetrics(env)
-          break
+          await aggregateMetrics(env);
+          break;
 
         case "*/5 * * * *": // Every 5 minutes
-          await healthCheck(env)
-          break
+          await healthCheck(env);
+          break;
 
         default:
-          console.log("Scheduled event:", event.cron)
+          console.log("Scheduled event:", event.cron);
       }
     } catch (error) {
-      console.error("Scheduled job failed:", error)
+      console.error("Scheduled job failed:", error);
       // Alert via monitoring service
       await alertMonitoring(env, {
         type: "cron_failure",
         cron: event.cron,
         error: String(error),
-      })
+      });
     }
   },
-}
+};
 
 // Cleanup job: delete stale data
 async function performDailyCleanup(env: Bindings) {
-  const db = createDbClient(env.DB)
+  const db = createDbClient(env.DB);
 
   // Delete expired invitations
   const result = await db
     .delete(invitations)
-    .where(lt(invitations.expiresAt, new Date()))
+    .where(lt(invitations.expiresAt, new Date()));
 
-  console.log(`Deleted ${result.changes} expired invitations`)
+  console.log(`Deleted ${result.changes} expired invitations`);
 
   // Delete old sessions
   const oldSessions = await db
     .delete(sessions)
-    .where(lt(sessions.expiresAt, new Date()))
+    .where(lt(sessions.expiresAt, new Date()));
 
-  console.log(`Deleted ${oldSessions.changes} expired sessions`)
+  console.log(`Deleted ${oldSessions.changes} expired sessions`);
 
   // Soft-delete old records (mark as archived after 90 days)
   await db
     .update(projects)
     .set({ archivedAt: new Date() })
-    .where(and(
-      lt(projects.updatedAt, new Date(Date.now() - 90 * 24 * 60 * 60 * 1000)),
-      isNull(projects.archivedAt),
-    ))
+    .where(
+      and(
+        lt(projects.updatedAt, new Date(Date.now() - 90 * 24 * 60 * 60 * 1000)),
+        isNull(projects.archivedAt),
+      ),
+    );
 }
 
 // Metrics aggregation job
 async function aggregateMetrics(env: Bindings) {
-  const db = createDbClient(env.DB)
+  const db = createDbClient(env.DB);
 
   // Summarize usage data
   const metrics = await db
@@ -266,7 +271,7 @@ async function aggregateMetrics(env: Bindings) {
       count: sql`count(*)`,
     })
     .from(events)
-    .groupBy(sql`date(${events.createdAt})`)
+    .groupBy(sql`date(${events.createdAt})`);
 
   // Store aggregates
   for (const metric of metrics) {
@@ -275,39 +280,36 @@ async function aggregateMetrics(env: Bindings) {
       date: metric.date,
       eventCount: metric.count,
       recordedAt: new Date(),
-    })
+    });
   }
 
-  console.log(`Aggregated ${metrics.length} daily metrics`)
+  console.log(`Aggregated ${metrics.length} daily metrics`);
 }
 
 // Health check job
 async function healthCheck(env: Bindings) {
-  const db = createDbClient(env.DB)
+  const db = createDbClient(env.DB);
 
   try {
     // Simple query to verify database connectivity
-    await db.select().from(users).limit(1)
-    console.log("Health check passed")
+    await db.select().from(users).limit(1);
+    console.log("Health check passed");
   } catch (error) {
-    console.error("Health check failed:", error)
-    throw error
+    console.error("Health check failed:", error);
+    throw error;
   }
 }
 
 // Helper to alert monitoring service
-async function alertMonitoring(
-  env: Bindings,
-  alert: Record<string, any>
-) {
+async function alertMonitoring(env: Bindings, alert: Record<string, any>) {
   try {
     await fetch("https://monitoring.example.com/alerts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(alert),
-    })
+    });
   } catch {
-    console.error("Failed to send alert")
+    console.error("Failed to send alert");
   }
 }
 ```
@@ -327,67 +329,61 @@ For workflows requiring coordinated state across multiple steps.
 export class ExportWorkflow implements DurableObject {
   constructor(
     private state: DurableObjectState,
-    private env: Bindings
+    private env: Bindings,
   ) {}
 
   async fetch(request: Request) {
-    const { action, ...data } = await request.json<{ action: string }>()
+    const { action, ...data } = await request.json<{ action: string }>();
 
     switch (action) {
       case "start": {
         // Initialize workflow
-        await this.state.storage.put("status", "processing")
-        await this.state.storage.put("data", JSON.stringify(data))
-        await this.state.storage.put("startedAt", Date.now())
+        await this.state.storage.put("status", "processing");
+        await this.state.storage.put("data", JSON.stringify(data));
+        await this.state.storage.put("startedAt", Date.now());
 
         // Set timeout alarm (30 minutes)
-        await this.state.storage.setAlarm(
-          Date.now() + 30 * 60 * 1000
-        )
+        await this.state.storage.setAlarm(Date.now() + 30 * 60 * 1000);
 
         return new Response(
           JSON.stringify({
             workflowId: request.url,
             status: "started",
-          })
-        )
+          }),
+        );
       }
 
       case "status": {
         // Get current workflow status
-        const status = await this.state.storage.get("status")
-        const progress = await this.state.storage.get("progress")
+        const status = await this.state.storage.get("status");
+        const progress = await this.state.storage.get("progress");
 
-        return new Response(
-          JSON.stringify({ status, progress })
-        )
+        return new Response(JSON.stringify({ status, progress }));
       }
 
       case "step": {
         // Execute next workflow step
-        const currentData = await this.state.storage.get("data")
-        const updated = await this.executeStep(currentData, data)
+        const currentData = await this.state.storage.get("data");
+        const updated = await this.executeStep(currentData, data);
 
-        await this.state.storage.put("data", JSON.stringify(updated))
-        await this.state.storage.put("progress", data.stepNumber)
+        await this.state.storage.put("data", JSON.stringify(updated));
+        await this.state.storage.put("progress", data.stepNumber);
 
-        return new Response(
-          JSON.stringify({ status: "step_completed" })
-        )
+        return new Response(JSON.stringify({ status: "step_completed" }));
       }
 
       default:
-        return new Response("Unknown action", { status: 400 })
+        return new Response("Unknown action", { status: 400 });
     }
   }
 
   async alarm() {
     // Handle workflow timeout
-    const status = await this.state.storage.get("status")
+    const status = await this.state.storage.get("status");
 
     if (status === "processing") {
-      await this.state.storage.put("status", "timeout")
-      console.error("Workflow timed out")
+      await this.state.storage.put("status", "timeout");
+      console.error("Workflow timed out");
 
       // Notify user or cleanup
     }
@@ -396,12 +392,13 @@ export class ExportWorkflow implements DurableObject {
   private async executeStep(data: any, step: any) {
     // Multi-step processing (e.g., export generation)
     // Return updated data
-    return { ...data, step: step.stepNumber }
+    return { ...data, step: step.stepNumber };
   }
 }
 ```
 
 Use Durable Objects only when you need:
+
 - Coordinated state across multiple requests
 - Long-lived WebSocket connections
 - Exactly-once processing guarantees
@@ -424,18 +421,3 @@ For simple fire-and-forget tasks, use Queues instead.
 10. Test scheduled jobs locally before deployment
 
 </instructions>
-
-<anti-patterns>
-
-- Using Durable Objects for simple async tasks (Queues are cheaper and simpler)
-- Missing dead letter queue (failed messages disappear)
-- No exponential backoff on retries (hammers failing services)
-- Consumer logic that isn't idempotent (duplicates cause bugs)
-- Putting heavy computation in request path (queue it instead)
-- Cron jobs without error handling (one failure stops entire scheduled handler)
-- Not logging task failures (hard to debug)
-- Missing task type in queue messages (can't route to handlers)
-- No monitoring of dead letter queue (missed failures)
-- Testing queues only in production (test locally first)
-
-</anti-patterns>

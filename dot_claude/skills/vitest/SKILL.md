@@ -63,9 +63,7 @@ describe("findUser", () => {
     const mockDb = {
       select: vi.fn().mockReturnThis(),
       from: vi.fn().mockReturnThis(),
-      where: vi.fn().mockResolvedValue([
-        { id: "user1", name: "Alice" },
-      ]),
+      where: vi.fn().mockResolvedValue([{ id: "user1", name: "Alice" }]),
     };
 
     const result = await findUser(mockDb, { id: "user1" });
@@ -90,7 +88,9 @@ import { getUserHandler } from "./users";
 describe("getUserHandler", () => {
   it("returns user data when authorized", async () => {
     const mockDb = {
-      query: { users: { findFirst: vi.fn().mockResolvedValue({ id: "user1" }) } },
+      query: {
+        users: { findFirst: vi.fn().mockResolvedValue({ id: "user1" }) },
+      },
     };
 
     const result = await getUserHandler({
@@ -106,7 +106,7 @@ describe("getUserHandler", () => {
       getUserHandler({
         input: { userId: "user1" },
         context: { user: null, db: {} },
-      })
+      }),
     ).rejects.toThrow("Unauthorized");
   });
 });
@@ -183,16 +183,3 @@ describe("useUser hook", () => {
 - Use `waitFor()` for async assertions in React tests
 
 </instructions>
-
-<anti-patterns>
-
-- Placing unit tests in separate `__tests__` folder (hurts discoverability)
-- Testing implementation details instead of public behavior
-- Over-mocking: mocking everything instead of testing business logic
-- Missing `retry: false` in async test configurations (tests retry, slowing feedback)
-- Manually mocking with `.mock()` instead of `vi.mock()` (can't hoist)
-- Not cleaning up between tests (state bleeds across tests)
-- Testing private functions directly instead of through public API
-- Forgetting to use `waitFor()` for async assertions
-
-</anti-patterns>

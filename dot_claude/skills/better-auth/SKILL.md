@@ -26,9 +26,9 @@ BETTER_AUTH_URL=http://localhost:3000 # or https://yourdomain.com
 <template id="server-config">
 
 ```typescript
-import { betterAuth } from "better-auth"
-import { drizzleAdapter } from "better-auth/adapters/drizzle"
-import { twoFactor, passkey } from "better-auth/plugins"
+import { betterAuth } from "better-auth";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { twoFactor, passkey } from "better-auth/plugins";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "sqlite" }), // or postgres, mysql
@@ -51,8 +51,8 @@ export const auth = betterAuth({
 
   // Plugins extend auth functionality
   plugins: [
-    twoFactor(),      // Two-factor authentication
-    passkey(),        // Passkeys/WebAuthn
+    twoFactor(), // Two-factor authentication
+    passkey(), // Passkeys/WebAuthn
     // emailVerification(), // Email verification
     // organization(),    // Multi-tenant organizations
   ],
@@ -74,7 +74,7 @@ export const auth = betterAuth({
   advanced: {
     useSecureCookies: process.env.NODE_ENV === "production",
   },
-})
+});
 ```
 
 </template>
@@ -104,10 +104,10 @@ export const {
 <template id="hono-handler">
 
 ```typescript
-import { auth } from "./auth"
+import { auth } from "./auth";
 
 // Mount auth handler on Hono app
-app.all("/api/auth/*", (c) => auth.handler(c.req.raw))
+app.all("/api/auth/*", (c) => auth.handler(c.req.raw));
 ```
 
 </template>
@@ -140,10 +140,10 @@ export const auth = betterAuth({
     },
     expiresIn: 60 * 60 * 24 * 7,
   },
-})
+});
 
 // 2. Type safety: infer session type
-export type Session = typeof auth.$Infer.Session
+export type Session = typeof auth.$Infer.Session;
 
 // 3. After modifying config, regenerate schema
 // Run: npx better-auth generate (or drizzle-kit introspect if using schema file)
@@ -152,7 +152,7 @@ export type Session = typeof auth.$Infer.Session
 // 4. Update session after authentication (e.g., when user selects tenant)
 const { data, error } = await authClient.updateUser({
   activeTenantId: tenantId,
-})
+});
 ```
 
 </template>
@@ -217,19 +217,19 @@ socialProviders: {
 
 ```typescript
 // Server-side: get session from request
-const session = await auth.api.getSession(request)
+const session = await auth.api.getSession(request);
 if (!session) {
-  return new Response("Unauthorized", { status: 401 })
+  return new Response("Unauthorized", { status: 401 });
 }
 
 // Client-side: use hook
-const { data: session, isPending } = useSession()
+const { data: session, isPending } = useSession();
 
 // Manual client-side: fetch session
-const session = await authClient.getSession()
+const session = await authClient.getSession();
 
 // With custom context
-const session = await auth.getSession(request.headers.get("cookie"))
+const session = await auth.getSession(request.headers.get("cookie"));
 ```
 
 </template>
@@ -248,18 +248,3 @@ const session = await auth.getSession(request.headers.get("cookie"))
 10. Store session type safely for type-safe client usage
 
 </instructions>
-
-<anti-patterns>
-
-- Manually editing auth-schema.ts (gets overwritten)
-- Missing BETTER_AUTH_SECRET or weak secret (< 32 chars)
-- Disabling CSRF protection
-- Using insecure cookies in production (useSecureCookies: false)
-- Forgetting to regenerate schema after adding plugins
-- Hardcoding secrets (use environment variables)
-- Missing trustedOrigins (enables CSRF attacks)
-- Not testing OAuth callback URLs in deployment environment
-- Storing tokens in localStorage (use httpOnly cookies)
-- Not handling session expiration on client
-
-</anti-patterns>

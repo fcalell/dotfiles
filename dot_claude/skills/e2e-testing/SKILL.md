@@ -20,7 +20,7 @@ npx playwright install --with-deps chromium
 
 ```typescript
 // playwright.config.ts (repo root)
-import { defineConfig } from "@playwright/test"
+import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
   testDir: "./tests/e2e",
@@ -34,13 +34,12 @@ export default defineConfig({
     port: 3000,
     reuseExistingServer: !process.env.CI,
   },
-  projects: [
-    { name: "chromium", use: { browserName: "chromium" } },
-  ],
-})
+  projects: [{ name: "chromium", use: { browserName: "chromium" } }],
+});
 ```
 
 **Customize:**
+
 - `testDir`: Where E2E tests live
 - `baseURL`: Local dev server URL
 - `webServer.command`: How to start your dev server
@@ -72,36 +71,37 @@ tests/
 
 ```typescript
 // tests/pages/login.page.ts
-import type { Page } from "@playwright/test"
+import type { Page } from "@playwright/test";
 
 export class LoginPage {
   constructor(private page: Page) {}
 
   // Use semantic locators (role, label, text) not CSS
-  readonly email = this.page.locator('input[name="email"]')
-  readonly password = this.page.locator('input[name="password"]')
-  readonly submit = this.page.locator('button[type="submit"]')
-  readonly error = this.page.locator('[role="alert"]')
+  readonly email = this.page.locator('input[name="email"]');
+  readonly password = this.page.locator('input[name="password"]');
+  readonly submit = this.page.locator('button[type="submit"]');
+  readonly error = this.page.locator('[role="alert"]');
 
   async goto() {
-    await this.page.goto("/login")
+    await this.page.goto("/login");
   }
 
   async login(email: string, password: string) {
-    await this.email.fill(email)
-    await this.password.fill(password)
-    await this.submit.click()
+    await this.email.fill(email);
+    await this.password.fill(password);
+    await this.submit.click();
     // Wait for successful navigation
-    await this.page.waitForURL("/dashboard/**")
+    await this.page.waitForURL("/dashboard/**");
   }
 
   async expectErrorMessage(message: string) {
-    await this.error.locator(`:has-text("${message}")`).waitFor()
+    await this.error.locator(`:has-text("${message}")`).waitFor();
   }
 }
 ```
 
 **Conventions:**
+
 - One page object per major app page/feature
 - Use semantic locators: `getByRole()`, `getByLabel()`, `getByText()`
 - Group related interactions into methods
@@ -115,39 +115,40 @@ export class LoginPage {
 
 ```typescript
 // tests/fixtures/auth.ts
-import { test as base } from "@playwright/test"
-import { LoginPage } from "../pages/login.page"
+import { test as base } from "@playwright/test";
+import { LoginPage } from "../pages/login.page";
 
 const TEST_USER = {
   email: process.env.E2E_TEST_EMAIL || "test@example.com",
   password: process.env.E2E_TEST_PASSWORD || "TestPassword123!",
-}
+};
 
 export const test = base.extend<{ authenticatedPage: void }>({
   authenticatedPage: async ({ page, context }, use) => {
-    const login = new LoginPage(page)
-    await login.goto()
-    await login.login(TEST_USER.email, TEST_USER.password)
+    const login = new LoginPage(page);
+    await login.goto();
+    await login.login(TEST_USER.email, TEST_USER.password);
 
     // Save auth state to avoid repeated logins
-    await context.storageState({ path: "tests/.auth/state.json" })
-    await use()
+    await context.storageState({ path: "tests/.auth/state.json" });
+    await use();
   },
-})
+});
 
-export { expect } from "@playwright/test"
+export { expect } from "@playwright/test";
 ```
 
 **Usage in tests:**
-```typescript
-import { test } from "../fixtures/auth"
 
-test.use({ storageState: "tests/.auth/state.json" })
+```typescript
+import { test } from "../fixtures/auth";
+
+test.use({ storageState: "tests/.auth/state.json" });
 
 test("authenticated flow", async ({ page }) => {
   // User already logged in via fixture
-  await page.goto("/dashboard")
-})
+  await page.goto("/dashboard");
+});
 ```
 
 </template>
@@ -158,57 +159,58 @@ test("authenticated flow", async ({ page }) => {
 
 ```typescript
 // tests/e2e/critical-flow.spec.ts
-import { test, expect } from "../fixtures/auth"
-import { DashboardPage } from "../pages/dashboard.page"
-import { ResourcePage } from "../pages/resource.page"
+import { test, expect } from "../fixtures/auth";
+import { DashboardPage } from "../pages/dashboard.page";
+import { ResourcePage } from "../pages/resource.page";
 
-test.use({ storageState: "tests/.auth/state.json" })
+test.use({ storageState: "tests/.auth/state.json" });
 
 test.describe("Critical User Flow", () => {
   test("authenticate → create resource → verify", async ({ page }) => {
-    const dashboard = new DashboardPage(page)
-    const resource = new ResourcePage(page)
+    const dashboard = new DashboardPage(page);
+    const resource = new ResourcePage(page);
 
     // Navigate to dashboard (already authenticated)
-    await dashboard.goto()
-    await expect(dashboard.heading).toBeVisible()
+    await dashboard.goto();
+    await expect(dashboard.heading).toBeVisible();
 
     // Create primary resource
-    await dashboard.createButton.click()
-    await resource.nameInput.fill("Test Resource")
-    await resource.descriptionInput.fill("Test description")
-    await resource.submitButton.click()
+    await dashboard.createButton.click();
+    await resource.nameInput.fill("Test Resource");
+    await resource.descriptionInput.fill("Test description");
+    await resource.submitButton.click();
 
     // Verify creation with URL pattern
-    await expect(page).toHaveURL(/\/resources\/[\w-]+/)
-    await expect(resource.heading).toContainText("Test Resource")
-  })
+    await expect(page).toHaveURL(/\/resources\/[\w-]+/);
+    await expect(resource.heading).toContainText("Test Resource");
+  });
 
   test("empty state prompts creation", async ({ page }) => {
-    const dashboard = new DashboardPage(page)
+    const dashboard = new DashboardPage(page);
 
-    await dashboard.goto()
+    await dashboard.goto();
     // Verify guidance message shown
-    await expect(page.getByText("Create your first resource")).toBeVisible()
-  })
+    await expect(page.getByText("Create your first resource")).toBeVisible();
+  });
 
   test("validation prevents invalid creation", async ({ page }) => {
-    const dashboard = new DashboardPage(page)
-    const resource = new ResourcePage(page)
+    const dashboard = new DashboardPage(page);
+    const resource = new ResourcePage(page);
 
-    await dashboard.goto()
-    await dashboard.createButton.click()
+    await dashboard.goto();
+    await dashboard.createButton.click();
 
     // Try submitting without required fields
-    await resource.submitButton.click()
+    await resource.submitButton.click();
 
     // Verify error shown
-    await expect(page.locator('[role="alert"]')).toContainText("Name required")
-  })
-})
+    await expect(page.locator('[role="alert"]')).toContainText("Name required");
+  });
+});
 ```
 
 **Customize:**
+
 - Test core business flows (signup → onboard → create → use)
 - Include empty state guidance
 - Validate error handling
@@ -220,21 +222,22 @@ test.describe("Critical User Flow", () => {
 
 ```typescript
 // Best: User-visible behavior
-page.getByRole("button", { name: "Submit" })
-page.getByLabel("Email address")
-page.getByText("Welcome back")
-page.getByPlaceholder("Enter name")
+page.getByRole("button", { name: "Submit" });
+page.getByLabel("Email address");
+page.getByText("Welcome back");
+page.getByPlaceholder("Enter name");
 
 // Acceptable: Only when semantic not available
-page.locator('input[name="email"]')
-page.locator('[data-testid="submit-button"]')
+page.locator('input[name="email"]');
+page.locator('[data-testid="submit-button"]');
 
 // Avoid: Implementation details (change with design)
-page.locator(".p-6.border.rounded")
-page.locator("div:has-text('Submit')")
+page.locator(".p-6.border.rounded");
+page.locator("div:has-text('Submit')");
 ```
 
 **Why semantic selectors:**
+
 - Resilient to design refactors (test user behavior, not HTML)
 - Match accessibility (screen readers see same elements)
 - Fail with more helpful errors
@@ -258,19 +261,19 @@ npx playwright test --headed --workers=1 # Single-threaded visible run
 
 ```typescript
 // Wait for element visibility (prefer)
-await page.locator('button[type="submit"]').waitFor()
-await expect(element).toBeVisible()
+await page.locator('button[type="submit"]').waitFor();
+await expect(element).toBeVisible();
 
 // Wait for navigation
-await page.waitForURL("/dashboard/**")
+await page.waitForURL("/dashboard/**");
 
 // Wait for API response
 const response = await page.waitForResponse(
-  resp => resp.url().includes("/api/items") && resp.status() === 200
-)
+  (resp) => resp.url().includes("/api/items") && resp.status() === 200,
+);
 
 // Never use (flaky)
-await page.waitForTimeout(3000)
+await page.waitForTimeout(3000);
 ```
 
 </template>
@@ -303,18 +306,3 @@ npx playwright test --debug
 - Test error states and edge cases: empty states, validation, missing resources
 
 </instructions>
-
-## Anti-Patterns
-
-<anti-patterns id="test-mistakes">
-
-- Testing implementation details (CSS classes, DOM structure) not user behavior
-- Sharing state between tests (global variables, test dependencies)
-- Hardcoding wait times (`page.waitForTimeout(3000)`)
-- Logging in manually in every test (use auth fixture)
-- Skipping error states and edge cases
-- Creating unnecessarily complex test selectors
-- Not testing the actual user flow (getting too unit-test focused)
-- Flaky tests with race conditions (always wait for elements, not times)
-
-</anti-patterns>

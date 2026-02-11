@@ -39,14 +39,3 @@ When done, provide a concise summary of:
 - Anything that needs manual follow-up (migrations, env vars, deployment config)
 
 </instructions>
-
-<anti-patterns>
-
-- Writing all code in one massive pass without running checks
-- Ignoring existing patterns in favor of personal preference
-- Skipping validation or error handling to "get it working first"
-- Leaving type errors or lint warnings for later
-- Adding dependencies without checking if the project already has an equivalent
-- Implementing beyond what was asked — stay in scope
-
-</anti-patterns>

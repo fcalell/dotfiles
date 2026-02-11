@@ -18,6 +18,7 @@ biome format --write            # Format code only
 ## Configuration
 
 Biome is configured at `biome.json` with:
+
 - Recommended rules for JavaScript/TypeScript
 - Auto import organization enabled
 - Consistent formatting across the project
@@ -29,10 +30,10 @@ Biome is configured at `biome.json` with:
 
 ```typescript
 // biome-ignore lint/suspicious/noExplicitAny: legacy API return type
-const data: any = legacyApiCall()
+const data: any = legacyApiCall();
 
 // biome-ignore lint/style/noUnusedTemplateLiteral: intentional template for formatting
-const template = `${ unused }`
+const template = `${unused}`;
 ```
 
 Always include explanation after the colon.
@@ -43,17 +44,9 @@ Always include explanation after the colon.
 
 - Run `biome check --write` before committing
 - Always explain rule ignores with clear reasoning
+- Avoid rule ignores as much as possible, do not fight the framework
 - Use auto-fix when possible: `biome lint --write`
 - Check for new violations: `biome lint`
 - Never disable rules globally in config unless project-wide requirement
 
 </instructions>
-
-<anti-patterns>
-
-- Ignoring rules without explanation
-- Disabling rules globally instead of per-line
-- Not running check before committing
-- Committing code that fails lint checks
-
-</anti-patterns>

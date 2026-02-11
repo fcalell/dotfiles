@@ -101,7 +101,7 @@ data: text("data"),
 
   // Unique constraint for business-level uniqueness
   unique("unique_tenant_slug").on(table.tenantId, table.slug),
-]
+];
 ```
 
 </template>
@@ -109,12 +109,12 @@ data: text("data"),
 <template id="relations">
 
 ```typescript
-import { relations } from "drizzle-orm"
+import { relations } from "drizzle-orm";
 
 // One-to-many: parent entity has many children
 export const parentRelations = relations(parentTable, ({ many }) => ({
   children: many(childTable),
-}))
+}));
 
 // One-to-one inverse: child belongs to parent
 export const childRelations = relations(childTable, ({ one }) => ({
@@ -122,7 +122,7 @@ export const childRelations = relations(childTable, ({ one }) => ({
     fields: [childTable.parentId],
     references: [parentTable.id],
   }),
-}))
+}));
 
 // Self-referential: hierarchical structure (tree/nested list)
 export const itemRelations = relations(itemTable, ({ one, many }) => ({
@@ -132,7 +132,7 @@ export const itemRelations = relations(itemTable, ({ one, many }) => ({
     relationName: "parentChild",
   }),
   children: many(itemTable, { relationName: "parentChild" }),
-}))
+}));
 
 // Many-to-many via junction table
 export const entityJoinRelations = relations(junctionTable, ({ one }) => ({
@@ -144,7 +144,7 @@ export const entityJoinRelations = relations(junctionTable, ({ one }) => ({
     fields: [junctionTable.entity2Id],
     references: [entity2Table.id],
   }),
-}))
+}));
 ```
 
 </template>
@@ -212,16 +212,3 @@ try {
 10. Use dialect-specific features only when necessary (prefer portable patterns)
 
 </instructions>
-
-<anti-patterns>
-
-- Using auto-increment IDs when business needs semantic/distributable IDs
-- Missing indexes on foreign keys or filtered columns
-- Forgetting cascade rules on child table deletes
-- Storing JSON in blob/binary instead of text
-- Not exporting type-safe insert/select types
-- Creating indexes on low-cardinality columns (status, role)
-- Migrations without proper rollback strategy
-- Using dialect-specific syntax when portable patterns exist
-
-</anti-patterns>

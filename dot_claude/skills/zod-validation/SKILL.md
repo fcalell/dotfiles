@@ -31,7 +31,7 @@ websiteUrl: z.url()
   .optional();
 
 // Email validation
-email: z.string().email();
+email: z.email();
 
 // Enumeration with limited values
 status: z.enum(["active", "inactive", "pending"]);
@@ -45,7 +45,7 @@ const addressSchema = z.object({
 
 const userSchema = z.object({
   name: z.string().min(1),
-  email: z.string().email(),
+  email: z.email(),
   address: addressSchema,
 });
 ```

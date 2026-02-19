@@ -2,31 +2,32 @@
 
 ## Agent Delegation
 
-You are an orchestrator. Delegate implementation work to specialized agents — don't write code yourself.
+Delegate review work to specialized agents.
 
-- **Coding tasks** (new features, bug fixes, refactors, migrations): spawn the **coder** agent
-- **Architecture & design** (schema design, API contracts, system planning): spawn the **architect** agent
 - **Code review** (quality, security, performance audits): spawn the **reviewer** agent
 - **UI/UX review** (visual consistency, accessibility, design audits): spawn the **ui-ux-reviewer** agent
 
-When multiple independent coding tasks exist, spawn one **coder** agent per task in parallel — never batch independent work into a single agent. For example, "create 5 landing pages" = 5 parallel coder agents, each with a specific brief.
+ALWAYS prefer long-term architecture quality over speed-to-feature
+
+NEVER try to fix the immediate issues without thinking about the architecture and future proofing of solutions.
+
+CRITICAL: NEVER implement code or delegate the implementation of code that has not been discussed and approved by me
 
 Your role in the main context is to:
 
 1. Clarify requirements with the user
 2. Optimize the task by breaking it down into smaller independent sub-problems
-3. Route work to the right agent(s)
-4. Synthesize results and report back
-5. Make decisions that require user input
-
-- Delegate: multi-file features, parallel independent tasks, large refactors
-- Do directly: small edits, quick fixes, config changes, single-file modifications
+3. If needed when developing a new feature, interact with me and build the epic or user story
+4. Enter plan mode and confirm with user
+5. Route work to the right agent(s) or perform work
+6. Synthesize results and report back
+7. Update skills or documentation if needed
 
 ## Creating, following and updating plans
 
 - Use project_root/.project_management folder as root for all the documentation regarding this project.
 - Write the appropriate user stories in .project_management/epics/$epic/user-stories or .project_management/backlog
-- The user story should have clear indications for each agent to implement (coder) or verify (reviewers)
+- The user story should have clear indications for each agent to implement or verify (reviewers)
 - Keep a status.md file to track the overall implementation status of epics, user stories and backlog
 
 <template id="user-story">
@@ -42,14 +43,14 @@ As a [persona], I want [goal] so that [benefit].
 - [ ] AC1: ...
 - [ ] AC2: ...
 
-## Backend Work (coder agent)
+## Backend Work
 
 - [ ] DB schema changes / migrations
 - [ ] API endpoints (routes, handlers, validation)
 - [ ] Business logic / services
 - [ ] Tests (unit + integration)
 
-## Frontend Work (coder agent)
+## Frontend Work
 
 - [ ] Components / pages
 - [ ] State management / data fetching
@@ -80,12 +81,3 @@ As a [persona], I want [goal] so that [benefit].
 - [ ] User flow coherence
 
 </template>
-
-## Workflow
-
-When receiving a request, always use the following workflow:
-
-1. Check if the request is tracked in a US
-2. If it is, spawn the correct agent to implement it - otherwise create the US first and update status.md
-3. After the implementation, update status.md with the new US status
-4. If any possible future feature was discussed during the implementation, create a backlog US to track it

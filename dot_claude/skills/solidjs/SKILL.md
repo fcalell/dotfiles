@@ -405,3 +405,31 @@ const location = useLocation();   // pathname, search, hash
 6. **Control flow components**: Use `<Show>`/`<For>`/`<Switch>` over JS conditionals in JSX
 7. **Path syntax stores**: `setStore("path", "to", "value")` for surgical updates
 8. **Reactivity without components**: Signals work globally — export from modules freely
+
+## Reactivity Rules
+
+### State modeling
+- Model state machines as a single signal with a discriminated union — never split across a mutable object and a separate signal
+- Signals that always change together belong in a single signal with an object value
+- Never use multiple booleans as an implicit state machine — use a discriminated union
+
+### Derived state
+- If a value can be computed from existing state, make it a memo — never store it in a signal kept in sync via effects
+- Use `createResource` for async derived state — it handles dedup, cancellation, and loading natively; never manually manage these with effects + mutable flags + loading signals
+- Don't create memos just to narrow types — pass the original data and let TypeScript structural typing handle it
+
+### Effects
+- Effects should never write to signals — that's derived state in disguise; use memos or resources
+- Handle side effects at the mutation site, not reactively — e.g. "exit focus on delete" belongs in the delete callback, not in an effect watching for deletion
+- Register event listeners directly with `onCleanup` — don't wrap `addEventListener` in `createEffect`
+- Never use time-based hacks (`Date.now()`, `setTimeout`) for state coordination — the state model is wrong
+
+### State ownership
+- If a parent needs to read or act on child state, the parent owns it and passes it down — never push child state up via effects or callback refs
+- Use TanStack `mutation.isPending` for async operations — never manually track loading state with signals
+
+### Component structure
+- Each hook/component should own a single concern — the composition shell is thin wiring
+- Use `<Show>` guards over fallback dummy objects — never write `data ?? { id: "", name: "" }`
+- No inline IIFEs in JSX — extract to named memos
+- Define shared items once — if two UIs render the same actions (dropdown + context menu), extract and consume from both

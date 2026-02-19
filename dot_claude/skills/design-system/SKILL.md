@@ -200,7 +200,7 @@ const elevation = {
 
 <template id="design-workflow">
 
-1. **Read .claude/project-management/design-system.md** if exists — understand established patterns
+1. **Read .project-management/design-system.md** if exists — understand established patterns
 2. **Check pattern library** before proposing new component
 3. **Propose with intent** — "This dropdown shows status filters. Should feel scannable and dense."
 4. **Get confirmation** before implementing
@@ -244,7 +244,7 @@ const elevation = {
 
 ## Documentation Template
 
-If creating new .claude/project-management/design-system.md:
+If creating new .project-management/design-system.md:
 
 ```markdown
 # Design System

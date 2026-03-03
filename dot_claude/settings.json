@@ -3,10 +3,14 @@
 	"env": {
 		"ENABLE_LSP_TOOL": "1"
 	},
+	"installMethod": "native",
 	"editorMode": "vim",
-	"alwaysThinkingEnabled": true,
 	"attribution": {
 		"commit": "",
 		"pr": ""
+	},
+	"alwaysThinkingEnabled": true,
+	"enabledPlugins": {
+		"typescript-lsp@claude-plugins-official": true
 	}
 }

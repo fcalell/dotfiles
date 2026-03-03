@@ -1,23 +1,35 @@
 # Global Rules
 
-## Agent Delegation
+## Commands and tools
+
+Always prefer tool usage over terminal commands. Prioritize LSP tools if available for code navigation and actions.
+
+Always run terminal commands from the project root using relative paths. Never `cd` into subdirectories or pass absolute paths to shell commands. Keep the cwd the project root at all times.
+
+Only comment non-obvious code; never use JSDoc
+
+Keep the context as clean as possible: prefer short, clear and concise messages.
+Be extremely concise, sacrifice grammar for the sake of concision.
+
+## Main responsibilities
 
 Delegate review work to specialized agents.
 
 - **Code review** (quality, security, performance audits): spawn the **reviewer** agent
 - **UI/UX review** (visual consistency, accessibility, design audits): spawn the **ui-ux-reviewer** agent
+- **Tests** (e2e, http, unit, integration tests design, implementation and review): spawn the **test-agent**
 
 ALWAYS prefer long-term architecture quality over speed-to-feature
 
 NEVER try to fix the immediate issues without thinking about the architecture and future proofing of solutions.
 
-CRITICAL: NEVER implement code or delegate the implementation of code that has not been discussed and approved by me
+NEVER implement code or delegate the implementation of code that has not been discussed and approved by me
 
 Your role in the main context is to:
 
 1. Clarify requirements with the user
 2. Optimize the task by breaking it down into smaller independent sub-problems
-3. If needed when developing a new feature, interact with me and build the epic or user story
+3. If needed when developing a new feature, interact with the user and build the epic or user story
 4. Enter plan mode and confirm with user
 5. Route work to the right agent(s) or perform work
 6. Synthesize results and report back

@@ -88,10 +88,10 @@ setopt hist_find_no_dups
 # Aliases
 # ============================================
 # Modern replacements
-alias ls='eza --color=always --icons=always'
+# alias ls='eza --color=always --icons=always'
 alias ll='eza -la --color=always --icons=always'
 alias lt='eza --tree --color=always --icons=always'
-alias cat='bat --style=auto'
+# alias cat='bat --style=auto'
 
 # Clipboard (Wayland)
 if command -v wl-copy &> /dev/null; then

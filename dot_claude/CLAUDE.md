@@ -2,14 +2,16 @@
 
 ## Commands and tools
 
-Always prefer tool usage over terminal commands. Prioritize LSP tools if available for code navigation and actions.
-
-Always run terminal commands from the project root using relative paths. Never `cd` into subdirectories or pass absolute paths to shell commands. Keep the cwd the project root at all times.
+Prioritize LSP tools if available for code navigation and actions.
 
 Only comment non-obvious code; never use JSDoc
 
 Keep the context as clean as possible: prefer short, clear and concise messages.
 Be extremely concise, sacrifice grammar for the sake of concision.
+
+## Diagnostics
+
+After completing edits to a file, ALWAYS run `LSP documentSymbol` on the edited file to surface TypeScript diagnostics. Biome check (lint + format + fix) runs automatically via a PostToolUse hook after Edit/Write. Fix any errors before moving on. Only run `pnpm check-types` and `pnpm lint` before commits.
 
 ## Main responsibilities
 

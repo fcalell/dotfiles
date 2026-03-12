@@ -66,6 +66,7 @@ As a [persona], I want [goal] so that [benefit].
 
 ## Frontend Work
 
+- [ ] Wireframe/UI Layout (attach here)
 - [ ] Components / pages
 - [ ] State management / data fetching
 - [ ] Routing changes

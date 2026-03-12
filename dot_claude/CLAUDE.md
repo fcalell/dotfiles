@@ -25,7 +25,7 @@ ALWAYS prefer long-term architecture quality over speed-to-feature
 
 NEVER try to fix the immediate issues without thinking about the architecture and future proofing of solutions.
 
-NEVER implement code or delegate the implementation of code that has not been discussed and approved by me
+NEVER implement code or delegate the implementation of code that has not been discussed and approved
 
 Your role in the main context is to:
 

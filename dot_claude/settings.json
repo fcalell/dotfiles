@@ -1,44 +1,41 @@
 {
-  "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "env": {
-    "ENABLE_LSP_TOOL": "1"
-  },
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  },
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/block-cd.sh"
-          },
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/block-raw-shell-tools.sh"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/biome-lint-after-edit.sh"
-          }
-        ]
-      }
-    ]
-  },
-  "enabledPlugins": {
-    "typescript-lsp@claude-plugins-official": true
-  },
-  "alwaysThinkingEnabled": true,
-  "installMethod": "native",
-  "editorMode": "vim"
+	"$schema": "https://json.schemastore.org/claude-code-settings.json",
+	"env": {
+		"ENABLE_LSP_TOOL": "1"
+	},
+	"attribution": {
+		"commit": "",
+		"pr": ""
+	},
+	"hooks": {
+		"PreToolUse": [
+			{
+				"matcher": "Bash",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "$HOME/.claude/hooks/block-cd.sh"
+					},
+					{
+						"type": "command",
+						"command": "$HOME/.claude/hooks/block-raw-shell-tools.sh"
+					}
+				]
+			}
+		]
+	},
+	"enabledPlugins": {
+		"typescript-lsp@claude-plugins-official": true
+	},
+	"alwaysThinkingEnabled": true,
+	"installMethod": "native",
+	"editorMode": "vim",
+	"extraKnownMarketplaces": {
+		"impeccable": {
+			"source": {
+				"source": "github",
+				"repo": "pbakaus/impeccable"
+			}
+		}
+	}
 }

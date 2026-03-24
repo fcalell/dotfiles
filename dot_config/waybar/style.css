@@ -96,9 +96,8 @@ window#waybar {
   padding: 0px 4px;
 }
 
-#custom-spotify,
-#custom-spotify-prev,
-#custom-spotify-next {
+#custom-spotify-launch,
+#mpris {
   color: #a6e3a1;
   background: transparent;
   border-radius: 0px;
@@ -107,13 +106,12 @@ window#waybar {
   box-shadow: none;
 }
 
-#custom-spotify {
+#mpris {
   padding: 0px 10px;
 }
 
-#custom-spotify:hover,
-#custom-spotify-prev:hover,
-#custom-spotify-next:hover {
+#custom-spotify-launch:hover,
+#mpris:hover {
   background: #313244;
 }
 

@@ -12,8 +12,15 @@
     "modules-right": ["group/spotify", "tray",  "pulseaudio", "custom/power"],
 
     "hyprland/workspaces": {
-        "format": "{id}",
+        "format": "{icon}",
         "on-click": "activate",
+        "format-icons": {
+            "1": "󰆍",
+            "2": "󰊯",
+            "3": "󰊗",
+            "4": "󰓇",
+            "5": "󰣀"
+        },
         "persistent-workspaces": {
             "1": [],
             "2": [],
@@ -42,36 +49,25 @@
 
     "group/spotify": {
         "orientation": "horizontal",
-        "modules": ["custom/spotify-prev", "custom/spotify", "custom/spotify-next"]
+        "modules": ["custom/spotify-launch", "mpris"]
     },
 
-    "custom/spotify-prev": {
-        "format": "󰒮",
+    "custom/spotify-launch": {
+        "format": "󰓇",
         "tooltip": false,
-        "interval": 1,
-        "exec-if": "playerctl -p spotify status 2>/dev/null",
+        "interval": "once",
         "exec": "echo ' '",
-        "on-click": "playerctl -p spotify previous"
+        "on-click": "playerctl -p spotify status 2>/dev/null && hyprctl dispatch workspace 4 || (hyprctl dispatch workspace 4 && spotify)"
     },
 
-    "custom/spotify": {
-        "format": "󰓇 {}",
+    "mpris": {
+        "format": "{artist} - {title}",
+        "format-stopped": "",
         "max-length": 40,
-        "interval": 1,
-        "exec": "playerctl -p spotify metadata --format '{{ artist }} - {{ title }}' 2>/dev/null",
-        "exec-if": "playerctl -p spotify status 2>/dev/null",
+        "player": "spotify",
         "on-click": "playerctl -p spotify play-pause",
         "on-scroll-up": "playerctl -p spotify next",
         "on-scroll-down": "playerctl -p spotify previous"
-    },
-
-    "custom/spotify-next": {
-        "format": "󰒭",
-        "tooltip": false,
-        "interval": 1,
-        "exec-if": "playerctl -p spotify status 2>/dev/null",
-        "exec": "echo ' '",
-        "on-click": "playerctl -p spotify next"
     },
 
     "pulseaudio": {

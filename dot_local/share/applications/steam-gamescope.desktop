@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Steam (Gamescope)
+Exec=gamescope -W 2560 -H 1440 -r 144 --adaptive-sync -f --backend wayland -- steam
+Icon=steam
+Type=Application
+Categories=Game;

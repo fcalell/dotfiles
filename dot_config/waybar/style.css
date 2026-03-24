@@ -51,7 +51,6 @@ window#waybar {
 #workspaces button:hover:not(.active) {
   background: #313244;
   color: #cdd6f4;
-  box-shadow: 0 0 2px rgba(49, 50, 68, 1);
 }
 
 /* Clock */
@@ -88,9 +87,7 @@ window#waybar {
 }
 
 #custom-power:hover {
-  background: #f38ba8;
-  color: #1e1e2e;
-  box-shadow: 0 0 3px rgba(243, 139, 168, 1);
+  background: #313244;
 }
 
 /* Spotify */
@@ -128,7 +125,6 @@ window#waybar {
 
 #pulseaudio:hover {
   background: #313244;
-  box-shadow: 0 0 3px rgba(137, 220, 235, 0.8);
 }
 
 #pulseaudio.muted {

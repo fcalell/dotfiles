@@ -27,9 +27,6 @@
 	"enabledPlugins": {
 		"typescript-lsp@claude-plugins-official": true
 	},
-	"alwaysThinkingEnabled": true,
-	"installMethod": "native",
-	"editorMode": "vim",
 	"extraKnownMarketplaces": {
 		"impeccable": {
 			"source": {
@@ -37,5 +34,9 @@
 				"repo": "pbakaus/impeccable"
 			}
 		}
-	}
+	},
+	"alwaysThinkingEnabled": true,
+	"installMethod": "native",
+	"editorMode": "vim",
+	"effortLevel": "high"
 }

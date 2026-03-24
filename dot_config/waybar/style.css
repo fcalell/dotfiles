@@ -18,9 +18,10 @@ window#waybar {
 #clock,
 #tray,
 #custom-power,
+#spotify,
 #pulseaudio {
   background: #1e1e2e;
-  border-radius: 12px;
+  border-radius: 0px;
   padding: 0px 14px;
   margin: 5px 6px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
@@ -36,7 +37,7 @@ window#waybar {
   margin: 4px 3px;
   color: #6c7086;
   background: transparent;
-  border-radius: 10px;
+  border-radius: 0px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -58,13 +59,10 @@ window#waybar {
   color: #cba6f7;
   font-weight: 700;
   padding: 0px 18px;
-  background: linear-gradient(135deg, #1e1e2e 0%, #313244 100%);
-  border: 2px solid #45475a;
 }
 
 #clock:hover {
-  background: linear-gradient(135deg, #313244 0%, #45475a 100%);
-  border-color: #585b70;
+  background: #313244;
 }
 
 /* System Tray */
@@ -93,6 +91,33 @@ window#waybar {
   background: #f38ba8;
   color: #1e1e2e;
   box-shadow: 0 0 3px rgba(243, 139, 168, 1);
+}
+
+/* Spotify */
+#spotify {
+  background: #1e1e2e;
+  padding: 0px 4px;
+}
+
+#custom-spotify,
+#custom-spotify-prev,
+#custom-spotify-next {
+  color: #a6e3a1;
+  background: transparent;
+  border-radius: 0px;
+  padding: 0px 8px;
+  margin: 4px 2px;
+  box-shadow: none;
+}
+
+#custom-spotify {
+  padding: 0px 10px;
+}
+
+#custom-spotify:hover,
+#custom-spotify-prev:hover,
+#custom-spotify-next:hover {
+  background: #313244;
 }
 
 /* Audio */

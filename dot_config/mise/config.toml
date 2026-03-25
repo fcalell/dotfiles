@@ -8,6 +8,9 @@ pnpm = "latest"
 # pnpm - Latest version
 yarn = "latest"
 
+# bun - JavaScript runtime & toolkit
+bun = "latest"
+
 # uv - Python package manager
 uv = "latest"
 

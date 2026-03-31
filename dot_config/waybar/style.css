@@ -97,6 +97,8 @@ window#waybar {
 }
 
 #custom-spotify-launch,
+#custom-spotify-prev,
+#custom-spotify-next,
 #mpris {
   color: #a6e3a1;
   background: transparent;
@@ -111,6 +113,8 @@ window#waybar {
 }
 
 #custom-spotify-launch:hover,
+#custom-spotify-prev:hover,
+#custom-spotify-next:hover,
 #mpris:hover {
   background: #313244;
 }

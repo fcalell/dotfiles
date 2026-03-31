@@ -9,7 +9,7 @@
 
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["group/spotify", "tray",  "pulseaudio", "custom/power"],
+    "modules-right": ["group/spotify", "pulseaudio","tray",  "custom/power"],
 
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -49,7 +49,25 @@
 
     "group/spotify": {
         "orientation": "horizontal",
-        "modules": ["custom/spotify-launch", "mpris"]
+        "modules": ["custom/spotify-launch", "mpris","custom/spotify-prev", "custom/spotify-next"]
+    },
+
+    "custom/spotify-prev": {
+        "format": "󰒮",
+        "tooltip": false,
+        "on-click": "playerctl -p spotify previous",
+        "exec": "echo ' '",
+        "exec-if": "playerctl -p spotify status 2>/dev/null | grep -qv Stopped",
+        "interval": 1
+    },
+
+    "custom/spotify-next": {
+        "format": "󰒭",
+        "tooltip": false,
+        "on-click": "playerctl -p spotify next",
+        "exec": "echo ' '",
+        "exec-if": "playerctl -p spotify status 2>/dev/null | grep -qv Stopped",
+        "interval": 1
     },
 
     "custom/spotify-launch": {
@@ -57,7 +75,7 @@
         "tooltip": false,
         "interval": "once",
         "exec": "echo ' '",
-        "on-click": "playerctl -p spotify status 2>/dev/null && hyprctl dispatch workspace 4 || (hyprctl dispatch workspace 4 && spotify)"
+        "on-click": "playerctl -p spotify status 2>/dev/null && hyprctl dispatch workspace 5 || (hyprctl dispatch workspace 5 && spotify)"
     },
 
     "mpris": {
@@ -65,9 +83,7 @@
         "format-stopped": "",
         "max-length": 40,
         "player": "spotify",
-        "on-click": "playerctl -p spotify play-pause",
-        "on-scroll-up": "playerctl -p spotify next",
-        "on-scroll-down": "playerctl -p spotify previous"
+        "on-click": "playerctl -p spotify play-pause"
     },
 
     "pulseaudio": {

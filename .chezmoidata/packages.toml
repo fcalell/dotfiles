@@ -96,8 +96,11 @@ linux.pacman = "lib32-fontconfig"
 
 [neovim]
 macos.brew = "neovim"
-macos.args = ["HEAD"]  # Install nightly from HEAD
-linux.aur = "neovim-nightly-bin"
+linux.pacman = "neovim"
+
+[tree-sitter-cli]
+macos.brew = "tree-sitter"
+linux.pacman = "tree-sitter-cli"
 
 [tmux]
 macos.brew = "tmux"

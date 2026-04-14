@@ -1,5 +1,5 @@
 vim.pack.add({
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
 	{ src = "https://github.com/axelvc/template-string.nvim" },
 	{ src = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring" },
@@ -9,53 +9,33 @@ vim.pack.add({
 	{ src = "https://github.com/kylechui/nvim-surround" },
 })
 
-vim.api.nvim_create_autocmd("PackChanged", {
-	desc = "Handle nvim-treesitter updates",
-	group = vim.api.nvim_create_augroup("nvim-treesitter-pack-changed-update-handler", { clear = true }),
-	callback = function(event)
-		if event.data.kind == "update" and event.data.spec.name == "nvim-treesitter" then
-			vim.notify("nvim-treesitter updated, running TSUpdate...", vim.log.levels.INFO)
-			---@diagnostic disable-next-line: param-type-mismatch
-			local ok = pcall(vim.cmd, "TSUpdate")
-			if ok then
-				vim.notify("TSUpdate completed successfully!", vim.log.levels.INFO)
-			else
-				vim.notify("TSUpdate command not available yet, skipping", vim.log.levels.WARN)
-			end
-		end
-	end,
+-- Install treesitter parsers (async, no-op if already installed)
+require("nvim-treesitter").install({
+	"astro",
+	"graphql",
+	"html",
+	"css",
+	"javascript",
+	"json",
+	"lua",
+	"luap",
+	"markdown",
+	"markdown_inline",
+	"query",
+	"regex",
+	"tsx",
+	"typescript",
+	"vim",
+	"yaml",
 })
 
-require("nvim-treesitter.configs").setup({
-	modules = {},
-	sync_install = false,
-	ignore_install = {},
-	highlight = {
-		enable = true,
-	},
-	indent = {
-		enable = true,
-	},
-	auto_install = true,
-	ensure_installed = {
-		"astro",
-		"graphql",
-		"html",
-		"css",
-		"javascript",
-		"json",
-		-- "latex",
-		"lua",
-		"luap",
-		"markdown",
-		"markdown_inline",
-		"query",
-		"regex",
-		"tsx",
-		"typescript",
-		"vim",
-		"yaml",
-	},
+-- Enable treesitter highlighting and indentation for all filetypes
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("treesitter-setup", { clear = true }),
+	callback = function()
+		pcall(vim.treesitter.start)
+		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	end,
 })
 
 require("treesitter-context").setup({

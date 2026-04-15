@@ -99,7 +99,7 @@ macos.brew = "neovim"
 linux.pacman = "neovim"
 
 [tree-sitter-cli]
-macos.brew = "tree-sitter"
+macos.brew = "tree-sitter-cli"
 linux.pacman = "tree-sitter-cli"
 
 [tmux]

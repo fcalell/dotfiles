@@ -2,8 +2,7 @@
 	"$schema": "https://json.schemastore.org/claude-code-settings.json",
 	"env": {
 		"ENABLE_LSP_TOOL": "1",
-		"CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
-		"CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "1"
+		"CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1"
 	},
 	"attribution": {
 		"commit": "",
@@ -40,5 +39,6 @@
 	"alwaysThinkingEnabled": true,
 	"installMethod": "native",
 	"editorMode": "vim",
-	"effortLevel": "high"
+	"model": "claude-opus-4-7",
+	"effortLevel": "xhigh"
 }

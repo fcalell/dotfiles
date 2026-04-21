@@ -40,5 +40,8 @@
 	"installMethod": "native",
 	"editorMode": "vim",
 	"model": "claude-opus-4-7",
-	"effortLevel": "xhigh"
+	"effortLevel": "xhigh",
+	"permissions": {
+		"defaultMode": "auto"
+	}
 }

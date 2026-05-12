@@ -22,9 +22,15 @@ require("mason-tool-installer").setup({
 		"graphql",
 		"jsonls",
 		"prettier",
+		"nixfmt",
 	},
 })
 require("mason-lspconfig").setup()
+
+-- nixd is not in the Mason registry; install it via the system package
+-- manager (AUR: `yay -S nixd`). vim.lsp.enable is a no-op when the binary
+-- is missing, so this is safe even on machines without nixd.
+vim.lsp.enable("nixd")
 
 -- On LSP attach
 vim.api.nvim_create_autocmd("LspAttach", {

@@ -21,6 +21,7 @@ require("nvim-treesitter").install({
 	"luap",
 	"markdown",
 	"markdown_inline",
+	"nix",
 	"query",
 	"regex",
 	"tsx",

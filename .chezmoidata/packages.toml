@@ -266,6 +266,15 @@ linux.pacman = "steam"
 [lutris]
 linux.pacman = "lutris"
 
+[gamescope]
+linux.pacman = "gamescope"
+
+[mangohud]
+linux.pacman = "mangohud"
+
+[lib32-mangohud]
+linux.pacman = "lib32-mangohud"
+
 # ============================================
 # Utilities
 # ============================================

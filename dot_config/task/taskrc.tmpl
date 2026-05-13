@@ -1,0 +1,91 @@
+# ============================================
+# Taskwarrior Configuration
+# ============================================
+# Managed by chezmoi (~/.local/share/chezmoi/dot_config/task/taskrc.tmpl)
+# Lives at ~/.config/task/taskrc (XDG) on TW 3.x
+
+# Data location (default, made explicit)
+data.location=~/.task
+
+# Confirm destructive ops, batch threshold for bulk operations
+confirmation=yes
+bulk=3
+
+# Silence the news prompt
+news.version=3.4.0
+
+# ============================================
+# UDAs (User-Defined Attributes)
+# ============================================
+
+# Link a task to a note in the ~/work/ tree (relative path)
+uda.note.type=string
+uda.note.label=Note
+
+# ============================================
+# Urgency tuning — bump +next, deprioritize +waiting
+# ============================================
+
+urgency.user.tag.next.coefficient=8.0
+urgency.user.tag.deep.coefficient=4.0
+urgency.user.tag.followup.coefficient=2.0
+urgency.user.tag.waiting.coefficient=-5.0
+urgency.user.tag.meeting.coefficient=1.0
+
+# ============================================
+# Custom Reports
+# ============================================
+
+# Shortlist: what's actionable now
+report.shortlist.description=Tasks tagged +next, by urgency
+report.shortlist.columns=id,project,tags,description,urgency
+report.shortlist.labels=ID,Project,Tags,Description,Urg
+report.shortlist.filter=status:pending +next
+report.shortlist.sort=urgency-
+
+# Waiting on others
+report.waiting.description=Tasks tagged +waiting
+report.waiting.columns=id,project,wait,description
+report.waiting.labels=ID,Project,Wait,Description
+report.waiting.filter=status:pending +waiting
+report.waiting.sort=wait+
+
+# Project view: tasks for a specific project (use with project:<slug>)
+report.proj.description=Pending tasks for a project
+report.proj.columns=id,tags,description,urgency,due
+report.proj.labels=ID,Tags,Description,Urg,Due
+report.proj.filter=status:pending
+report.proj.sort=urgency-
+
+# Today's completions
+report.donetoday.description=Completed today
+report.donetoday.columns=id,end,project,description
+report.donetoday.labels=ID,Done,Project,Description
+report.donetoday.filter=status:completed end.after:today
+report.donetoday.sort=end+
+
+# ============================================
+# Display
+# ============================================
+
+{{- if eq .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.arch "arm64" }}
+include /opt/homebrew/share/doc/task/rc/dark-blue-256.theme
+{{- else }}
+include /usr/local/share/doc/task/rc/dark-blue-256.theme
+{{- end }}
+{{- else if eq .chezmoi.os "linux" }}
+include /usr/share/doc/task/rc/dark-blue-256.theme
+{{- end }}
+
+color.tag.next=color46
+color.tag.waiting=color244
+color.tag.deep=color93
+
+# ============================================
+# Sync — TaskChampion (uncomment when server is ready)
+# ============================================
+
+# sync.server.url=https://your-taskchampion-host.example
+# sync.server.client_id=<uuid>
+# sync.encryption_secret=<generated-secret>

@@ -163,6 +163,18 @@ macos.brew = "mise"
 linux.pacman = "mise"
 
 # ============================================
+# Task Management
+# ============================================
+
+[task]
+macos.brew = "task"
+linux.pacman = "task"
+
+[vit]
+macos.brew = "vit"
+linux.pacman = "vit"
+
+# ============================================
 # System Utilities
 # ============================================
 

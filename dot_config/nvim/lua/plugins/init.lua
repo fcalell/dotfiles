@@ -1,3 +1,5 @@
 require("plugins.colorscheme")
 require("plugins.code-writing")
 require("plugins.ui")
+require("plugins.markdown")
+require("plugins.claude-code")
